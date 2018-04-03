@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.1.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.1.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="原文链接：http://lteuniversity.com/get_trained/expert_opinion1/b/prakash/archive/2013/04/17/discontinuous-reception-drx-in-rrc-idle-part-1.aspx  RRC空闲模式期间由UE执行的一个重要活动是监听寻呼消息。该UE应该监听寻呼消息了解来电，系统信息的变化，并ETWS（地">
+<meta name="keywords" content="LTE,通信,DRX">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LTE Discontinuous Reception (DRX) in RRC_IDLE: Part 1">
+<meta property="og:url" content="http://yoursite.com/2018/04/03/LTE-Discontinuous-Reception-DRX-in-RRC-IDLE-Part-1/index.html">
+<meta property="og:site_name" content="sun-day-blog">
+<meta property="og:description" content="原文链接：http://lteuniversity.com/get_trained/expert_opinion1/b/prakash/archive/2013/04/17/discontinuous-reception-drx-in-rrc-idle-part-1.aspx  RRC空闲模式期间由UE执行的一个重要活动是监听寻呼消息。该UE应该监听寻呼消息了解来电，系统信息的变化，并ETWS（地">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://img.blog.csdn.net/20151122140053452">
+<meta property="og:image" content="http://img.blog.csdn.net/20151122140956411">
+<meta property="og:image" content="http://img.blog.csdn.net/20151122141315127">
+<meta property="og:image" content="http://img.blog.csdn.net/20151122141441292">
+<meta property="og:image" content="http://img.blog.csdn.net/20151122141608110">
+<meta property="og:image" content="http://img.blog.csdn.net/20151122141615165">
+<meta property="og:image" content="http://img.blog.csdn.net/20151122141542773">
+<meta property="og:image" content="http://img.blog.csdn.net/20151122141553971">
+<meta property="og:updated_time" content="2018-04-03T15:09:46.355Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LTE Discontinuous Reception (DRX) in RRC_IDLE: Part 1">
+<meta name="twitter:description" content="原文链接：http://lteuniversity.com/get_trained/expert_opinion1/b/prakash/archive/2013/04/17/discontinuous-reception-drx-in-rrc-idle-part-1.aspx  RRC空闲模式期间由UE执行的一个重要活动是监听寻呼消息。该UE应该监听寻呼消息了解来电，系统信息的变化，并ETWS（地">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20151122140053452">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/03/LTE-Discontinuous-Reception-DRX-in-RRC-IDLE-Part-1/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>LTE Discontinuous Reception (DRX) in RRC_IDLE: Part 1 | sun-day-blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> 
+
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">sun-day-blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">牛逼的人生不需要解释</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+          
+  <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+</li>
+
+      
+
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/03/LTE-Discontinuous-Reception-DRX-in-RRC-IDLE-Part-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="sun-day">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sun-day-blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">LTE Discontinuous Reception (DRX) in RRC_IDLE: Part 1</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-03T23:08:41+08:00">2018-04-03</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/通信/" itemprop="url" rel="index"><span itemprop="name">通信</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/通信/LTE/" itemprop="url" rel="index"><span itemprop="name">LTE</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>原文链接：<br><a href="http://lteuniversity.com/get_trained/expert_opinion1/b/prakash/archive/2013/04/17/discontinuous-reception-drx-in-rrc-idle-part-1.aspx" target="_blank" rel="noopener">http://lteuniversity.com/get_trained/expert_opinion1/b/prakash/archive/2013/04/17/discontinuous-reception-drx-in-rrc-idle-part-1.aspx</a></p>
+<hr>
+<p>RRC空闲模式期间由UE执行的一个重要活动是监听寻呼消息。该UE应该监听寻呼消息了解来电，系统信息的变化，并ETWS（地震和海啸预警服务）通知ETWS的UE。在LTE中，UE需要连续监视PDCCH（每1ms）用于P-RNTI的收听寻呼消息和这将会导致UE电池功耗严重。相反，如果允许UE监视的P-RNTI的PDCCH中，仅在规定期间，比如说每60毫秒或100毫秒，这将减少UE的功率消耗。不连续地监视的PDCCH用于P-RNTI的过程期间RRC空闲状态被称为在RRC_IDLE非连续接收（DRX）收听寻呼消息。</p>
+<h2 id="什么是LTE终端的空闲模式？"><a href="#什么是LTE终端的空闲模式？" class="headerlink" title="什么是LTE终端的空闲模式？"></a>什么是LTE终端的空闲模式？</h2><ul>
+<li>UE与核心网络之间不存在的NAS信令连接</li>
+<li>至少一个PDN连接中存在</li>
+<li>UE被注册的MME＆EMM上下文存在于MME</li>
+<li>UE位置是已知的MME与跟踪区域的列表的精度</li>
+<li>UE与eNB之间不存在RRC连接</li>
+<li>该基站没有上下文信息</li>
+</ul>
+<h2 id="空闲模式的寻呼"><a href="#空闲模式的寻呼" class="headerlink" title="空闲模式的寻呼"></a>空闲模式的寻呼</h2><p>寻呼是处于RRC空闲模式或EMM注册状态用来发送寻呼消息到UE的一个过程。寻呼消息可以通过MME在核心网络或eNB触发。</p>
+<h2 id="不连续接收的寻呼"><a href="#不连续接收的寻呼" class="headerlink" title="不连续接收的寻呼"></a>不连续接收的寻呼</h2><p>UE的寻呼信息由在由PDCCH指示的资源块PDSCH上承载。在PDCCH上寻呼指示是单一固定指示器（FFFE）称为寻呼-RNTI（P-RNTI）。不同UE群组的监视其寻呼消息不同的子帧。</p>
+<p>在空闲模式下的UE监听PDCCH信道P-RNTI用于从基站接收寻呼消息。 UE只在某些特定的UE寻呼时机来监视PDCCH，即只在特定的无线电帧特定子帧。在其他时间，UE可以去为睡眠模式，以节省电池电量。</p>
+<p>让我们来讨论UE如何能够找出寻呼帧和寻呼时机的寻呼消息。</p>
+<p><strong>寻呼帧（PF）</strong>：一个寻呼帧（PF）是一个无线帧，其中UE正在寻找寻呼消息。一个寻呼帧可以含有一个或多个寻呼时机。</p>
+<p><strong>寻呼时机（PO）</strong>：这是在有可能的P-RNTI发送PDCCH上寻址用于UE的寻呼消息的子帧。对每个UE来说，在DRX周期中永远只有一个寻呼时机。</p>
+<p>要找出PF（寻呼帧）和PO（寻呼场合），UE使用广播系统信息SIB2 DRX参数。</p>
+<p>  <img src="http://img.blog.csdn.net/20151122140053452" alt="这里写图片描述"></p>
+<h2 id="DRX参数的意义"><a href="#DRX参数的意义" class="headerlink" title="DRX参数的意义"></a>DRX参数的意义</h2><p><strong>DRX周期</strong>：表示在寻呼周期的无线电帧的数目。这个参数的值越大，UE电池功耗越少。而DRX周期的值小，增加在UE电池功耗。 DRX周期可以是特定小区或UE特定的参数。当它被在eNB上配置并在系统信息中的SIB2作为默认寻呼周期广播到所有UE，这样的DRX周期是小区特异性的。 当DRX周期是UE特定的时，MME可以配置DRX周期，并在NAS信令中’UE特定的DRX周期“将其提供给UE和向eNB中的PAGING S1 AP消息为”寻呼DRX’（对于MME发起的寻呼消息）。UE和基站将使用默认和专用的DRX周期这两个中最小的一个。<br><img src="http://img.blog.csdn.net/20151122140956411" alt="这里写图片描述"></p>
+<p>128个无线帧的DRX周期，需要UE每隔1.28秒唤醒，并查找寻呼消息。</p>
+<p><strong>nB</strong>：在小区中特定的DRX周期用于指示寻呼时机的小区特定参数。 nB值的配置取决于小区中所需的寻呼容量。 nB的值配置为较大的，具有较大的寻呼容量。同样地，较小的寻呼容量时nB的值越小。</p>
+<p>  <img src="http://img.blog.csdn.net/20151122141315127" alt="这里写图片描述"></p>
+<p>与此我们可以推断，一个最大1无线帧的可每UE以用于寻呼的DRX周期。此外，每无线电帧1的子帧的4个子帧的最小（NB≤1T）和最大（对于NB = 4T）可用于为UE寻呼消息。</p>
+<h2 id="寻呼帧号的计算"><a href="#寻呼帧号的计算" class="headerlink" title="寻呼帧号的计算"></a>寻呼帧号的计算</h2><p>eNB和UE计算由以下关系的寻呼帧号码：</p>
+<p>  <img src="http://img.blog.csdn.net/20151122141441292" alt="这里写图片描述"></p>
+<p>该基站将寻呼接收UE_ID从MME S1AP消息“UE标识指数值”为MME发起的寻呼消息。</p>
+<p>UE将找出UE_ID通过关系IMSI国防部1024（编号：TS 36.304 7.1）</p>
+<p>该IMSI是作为类型整数（0..9）的数字序列。该IMSI应，在上述式中，被解释为一个十进制整数，其中该序列中给出的第一个数字代表的最高阶位。</p>
+<p>例如：IMSI = 12（digit1 = 1，digit2 = 2）。在计算中，这应被解释为十进制整数“12”，而不是“1×16 + 2 = 18”。</p>
+<h1 id="寻呼时机的计算（在一个寻呼帧寻呼子帧号）"><a href="#寻呼时机的计算（在一个寻呼帧寻呼子帧号）" class="headerlink" title="寻呼时机的计算（在一个寻呼帧寻呼子帧号）"></a>寻呼时机的计算（在一个寻呼帧寻呼子帧号）</h1><p>  <img src="http://img.blog.csdn.net/20151122141608110" alt="这里写图片描述"></p>
+<p>  <img src="http://img.blog.csdn.net/20151122141615165" alt="这里写图片描述"></p>
+<p>从基于Ns的值的预定义子帧模式（36.304第7.2节，下面所示为快速参考）中获得的寻呼场合为UE，i_s。例如，如果Ns个= 2和i_s = 1中，UE解释该子帧4和9被配置用于寻呼在小区和子帧9是用于它寻呼时机。</p>
+<p>副车架模式（参考：TS 36.304 7.2节）</p>
+<p>FDD</p>
+<p>  <img src="http://img.blog.csdn.net/20151122141542773" alt="这里写图片描述"></p>
+<p>TDD（所有DL / UL模式）</p>
+<p><img src="http://img.blog.csdn.net/20151122141553971" alt="这里写图片描述"></p>
+<p>《end》</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    
+    <div>
+    
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+    
+    </div>
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/wechat-qcode.jpg" alt="sun-day wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎微信交流！</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="sun-day 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="sun-day 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/LTE/" rel="tag"><i class="fa fa-tag"></i> LTE</a>
+          
+            <a href="/tags/通信/" rel="tag"><i class="fa fa-tag"></i> 通信</a>
+          
+            <a href="/tags/DRX/" rel="tag"><i class="fa fa-tag"></i> DRX</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/03/LTE-RACH过程/" rel="next" title="LTE-RACH过程">
+                <i class="fa fa-chevron-left"></i> LTE-RACH过程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/03/LTE-Discontinuous-Reception-DRX-in-RRC-IDLE-Part-2/" rel="prev" title="LTE Discontinuous Reception (DRX) in RRC_IDLE: Part 2">
+                LTE Discontinuous Reception (DRX) in RRC_IDLE: Part 2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="sun-day" />
+            
+              <p class="site-author-name" itemprop="name">sun-day</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">48</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/zhanghaogithub123" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:zhanghao163mail@163.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/zhang-hao-3-80-49/activities" target="_blank" title="知乎"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://blog.csdn.net/mouse1598189" target="_blank" title="CSDN"><i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.google.com/" title="Google" target="_blank">Google</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.baidu.com/" title="百度" target="_blank">百度</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是LTE终端的空闲模式？"><span class="nav-number">1.</span> <span class="nav-text">什么是LTE终端的空闲模式？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#空闲模式的寻呼"><span class="nav-number">2.</span> <span class="nav-text">空闲模式的寻呼</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#不连续接收的寻呼"><span class="nav-number">3.</span> <span class="nav-text">不连续接收的寻呼</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DRX参数的意义"><span class="nav-number">4.</span> <span class="nav-text">DRX参数的意义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#寻呼帧号的计算"><span class="nav-number">5.</span> <span class="nav-text">寻呼帧号的计算</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#寻呼时机的计算（在一个寻呼帧寻呼子帧号）"><span class="nav-number"></span> <span class="nav-text">寻呼时机的计算（在一个寻呼帧寻呼子帧号）</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate"> 
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">true</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_pv">
+  本站访客数:<span id="busuanzi_container_site_pv"></span>
+</span>
+</div>
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.1.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.1.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -8,7 +8,7 @@ subtitle: 牛逼的人生不需要解释
 description:
 keywords:
 author: sun-day
-language: zh-Hans
+language: zh-CN
 timezone:
 
 # URL
@@ -78,7 +78,8 @@ theme: next
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type: github
-  repository: git@github.com:zhanghaogithub123/zhanghaogithub123.github.io
+  type: git
+  repo: https://github.com/zhanghaogithub123/zhanghaogithub123.github.io
   branch: master
+  
 

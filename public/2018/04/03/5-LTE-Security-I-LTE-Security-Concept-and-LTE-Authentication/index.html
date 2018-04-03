@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.1.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.1.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="原文链接：http://www.netmanias.com/en/?m=view&amp;amp;id=techdocs&amp;amp;no=5902 I. Introduction实际中的无线通信，因为数据是原始的发送和接收的，这些数据可能被接收，并被意想不到的用户非法使用，存在窃听和篡改的风险。用户的位置和移动轨迹也是可以通过追踪用户连接的小区很容易的跟踪。这将会引起隐私侵权。移动通信提供安全特性来保证在空">
+<meta name="keywords" content="LTE,通信">
+<meta property="og:type" content="article">
+<meta property="og:title" content="5-LTE Security I: LTE Security Concept and LTE Authentication">
+<meta property="og:url" content="http://yoursite.com/2018/04/03/5-LTE-Security-I-LTE-Security-Concept-and-LTE-Authentication/index.html">
+<meta property="og:site_name" content="sun-day-blog">
+<meta property="og:description" content="原文链接：http://www.netmanias.com/en/?m=view&amp;amp;id=techdocs&amp;amp;no=5902 I. Introduction实际中的无线通信，因为数据是原始的发送和接收的，这些数据可能被接收，并被意想不到的用户非法使用，存在窃听和篡改的风险。用户的位置和移动轨迹也是可以通过追踪用户连接的小区很容易的跟踪。这将会引起隐私侵权。移动通信提供安全特性来保证在空">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://img.blog.csdn.net/20150911150356580">
+<meta property="og:image" content="http://img.blog.csdn.net/20150911190320082">
+<meta property="og:image" content="http://img.blog.csdn.net/20150911190346937">
+<meta property="og:image" content="http://img.blog.csdn.net/20150911190402290">
+<meta property="og:image" content="http://img.blog.csdn.net/20150911190607256">
+<meta property="og:image" content="http://img.blog.csdn.net/20150912084712477">
+<meta property="og:image" content="http://img.blog.csdn.net/20150912085939485">
+<meta property="og:image" content="http://img.blog.csdn.net/20150912102644835">
+<meta property="og:updated_time" content="2018-04-03T14:20:36.155Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="5-LTE Security I: LTE Security Concept and LTE Authentication">
+<meta name="twitter:description" content="原文链接：http://www.netmanias.com/en/?m=view&amp;amp;id=techdocs&amp;amp;no=5902 I. Introduction实际中的无线通信，因为数据是原始的发送和接收的，这些数据可能被接收，并被意想不到的用户非法使用，存在窃听和篡改的风险。用户的位置和移动轨迹也是可以通过追踪用户连接的小区很容易的跟踪。这将会引起隐私侵权。移动通信提供安全特性来保证在空">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20150911150356580">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/03/5-LTE-Security-I-LTE-Security-Concept-and-LTE-Authentication/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>5-LTE Security I: LTE Security Concept and LTE Authentication | sun-day-blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> 
+
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">sun-day-blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">牛逼的人生不需要解释</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+          
+  <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+</li>
+
+      
+
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/03/5-LTE-Security-I-LTE-Security-Concept-and-LTE-Authentication/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="sun-day">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sun-day-blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">5-LTE Security I: LTE Security Concept and LTE Authentication</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-03T22:06:16+08:00">2018-04-03</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/通信/" itemprop="url" rel="index"><span itemprop="name">通信</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/通信/LTE/" itemprop="url" rel="index"><span itemprop="name">LTE</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>原文链接：<a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5902" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5902</a></p>
+<h1 id="I-Introduction"><a href="#I-Introduction" class="headerlink" title="I. Introduction"></a>I. Introduction</h1><p>实际中的无线通信，因为数据是原始的发送和接收的，这些数据可能被接收，并被意想不到的用户非法使用，存在窃听和篡改的风险。用户的位置和移动轨迹也是可以通过追踪用户连接的小区很容易的跟踪。这将会引起隐私侵权。移动通信提供安全特性来保证在空中接口传输的数据避免被篡改，且阻止意想不到的用户非授权的接入来接收数据，并保护用户的隐私。</p>
+<p>LTE安全文档描述LTE网络提供的基本安全特征，包括LTE鉴权，NAS安全，AS安全。LTE鉴权是判定试图接入网络的用户是否是合法的签约用户。NAS安全和AS安全是在NAS和AS级别上在LTE空中接口上传输的数据确保能安全地传送。</p>
+<p>LTE安全文档包含两个部分，part I II。第一个部分主要介绍LTE安全的概念和LTE鉴权的详细过程，第二部分主要介绍NAS和AS安全建立过程。</p>
+<p>第一部分组成如下：在第二章，将介绍这两个文档的范围和概述，第三张介绍LTE鉴权过程，第四章总结LTE鉴权和LTE鉴权相关的秘钥。</p>
+<h1 id="II-LTE-Security-Concept"><a href="#II-LTE-Security-Concept" class="headerlink" title="II. LTE Security Concept"></a>II. LTE Security Concept</h1><h2 id="2-1-LTE安全的范围和概念"><a href="#2-1-LTE安全的范围和概念" class="headerlink" title="2.1 LTE安全的范围和概念"></a>2.1 LTE安全的范围和概念</h2><p>图1展示了LTE安全文档的范围和概念。这些文档的将包含以下三个区域。<br>1、LTE鉴权：在UE和网络之间执行相互的鉴权。<br>2、NAS安全：在UE和MME之间执行完整性保护验证和NAS信令的加密（加密和解密）<br>3、AS安全，在UE和eNB之间执行完整性保护验证和RRC信令消息的加密，执行用户数据的加密。<br><img src="http://img.blog.csdn.net/20150911150356580" alt="这里写图片描述"></p>
+<h3 id="LTE鉴权"><a href="#LTE鉴权" class="headerlink" title="LTE鉴权"></a>LTE鉴权</h3><p>在移动网络中，鉴权是判定试图接入网络的用户是否是合法的签约用户。在多种多样的可用的鉴权过程中，在LTE网络中，在用户和网络之间使用EPS AKA（Authentication and Key Agreement鉴权和秘钥协商）过程来相互鉴权。</p>
+<p>EPS AKA过程是由两步组成，第一步，HSS生成EPS鉴权向量（RAND, AUTN, XRES, K-ASME），并把他们发送给MME。第二步，MME选择EPS鉴权向量中的一个，并使用它来双向鉴权，并相互共享这同一个鉴权秘钥-KASME。相互鉴权是网络和UE相关鉴权的过程。在LTE网络，因为当生成鉴权向量时用户服务网络的ID是需要的，所以网络的鉴权是由用户来执行，用户的鉴权是由网络来执行。</p>
+<p>ASME（Access Security Management Entity 接入安全管理实体）是一个从HSS接收顶层秘钥的实体，用在接入网络中。在EPS中，MME充当ASME的功能，K-ASME作为一个顶层秘钥在接入网络中使用。MME代表HSS使用K-ASME和UE实施相互鉴权。一旦相互鉴权，UE和MME共享K-ASME作为鉴权秘钥。</p>
+<p>为了避免在无线链路上数据的窃听和篡改，K-ASME不是通过E-UTRAN传输给UE。而是，MME传输鉴权向量的部分内容给UE，使用这些内容来鉴权网络，并像HSS那样生成K-ASME。</p>
+<h3 id="NAS安全"><a href="#NAS安全" class="headerlink" title="NAS安全"></a>NAS安全</h3><p>NAS安全，是设计用来在无线链路UE和MME之间安全地传输信令信息的，用来执行NAS信令消息的完整性检查和加密。不懂得秘钥用于完整性检查和加密。完整性检查是必须的，而加密是可选的功能。NAS安全秘钥，例如，完整性秘钥（K-NASint）和加密秘钥（K-NASenc）。</p>
+<h3 id="AS安全"><a href="#AS安全" class="headerlink" title="AS安全"></a>AS安全</h3><p>AS安全是用来确保在无线链路上UE和eNB之间数据传输的安全。在控制面对RRC信令消息实施完整性检查和加密，在用户面对IP数据包仅执行加密。不同的秘钥用于RRC信令消息的完整性检查/加密和IP数据包的加密。完整性保护是必须的，而加密是可选的功能。<br>AS安全秘钥，例如，K-RRCint，K-RRCenc和K-UPenc，是由UE和eNB从K-eNB中衍生的，K-RRCint和K-RRCenc是用于控制面数据的完整性检查和加密，K-UPenc用于用户面数据的加密。完整性检查和加密是在PDCP层执行的。</p>
+<p>UE可以从K-ASME中衍生出K-eNB，因为K-ASME是不传输到eNB的，而是由MME从K-ASME中衍生出K-eNB，然后传递给eNB。</p>
+<h2 id="2-2-LTE安全过程的概述"><a href="#2-2-LTE安全过程的概述" class="headerlink" title="2.2 LTE安全过程的概述"></a>2.2 LTE安全过程的概述</h2><p>图2展示了LTE安全过程的概述。<img src="http://img.blog.csdn.net/20150911190320082" alt="这里写图片描述">1显示了LTE鉴权过程，<img src="http://img.blog.csdn.net/20150911190346937" alt="这里写图片描述"> <img src="http://img.blog.csdn.net/20150911190402290" alt="这里写图片描述">2和3展示了相应的NAS和AS安全建立过程。下面对每一个过程的简要描述。然后在第三章和第二篇文档中详细介绍每一个过程。</p>
+<p><img src="http://img.blog.csdn.net/20150911190607256" alt="这里写图片描述"></p>
+<h3 id="1、LTE鉴权"><a href="#1、LTE鉴权" class="headerlink" title="1、LTE鉴权"></a>1、LTE鉴权</h3><p>当用户请求接入LTE网络时，在用户和网络之间使用EPS KAK过程来进行相互鉴权。MME一旦接收到了这样的请求，使用用户的IMSI来标识用户，并向HSS请求鉴权向量（AV）。HSS使用EPS AKA算法生成AV，AV={RAND, XRES, AUTN-HSS, K-ASME}，并转发给MME。</p>
+<p>在MME存储AV之后，MME从中选择一个，使用这个AV来和UE执行相互鉴权。MME会转发RAND和AUTH-HSS给UE，然后UE使用EPS AKA算法计算出RES，AUTN-UE和K-ASME。UE比较自己的AUTN-UE和从MME接收到的AUTH-HSS来执行网络鉴权。一旦鉴权完成，发送RES给MME，MME比较从HSS接收到的XRES和从UE接收到的RES来执行用户鉴权。如果ＵＥ和网络都鉴权了，则他们就共享了相同的Ｋ－ＡＳＭＥ（尽管Ｋ－ＡＳＭＥ不在UE和MME之间传送）。</p>
+<h3 id="2、NAS安全"><a href="#2、NAS安全" class="headerlink" title="2、NAS安全"></a>2、NAS安全</h3><p>一旦UE和MME相互鉴权完毕并具有相同的秘钥K-ASME，NAS安全过程开始。在这个过程中，当传送NAS信令消息时，NAS安全秘钥从K-ASME中衍生，用于这些NAS消息的安全传送。这个过程包含NAS消息的一个来回（Security Mode Command 和 Security Mode Complete消息），并在MME传送Security Mode Command 消息给UE是开始。</p>
+<p>第一，MME选择一个NAS安全算法（Alg-ID：算法ID），并使用它们来从K-ASME来产生K-NASinc和K-NASenc。接着MME把K-NASinc算法用于Security Mode Command消息产生一个NAS消息鉴权码（NAS-MAC：Message Authentication Code for NAS for Integrity)。MME接着传输包含选择的NAS安全算法和NAS-MAC的Security Mode Command消息给UE。因为UE并不知道选择的加密算法，所以这个消息是完整性保护的，但是没有加密。</p>
+<p>一旦接收到了Security Mode Command消息，UE使用MME选择的NAS完整性算法来验证完整性，并使用NAS完整性/加密算法从K-ASME中产生NAS安全秘钥（K-NASinc，K-NASenc）。接着使用K-NASenc加密Security Command Complete消息，并使用K-NASinc生成消息鉴权码NAS-MAC用于加密的消息。现在UE可以传输包含NAS-MAC的加密和完整性保护的消息到MME了。</p>
+<p>一旦NAS安全建立起来，在UE和MME之间的NAS信令都是通过NAS安全秘钥加密和完整性保护的，在无线链路上安全的传输。</p>
+<h3 id="3、AS-安全"><a href="#3、AS-安全" class="headerlink" title="3、AS 安全"></a>3、AS 安全</h3><p>在NAS安全建立完成之后，在UE和eNB之间AS安全建立过程开始。在这个过程中，当传输RRC信令消息和IP数据包时，使用从K-eNB产生的AS安全秘钥用于这些数据的安全传输。这个过程包括RRC信令消息的一个来回（Security Mode Command 和 Security Mode Complete 消息），并且这个过程在eNB传输Security Mode Command消息给UE时开始。</p>
+<p>第一，MME从K-ASME中计算出K-eNB并传输给eNB，eNB使用K-eNB来执行AS安全过程。eNB选择AS安全算法（Alg-ID：算法ID）并使用这个算法ID从K-eNB中计算出完整性秘钥（K-RRCinc）和加密秘钥（K-RRCenc）用于RRC信令消息，计算出加密秘钥（K-UPenc）用于用户面。接着，应用K-RRCint到Security Mode Command消息产生一个消息鉴权码（MAC-I，Message Authentication Code for Integrity）。现在eNB开始传输包含选择的AS安全算法和MAC-I的Security Mode Command消息到UE。</p>
+<p>一旦从eNB接收到Security Mode Command消息，UE使用eNB选择的AS完整性算法验证完整性，并使用AS完整性/加密算法来计算出AS加密秘钥 (K-RRCint, K-RRCenc and K-UPenc)。接着UE使用RRC完整性秘钥产生一个消息鉴权码MAC-I给Security Mode Complete 消息，接着转发包含MAC-I的这条消息给eNB。</p>
+<p>当eNB使用AS安全秘钥成功的验证了接收到的Security Mode Complete 消息的完整性，AS安全建立过程完成的。</p>
+<p>在AS安全建立之后，UE和eNB之间的RRC信令消息都是使用AS安全秘钥加密的和完整性保护的，在空中链路上传输的用户IP数据包是加密的。</p>
+<h1 id="III-LTE-Authentication-Procedure"><a href="#III-LTE-Authentication-Procedure" class="headerlink" title="III. LTE Authentication Procedure"></a>III. LTE Authentication Procedure</h1><p>在第二章简要介绍了LTE鉴权过程，接下来将详细介绍。图3是当UE附着到LTE网络时执行基于EPS AKA的LTE鉴权过程。在USIM和HSS/AuC上存储着固定的秘钥（LTE 秘钥K，IMSI）。当UE被生产的时候，在USIM卡上就存储了LTE K和IMSI，并且当用户开始签约LTE网络时在HSS/AuC中提供。</p>
+<p><img src="http://img.blog.csdn.net/20150912084712477" alt="这里写图片描述"></p>
+<h2 id="3-1-由UE请求的鉴权"><a href="#3-1-由UE请求的鉴权" class="headerlink" title="3.1 由UE请求的鉴权"></a>3.1 由UE请求的鉴权</h2><p>1、[UE -&gt; MME] UE请求对网络的鉴权</p>
+<p>当UE在初始附着时试图接入网络，UE传送Attach Request消息给MME，这个消息触发了EPS AKA过程。在Attach Request消息中包含(IMSI, UE网络能力, KSIA-SME=7)参数。<br>其中</p>
+<ul>
+<li>IMSI：（ International Mobile Subscriber Identity），是和用户关联的唯一的ID。</li>
+<li>UE网络能力：UE可用的安全算法。</li>
+<li>KSIA-SME=7：指示UE没有安全秘钥。</li>
+</ul>
+<p>UE网络能力通知MME 连接到EPS的UE具有什么样的能力，并指示UE支持的NAS和AS算法，比如EEA和EIA（EPS Encryption Algorithms 和 EPS Integrity Algorithms）。他们是用1bit的值来标识是否存在，（比如EEA0=0，EEA1=1……EIA1=1，EIA2=1….），表1列出了UE网络能力信息。</p>
+<p><img src="http://img.blog.csdn.net/20150912085939485" alt="这里写图片描述"><br>KSI-ASME标识UE和MME中的K-ASME，由3bit组成，从000到111（0-7），7是标识在UE中没有可用的K-ASME。</p>
+<h2 id="3-2-在MME和HSS之间鉴权数据的交换"><a href="#3-2-在MME和HSS之间鉴权数据的交换" class="headerlink" title="3.2 在MME和HSS之间鉴权数据的交换"></a>3.2 在MME和HSS之间鉴权数据的交换</h2><p>2、[MME -&gt; HSS]MME向HSS请求鉴权数据</p>
+<p>MME识别到UE没有可用的K-ASME，通过向HSS发送Authentication Information Request消息来发起LTE鉴权过程获取新的鉴权数据。Authentication Information Request消息包含(IMSI, SN ID, n, Network Type)参数。<br>其中</p>
+<ul>
+<li>IMSI：和用户关联的唯一的ID。</li>
+<li>SN ID（Serving Network ID服务网络ID）：是指用户接入的网络，由PLMN ID组成。</li>
+<li>n（鉴权向量的个数）：MME请求鉴权向量的个数</li>
+<li>Network Type：UE接入网络的类型（在此是E-UTRAN）。</li>
+</ul>
+<p>一旦从MME接收到Authentication Information Request消息，HSS生成RAND和SQN，并使用EPS AKA算法用LTE K，SQN，RAND计算出XRES，AUTN，CK，IK。然后使用KDF（Key Derivation Function秘钥派生函数）用CK，IK，SQN和SN ID（PLMN）计算出接入网络的顶级秘钥（K-ASME），然后传输给MME。KDF是一个单向函数。因为在生成K-ASME时需要SN ID，所以当服务网络发生变化时K-ASME需要重新生成。在K-ASME生成后，HSS形成鉴权向量组AV-i=（RAND-i，AUTN-i，XRES-i，K-ASME-i），i=0….n-1.</p>
+<p>3、[MME &lt;- HSS]HSS响应鉴权数据的请求</p>
+<p>HSS应MME请求生成需要AV，然后发送Authentication Information Answer (AVs)消息给MME。</p>
+<h2 id="3-3-UE和MME之间的相互鉴权"><a href="#3-3-UE和MME之间的相互鉴权" class="headerlink" title="3.3 UE和MME之间的相互鉴权"></a>3.3 UE和MME之间的相互鉴权</h2><p>MME存储从HSS接收到的AV，然后在UE的LTE鉴权中选择其中一个使用。在图3中，MME选择第i个AV。K-ASME是MME基本的秘钥，在接入网络中作为一个顶级的秘钥起作用。它只存在于EPC中，不会通过E-UTRAN传送给UE，因为那样传输是不安全的。MME分配KSI-ASME（K-ASME的索引）代替K-ASME传送给ＵＥ，因此UE和MME都能使用KSI-ASME来代替K-ASME（在图3中，KSI-ASME=1）。</p>
+<p>4、[UE&lt;-MME]MME请求对用户鉴权<br>MME保留在AV中的K-ASME-i和XRES-i，把KSI-ASME-i代替K-ASME-i，RAND-i，AUTN-i包含在Authentication Request消息中传递给ＵＥ。XRES-i会在待会鉴权用户的时候用到。</p>
+<p>UE一旦从MME接收到Authentication Request消息，传递RAND-i和AUTN-i给USIM，USIM使用和HSS相同的EPS AKA算法用存储的LTE K和接收到的RAND-i和HSS生成的SQN（SQN隐藏在AUTN中）计算出RES，AUTN-UE，CK，IK。UE比较通过EPS AKA算法产生AUTN-UE和从MME接收到的AUTN来鉴权LTE网络。</p>
+<p>5、[UE-&gt;MME]UE响应对用户的鉴权<br>一旦UE完成网络鉴权，UE发送包含由EPS AKA算法生成RES的Authentication Response消息给MME。如果使用AUTN网络鉴权失败，UE包含失败原因的Authentication Failure消息给MME。</p>
+<p>当MME接收到从UE的Authentication Response消息，将对比由UE生成的RES和从HSS接收到的AV中的XRES-i来鉴权用户。</p>
+<p>在完成网络鉴权之后，USIM卡传输CK，IK给UE。UE使用KDF函数用CK，IK，SQN，SN ID生成K-ASME，并使用从MME接收到的KSI-ASME作为它的索引存储。然后，在UE和MME之间NAS安全监理时用KSI-ASME代替K-ASME。</p>
+<h1 id="IV-Closing"><a href="#IV-Closing" class="headerlink" title="IV. Closing"></a>IV. Closing</h1><p>上面，我们已经讨论了LTE鉴权过程。LTE鉴权是基于EPS AKA过程的用户和网络之间的相互鉴权。在服务网络中的MME和UE代替HSS来执行相互鉴权，鉴权的结果是在UE和MME之间具有相同的K-ASME。在表2中总结了LTE鉴权相关的秘钥。在第二个文档将基于K-ASME来介绍NAS和AS安全。<br><img src="http://img.blog.csdn.net/20150912102644835" alt="这里写图片描述"></p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p>[1] Netmanias Technical Document, “LTE Security II: NAS and AS Security”, August 2013,<br><a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5903" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5903</a>.<br>[2] 3GPP TS 24.301, “Non-Access-Stratum (NAS) protocol for Evolved Packet System (EPS); Stage 3”.<br>[3] 3GPP TS 33.401, “3GPP System Architecture Evolution (SAE); Security architecture”.<br>[4] NMC Consulting Group Confidential Internal Report, “E2E LTE Network Design”, August 2010.</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    
+    <div>
+    
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+    
+    </div>
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/wechat-qcode.jpg" alt="sun-day wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎微信交流！</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="sun-day 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="sun-day 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/LTE/" rel="tag"><i class="fa fa-tag"></i> LTE</a>
+          
+            <a href="/tags/通信/" rel="tag"><i class="fa fa-tag"></i> 通信</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/03/4-LTE-Identification-III-EPS-Session-Bearer-Identifiers/" rel="next" title="4-LTE Identification III: EPS Session/Bearer Identifiers">
+                <i class="fa fa-chevron-left"></i> 4-LTE Identification III: EPS Session/Bearer Identifiers
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/03/6-LTE-Security-II-NAS-and-AS-Security/" rel="prev" title="6-LTE Security II: NAS and AS Security">
+                6-LTE Security II: NAS and AS Security <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="sun-day" />
+            
+              <p class="site-author-name" itemprop="name">sun-day</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">48</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/zhanghaogithub123" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:zhanghao163mail@163.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/zhang-hao-3-80-49/activities" target="_blank" title="知乎"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://blog.csdn.net/mouse1598189" target="_blank" title="CSDN"><i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.google.com/" title="Google" target="_blank">Google</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.baidu.com/" title="百度" target="_blank">百度</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#I-Introduction"><span class="nav-number">1.</span> <span class="nav-text">I. Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#II-LTE-Security-Concept"><span class="nav-number">2.</span> <span class="nav-text">II. LTE Security Concept</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-LTE安全的范围和概念"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 LTE安全的范围和概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#LTE鉴权"><span class="nav-number">2.1.1.</span> <span class="nav-text">LTE鉴权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NAS安全"><span class="nav-number">2.1.2.</span> <span class="nav-text">NAS安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AS安全"><span class="nav-number">2.1.3.</span> <span class="nav-text">AS安全</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-LTE安全过程的概述"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 LTE安全过程的概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、LTE鉴权"><span class="nav-number">2.2.1.</span> <span class="nav-text">1、LTE鉴权</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、NAS安全"><span class="nav-number">2.2.2.</span> <span class="nav-text">2、NAS安全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、AS-安全"><span class="nav-number">2.2.3.</span> <span class="nav-text">3、AS 安全</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#III-LTE-Authentication-Procedure"><span class="nav-number">3.</span> <span class="nav-text">III. LTE Authentication Procedure</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-由UE请求的鉴权"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 由UE请求的鉴权</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-在MME和HSS之间鉴权数据的交换"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 在MME和HSS之间鉴权数据的交换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3-UE和MME之间的相互鉴权"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 UE和MME之间的相互鉴权</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IV-Closing"><span class="nav-number">4.</span> <span class="nav-text">IV. Closing</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number">5.</span> <span class="nav-text">References</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate"> 
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">true</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_pv">
+  本站访客数:<span id="busuanzi_container_site_pv"></span>
+</span>
+</div>
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.1.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.1.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

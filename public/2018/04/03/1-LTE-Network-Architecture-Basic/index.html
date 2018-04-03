@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next pisces use-motion" lang="zh-Hans">
+<html class="theme-next gemini use-motion" lang="zh-CN">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -101,7 +101,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Pisces',
+    scheme: 'Gemini',
     version: '6.1.0',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: false,
@@ -125,21 +125,22 @@
 
 
 
-  <meta name="description" content="原文地址：http://www.netmanias.com/en/?m=view&amp;amp;id=techdocs&amp;amp;no=5904 I. Introduction这篇文章主要介绍LTE网络结构，是LTE的第一篇技术文章。LTE网络也叫EPS，是一个端到端的全IP网络；EPS分为两个部分，LTE部分负责处理和接入网络E-UTRAN相关的技术，EPC部分负责处理和核心网相关的技术。一个端到端的">
+  <meta name="description" content="原文地址：http://www.netmanias.com/en/?m=view&amp;amp;id=techdocs&amp;amp;no=5904 I. Introduction这篇文章主要介绍LTE网络结构，是LTE的第一篇技术文章。LTE网络也叫EPS，是一个端到端的全IP网络；EPS分为两个部分，LTE部分负责处理和接入网络E-UTRAN相关的技术，EPC部分负责处理和核心网相关的技术。一个端到端的全">
+<meta name="keywords" content="LTE,通信">
 <meta property="og:type" content="article">
 <meta property="og:title" content="1-LTE Network Architecture: Basic">
 <meta property="og:url" content="http://yoursite.com/2018/04/03/1-LTE-Network-Architecture-Basic/index.html">
 <meta property="og:site_name" content="sun-day-blog">
-<meta property="og:description" content="原文地址：http://www.netmanias.com/en/?m=view&amp;amp;id=techdocs&amp;amp;no=5904 I. Introduction这篇文章主要介绍LTE网络结构，是LTE的第一篇技术文章。LTE网络也叫EPS，是一个端到端的全IP网络；EPS分为两个部分，LTE部分负责处理和接入网络E-UTRAN相关的技术，EPC部分负责处理和核心网相关的技术。一个端到端的">
-<meta property="og:locale" content="zh-Hans">
+<meta property="og:description" content="原文地址：http://www.netmanias.com/en/?m=view&amp;amp;id=techdocs&amp;amp;no=5904 I. Introduction这篇文章主要介绍LTE网络结构，是LTE的第一篇技术文章。LTE网络也叫EPS，是一个端到端的全IP网络；EPS分为两个部分，LTE部分负责处理和接入网络E-UTRAN相关的技术，EPC部分负责处理和核心网相关的技术。一个端到端的全">
+<meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://img.blog.csdn.net/20150909120950694">
 <meta property="og:image" content="http://img.blog.csdn.net/20150909135820709">
 <meta property="og:image" content="http://img.blog.csdn.net/20150909144404890">
 <meta property="og:image" content="http://img.blog.csdn.net/20150909144940673">
-<meta property="og:updated_time" content="2018-04-03T13:02:13.189Z">
+<meta property="og:updated_time" content="2018-04-03T14:08:28.736Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="1-LTE Network Architecture: Basic">
-<meta name="twitter:description" content="原文地址：http://www.netmanias.com/en/?m=view&amp;amp;id=techdocs&amp;amp;no=5904 I. Introduction这篇文章主要介绍LTE网络结构，是LTE的第一篇技术文章。LTE网络也叫EPS，是一个端到端的全IP网络；EPS分为两个部分，LTE部分负责处理和接入网络E-UTRAN相关的技术，EPC部分负责处理和核心网相关的技术。一个端到端的">
+<meta name="twitter:description" content="原文地址：http://www.netmanias.com/en/?m=view&amp;amp;id=techdocs&amp;amp;no=5904 I. Introduction这篇文章主要介绍LTE网络结构，是LTE的第一篇技术文章。LTE网络也叫EPS，是一个端到端的全IP网络；EPS分为两个部分，LTE部分负责处理和接入网络E-UTRAN相关的技术，EPC部分负责处理和核心网相关的技术。一个端到端的全">
 <meta name="twitter:image" content="http://img.blog.csdn.net/20150909120950694">
 
 
@@ -197,7 +198,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
   
   
@@ -227,7 +228,7 @@
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="accessibility.nav_toggle">
+    <button aria-label="切换导航栏">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -246,7 +247,7 @@
           
   <li class="menu-item menu-item-home">
     <a href="/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />home</a>
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
 </li>
 
       
@@ -255,7 +256,7 @@
           
   <li class="menu-item menu-item-tags">
     <a href="/tags/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />tags</a>
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
 </li>
 
       
@@ -264,7 +265,7 @@
           
   <li class="menu-item menu-item-categories">
     <a href="/categories/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />categories</a>
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
 </li>
 
       
@@ -273,7 +274,7 @@
           
   <li class="menu-item menu-item-archives">
     <a href="/archives/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />archives</a>
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
 </li>
 
       
@@ -282,7 +283,7 @@
           
   <li class="menu-item menu-item-about">
     <a href="/about/" rel="section">
-      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />about</a>
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
 </li>
 
       
@@ -360,9 +361,9 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">post.posted</span>
+                <span class="post-meta-item-text">发表于</span>
               
-              <time title="post.created" itemprop="dateCreated datePublished" datetime="2018-04-03T20:57:47+08:00">2018-04-03</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-03T20:57:47+08:00">2018-04-03</time>
             
 
             
@@ -371,6 +372,31 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/通信/" itemprop="url" rel="index"><span itemprop="name">通信</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/通信/LTE/" itemprop="url" rel="index"><span itemprop="name">LTE</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -385,7 +411,7 @@
             <span class="post-meta-item-icon"
             >
             <i class="fa fa-eye"></i>
-             post.viewssymbol.colon 
+             阅读次数： 
             <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
             </span>
           
@@ -407,8 +433,7 @@
       
 
       
-        <hr>
-<p>原文地址：<a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5904" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5904</a></p>
+        <p>原文地址：<a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5904" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5904</a></p>
 <h1 id="I-Introduction"><a href="#I-Introduction" class="headerlink" title="I. Introduction"></a>I. Introduction</h1><p>这篇文章主要介绍LTE网络结构，是LTE的第一篇技术文章。LTE网络也叫EPS，是一个端到端的全IP网络；EPS分为两个部分，LTE部分负责处理和接入网络E-UTRAN相关的技术，EPC部分负责处理和核心网相关的技术。一个端到端的全IP网络一位置所有的数据流，从UE到连接服务实体的PDN之间的所有通路，在EPS内部，所有的传输都是基于IP协议的。</p>
 <p>为了通过LTE网络提供给用户LTE服务，引入了一个端到端LTE网络的参考模型（NRM），这个模型除了基本的EPS域之外，还包含三个额外的域（用户的BSS/OSS域，提供服务的应用域，发送IP包的IP传输网络域）。这篇文章的范围集中在基本的EPS域。其他的EPS域特性，例如，LTE和其他3gpp/3gpp2的互操作性和漫游，这些特性是在本文档范围之外，后续会在其他文档中涉及。</p>
 <p>这个文档剩余部分的组织如下，在第二章，定义LTE网络参考模型，解释EPS实体和接口。第三章描述协议栈架构。第四章描述整个LTE网络的数据流。</p>
@@ -617,6 +642,17 @@
     
     
     
+    
+    <div>
+    
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+    
+    </div>
 
     
       <div>
@@ -631,23 +667,23 @@
     
       <div>
         <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-  <div>打赏一下</div>
+  <div></div>
   <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-    <span>reward.donate</span>
+    <span>打赏</span>
   </button>
   <div id="QR" style="display: none;">
 
     
       <div id="wechat" style="display: inline-block">
-        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="sun-day reward.wechatpay"/>
-        <p>reward.wechatpay</p>
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="sun-day 微信支付"/>
+        <p>微信支付</p>
       </div>
     
 
     
       <div id="alipay" style="display: inline-block">
-        <img id="alipay_qr" src="/images/alipay.jpg" alt="sun-day reward.alipay"/>
-        <p>reward.alipay</p>
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="sun-day 支付宝"/>
+        <p>支付宝</p>
       </div>
     
 
@@ -662,6 +698,14 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/LTE/" rel="tag"><i class="fa fa-tag"></i> LTE</a>
+          
+            <a href="/tags/通信/" rel="tag"><i class="fa fa-tag"></i> 通信</a>
+          
+        </div>
       
 
       
@@ -681,6 +725,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/03/2-LTE-Identification-I-UE-and-ME-Identifiers/" rel="prev" title="2-LTE Identification I: UE and ME Identifiers">
+                2-LTE Identification I: UE and ME Identifiers <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -731,10 +779,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            sidebar.toc
+            文章目录
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            sidebar.overview
+            站点概览
           </li>
         </ul>
       
@@ -758,8 +806,8 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">2</span>
-                    <span class="site-state-item-name">state.posts</span>
+                    <span class="site-state-item-count">48</span>
+                    <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
               
@@ -775,8 +823,16 @@
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
-                    <span class="site-state-item-name">state.categories</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
               
@@ -792,8 +848,24 @@
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
-                    <span class="site-state-item-name">state.tags</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
               
@@ -821,7 +893,7 @@
                 </span>
               
                 <span class="links-of-author-item">
-                  <a href="https://www.douban.com/people/62608961/" target="_blank" title="豆瓣"><i class="fa fa-fw fa-globe"></i>豆瓣</a>
+                  <a href="https://blog.csdn.net/mouse1598189" target="_blank" title="CSDN"><i class="fa fa-fw fa-globe"></i>CSDN</a>
                   
                 </span>
               
@@ -890,7 +962,9 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
   <span class="with-love" id="animate"> 
     <i class="fa fa-user"></i>
   </span>
@@ -904,7 +978,14 @@
 
 
 
-  <div class="powered-by">footer.powered</div>
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_pv">
+  本站访客数:<span id="busuanzi_container_site_pv"></span>
+</span>
+</div>
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
 
 
 
@@ -912,7 +993,7 @@
 
 
 
-  <div class="theme-info">footer.theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Pisces</a> v6.1.0</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.1.0</div>
 
 
 
@@ -922,14 +1003,14 @@
   <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
   
-    <span class="site-uv" title="footer.total_visitors">
+    <span class="site-uv" title="总访客量">
       <i class="fa fa-user"></i>
       <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
     </span>
   
 
   
-    <span class="site-pv" title="footer.total_views">
+    <span class="site-pv" title="总访问量">
       <i class="fa fa-eye"></i>
       <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
     </span>

@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.1.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.1.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="什么是设备故障的处理最棘手的部分？我的经验说：“如果做一些使用时中间的问题发生，就比较容易找到问题的根源并解决它（可能是我可能有过分简化的情况 - :)，但是如果有的话开始前发生了一件事，那将是一场噩梦。”例如，您设置的所有参数在网络仿真器要测试一个UE，然后打开了UE。在几秒之后，UE开始启动，然后再几秒之后，你看到一对的信号条在UE屏幕顶部的地方..然后在几秒钟内你看到’SOS’或’服务不可用">
+<meta name="keywords" content="LTE,通信,RACH">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LTE-RACH过程">
+<meta property="og:url" content="http://yoursite.com/2018/04/03/LTE-RACH过程/index.html">
+<meta property="og:site_name" content="sun-day-blog">
+<meta property="og:description" content="什么是设备故障的处理最棘手的部分？我的经验说：“如果做一些使用时中间的问题发生，就比较容易找到问题的根源并解决它（可能是我可能有过分简化的情况 - :)，但是如果有的话开始前发生了一件事，那将是一场噩梦。”例如，您设置的所有参数在网络仿真器要测试一个UE，然后打开了UE。在几秒之后，UE开始启动，然后再几秒之后，你看到一对的信号条在UE屏幕顶部的地方..然后在几秒钟内你看到’SOS’或’服务不可用">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://img.blog.csdn.net/20151121104544870">
+<meta property="og:image" content="http://img.blog.csdn.net/20151121165747335">
+<meta property="og:image" content="http://img.blog.csdn.net/20151121170341665">
+<meta property="og:image" content="http://img.blog.csdn.net/20151122133051207">
+<meta property="og:image" content="http://img.blog.csdn.net/20151122133116489">
+<meta property="og:image" content="http://img.blog.csdn.net/20151122133134946">
+<meta property="og:image" content="http://img.blog.csdn.net/20151130164127081">
+<meta property="og:image" content="http://img.blog.csdn.net/20151130164352694">
+<meta property="og:updated_time" content="2018-04-03T15:09:11.023Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LTE-RACH过程">
+<meta name="twitter:description" content="什么是设备故障的处理最棘手的部分？我的经验说：“如果做一些使用时中间的问题发生，就比较容易找到问题的根源并解决它（可能是我可能有过分简化的情况 - :)，但是如果有的话开始前发生了一件事，那将是一场噩梦。”例如，您设置的所有参数在网络仿真器要测试一个UE，然后打开了UE。在几秒之后，UE开始启动，然后再几秒之后，你看到一对的信号条在UE屏幕顶部的地方..然后在几秒钟内你看到’SOS’或’服务不可用">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20151121104544870">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/03/LTE-RACH过程/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>LTE-RACH过程 | sun-day-blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> 
+
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">sun-day-blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">牛逼的人生不需要解释</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+          
+  <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+</li>
+
+      
+
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/03/LTE-RACH过程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="sun-day">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sun-day-blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">LTE-RACH过程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-03T23:05:09+08:00">2018-04-03</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/通信/" itemprop="url" rel="index"><span itemprop="name">通信</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/通信/LTE/" itemprop="url" rel="index"><span itemprop="name">LTE</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>什么是设备故障的处理最棘手的部分？我的经验说：“如果做一些使用时中间的问题发生，就比较容易找到问题的根源并解决它（可能是我可能有过分简化的情况 - :)，但是如果有的话开始前发生了一件事，那将是一场噩梦。”例如，您设置的所有参数在网络仿真器要测试一个UE，然后打开了UE。在几秒之后，UE开始启动，然后再几秒之后，你看到一对的信号条在UE屏幕顶部的地方..然后在几秒钟内你看到’SOS’或’服务不可用“，而不是显示在屏幕和普通天线条网络运营商的名称。这就是我所说的“问题做一些中间”。在这种情况下，如果你收集客户端日志和设备日志，至少你可以很容易地针点出了问题发生的位置，并从那里开始的进一步细节。但如果你是在这种情况下怎么办？您将所有的参数在网络仿真器侧并打开UE .. UE启动开机..显示消息说“搜索网络…”，结果卡在那里..没有信号条吧..连“SOS”都没有..只是说“不服务”。我收集了UE侧记录和网络仿真器端日志，但没有信令消息。这是我们头痛的开始。</p>
+<p>作为例子，<br>1）当你在WCDMA UE打开，如果你没有看到’RRC Connection Request’？<br>2）当你对GSM UE打开，若您没有看到 ‘Channel Request’？<br>3）当你的LTE UE打开，如果你没有看到 ‘RACH Preamble’ ？</p>
+<p>首先你要做的是了解不仅在更高的信令层这一过程的每一个细节，也要涉及到关于这一步从高层到物理层一直下去的每一个细节。而你也必须使用适当的设备可以显示这些详细的过程。如果您有不提供日志记录的设备或提供日志，但只有高层信令日志，这将是很难解决。既然你有合适的工具，接下来的事情，你必须做好准备是要了解这些过程的详细知识。没有知识，即使有好的工具，这并不意味着任何东西给我。所以 ，我想在这里教我关于LTE信号的第一步，这是RACH过程。 （有人会说，即使在RACH之前，还有很多其他的步骤，如频率同步，时间同步，MIB / SIB解码..但它把这些放在一边，现在..因为它更像是基带处理）。</p>
+<p><strong>为什么RACH？ （RACH什么功能？）</strong></p>
+<p>当你第一次听到这个词RACH或RACH过程时，在你的心中第一个问题将是“为什么RACH？”，“什么是RACH过程，功能/目的是什么？”，“为什么我们需要这种复杂（看起来过分复杂的）？“。<br>肯定的，这不是为了混淆你:)，RACH具有非常重要的功能，尤其在LTE中（在WCDMA中也一样）。 </p>
+<p><strong>RACH的主要目的可以如下所述。</strong><br>1）实现高达UE与eNB之间链路同步<br>2）为消息3获取资源（例如，RRC连接请求）</p>
+<p>在大多数的通信（无论它是有线或无线的，特别是数字通信中），最重要的先决条件是建立接收机和发射机之间的定时同步。所以，无论你学习什么通信技术，你会看到一种是专门特定的通信同步机制。</p>
+<p>在LTE（在WCDMA中也一样），在下行链路的同步（发送是基站，接收机是UE），这种同步是通过特别的同步​​信道（专用物理信号模式）来实现的。请参阅时间同步处理页面的详细信息。这个下行同步信号被广播给大家，它是以一定的时间间隔一直发送的。<br>然而，在上行链路（发射机是UE，接收机是eNB），如果UE正在使用广播/始终发送同步机制，它是没有效率的（实际上浪费能源，造成了很多其他UE的干扰）。你可以很容易地理解这样的问题。在上行链路的情况下，这种同步过程应符合下列标准<br>1）仅仅在立即需要的时候才应该发生同步过程<br>2）同步应该只专用于特定UE</p>
+<p>在这个页面中关于程序讨论的所有复杂的专门设计机制，都满足这些标准。</p>
+<p>RACH过程的另一目的是为消息3获得资源（消息3）。 RRC连接请求是消息3的一个例子，根据不同的情况，有几种不同类型的消息3。你会找出这部分通过此网页阅读，这是不是很复杂，很好理解。</p>
+<p><strong>什么时候RACH发生？</strong></p>
+<p>当你想到WCDMA中RRC连接发生时（或当PRACH发生时），这将很好帮助你理解。当你想到GSM中信道请求发生时，这将很好帮助你理解。</p>
+<p>我的LTE RACH过程的印象是PRACH过程（WCDMA）和信道请求（GSM）的组合。它可能不是100％正确的比喻……但无论如何，我得到了这样的印象。在LTE中，RACH过程发生在下列情况下（3GPP规范中，36.300 10.1.5随机接入过程）<br>1）RRC_IDLE首次访问<br>2）RRC连接重建程序<br>3）切换（基于竞争的还是非竞争为主）<br>4）在RRC_CONNECTED状态DL数据到达，需要随机接入过程。例如，当UL同步状态为非同步<br>5）在RRC_CONNECTED 状态UL数据到达，需要随机接入过程。例如，当UL同步状态为“非同步”或不存在可以使用SR的PUCCH资源。<br>6）对于RRC_CONNECTED 状态下定位目的，需要随机接入过程;    例如。当UE定位需要定时超前TA</p>
+<p><strong>两种类型的RACH过程：基于竞争和非竞争的</strong></p>
+<p>当UE发送PRACH前导码，它发送特定的序列，这个序列被称为“签名”。在每个LTE小区，总共64个前导签名可用与UE随机选择这些签名中的其中一个。</p>
+<p>UE选择“随机”这些签名中的其中一个？<br>这是否意味着有一些可能性，即多个UE发送PRACH具有相同的签名？是。有这样的可能性。它意味着同样的PRACH前置码从多个UE同时到达NW..这种PRACH碰撞被称为“争用”。在RACH过程中，允许这种类型的“争用”被称为“基于竞争”的RACH过程。在这种基于竞争的RACH过程，网络会经历另外的过程，在稍后的步骤来解决这些争用和这个过程被称为“竞争解决”步骤。</p>
+<p>但有一些情况下，这些种类的争用是不能接受的，由于某些原因（例如，时序限制），这些争用可被防止。通常在这种情况下，网络通知使用的每个确切时间和UE的前导签名。当然，在这种情况下，网络将分配这些前导签名，以便它不会发生碰撞。这种RACH过程被称为“无竞争”RACH程序。要启动的“无竞争”RACH过程中，UE应在连接模式的RACH过程，在切换之前。</p>
+<p><strong>典型的“基于竞争的”RACH程序如下：</strong><br>1）UE - &gt;NW  ：RACH前导码（RA-RNTI，指示L2 / L3消息的大小）<br>2）UE &lt; - NW ：随机接入响应（定时提前TA，T_C-RNTI，对L2 / L3消息的UL授权）<br>3）UE - &gt;NW ：L2 / L3消息<br>4）关于早竞争解决的消息</p>
+<p>现在让我们假设一个竞争发生在步骤1）。例如，两个UE发送PRACH。在这种情况下，在步骤2）两个UE的将收到同一T_C-RNTI和资源分配。其结果是在步骤3），UE将通过相同的资源分配（具有相同的时间/频率位置）发送L2 / L3消息到NW。会发生什么，当两个UE的发射在完全相同的时间/频率位置完全相同的信息？一种可能性是，这两个信号充当彼此干扰和NW都不能解码码它们。在这种情况下，没有UE能获得从NW任何响应（HARQ ACK），并且它们都认为RACH过程失败，并返回到步骤1）。另一种可能性将是NW可以成功地从仅一个UE解码所述消息并且未能另外一个UE的解码。在这种情况下，NW成功的L2 / L3解码的UE将从网络得到HARQ ACK。此HARQ ACK过程步骤3）消息被称为“竞争解决”的过程。</p>
+<p><strong>典型的“无竞争”RACH程序如下：</strong><br>1）UE &lt; - NW：RACH前导码（PRACH）分配<br>2）UE - &gt;NW：RACH前导码（RA-RNTI，指示L2 / L3消息的大小）<br>3) UE &lt; - NW：随机接入响应（定时提前，C-RNTI，UL授权L2 / L3消息）</p>
+<p><strong>信息是如何编码成PRACH（RACH前导）？</strong></p>
+<p>在LTE中，在PRACH前导码之后所有的信息（数据）都具有其自己的二进制结构，这意味着它们翻译成一定的数据结构。然而，在PRACH前导码中的信息是由纯粹的物理特性表示的。形成的信息中的PRACH物理性质如下。<br>1）PRACH前导码传输时序（t_id）<br>2）PRACH传输的频域位置（F​​_ID）<br>3）PRACH信号的整个I / Q数据的序列（如下所示的一个示例）</p>
+<p><img src="http://img.blog.csdn.net/20151121104544870" alt="这里写图片描述"></p>
+<p>从1）和2）中，RA-RNTI被描述下面的链接中。从3）中，可以得出前导码索引（RAPID）。<br>在了解RA RNTI的推导时，你可能不会有太大的困难，但它不会是那么简单理解序列索引部分的推导。涉及到这个过程，大多数本页面有很多公式和复杂的表格，但我不认为我的工作做得很好以至于可以简单/清楚地描述这一部分。我将在未来添加其他短节，当我把一切都理清了。在此同时，请参阅Matlab的LTE工具箱：PRACH页面在你的大脑获得直观的形象，并了解在本页面PRACH前导信号生成部的部分。当然，你不会得到一切都一样。没有那么简单的工程:)</p>
+<p><strong>究竟在何时何一个UE的发射RACH？</strong><br>要回答这个问题，你需要参考3GPP规范TS36.211 - 表5.7.1-2。<br><img src="http://img.blog.csdn.net/20151121165747335" alt="这里写图片描述"></p>
+<p>它准确显示当UE应该根据一个所谓的“PRACH配置索引”参数来发送RACH。</p>
+<p>例如，如果UE正在使用“PRACH配置索引0”时，它应该只在偶数SFN（系统帧号）发送所述RACH。这是足够好的答案吗？这是否意味着该UE可以以指定的SFN在任何时间发送RACH呢？这个问题回的答案在表中的“子帧号”列。它说：“1”为“PRACH配置索引0”。它意味着在UE仅被允许在每一个偶数SFN的子帧号1上发送的RACH。</p>
+<p>检查你的表的理解，我会给你一个问题。使用哪个“PRACH配置索引”，网络能更容易的检测到来自UE的RACH？为什么？<br>答案是14，因为UE可以在任何SFN和帧内的任何时隙发送RACH。</p>
+<p>在一个大的图片上，你应该知道，如下图的所有维度。 （红色矩形是PRACH信号）。<br><img src="http://img.blog.csdn.net/20151121170341665" alt="这里写图片描述"></p>
+<p>该R_Slot由PRACH配置指标确定，R_length由Premable格式决定。当前导码格式0〜3时，F_offset由以下方程决定。 这个方程式中n_RA_PRBoffset是由PRACH-FreqOffset在SIB2规定。 （参考36.2115.7物理随机接入信道的细节）<br><strong>&lt; FDD &gt;</strong><br><img src="http://img.blog.csdn.net/20151122133051207" alt="这里写图片描述"><br><strong>&lt; TDD : Preamble format 0-3 &gt;</strong><br><img src="http://img.blog.csdn.net/20151122133116489" alt="这里写图片描述"><br><strong>&lt; TDD : Preamble format 4 &gt;</strong><br><img src="http://img.blog.csdn.net/20151122133134946" alt="这里写图片描述"></p>
+<p><strong>什么是前导码格式？</strong><br> 如果你看到上面的表5.7.1-1展示，你看到标题为“序言格式”的列。什么是前导码格式？它被定义为下面的图。</p>
+<p>你会看到，PRACH前导码的长度取决于前导码格式。例如，PRACH前导码格式0的长度为（3186+24567）的抽样。 （如你所知，一个抽样（TS）为1/30.72（=0.03255）us，它在36.2114帧结构定义为1 /（15000×2048）s（=0.03255us））。</p>
+<p><img src="http://img.blog.csdn.net/20151130164127081" alt="这里写图片描述"></p>
+<p>你可能会问：“为什么我们需要这么多个前导码格式？”，特别是“为什么我们需要与不同时间长度的不同PRACH格式？”。<br>其中一个主要的原因是，他们使用根据小区的半径不同使用不同的前导码格式，但是这是过于简单的回答。<br>我想推荐一本名为“LTE：UMTS的从理论到实践”第19.4.2的PRACH结构。这是描述PRACH在最详细的级别我曾经阅读材料。</p>
+<p>正如简短的结论为小区大小，我们可以如下重写表。<br><img src="http://img.blog.csdn.net/20151130164352694" alt="这里写图片描述"></p>
+<p>Note 1 : T_CP (in ms) = T_CP(in Ts) x 0.03255 x 1/1000,<br>Note 2 : T_SEQ (in ms) = T_SEQ(in Ts) x 0.03255 x 1/1000,<br>Note 3 : Guard Time (in ms) = Number of Subframe - Total Length<br>Note 4 : 小区半径大约是电磁波传输距离除以2。</p>
+<p><strong>如何网络知道什么时候UE将发送RACH？</strong></p>
+<p>这很简单。网络知道当UE将发送所述RACH之前UE发送它，因为网络通知UE的当UE应该发送所述RACH。 （如果UE未能正确地解码有关的RACH的网络信息，网络将无法检测到它，即使UE发送RACH）。</p>
+<p>以下部分将描述在RACH网络，情报。</p>
+<p>其中RRC消息中包含RACH配置？</p>
+<p>正是在SIB2，你可以找到在3GPP36.331的细节。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    
+    <div>
+    
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+    
+    </div>
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/wechat-qcode.jpg" alt="sun-day wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎微信交流！</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="sun-day 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="sun-day 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/LTE/" rel="tag"><i class="fa fa-tag"></i> LTE</a>
+          
+            <a href="/tags/通信/" rel="tag"><i class="fa fa-tag"></i> 通信</a>
+          
+            <a href="/tags/RACH/" rel="tag"><i class="fa fa-tag"></i> RACH</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/03/LTE基本过程/" rel="next" title="LTE基本过程">
+                <i class="fa fa-chevron-left"></i> LTE基本过程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/03/LTE-Discontinuous-Reception-DRX-in-RRC-IDLE-Part-1/" rel="prev" title="LTE Discontinuous Reception (DRX) in RRC_IDLE: Part 1">
+                LTE Discontinuous Reception (DRX) in RRC_IDLE: Part 1 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="sun-day" />
+            
+              <p class="site-author-name" itemprop="name">sun-day</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">48</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/zhanghaogithub123" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:zhanghao163mail@163.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/zhang-hao-3-80-49/activities" target="_blank" title="知乎"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://blog.csdn.net/mouse1598189" target="_blank" title="CSDN"><i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.google.com/" title="Google" target="_blank">Google</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.baidu.com/" title="百度" target="_blank">百度</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate"> 
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">true</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_pv">
+  本站访客数:<span id="busuanzi_container_site_pv"></span>
+</span>
+</div>
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.1.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.1.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

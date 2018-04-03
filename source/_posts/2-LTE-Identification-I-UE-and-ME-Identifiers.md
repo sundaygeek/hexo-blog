@@ -2,12 +2,14 @@
 title: '2-LTE Identification I: UE and ME Identifiers'
 date: 2018-04-03 21:16:55
 tags:
+    - LTE
+    - 通信
+categories:
+    - 通信
+    - LTE
 ---
+
 原文链接：http://www.netmanias.com/en/?m=view&id=techdocs&no=5905
-
-
-----------
-
 
 # I. Introduction
 在LTE网络中，根据和其他ID的关系使用不同的ID来标识每一个实体。就像在人际网络中使用不同的名字和头衔来标识一个人。理解这些ID和EPS实体是对理解LTE技术很必要。

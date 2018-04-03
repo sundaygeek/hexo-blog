@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.1.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.1.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="EMM Procedure 1. Initial AttachPart 1. Cases of Initial Attach 原文链接：http://www.netmanias.com/en/?m=view&amp;amp;id=techdocs&amp;amp;no=6098  I. Introduction这个文档讨论初始附着，也就是第九篇文档所讨论的case1。在这个阶段，用户在签约到一个LTE网络服务之后">
+<meta name="keywords" content="LTE,通信">
+<meta property="og:type" content="article">
+<meta property="og:title" content="10-EMM Procedure 1. Initial Attach Part-1">
+<meta property="og:url" content="http://yoursite.com/2018/04/03/10-EMM-Procedure-1-Initial-Attach-Part-1/index.html">
+<meta property="og:site_name" content="sun-day-blog">
+<meta property="og:description" content="EMM Procedure 1. Initial AttachPart 1. Cases of Initial Attach 原文链接：http://www.netmanias.com/en/?m=view&amp;amp;id=techdocs&amp;amp;no=6098  I. Introduction这个文档讨论初始附着，也就是第九篇文档所讨论的case1。在这个阶段，用户在签约到一个LTE网络服务之后">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://img.blog.csdn.net/20150915135257809">
+<meta property="og:image" content="http://img.blog.csdn.net/20150915135947039">
+<meta property="og:image" content="http://img.blog.csdn.net/20150917152809534">
+<meta property="og:image" content="http://img.blog.csdn.net/20150917162518218">
+<meta property="og:updated_time" content="2018-04-03T14:26:45.474Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="10-EMM Procedure 1. Initial Attach Part-1">
+<meta name="twitter:description" content="EMM Procedure 1. Initial AttachPart 1. Cases of Initial Attach 原文链接：http://www.netmanias.com/en/?m=view&amp;amp;id=techdocs&amp;amp;no=6098  I. Introduction这个文档讨论初始附着，也就是第九篇文档所讨论的case1。在这个阶段，用户在签约到一个LTE网络服务之后">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20150915135257809">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/03/10-EMM-Procedure-1-Initial-Attach-Part-1/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>10-EMM Procedure 1. Initial Attach Part-1 | sun-day-blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> 
+
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">sun-day-blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">牛逼的人生不需要解释</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+          
+  <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+</li>
+
+      
+
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/03/10-EMM-Procedure-1-Initial-Attach-Part-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="sun-day">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sun-day-blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">10-EMM Procedure 1. Initial Attach Part-1</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-03T22:19:07+08:00">2018-04-03</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/通信/" itemprop="url" rel="index"><span itemprop="name">通信</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/通信/LTE/" itemprop="url" rel="index"><span itemprop="name">LTE</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>EMM Procedure 1. Initial Attach<br>Part 1. Cases of Initial Attach</p>
+<p>原文链接：<a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6098" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6098</a></p>
+<hr>
+<h1 id="I-Introduction"><a href="#I-Introduction" class="headerlink" title="I. Introduction"></a>I. Introduction</h1><p>这个文档讨论初始附着，也就是第九篇文档所讨论的case1。在这个阶段，用户在签约到一个LTE网络服务之后，用户开机，试图附着到网络上，发送IMSI给网络。<br>初始附着过程随着环境发生变化。可以是下面将要讨论的case1也可以是EMM case11（在另外一个城市初始附着，将在后面的文档中讨论）。或者可以使其他类型，取决于用户是否保存着上次附着到网络时使用的信息，（这里是指最后附着信息，或者MME是否有用户的信息，包括UE ID，接下来都是指最后一次UE上下文）。所以这个文档描述了不同初始附着类型，发现他们的特征和不同。接下来的文档part2将描述EMM case1，详细介绍相关的过程。</p>
+<p>这个文档组织如下：第二章描述不同的初始附着类型，第三章通过列出MME执行的功能来简要讨论每一种情况的不同初始附着过程。</p>
+<h1 id="II-Cases-of-Initial-Attach"><a href="#II-Cases-of-Initial-Attach" class="headerlink" title="II. Cases of Initial Attach"></a>II. Cases of Initial Attach</h1><p>当UE初始附着到网络，MME根据附着的类型来发起不同的过程。这个过程以attach request消息开始，以attach accept消息结束。当UE发送给MME attach request消息，在这个消息包含UE ID（IMSI or old GUTI）来识别UE。当MME发送attach accept（GUTI和TAI列表）消息，在消息中包含用来代替IMSI的ID –GUTI，和包含TAI列表（在这个区域，UE不需要TAU过程可以进入的区域）。</p>
+<p>在接收到attach request消息之后，发送attach accept消息之前，MME可能执行以下过程的全部或部分：</p>
+<ul>
+<li>UE ID 获取</li>
+<li>鉴权</li>
+<li>NAS安全建立</li>
+<li>位置更新</li>
+<li>EPS会话建立</li>
+</ul>
+<p>基于UE发起的初始附着的类型，决定要执行哪些过程。但是，UE ID过去和EPS会话建立过程是所有初始附着过程都必须的。其他过程，像鉴权，NAS安全建立和位置更新更具初始附着的类型选择的执行。这些过程的选择受到下面因素的影响：i)UE有的UE ID是什么（IMSI or old GUTI），ii）上次附着信息是否依旧保存在MME中有效等等。在这个文档中，我们将使用下面的判决来分辨初始附着的不同类型，如图1所示。</p>
+<ul>
+<li>UE使用什么UE ID累发起初始附着请求（IMSI or old GUTI）？</li>
+<li>UE尝试附着的MME是哪个（是上次附着的那个，还是从来没有附着过的一个新的）？</li>
+<li>在网络中是否有有效的UE上下文存在？</li>
+</ul>
+<p><img src="http://img.blog.csdn.net/20150915135257809" alt="这里写图片描述"></p>
+<p>在这个文档中，如果上次UE上下文（包含UE ID）在网络中不存在，UE被定义为未知UE，其他的称为已知UE。2.1节描述未知UE的初始附着，2.2节描述已知UE的初始附着。下面，如果UE有上次附着信息，我们假设attach request消息已经完整性保护的。</p>
+<h2 id="2-1-未知UE"><a href="#2-1-未知UE" class="headerlink" title="2.1 未知UE"></a>2.1 未知UE</h2><p>图2描述了当UE给网络发送了attach request消息初始附着的实例，MME没有关于用户的有效的UE上下文。我们将分辨初始附着的类型，并解释每一种类型的特征比较。现在UE想附着的MME称为新MME，上次UE已经附着过的MME称为旧MME。</p>
+<p><img src="http://img.blog.csdn.net/20150915135947039" alt="这里写图片描述"></p>
+<p><strong>attach case-1：当UE使用IMSI来附着</strong></p>
+<p>这个是在UE和MME中都没有上次UE上下文，这种情况下需要的场景如下：</p>
+<p>1）UE使用IMSI作为UE ID发送给MME attach request消息。MME从这个消息中获得IMSI。<br>2）假设MME不知道UE（以为发送的而是IMSI），MME发起鉴权和NAS安全建立过程。<br>3）MME向HSS发送位置更新消息通知HSS UE已经注册上了，并从HSS中下载这个用户的签约信息。</p>
+<p><strong>attach case-2：当UE附着的MME是上次已经附着的MME（new MME=old MME），但是MME没有包含有效的上次UE上下文</strong></p>
+<p>这个是当UE在上次附着后仍保留着上次附着信息（old GUTI和NAS安全上下文）时UE尝试附着到相同的MME上，但是MME没有任何UE的上下文。基本的过程如下：<br>1）UE使用old GUTI给新的MME发送attach request消息。这时候，这个attach request消息是使用NAS安全秘钥（K-NASinc）完整性保护的。<br>2）因为GUTI包含GUMMEI，新的MME就可以从old GUTI中知道这个旧的GUTI是从哪里分配的。新的MME查找上次UE上下文，但是没有找到任何信息（例如，完整性验证失败或者没有old GUTI）。<br>3）MME给UE发送identity request消息来请求IMSI。<br>4）UE给MME发送identity response消息提供请求的IMSI。<br>5）现在，MME通过使用获取的IMSI按照attach case-1的流程执行鉴权和NAS安全建立过程，接着发送UE位置更新消息给HSS。</p>
+<p><strong>attach case-3：当UE附着到一个之前从来没有附着过的MME上（new MME ！= old MME），且MME没有有效的上次UE上下文信息</strong></p>
+<p>这是当UE在上次去附着之后仍然还保留着上次附着信息，附着到一个新的MME，不是旧的MME，但是就的MME没有和UE关联的有效的UE上下文信息。基本过程如下所示：<br>1）UE使用old GUTI作为UE ID给新的MME发送attach request消息，这时候这个消息是完整性保护的<br>2）当新的MME接收到这个消息，他从这个old GUTI知道来自哪里。<br>3）接着，新的MME向旧的MME发送identification request（old GUTI，完整的attach request消息）把旧的GUTI和attach request消息转发给旧的MME。通过这个消息，新的MME请求和旧的GUTI相关的上次UE上下文。<br>4）一旦接收到这个消息，旧MME查找UE上下文，但是没有找到任何信息。<br>5）旧MME给新MME发送identification response消息，通知没有找到UE上下文。</p>
+<p>从这儿开始开始和attach case-2相同，执行attach case-2的3/4/5。新MME发送给UE identify request消息来请求IMSI。接着UE携带自己的IMSI使用identify response消息发送给MME。MME接收到IMSI后，MME开始执行鉴权和NAS安全建立和UE位置更新。</p>
+<h2 id="2-2-已知UE"><a href="#2-2-已知UE" class="headerlink" title="2.2 已知UE"></a>2.2 已知UE</h2><p>图3展示了UE发送attach request初始附着到网络，并且MME有用户有效的UE上下文信息的情况。在初始附着时，不像未知UE，所有的已知UE都是使用GUTI，不是IMSI。在图3中，UE和MME中都包含和用户相关的UE上下文信息，并且UE发送的attach request消息是完整性保护的。</p>
+<p><img src="http://img.blog.csdn.net/20150917152809534" alt="这里写图片描述"></p>
+<p><strong>attach case-4：当UE附着到上次附着过的MME上，并且这个MME中包含用户有效的上次UE上下文</strong></p>
+<p>这是当UE仍旧有上次附着信息（old GUTI，NAS安全上下文），附着到它上次附着的MME，MME具有这个UE的有效UE上下文。具体的场景如下：<br>1）UE使用old GUTI作为自己的UE ID给new MME发送attach request消息。这个attach request消息是使用NAS完整性秘钥K-NASint完整性保护的。<br>2）这个new MME从old GUTI中知道谁分配的这个ID。然后它查找old GUTI，找到有效的UE上下文（IMSI，MM上下文（NAS安全上下文，UE-AMBR））。<br>3）MME对attach request消息执行完整性检查<br>        i)如果完整性检查失败，MME必须使用IMSI来鉴权用户，并执行用户的NAS安全建立过程。<br>        ii）如果完整性检查通过，MME会略过鉴权和NAS安全建立过程。</p>
+<p><strong>attach case-5：当UE附着到之前没有附着过的MME上（new MME！=old MME），并且old MME具有有效的上次UE上下文</strong></p>
+<p>这是当仍包含上次附着信息，附着到一个新的MME，在旧的MME上具有有效的UE上下文。一个简单过程如下：<br>1）UE使用old GUTI作为自己的UE ID给new MME发送attach request消息。这个attach request消息是完整性保护的。<br>2）new MME从接收到的old GUTI上知道是谁分配的（old MME）。<br>3）new MME向old MME发送identification request（old GUTI，完整的attach request消息），转发old GUTI和attach request消息。通过这样，new MME请求和old GUTI相关联的上次UE上下文信息。<br>4）一旦接收到这个消息，old MME查找UE上下文，找到和这个UE相关联的IMSI和MM上下文（NAS安全上下文，UE-AMBR）。<br>5）old MME对attach request消息执行完整性检查<br>6）old MME把完整性检查的结果通过identification response消息发给new MME<br>        i)如果完整性检查失败，old MME在这个消息转发错误原因消息。<br>        ii）如果完整性检查通过，则转发UE上下文（IMSI，old GUTI，MM上下文）。</p>
+<p>如果完整性检查失败，情况和attach case-3相同，因此需要执行和attach case-3上相同的IMSI获取，鉴权和NAS安全建立过程。如果检查通过，new MME从old MME接收到IMSI和MM上下文，并略去鉴权和NAS安全建立的过程（类似case-4）。和case-4不同的一点就是因为UE是附着到一个new MME，这个new MME需要和HSS通信更新UE的位置信息。</p>
+<h1 id="III-Simplified-Call-Flow-in-Each-Case"><a href="#III-Simplified-Call-Flow-in-Each-Case" class="headerlink" title="III. Simplified Call Flow in Each Case"></a>III. Simplified Call Flow in Each Case</h1><p>第二章介绍了不同类型的初始附着。第三章将描述在每种类型的流程，主要关注在功能模块上。图4描述了基于使用不同的UE ID，每一个初始附着过程具有不同的流程。对于known UE的初始附着情况，我们讨论NAS-MAC完整性检查在什么地方完整。在初始附着过程中执行的功能模块包括：</p>
+<p>1）UE ID获取<br>MME获取去UE ID用于用户身份认证和鉴权。UE ID可以是IMSI和old GUTI。IMSI可以通过attach request或者iDentify response消息从UE中获取，而old GUTI可以通过attach request消息从UE中获取。</p>
+<p>2）鉴权<br>如果MME通过attach request消息获取IMSI或者old GUTI作为UE ID，但是这个消息的完整性检查失败了，网络检查是否需要通过执行EPS AKA过程来允许UE附着。通过产生鉴权向量并发送到MME，HSS产生K-ASME（MME基本秘钥），接着和UE之间执行相互鉴权。</p>
+<p>3） NAS安全建立<br>一旦用户鉴权完成，产生了在UE和MME之间用于NAS消息安全传输的NAS安全秘钥。</p>
+<p>4）位置更新<br>MME从HSS下载用户信息，并且HSS更新UE当前位置的信息。MME只有当i)UE使用IMSI作为UE ID时ii）MME没有有效的上次UE上下文信息iii）MME没有关于用户的任何签约信息iv）UE上次从其他MME上去附着，这些情况下MME才会执行位置更新。</p>
+<p>5）EPS会话建立<br>EPS会话和默认承载建立。</p>
+<p><img src="http://img.blog.csdn.net/20150917162518218" alt="这里写图片描述"></p>
+<h2 id="3-1-使用IMSI初始附着"><a href="#3-1-使用IMSI初始附着" class="headerlink" title="3.1 使用IMSI初始附着"></a>3.1 使用IMSI初始附着</h2><p><strong>attach case-1：unknown UE</strong></p>
+<p>UE使用IMSI请求初始附着，MME从attach  request消息中获取用户的IMSI。</p>
+<p>【UE-&gt;MME】attach request（IMSI）</p>
+<p>在初始附着时UE如果使用IMSI，MME会执行鉴权，NAS安全建立和位置更新，建立EPS会话/默认EPS承载。</p>
+<h2 id="3-2-使用GUTI初始附着"><a href="#3-2-使用GUTI初始附着" class="headerlink" title="3.2 使用GUTI初始附着"></a>3.2 使用GUTI初始附着</h2><p><strong>attach case-2：unknown UE，MME unchanged</strong></p>
+<p>UE使用old GUTI请求初始附着，但是MME中没有old GUTI。所以MME向UE请求UE ID，并获取IMSI。</p>
+<p>【UE-&gt;MME】 attach request（old GUTI）<br>【MME】 no IMSI<br>【UE&lt;-MME】 identity request（UE ID=IMSI）<br>【UE-&gt;MME】identity response（IMSI）</p>
+<p>剩下来的过程和case-1相同。也就是，MME执行鉴权，NAS安全建立，位置更新和建立EPS会话/默认EPS承载。</p>
+<p><strong>attach case-3：unknown UE，MME changed</strong></p>
+<p>UE使用old GUTI请求初始附着。所以，new MME向old MME请求上次UE上下文，但是没有接收到任何有效的。所以MME向UE请求UE ID，获取IMSI。</p>
+<p>【UE-&gt;new MME】 attach request（old GUTI）<br>【new MME-&gt;old MME】identification request(old GUTI)<br>【old MME】no IMSI<br>【new MME&lt;-old MME】identification response（error cause）<br>【UE<-new mme】identity="" request="" （ue="" id="IMSI）" 【ue-="">new MME】identify response（IMSI）</-new></p>
+<p>剩下的过程和case-1相同。也就是，MME执行鉴权，NAS安全建立，位置更新和建立EPS会话/默认EPS承载。</p>
+<p><strong>attach case-4： known UE， MME unchanged</strong></p>
+<p>UE使用old GUTI请求初始附着，MME有和old GUTI相关的上次UE上下文。所以不需要获取IMSI的步骤。</p>
+<p>【UE-&gt;MME】 attach request（old GUTI）<br>【MME】 IMSI，old GUTI，MM上下文</p>
+<p>如果在NAS-MAC完整性检查通过，MME可能不执行鉴权，NAS安全建立和位置更新立即建立EPS会话/默认EPS承载。</p>
+<p><strong>attach case-5：known UE，MME changed</strong></p>
+<p>UE使用old GUTI来请求初始附着。所以new MME向old MME请求上次UE上下文信息，并获取UE的IMSI和MM上下文。</p>
+<p>【UE-&gt;new MME】 attach request（old GUTI）<br>【new MME-&gt;old MME】identification request(old GUTI)<br>【old MME】IMSI，old GUTI，MM上下文<br>【new MME&lt;-old MME】identification response（IMSI，old GUTI，MM上下文）</p>
+<p>如果old MME的NAS-MAC完整性检查通过，new MME介绍接收到IMSI和MM上下文，就不执行鉴权和NAS安全建立。但是因为MME发生了改变，new MME需要和HSS通信来更新UE位置信息，并建立EPS会话/默认EPS承载。HSS从old MME到new MME更新UE的位置信息，并发送cancel Location消息给old MME来通知UE的MM上下文信息可以从old MME中删除了。</p>
+<h1 id="IV-Closing"><a href="#IV-Closing" class="headerlink" title="IV. Closing"></a>IV. Closing</h1><p>到目前为止，我们讨论了初始附着的不同类型，并且不同类型所需要的步骤。在接下来的文档中，我们将关注详细的初始附着过程，并探讨在这些附着过程中在EPS实体中有哪些信息需要设置。</p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p>[1] Netmanias Technical Document, “Eleven EMM Cases in an EMM Scenario”, October 2013,<br><a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6002" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6002</a><br>[2] Netmanias Technical Document, “LTE Security II: NAS and AS Security”, August 2013,<br><a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5903" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5903</a><br>[3] Netmanias Technical Document, “LTE Security I: LTE Security Concept and LTE Authentication”, July<br>2013, <a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5902" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5902</a><br>[4] NMC Consulting Group Confidential Internal Report, “E2E LTE Network Design”, August 2010.</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    
+    <div>
+    
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+    
+    </div>
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/wechat-qcode.jpg" alt="sun-day wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎微信交流！</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="sun-day 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="sun-day 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/LTE/" rel="tag"><i class="fa fa-tag"></i> LTE</a>
+          
+            <a href="/tags/通信/" rel="tag"><i class="fa fa-tag"></i> 通信</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/03/9-EMM-Scenario-and-Eleven-EMM-Cases/" rel="next" title="9-EMM Scenario and Eleven EMM Cases">
+                <i class="fa fa-chevron-left"></i> 9-EMM Scenario and Eleven EMM Cases
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/03/11-EMM-Procedure-1-Initial-Attach-Part2/" rel="prev" title="11-EMM Procedure 1. Initial Attach Part2">
+                11-EMM Procedure 1. Initial Attach Part2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="sun-day" />
+            
+              <p class="site-author-name" itemprop="name">sun-day</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">48</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/zhanghaogithub123" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:zhanghao163mail@163.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/zhang-hao-3-80-49/activities" target="_blank" title="知乎"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://blog.csdn.net/mouse1598189" target="_blank" title="CSDN"><i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.google.com/" title="Google" target="_blank">Google</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.baidu.com/" title="百度" target="_blank">百度</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#I-Introduction"><span class="nav-number">1.</span> <span class="nav-text">I. Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#II-Cases-of-Initial-Attach"><span class="nav-number">2.</span> <span class="nav-text">II. Cases of Initial Attach</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-未知UE"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 未知UE</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-已知UE"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 已知UE</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#III-Simplified-Call-Flow-in-Each-Case"><span class="nav-number">3.</span> <span class="nav-text">III. Simplified Call Flow in Each Case</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-使用IMSI初始附着"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 使用IMSI初始附着</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-使用GUTI初始附着"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 使用GUTI初始附着</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IV-Closing"><span class="nav-number">4.</span> <span class="nav-text">IV. Closing</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number">5.</span> <span class="nav-text">References</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate"> 
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">true</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_pv">
+  本站访客数:<span id="busuanzi_container_site_pv"></span>
+</span>
+</div>
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.1.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.1.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

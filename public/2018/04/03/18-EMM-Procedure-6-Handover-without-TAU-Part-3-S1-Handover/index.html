@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.1.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.1.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="原文链接：http://www.netmanias.com/en/?m=view&amp;amp;id=techdocs&amp;amp;no=6286 I. Introduction之前的文档，我们讨论了X2切换，这篇文档我们关注在EPC干预下的S1切换。这里，我们假设source和target eNB连接在同一个MME/SGW，并且位于UE的TAI列表中的同一个TA下。第二章我们描述S1切换的概念，第三章我们">
+<meta name="keywords" content="LTE,通信">
+<meta property="og:type" content="article">
+<meta property="og:title" content="18-EMM Procedure 6. Handover without TAU - Part 3. S1 Handover">
+<meta property="og:url" content="http://yoursite.com/2018/04/03/18-EMM-Procedure-6-Handover-without-TAU-Part-3-S1-Handover/index.html">
+<meta property="og:site_name" content="sun-day-blog">
+<meta property="og:description" content="原文链接：http://www.netmanias.com/en/?m=view&amp;amp;id=techdocs&amp;amp;no=6286 I. Introduction之前的文档，我们讨论了X2切换，这篇文档我们关注在EPC干预下的S1切换。这里，我们假设source和target eNB连接在同一个MME/SGW，并且位于UE的TAI列表中的同一个TA下。第二章我们描述S1切换的概念，第三章我们">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://img.blog.csdn.net/20151010104116557">
+<meta property="og:image" content="http://img.blog.csdn.net/20151010104218858">
+<meta property="og:image" content="http://img.blog.csdn.net/20151010104310786">
+<meta property="og:image" content="http://img.blog.csdn.net/20151010104408319">
+<meta property="og:image" content="http://img.blog.csdn.net/20151010104449020">
+<meta property="og:image" content="http://img.blog.csdn.net/20151013092154440">
+<meta property="og:image" content="http://img.blog.csdn.net/20151010104536396">
+<meta property="og:image" content="http://img.blog.csdn.net/20151010104638181">
+<meta property="og:image" content="http://img.blog.csdn.net/20151010104733471">
+<meta property="og:updated_time" content="2018-04-03T14:40:55.740Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="18-EMM Procedure 6. Handover without TAU - Part 3. S1 Handover">
+<meta name="twitter:description" content="原文链接：http://www.netmanias.com/en/?m=view&amp;amp;id=techdocs&amp;amp;no=6286 I. Introduction之前的文档，我们讨论了X2切换，这篇文档我们关注在EPC干预下的S1切换。这里，我们假设source和target eNB连接在同一个MME/SGW，并且位于UE的TAI列表中的同一个TA下。第二章我们描述S1切换的概念，第三章我们">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20151010104116557">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/03/18-EMM-Procedure-6-Handover-without-TAU-Part-3-S1-Handover/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>18-EMM Procedure 6. Handover without TAU - Part 3. S1 Handover | sun-day-blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> 
+
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">sun-day-blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">牛逼的人生不需要解释</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+          
+  <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+</li>
+
+      
+
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/03/18-EMM-Procedure-6-Handover-without-TAU-Part-3-S1-Handover/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="sun-day">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sun-day-blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">18-EMM Procedure 6. Handover without TAU - Part 3. S1 Handover</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-03T22:35:13+08:00">2018-04-03</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/通信/" itemprop="url" rel="index"><span itemprop="name">通信</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/通信/LTE/" itemprop="url" rel="index"><span itemprop="name">LTE</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>原文链接：<a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6286" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6286</a></p>
+<h1 id="I-Introduction"><a href="#I-Introduction" class="headerlink" title="I. Introduction"></a>I. Introduction</h1><p>之前的文档，我们讨论了X2切换，这篇文档我们关注在EPC干预下的S1切换。这里，我们假设source和target eNB连接在同一个MME/SGW，并且位于UE的TAI列表中的同一个TA下。第二章我们描述S1切换的概念，第三章我们详细描述S1切换，最后第四章我们总结在S1切换前后EPS实体信息的变化。</p>
+<h1 id="II-Concept-of-S1-Handover"><a href="#II-Concept-of-S1-Handover" class="headerlink" title="II. Concept of S1 Handover"></a>II. Concept of S1 Handover</h1><h2 id="2-1-S1协议栈"><a href="#2-1-S1协议栈" class="headerlink" title="2.1 S1协议栈"></a>2.1 S1协议栈</h2><p>S1切换是通过S1接口source和target eNB之间执行的。在控制面eNB和MME通过S1AP信令通信，在用户面eNB和SGW通过GTP隧道通信。图1显示控制面和用户的S1接口上的协议栈。</p>
+<p><img src="http://img.blog.csdn.net/20151010104116557" alt="这里写图片描述"></p>
+<p>当安装一个新eNB时，就需要在eNB和MME之间执行S1 setup过程。eNB通过发送S1 setup request(eNB ID, eNB Name,TAC)给MME通知eNB配置信息。在MME中也会使用相应的<strong> MME容量参数</strong> 用于MME间的负载均衡。这个值被标记为权值，表示每一个MME处理UE连接的相对容量。eNB连接不止一个MME，当选择一个MME建立新的UE连接时使用这个值。eNB和EPC之间的UE连接如下：在控制面，eNB和MME之间每一个用户的信令都是通过S1AP信令连接提供的，并使用{eNB UES1AP ID, MME UE S1AP ID}标识，在用户面，eNB和SGW之间的每一个用户的S1承载都是通过GTP隧道来提供，并使用{DL S1 TEID (S1 eNB TEID), UL S1 TEID (S1 SGW TEID)}标识。</p>
+<h2 id="2-2-和切换相关的S1AP过程和消息"><a href="#2-2-和切换相关的S1AP过程和消息" class="headerlink" title="2.2 和切换相关的S1AP过程和消息"></a>2.2 和切换相关的S1AP过程和消息</h2><p>表1和2是在GPP TS 36.413中S1AP的基本过程，包含non-UE和UE相关的过程。这个文档是和切换相关的，所以这里只讨论UE相关的过程。表1列出了S1切换相关的S1AP过程和他们相关的S1AP消息。</p>
+<p><img src="http://img.blog.csdn.net/20151010104218858" alt="这里写图片描述"></p>
+<p>列在上表中的这些S1AP消息在下面详细介绍：</p>
+<ul>
+<li><strong> Handover Required message</strong> : 这个消息用于切换准备阶段，由eNB发送给MME，包含target eNB的信息和source cell的无线资源。</li>
+<li><strong> Handover Request message</strong> : 这个消息在切换准备阶段使用，由MME发送到target eNB，包含UE上下文信息。</li>
+<li><strong> Handover Request Acknowledge message</strong> : 这个消息是在切换准备阶段使用的，它是当在target eNB中成功为UE分配资源时由target eNB发送给MME。target eNB分配DL S1 TEID供S1承载在切换后使用，并分配DL S1 TEID供S1承载(indirect tunnel)用于在切换时下行数据包的传送，包含在这个消息中转发他们。</li>
+<li><strong> handover command message</strong> ：这个消息用于切换准备阶段，是由MME发送给source eNB。它包含了UE接入target eNB需要的信息（e.g. Target C-RNTI, Target eNB AS Security algorithm, DRB ID, etc.），并包含UL S1 TEID供SGW在切换时用于下行数据包传送。</li>
+<li><strong> eNB status transfer message</strong> ：这个消息是在切换执行阶段使用，由source eNB发送给MME。指示target eNB应该从哪个数据包开始接收或者发送。</li>
+<li><strong> MME Status Transfer message</strong> : 这个消息是在切换执行阶段使用，是由MME发送给target eNB。指示target eNB应该从哪个数据包开始接收或者发送。</li>
+<li><strong> Handover Notify message</strong> : 这个消息在切换完成阶段使用，是由target eNB发送给MME，指示UE已经完成到target eNB的切换。</li>
+<li><strong> UE Context Release Command message</strong> : 这个消息用在切换完成阶段，是由MME发送给source eNB请求UE上下文的释放。</li>
+<li><strong> UE Context Release Complete message</strong> : 这个消息是在切换完成阶段使用，是由source eNB发送给MME指示UE上下文已经释放了。</li>
+</ul>
+<h2 id="2-3-S1-Handover-Procedure-at-a-Glance"><a href="#2-3-S1-Handover-Procedure-at-a-Glance" class="headerlink" title="2.3 S1 Handover Procedure at a Glance"></a>2.3 S1 Handover Procedure at a Glance</h2><p>像之前文档看到的，S1切换过程包括准备，执行，完成阶段。在我们详细介绍之前，我们简要预览一下S1切换过程。</p>
+<p><img src="http://img.blog.csdn.net/20151010104310786" alt="这里写图片描述"></p>
+<p>图2描述了在切换前/中/后需要的过程。方便起见，SGW和PGW被标记为SAE-GW，source和target eNB被标记为SeNB和TeNB。</p>
+<p><strong> before S1 handover</strong><br>在上图中，UE是通过eNB A获得服务的。当UE检测到测量事件时，UE发送measurement report 给eNB A。</p>
+<p><strong> S1 handover preparation</strong><br>source eNB基于自己保留的邻区列表信息和在measurement report 消息中包含的邻区信号强度信息选择target eNB作为切换目的地。接着，source eNB意识到通过X2连接切换到target eNB是不可能的，所以决定执行S1切换，并通过MME执行。所有的eNB都是通过S1AP信令和MME通信。这时，target eNB提前分配资源来确保source eNB提供的服务在target eNB同样可用。MME提供给source eNB所有的UE接入target cell需要的所有信息。</p>
+<p>期间，target eNB和SGW分配创建indirect tunnel需要的资源，通过这个indirect tunnel，到达source eNB的下行数据转发给SGW，最终发送给target eNB。如下所示：</p>
+<ul>
+<li>source eNB发送target eNB所需要的信息给MME， 包含在handover required消息中。（1）</li>
+<li>MME发送handover request消息给target eNB，包含target eNB需要的AS安全信息来创建AS安全基础秘钥和UE上下文。</li>
+<li>target eNB（2）<ul>
+<li>使用从MME获得的S1 S-GW TEID建立上行S1承载，通过这个承载在切换后可以转发上行数据包。并为下行S1承载分配S1 target eNB TEID。（3）</li>
+<li>为连接SGW和target eNB的indirect tunnel分配S1 target eNB TEID。</li>
+<li>配置handover command消息，包含UE接入target cell所需要的所有的信息。</li>
+<li>把这些信息包含在handover request ack发送给MME。（4）</li>
+</ul>
+</li>
+<li>MME一旦接收到这个消息，在create indirect data forwarding tunnel request消息中包含target eNB为indirect tunnel分配的S1 target eNB TEID，并把这个消息发送给SGW。（5）</li>
+<li>SGW<ul>
+<li>创建indirect tunnel连接target eNB（6）</li>
+<li>分配S1 S-GW TEID用于source eNB和SGW之间的indirect tunnel的创建，并通过Create Indirect Data Forwarding Tunnel Response消息发送给MME。</li>
+</ul>
+</li>
+<li>MME包含i）SGW为indirect tunnel分配的S1 S-GW TEID，ii）包含UE接入target cell所需的信息，包含在handover command消息发送给source eNB。</li>
+<li>接着，source eNB创建连接SGW的indirect tunnel。</li>
+</ul>
+<p>通过第8和第6步，连接source eNB，SGW，target eNB三个实体的indirect tunnel创建成功了。</p>
+<p><strong> S1 handover execution</strong><br>现在两个eNB准备好切换了，是时候命令UE执行了。</p>
+<ul>
+<li>source eNB<ul>
+<li>通过发送handover command消息包含UE接入target cell需要的信息命令UE执行切换到target cell（1）</li>
+<li>发送eNB status transfer消息通知MME，eNB应该从哪个上行/下行数据包开始接收/发送。（2）</li>
+<li>通过indirect tunnel发送从SGW接收到的下行数据包给target eNB。（4）</li>
+</ul>
+</li>
+<li>MME通过发送MME status transfer消息通知target eNB，它应该从哪个UL/DL数据包开始发送/接收。（3）</li>
+<li>UE从source eNB断开，接入到target eNB。（5）</li>
+<li>一旦UE成功接入target eNB，UE就立即有能力发送或接收数据包了。（6）</li>
+</ul>
+<p><strong> S1 handover completion</strong><br>因为MME已经知道UE执行切换，不像X2切换，target eNB不需要MME进行路径修改。一旦UE连接到target eNB，target eNB给MME发送handover notify消息指示UE已经完成切换。</p>
+<ul>
+<li>一旦UE连接，target eNB给MME发送handover notify通知切换完成（1）</li>
+<li>接着MME请求SGW做S1承载修改。SGW修改下行S1承载路径连接target eNB。（2）（3）</li>
+<li><p>SGW改变承载路径：如下</p>
+<ul>
+<li>SGW通过连接source eNB的下行S1承载发送end marker（EM）停止下行数据包传输。</li>
+<li>接着SGW创建连接target eNB的下行S1承载，并恢复下行数据包传输给target eNB。</li>
+</ul>
+</li>
+<li><p>target eNB给UE发送下行数据包如下：</p>
+<ul>
+<li>target eNB在EM标记数据包到达之前通过indirect tunnel发送下行数据包</li>
+<li>一旦EM标记数据包到达，target eNB通过新路径给UE发送数据包。</li>
+</ul>
+</li>
+<li><p>MME：</p>
+<ul>
+<li>MME通过发送UE context release command消息请求source eNB释放S1承载资源和UE上下文。（4）</li>
+<li>MME通过发送delete indirect data forwarding tunnel request消息通过SGW释放和indirect tunnel相关的资源。（5）</li>
+</ul>
+</li>
+</ul>
+<p><strong> after S1 handover</strong><br>UE现在可以通过eNB B提供服务。</p>
+<h2 id="2-4-在S1切换前后UE状态和连接信息"><a href="#2-4-在S1切换前后UE状态和连接信息" class="headerlink" title="2.4 在S1切换前后UE状态和连接信息"></a>2.4 在S1切换前后UE状态和连接信息</h2><p>图3描述了在S1切换前后控制面用户面的连接建立情况，和UE/MME的状态。</p>
+<p><strong> before S1 handover</strong><br>UE在EMM-REgistered和ECM/RRC-connected状态，并保持着E-UTRAN和EPC分配的所有资源。</p>
+<p><strong> during S1 handover</strong><br>即使在切换阶段，NAS层的UE状态一直保持不变。source eNB和target eNB都通过S1信令连接到MME上。他们也通过indirect tunnel连接到SGW上。在图3中，step-2展示了在切换执行阶段切换中断时的连接和状态。在这个阶段，没有激活的无线连接，但是UE仍保持连接状态。</p>
+<p><strong> after S1 handover</strong><br>UE保持在EMM-REgistered和ECM/RRC-connected状态。在用户面，E_RAB（DRB+S1承载）转到连接新eNB的路径上，在控制面建立了新的RRC连接。</p>
+<p><img src="http://img.blog.csdn.net/20151010104408319" alt="这里写图片描述"></p>
+<h1 id="III-Procedure-of-S1-Handover"><a href="#III-Procedure-of-S1-Handover" class="headerlink" title="III. Procedure of S1 Handover"></a>III. Procedure of S1 Handover</h1><p>现在我们详细介绍S1切换过程。图4描述了在S1切换之前的EPS承载和信令连接，并包括S1切换准备阶段详细过程。<br><img src="http://img.blog.csdn.net/20151010104449020" alt="这里写图片描述"></p>
+<p><strong> before handover</strong><br><strong> 1）【UE-&gt;eNB】measurement report</strong><br>一旦测量事件触发，UE测量邻区的信号强度，并给服务小区发送measurement report 消息。</p>
+<p><strong> handover preparation</strong><br><strong> 2）【source eNB】handover decision</strong><br>source eNB根据measurement report消息包含的信息和source eNB自己保留的邻区列表信息中选择target eNB。并且发现在两个eNB之间没有有效X2连接可用，source eNB决定执行S1切换。</p>
+<p><strong> 3）【source eNB-&gt;MME】 requesting handover</strong><br>source eNB发送handover required消息给MME，请求切换到target eNB。这个消息包含如下：<br>Handover Required (Handover Type, Target eNB ID, Source to Target Transparent Container)</p>
+<ul>
+<li>Handover Required (Handover Type, Target eNB ID, Source to Target Transparent Container)</li>
+<li>Target eNB ID: 包含Target Global eNB ID and Selected TAI information</li>
+<li>Source to Target Transparent Container: is used when forwarding the radio-related information of the source cell to the target cell transparently through EPC (MME)</li>
+</ul>
+<p><strong> 4) [MME] 产生安全上下文转发给target eNB</strong><br>MME生成安全上下文{NCC,NH}, target eNB可用产生AS安全基础秘钥。NCC从初始NCC值开始加1，NH是从初始NH值和Kasme值产生的。<br><img src="http://img.blog.csdn.net/20151013092154440" alt="这里写图片描述"></p>
+<p><strong> 5）【target eNB &lt;-MME】请求target eNB切换</strong><br>MME给target eNB发送handover request消息，代表 source eNB请求切换。这个消息如下：<br>Handover Request (UE-AMBR, E-RAB to be setup (E-RAB ID, QCI, ARP, S1 S-GW TEID), Source to Target Transparent Container, UE Security Capability, Security Context)</p>
+<ul>
+<li>Handover Request (UE-AMBR, E-RAB to be setup (E-RAB ID, QCI, ARP, S1 S-GW TEID), Source to TargetTransparent Container, UE Security Capability, Security Context)</li>
+<li>E-RAB to be setup: UE’s E-RAB information stored at Source eNB. Includes E-RAB ID, QoS parameters, UL S1 bearer information</li>
+<li>Source to Target Transparent Container: is used when forwarding the radio-related information of the source cell (e.g. UE radio access capability, RRC configuration Info, etc.) to the target cell transparently through EPC (MME).</li>
+<li>UE Security Capability: security algorithms supported by UE (encryption and integrity algorithm)</li>
+<li>Security Context: includes {NCC, NH} to be used when Target eNB derives the AS Security base key, KeNB*</li>
+</ul>
+<p><strong> 6) [Target eNB] 准备S1 handover</strong><br>一旦接收到handover request消息，target eNB开始准备切换为UE提供无缝服务<br><strong> i)新的S1承载资源分配</strong> ：target eNB基于要建立的E-RAB信息，检查source eNB提供的QoS是否在target eNB中可用。如果可用，target eNB使用存储在source eNB中的上行S1承载信息（S1 SGW TEID）建立上行S1承载连接SGW。接着分配S1 target eNB TEID准备下行S1承载。</p>
+<p><strong> ii）indirect tunnel资源分配</strong> ：在UE执行S1切换时，应该有一个从source eNB到target eNB的indirect tunnel。所以，target eNB分配S1 target eNB TEID，SGW可以建立indirect tunnel连接target eNB。</p>
+<p><strong> iii）为UE在无线链路上分配资源</strong> ：基于E-RAB的QoS信息，target eNB为UE在无线链路上保留RRC资源，并分配C-RNTI。</p>
+<p><strong> iv）Kenb*产生</strong> ：使用从MME中接收到的安全上下文信息（NCC1，NH1）来产生Kenb<em>，接着获得AS安全秘钥(KRRCint, KRRCenc, KUpenc)。接着，当UE连接到target eNB是，UE和target eNB可以使用这些秘钥来安全的通信。图5显示了Kenb </em>是怎么产生的。我们可以看到Kenb *从NH1，PCI，频点生成。<br><img src="http://img.blog.csdn.net/20151010104536396" alt="tunnel connecting to the target eNB."><br><strong> 7）【target eNB-&gt;MME】通知MME准备完毕</strong><br>target eNB给MME发送handover request ack消息，消息中包含了step-6中的所有资源。这些消息如下所示：<br>Handover Request Ack (E-RAB Admitted(E-RAB ID, S1 Target eNB TEID, DL S1 Target eNB TEID), Handover Command (Target C-RNTI, Target DRB ID, AS Security Algorithm of Target eNB))</p>
+<ul>
+<li><p>E-RAB Admitted</p>
+<ul>
+<li><strong> E-RAB ID</strong> : E-RAB ID allocated by the target eNB</li>
+<li><strong> S1 Target eNB TEID</strong> : DL S1 TEID that the target eNB allocated to S-GW for establishment of S1 bearer connecting to itself.</li>
+<li><strong> DL S1 Target eNB TEID</strong> : DL S1 TEID that the target eNB allocated for establishment of an indirect tunnel for handover through which to deliver DL packets.</li>
+</ul>
+</li>
+<li><p><strong> Handover Command:</strong>  Transparent Container, delivered by the target eNB to the source eNB, that contains the radio information of the target cell that UE needs to access the target eNB.</p>
+<ul>
+<li>Target C-RNTI: C-RNTI allocated by the target cell to identify UE.</li>
+<li>Target DRB ID: ID of DRB that the target eNB set to deliver user packets over the radio link.</li>
+<li>Target DRB ID: ID of DRB that the target eNB set to deliver user packets over the radio link.</li>
+</ul>
+</li>
+</ul>
+<p><strong> 8）【MME-&gt;SGW】请求S1承载创建用于下行数据包传输</strong><br>MME给SGW发送Create Indirect Data Forwarding Tunnel Request消息，请求创建indirect tunnel用于交付下行数据包。这个消息包括GTP TEID（S1 Target eNB TEID，target eNB分配的）</p>
+<p><strong> 9）【MME&lt;-SGW】通知MME S1承载创建完成</strong><br>SGW一旦接收到Create Indirect Data Forwarding Tunnel Request消息，创建一个连接target eNB的indirect tunnel。接着分配S1 SGW TEID，通过Create Indirect Data Forwarding Tunnel Response消息转发给MME，source eNB可以使用这个TEID穿件indirect tunnel连接SGW。</p>
+<p><strong> 10）【source eNB&lt;-MME】通知完成切换</strong><br>MME发送给source eNB handover command消息包含i)S1 SGW TEID（在step-9从SGW接收到）ii）包含包含handover command消息（在step-7从target eNB接收到的）<br>source eNB从handover command消息中知道target eNB和EPC已经准备UE切换了。</p>
+<p><strong> handover execution</strong><br>图6描述了S1切换的执行阶段。<br><img src="http://img.blog.csdn.net/20151010104638181" alt="这里写图片描述"></p>
+<p><strong> 11）【UE&lt;-source eNB】命令UE执行切换</strong><br>一旦source eNB准备好切换，source eNB发送handover command消息命令UE执行切换。这个消息是包含在RRC connection reconfiguration消息中的。</p>
+<p><strong> 12）【UE】执行切换</strong><br>一旦UE从handover command消息中获得C-RNTI和DRB ID，并从source eNB detach。现在UE和source eNB之间的所有的数据包交换都停止了，切换中断时间开始了。</p>
+<p><strong> 13）【UE】AS安全建立</strong><br>UE产生AS安全秘钥用于target eNB的无线链路。首先产生Kenb*，接着使用target eNB选择的AS安全算法产生AS安全秘钥 (KRRCint, KRRCenc, KUPenc)。<br><strong> 14）~15）【source eNB-&gt;MME.MME-&gt;target eNB】通知从哪个数据包开始发送/接收</strong><br>source eNB发送eNB status transfer 消息，包含DL count和UL count给MME。接着MME通过MME status transfer消息包含相同的信息给target eNB。这是为了让target eNB知道从哪个数据包开始发送/接收数据包。这里这个count值是PDCP PDU计数，每一个count是32bit值，包含HFN超帧号和PDCP序列号SN。这个消息如下：<br>eNB Status Transfer (DL Count, UL Count)<br> DL Count: Count of the first packet to send to the UE<br> UL Count: Count of the first packet to receive from the UE<br>在发送eNB status transfer消息之后，source eNB开始通过indirect tunnel转发从SGW到达的下行数据包给target eNB。target eNB缓存这些数据包，知道UE成功接入到target eNB。<br><strong> 16）-18）【UE，target eNB】UE接入到target eNB</strong><br>16）UE检测到target eNB的同步信号并执行同步到target eNB。一旦同步完成，UE发起非竞争的随即接入。17）target eNB给UE发送时间偏移信息和上行授权。18）UE给target eNB发送handover confirm消息包含在RRC connection reconfiguration complete消息中。<br>现在UE可以从target eNb接收或发送数据包了。切换中断时间结束。<br><strong> 19）【UE~target eNB】无线链路上的安全通信</strong><br>UE和target eNB之间的所有的RRC信令消息和用户数据包都是使用AS安全秘钥安全传输的。rrc信令消息是完整性保护和加密的，用户数据是加密的。<br><strong> 20）【target eNB】恢复下行数据包交付给UE</strong><br>随着UE成功连接到target eNB，target eNB通过下面的路径恢复发送缓冲的下行数据包给UE。<br>S5承载( PGW到SGW)—-S1承载（SGW到source eNB）—–S1承载（source eNB到SGW）—-S1承载（SGW到target eNB）—DRB（target eNB到UE）<br>对于UE发送的数据包，target eNB检查是否以正确的顺序接收到上行数据包，接着通过下面的路径转发给SGW。<br>DRB（UE到target eNB）—S1承载（target eNB到SGW）—S5承载（SGW到PGW）<br><strong> handover completion</strong><br>图7描述了S1切换结束阶段的过程。<br><img src="http://img.blog.csdn.net/20151010104733471" alt="这里写图片描述"><br><strong> 21）【target eNB-&gt;MME】请求EPS承载路径转换</strong><br>一旦UE成功接入，target eNB通过发送handover notify消息给MME通知UE已经成功完成了S1切换，这个消息中包含ECGI和TAI。<br><strong> 22）~27）修改EPS承载</strong><br>MME转发由target eNB分配的S1 target eNB TEID给SGW（通过发送modify bearer request消息）。通过这种方式请求SGW修改承载路径。接着SGW建立下行S1承载连接target eNB。一些SGW，根据UE初始附着时的选项设置，需要报告UE的服务小区是否发生变化。就需要SGW发送modify bearer request消息给PGW（PGW报告给PCRF），根据EPS会话修改过程，表示UE服务小区发生变化了。<br><strong> 28）~29）【SGW】修改S1承载路径</strong><br>SGW转换下行数据包转发路径为连接target eNB的下行S1承载。首先SGW发送end marker（EM）来指示发送给source eNB的最后一个数据包。接着它通过连接target eNB的S1承载来发送下行数据包。<br><strong> 30）【target eNB】数据包重新排序</strong><br>现在，target eNB接收到从source eNB转发过来的下行数据包，和通过新修改的路径的下行数据包。所以应该以正确的顺序交付给UE。首先target eNB转发从indirect tunnel接收到的数据包，接着当EM到达时，就是知道从indirect tunnel的最后一个数据包，接着发送从新修改的路径上接收到的下行数据包给UE。<br><strong> 31）~32）【source eNB<->MME】释放存储在source eNB中的UE上下文和S1资源</-></strong><br>MME通知source eNB，source eNB可以释放indirect tunnel和S1资源，以及UE上下文了（通过发送UE context release command消息）。<br><strong> 33）~34）【MME<->SGW】MME给SGW发送delete indirect data forwarding tunnel</-></strong><br>request消息请求释放indirect tunnel。一旦接收到这个请求，SGW释放indirect tunnel，并发送delete indirect data forwarding tunnel response消息通知MME释放完成。</p>
+<h1 id="IV-EPS-entity-information：before-after-S1-handover"><a href="#IV-EPS-entity-information：before-after-S1-handover" class="headerlink" title="IV. EPS entity information：before/after S1 handover"></a>IV. EPS entity information：before/after S1 handover</h1><p>在intra-LTE环境中，在S1切换前后存储在EPS实体中的信息和X2相同、</p>
+<ul>
+<li>切换相关的As安全上下文会根据切换的类型不同俄日变化（S1 or X2）。切换安全在本篇文档范围之外。</li>
+<li>在切换过程中，EPS实体中存储的信息十分相同，但是也会根据切换类型而不同。</li>
+</ul>
+<h1 id="V-closing"><a href="#V-closing" class="headerlink" title="V. closing"></a>V. closing</h1><p>目前为止，我们讨论了在SGW和MME都不发生变化时的S1切换过程。不想X2切换，在S1切换中，EPS知道UE的切换。EPC从切换准备阶段参与到切换过程。它和source eNB，target eNb协作共同完成切换。<br>在EMM case-6我们讨论了LTE 切换。接下来对我们将讨论小区重选。</p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p>[1] Netmanias Technical Document, “LTE EMM Procedure 6 – Part 2. X2 Handover”, March 2014, <a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6257" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6257</a><br>[2] 3GPP TS 36.413, “Evolved Universal Terrestrial Radio Access Network (E-UTRAN); S1 Application Protocol (S1AP)”<br>[3] Netmanias Technical Document, “LTE EMM Procedure 6 – Part 1. Overview of LTE Handover”, March 2014, <a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6224" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6224</a><br>[4] 3GPP TS 36.331, “Evolved Universal Terrestrial Radio Access (E-UTRA); Radio Resource Control (RRC); Protocol specification”<br>[5] Netmanias Technical Document, “LTE Security II: NAS and AS Security”, August 2013, <a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5903" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5903</a><br>[6] Netmanias Technical Document, “Eleven EMM Cases in an EMM Scenario”, October 2013, <a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6002" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6002</a><br>[7] NMC Consulting Group Confidential Internal Report, “E2E LTE Network Design”, August 2010</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+    
+    <div>
+    
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+    
+    </div>
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/wechat-qcode.jpg" alt="sun-day wechat" style="width: 200px; max-width: 100%;"/>
+    <div>欢迎微信交流！</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="sun-day 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="sun-day 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/LTE/" rel="tag"><i class="fa fa-tag"></i> LTE</a>
+          
+            <a href="/tags/通信/" rel="tag"><i class="fa fa-tag"></i> 通信</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/03/17-EMM-Procedure-6-Handover-without-TAU-Part-2-X2-Handover/" rel="next" title="17-EMM Procedure 6. Handover without TAU - Part 2. X2 Handover">
+                <i class="fa fa-chevron-left"></i> 17-EMM Procedure 6. Handover without TAU - Part 2. X2 Handover
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/03/19-EMM-Procedure-7-Cell-Reselection-without-TAU/" rel="prev" title="19-EMM Procedure 7. Cell Reselection without TAU">
+                19-EMM Procedure 7. Cell Reselection without TAU <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="sun-day" />
+            
+              <p class="site-author-name" itemprop="name">sun-day</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">48</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/zhanghaogithub123" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:zhanghao163mail@163.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/zhang-hao-3-80-49/activities" target="_blank" title="知乎"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://blog.csdn.net/mouse1598189" target="_blank" title="CSDN"><i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.google.com/" title="Google" target="_blank">Google</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.baidu.com/" title="百度" target="_blank">百度</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#I-Introduction"><span class="nav-number">1.</span> <span class="nav-text">I. Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#II-Concept-of-S1-Handover"><span class="nav-number">2.</span> <span class="nav-text">II. Concept of S1 Handover</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-S1协议栈"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 S1协议栈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-和切换相关的S1AP过程和消息"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 和切换相关的S1AP过程和消息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-S1-Handover-Procedure-at-a-Glance"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 S1 Handover Procedure at a Glance</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-在S1切换前后UE状态和连接信息"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 在S1切换前后UE状态和连接信息</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#III-Procedure-of-S1-Handover"><span class="nav-number">3.</span> <span class="nav-text">III. Procedure of S1 Handover</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IV-EPS-entity-information：before-after-S1-handover"><span class="nav-number">4.</span> <span class="nav-text">IV. EPS entity information：before/after S1 handover</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#V-closing"><span class="nav-number">5.</span> <span class="nav-text">V. closing</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number">6.</span> <span class="nav-text">References</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate"> 
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">true</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_pv">
+  本站访客数:<span id="busuanzi_container_site_pv"></span>
+</span>
+</div>
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.1.0</div>
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.1.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

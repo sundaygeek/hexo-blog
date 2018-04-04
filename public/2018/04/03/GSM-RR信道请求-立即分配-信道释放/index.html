@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.1.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.1.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="RR  : Channel Request信道请求具有各种功能，在上电之后的信道请求相当于UMTS和LTE的RACH过程。简单地说，这个消息是告诉网络“我想驻留上你，我开始连接过程，请分配无线资源”。一个用于初始注册如下。 （在良好的信道状态，以及在开放的空间中，第一个信道请求将到达网络并获得立即分配，只有一个信道请求。以下为一种最坏的情况下的，其中初始信道请求不能由NW解码或UE对初始直接分配解">
+<meta name="keywords" content="通信,GSM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GSM RR信道请求&#x2F;立即分配&#x2F;信道释放">
+<meta property="og:url" content="http://yoursite.com/2018/04/03/GSM-RR信道请求-立即分配-信道释放/index.html">
+<meta property="og:site_name" content="sun-day-blog">
+<meta property="og:description" content="RR  : Channel Request信道请求具有各种功能，在上电之后的信道请求相当于UMTS和LTE的RACH过程。简单地说，这个消息是告诉网络“我想驻留上你，我开始连接过程，请分配无线资源”。一个用于初始注册如下。 （在良好的信道状态，以及在开放的空间中，第一个信道请求将到达网络并获得立即分配，只有一个信道请求。以下为一种最坏的情况下的，其中初始信道请求不能由NW解码或UE对初始直接分配解">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://img.blog.csdn.net/20151121195956641">
+<meta property="og:image" content="http://img.blog.csdn.net/20151121200250597">
+<meta property="og:image" content="http://img.blog.csdn.net/20151121200608855">
+<meta property="og:image" content="http://img.blog.csdn.net/20151121202600028">
+<meta property="og:image" content="http://img.blog.csdn.net/20151121221312886">
+<meta property="og:updated_time" content="2018-04-04T00:59:50.746Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="GSM RR信道请求&#x2F;立即分配&#x2F;信道释放">
+<meta name="twitter:description" content="RR  : Channel Request信道请求具有各种功能，在上电之后的信道请求相当于UMTS和LTE的RACH过程。简单地说，这个消息是告诉网络“我想驻留上你，我开始连接过程，请分配无线资源”。一个用于初始注册如下。 （在良好的信道状态，以及在开放的空间中，第一个信道请求将到达网络并获得立即分配，只有一个信道请求。以下为一种最坏的情况下的，其中初始信道请求不能由NW解码或UE对初始直接分配解">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20151121195956641">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/03/GSM-RR信道请求-立即分配-信道释放/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>GSM RR信道请求/立即分配/信道释放 | sun-day-blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> 
+
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">sun-day-blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">牛逼的人生不需要解释</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+          
+  
+  <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+</li>
+
+      
+        
+        
+          
+  
+  <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+</li>
+
+      
+
+      
+    </ul>
+  
+
+  
+    
+
+    
+    
+      
+      
+    
+      
+      
+    
+    
+
+  
+
+
+  
+
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/03/GSM-RR信道请求-立即分配-信道释放/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="sun-day">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sun-day-blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">GSM RR信道请求/立即分配/信道释放</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-03T23:24:44+08:00">2018-04-03</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/通信/" itemprop="url" rel="index"><span itemprop="name">通信</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/通信/GSM/" itemprop="url" rel="index"><span itemprop="name">GSM</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="RR-Channel-Request"><a href="#RR-Channel-Request" class="headerlink" title="RR  : Channel Request"></a>RR  : Channel Request</h1><p>信道请求具有各种功能，在上电之后的信道请求相当于UMTS和LTE的RACH过程。简单地说，这个消息是告诉网络“我想驻留上你，我开始连接过程，请分配无线资源”。<br>一个用于初始注册如下。 （在良好的信道状态，以及在开放的空间中，第一个信道请求将到达网络并获得立即分配，只有一个信道请求。以下为一种最坏的情况下的，其中初始信道请求不能由NW解码或UE对初始直接分配解码失败）</p>
+<p><img src="http://img.blog.csdn.net/20151121195956641" alt="这里写图片描述"></p>
+<p>注：在“信道请求”的最后一个重传时启动T3126，并在UE得到“立即支配”时停止。如果UE没有得到“立即支配”，直到T3126到期时，UE开始小区重选。</p>
+<p>一个信道请求的确切功能由消息的第一个8位和第一字节的描述中，由下表中44.018中指定决定。<br><img src="http://img.blog.csdn.net/20151121200250597" alt="这里写图片描述"></p>
+<h1 id="RR-Immediate-Assignment"><a href="#RR-Immediate-Assignment" class="headerlink" title="RR  : Immediate Assignment"></a>RR  : Immediate Assignment</h1><p>立即分配是对最初的“信道请求”的应答消息。这就是说，以MS“好吧，我会接受你的‘信道请求’，你可以使用以下步骤获得无线资源”。<br>一个信道请求的例子将如下所示。你必须要注意的最重要的事情是，立即指派应该重放的整个信道请求消息。所有的MS（UE）的尝试连接的小区将接收相同的“立即指派”，但是，如果包含在“立即指派”的’信道请求”部分与它送出信道请求字节不匹配，UE应当丢弃“立即指派”消息，因为它不是对本身。<br><img src="http://img.blog.csdn.net/20151121200608855" alt="这里写图片描述"></p>
+<h1 id="RR：Channel-Release"><a href="#RR：Channel-Release" class="headerlink" title="RR：Channel Release"></a>RR：Channel Release</h1><p>GSM信道释放是基于44.018 3.4.13.1.1，信道释放过程是在专用模式和组传输模式下发起的。</p>
+<p><strong>什么时候使用？</strong></p>
+<ul>
+<li>在呼叫释放后释放TCH</li>
+<li>当分配给信令的专用信道被释放时用以释放DCCH</li>
+<li>去激活SACCH</li>
+</ul>
+<p><strong>UE在收到信道释放之后应该怎么做？</strong></p>
+<p>UE启动定时器T3110并断开主信令链路。当T3110超时，或当确认被断开时，移动台停用所有信道，认为RR连接已经释放，并返回到CCCH空闲模式，返回到PCCCH或CCCH分组空闲模式或进入数据包传送模式。</p>
+<p><strong>信道释放原因</strong></p>
+<p>有许多释放原因如下所示，但只有其中的一些在44.018 3.4.13.1.1中描述。我会继续增加更多的说明。<br><img src="http://img.blog.csdn.net/20151121202600028" alt="这里写图片描述"></p>
+<p><strong>在信道释放消息中重要的IE</strong></p>
+<p>以下为信道释放进行整体结构和IE（信息元素）。<br><img src="http://img.blog.csdn.net/20151121221312886" alt="这里写图片描述"><br>BA范围：<br>一个UE在其小区选择算法可以使用这个字段（参见3GPP TS45.008和3GPP TS23.022）。<br>所有TCH的释放和SDCCH后的小区选择指示：<br>移动台的所有TCH和SDCCH释放后在小区选择算法可以使用该指示（参见3GPP TS45.008）<br>Individual priorities：移动台可以用它来传达单独优先级信息到MS（见第3.2.3.3）。当MS接收到一个单独优先级IE应启动定时器T3230的一个实例，在个人的优先级IE提供的值。<br>《end》</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/通信/" rel="tag"># 通信</a>
+          
+            <a href="/tags/GSM/" rel="tag"># GSM</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/03/GSM帧结构/" rel="next" title="GSM帧结构">
+                <i class="fa fa-chevron-left"></i> GSM帧结构
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/03/RF-Test-and-Measurement-1/" rel="prev" title="RF Test and Measurement-1">
+                RF Test and Measurement-1 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">sun-day</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">49</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#RR-Channel-Request"><span class="nav-number">1.</span> <span class="nav-text">RR  : Channel Request</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RR-Immediate-Assignment"><span class="nav-number">2.</span> <span class="nav-text">RR  : Immediate Assignment</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#RR：Channel-Release"><span class="nav-number">3.</span> <span class="nav-text">RR：Channel Release</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate"> 
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">sun-day</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Muse</a> v6.1.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.1.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

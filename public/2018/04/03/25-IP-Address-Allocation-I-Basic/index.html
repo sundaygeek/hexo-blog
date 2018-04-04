@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.1.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.1.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '6.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="原文链接：http://www.netmanias.com/en/?m=view&amp;amp;id=techdocs&amp;amp;no=7246 I. Introductionlte是全IP网络。这就意味着交付所有用户流量时都是以IP数据包的形式，提供给用户always on IP connectivity的服务。当UE加入LTE网络，会给UE分配一个PDN地址让UE连接这个PDN，并建立默认承载。默认承">
+<meta name="keywords" content="LTE,通信">
+<meta property="og:type" content="article">
+<meta property="og:title" content="25-IP Address Allocation I - Basic">
+<meta property="og:url" content="http://yoursite.com/2018/04/03/25-IP-Address-Allocation-I-Basic/index.html">
+<meta property="og:site_name" content="sun-day-blog">
+<meta property="og:description" content="原文链接：http://www.netmanias.com/en/?m=view&amp;amp;id=techdocs&amp;amp;no=7246 I. Introductionlte是全IP网络。这就意味着交付所有用户流量时都是以IP数据包的形式，提供给用户always on IP connectivity的服务。当UE加入LTE网络，会给UE分配一个PDN地址让UE连接这个PDN，并建立默认承载。默认承">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://img.blog.csdn.net/20151021121418827">
+<meta property="og:image" content="http://img.blog.csdn.net/20151021122301279">
+<meta property="og:image" content="http://img.blog.csdn.net/20151021134900737">
+<meta property="og:image" content="http://img.blog.csdn.net/20151021145233115">
+<meta property="og:image" content="http://img.blog.csdn.net/20151021150651205">
+<meta property="og:image" content="http://img.blog.csdn.net/20151021150809355">
+<meta property="og:updated_time" content="2018-04-04T00:59:50.746Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="25-IP Address Allocation I - Basic">
+<meta name="twitter:description" content="原文链接：http://www.netmanias.com/en/?m=view&amp;amp;id=techdocs&amp;amp;no=7246 I. Introductionlte是全IP网络。这就意味着交付所有用户流量时都是以IP数据包的形式，提供给用户always on IP connectivity的服务。当UE加入LTE网络，会给UE分配一个PDN地址让UE连接这个PDN，并建立默认承载。默认承">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20151021121418827">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/03/25-IP-Address-Allocation-I-Basic/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>25-IP Address Allocation I - Basic | sun-day-blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> 
+
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">sun-day-blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">牛逼的人生不需要解释</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+          
+  
+  <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+</li>
+
+      
+        
+        
+          
+  
+  <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+</li>
+
+      
+
+      
+    </ul>
+  
+
+  
+    
+
+    
+    
+      
+      
+    
+      
+      
+    
+    
+
+  
+
+
+  
+
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/03/25-IP-Address-Allocation-I-Basic/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="sun-day">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sun-day-blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">25-IP Address Allocation I - Basic</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-03T22:46:54+08:00">2018-04-03</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/通信/" itemprop="url" rel="index"><span itemprop="name">通信</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/通信/LTE/" itemprop="url" rel="index"><span itemprop="name">LTE</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>原文链接：<a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=7246" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=7246</a></p>
+<h1 id="I-Introduction"><a href="#I-Introduction" class="headerlink" title="I. Introduction"></a>I. Introduction</h1><p>lte是全IP网络。这就意味着交付所有用户流量时都是以IP数据包的形式，提供给用户always on IP connectivity的服务。当UE加入LTE网络，会给UE分配一个PDN地址让UE连接这个PDN，并建立默认承载。默认承载保持连接知道UE从LTE网络中detach掉。<br>默认承载对用户拥有的没有APN建立，为每一个APN分配独立的IP地址，一个IP地址可以为ipv4，ipv6，ipv4/ipv6三种类型。</p>
+<p>这篇文件主要解释当用户初始接入网络时LTE网络怎么给用户分配IP地址的，并通过实例来解释。</p>
+<p>在接下来的文档中我们将会涉及到两种类型的IP地址，这篇文档涉及到基本IP地址分配机制和过程，描述熊地址是怎样分配给用户的（用户处于一个位置，对网络执行多次初始attach）。接下来文档我们将学习不同类型的IP地址分配（用户在两个物理分割区域cityA和cityB执行初始附着）。<br>这篇文档组织如下：第二章，不同类型的IP地址分配–动态的和静态的，并讨论他们的特点。第三章和第四章将详细讨论动态和静态IP地址的分配过程。</p>
+<h1 id="II-Types-of-IP-Address-Allocation"><a href="#II-Types-of-IP-Address-Allocation" class="headerlink" title="II. Types of IP Address Allocation"></a>II. Types of IP Address Allocation</h1><p>当UE初始附着到LTE网络，UE请求PDN连接。PGW分配一个IP地址供UE连接PDN，并在U默认承载建立时连接UE和PDN，转发给UE。使用这个IP地址，UE可以获得PDN提供的服务。<br>PGW分配IP地址有两种方式：动态的和静态的分配。对于动态分配，当UE每次接入网络时自动分配一个IP地址。对于静态分配，一旦用户签约后指定给UE一个固定的IP地址，并在每次UE接入网络时都分配这个指定的IP地址。图1比较两种方式的不同。<br><img src="http://img.blog.csdn.net/20151021121418827" alt="这里写图片描述"></p>
+<p>对于动态分配，网络PGW自动为UE选择IP地址。在PGW中网络运营商有一个IP地址池。的那个UE初始附着到LTE网络时，PGW动态为UE分配一个IP地址。所以每次UE初始附着到网络时分配的一个新的动态IP地址。<br>但是，对于静态分配，一旦UE签约网络之后网络运营商就分配了一个固定的IP地址。运营商在hss中和其他签约信息一起为UE分配了静态的IP地址。接着当UE初始附着到LTE网络时，PGW从hss中获得这个静态IP地址并转发给UE。所以在每次UE初始附着网络时给UE分配的都是特定的IP地址。</p>
+<p>当在初始附着请求PDN连接时，UE通过使用协议配置选项PCO可以请求和外部协议/应用相关的协议数据（eg请求dns服务器地址，P-CSCF地址）。这篇文档将详细解释dns服务器地址和IP地址的请求。</p>
+<h1 id="III-Dynamic-IP-Address-Allocation"><a href="#III-Dynamic-IP-Address-Allocation" class="headerlink" title="III. Dynamic IP Address Allocation"></a>III. Dynamic IP Address Allocation</h1><p>对于动态IP地址分配，PGW为UE保留IP地址池，并在UE初始附着到LTE网络时为其分配一个IP地址。<br><img src="http://img.blog.csdn.net/20151021122301279" alt="这里写图片描述"></p>
+<p><strong>PGW中提供IP地址</strong><br>在PGW中，分配了一个IP地址池，并且dns服务器IP地址已经分配了。<br><img src="http://img.blog.csdn.net/20151021134900737" alt="这里写图片描述"></p>
+<p><strong>动态IP地址分配过程</strong><br>用户打开UE，试图初始附着到LTE网络上。</p>
+<p><strong>1）【UE-&gt;MME】请求PDN connectivity</strong><br>UE通过发送PDN connectivity request(PDN type=IPv4, PCO=DNS Server IPv4 Address Request)消息给MME请求PDN连接。这是，除了请求ipv4地址，也请求dns服务器地址。PDN connectivity request消息是一个ESM消息，但是这个消息是嵌入在attach request(IMSI，ESM Message Container)消息中传输的。</p>
+<p><strong>2）~3）【MME-&gt;SGW-&gt;PGW】请求会话创建</strong><br>MME基于从hss接收到的签约配置文件，发送create session request(IMSI, PDN Type=IPv4, PDN Address=0.0.0.0, PCO=DNS Server IPv4 Address Request) 消息给SGW请求EPS会话创建。因为是动态IP分配，这个签约配置文件中不包含IP地址信息，在create sessionrequest消息中PDN地址域是0.0.0.0，从UE接受到的PCO信息也包含在PCO域中。</p>
+<p><strong>4）【PGW】分配PDN地址和dns服务器地址</strong><br>PGW在检查PDN类型和PDN地址（0.0.0.0）之后发现需要分配ipv4地址。PGW从ipv4地址池中选择一个IP地址(e.g. UE IP=1.1.1.5)，并分配给UE。根据PCO域的请求，也分配相应的dns服务器IP地址。</p>
+<p><strong>5）~6）【MME&lt;-SGW&lt;-PGW】对请求会话创建的响应</strong><br>作为对2-3步请求的响应，PGW发送create session response消息给MME。这个消息包含PDN地址域的UE IP地址，PCO域的dns服务器IP地址。</p>
+<p><strong>7）【UE&lt;-MME】请求默认承载上下文的激活</strong><br>MME给UE发送activate default EPS bearer context request(PDN Type=IPv4, PDN Address=UE IP(1.1.1.5), PCO={Primary DNS IP, Secondary DNS IP})消息来请求对默认承载上下文的激活。这个ESM消息包含dns服务器IP地址和UE IP地址，嵌入到attach accept消息中传输。</p>
+<p><strong>8）【UE】获得动态IP地址使用PDN服务</strong><br>UE获得动态IP地址和dns服务器地址。UE和PGW之间建立默认承载。UE现在已经连接到PDN上，可以以动态IP地址来使用Internet服务。</p>
+<h1 id="IV-Static-IP-Address-Allocation"><a href="#IV-Static-IP-Address-Allocation" class="headerlink" title="IV. Static IP Address Allocation"></a>IV. Static IP Address Allocation</h1><p>对于静态IP地址分配，当用户第一次签约网络时网络运营商为用户指定了一个UE IP地址，在hss中提供用户签约配置文件，并在用户每次初始附着到网络时分配一个存储在配置文件中的静态IP地址。详细的过程如图3所示。<br><img src="http://img.blog.csdn.net/20151021145233115" alt="这里写图片描述"><br><strong>hss中提供IP</strong><br>在hss中，提供了每一个签约用户的签约配置文件。这个配置文件包括PDN类型，用于PDN连接的PDN地址。<br><img src="http://img.blog.csdn.net/20151021150651205" alt="这里写图片描述"><br><strong>PGW中IP提供</strong><br>在PGW中，dns服务器IP地址已经设置了。<br><img src="http://img.blog.csdn.net/20151021150809355" alt="这里写图片描述"></p>
+<p><strong>静态IP地址分配的过程</strong><br>用户打开UE，试图初始化附着到LTE网络。</p>
+<p><strong>1）【UE-&gt;MME】请求PDN连接</strong><br>UE通过发送PDN connectivity request消息(PDN type=IPv4, PCO=DNS Server IPv4 Address Request)消息给MME请求PDN连接。这时，除了IPv4地址，包括dns服务器地址也请求了。</p>
+<p><strong>2）【MME-&gt;HSS】为了注册请求LTE网络</strong><br>MME通过发送update location request消息通知HSS，UE已经在MME的控制之下，请求在网络上注册UE。</p>
+<p><strong>3）【MME&lt;-HSS】转发签约配置文件</strong><br>HSS识别到UE已经在MME上注册了，通过发送update location answer(IMSI, PDN Type=IPv4, PDN Address=Static UE IP(1.1.1.1))消息来转发UE的签约配置文件。这个签约配置文件包含静态IP地址。</p>
+<p><strong>4）~5）【MME-&gt;SGW-&gt;PGW】请求会话创建</strong><br>在从HSS接收到UE签约配置文件后，MME知道UE已经有一个额静态IP地址了。MME准备create session request消息(IMSI, PDN Type=IPv4, PDN Address=Static UE IP(1.1.1.1), PCO=DNS Server IPv4 Address Request)并发送给PGW。这时，这个消息在PDN地址域包含从hss接收到的静态IP地址，在PCO域包含从UE接收到的PCO信息。</p>
+<p><strong>6）~7）【MME&lt;-SGW&lt;-PGW】对创建会话请求的响应</strong><br>作为对4-5步请求的响应，PGW和SGW发送create session response消息(IMSI, PDN Type=IPv4, PDN Address=Static UE IP(1.1.1.1), PCO={Primary DNS IP, Secondary DNS IP})给MME。这个消息在PDN地址域包含静态IP地址，在PCO域包含dns服务器地址。</p>
+<p><strong>8）【UE&lt;-MME】请求默认承载上下文的激活</strong><br>MME通过发送active default EPS bearer context request消息(PDN Type=IPv4, PDN Address=Static UE IP(1.1.1.1), PCO={Primary DNS IP, Secondary DNS IP})请求默认承载上下文的创建。这个ESM消息包含UE的静态IP地址和dns服务器地址，嵌入到attach accept消息中。</p>
+<p><strong>9）【UE】获得静态IP地址来使用PDN服务</strong><br>UE获得静态IP地址和dns服务器IP地址。UE和PGW之间建立了默认承载。UE现在连接了PDN，可以通过静态IP地址使用Internet服务了。</p>
+<h1 id="V-Closing"><a href="#V-Closing" class="headerlink" title="V. Closing"></a>V. Closing</h1><p>到目前为止，我们讨论了两种分配IP的方式：静态和动态。当用户试图初始附着到LTE网络时，LTE网络分配一个IP地址来连接到PDN上和默认承载。只要用户网络注册有效，PDN地址和默认承载一直保持有用，即使用户没有在使用服务。这种方式叫做always-on IP connectivity。<br>这个文档解释了IP地址分配的机制和过程。下面一个文章我们将讨论在不同的位置UE连接PDN时的情况。</p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p>[1] Netmanias Technical Document, “LTE IP Address Allocation Schemes II: A Case for Two Cities”,<br>February 2014 (TBD)<br>[2] Netmanias Technical Document, “EMM Procedure 1. Initial Attach - Part 1. Cases of Initial Attach”,<br>December 2013, <a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6098" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6098</a><br>[3] NMC Consulting Group Confidential Internal Report, “E2E LTE Network Design”, August 2010</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/LTE/" rel="tag"># LTE</a>
+          
+            <a href="/tags/通信/" rel="tag"># 通信</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/03/23-LTE-Charging-I-Offline/" rel="next" title="23-LTE Charging I_Offline">
+                <i class="fa fa-chevron-left"></i> 23-LTE Charging I_Offline
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/03/26-LTE-IP-Address-Allocation-II-A-Case-for-Two-Cities/" rel="prev" title="26-LTE IP Address Allocation II - A Case for Two Cities">
+                26-LTE IP Address Allocation II - A Case for Two Cities <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">sun-day</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">49</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#I-Introduction"><span class="nav-number">1.</span> <span class="nav-text">I. Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#II-Types-of-IP-Address-Allocation"><span class="nav-number">2.</span> <span class="nav-text">II. Types of IP Address Allocation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#III-Dynamic-IP-Address-Allocation"><span class="nav-number">3.</span> <span class="nav-text">III. Dynamic IP Address Allocation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IV-Static-IP-Address-Allocation"><span class="nav-number">4.</span> <span class="nav-text">IV. Static IP Address Allocation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#V-Closing"><span class="nav-number">5.</span> <span class="nav-text">V. Closing</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number">6.</span> <span class="nav-text">References</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate"> 
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">sun-day</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Muse</a> v6.1.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.1.0"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.1.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -17,6 +17,13 @@
 
 
 
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
 
 
 
@@ -41,6 +48,32 @@
 
 
 
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
 
 
 
@@ -77,7 +110,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '6.1.0',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: false,
     fastclick: false,
     lazyload: false,
@@ -304,7 +337,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sun-day">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -394,55 +427,16 @@
       
         
           
-            <p>原文链接：<a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5909" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5909</a></p>
-<h1 id="I-Introduction"><a href="#I-Introduction" class="headerlink" title="I. Introduction"></a>I. Introduction</h1><p>通过之前的技术文档，我们已经学习了LTE网络架构和LTE identification和LTE安全操作（当用户附着到LTE网络时需要的，并保证通信的安全）。现在我们开始更深入学习LTE的详细过程。</p>
-<p>一旦用户附着到LTE网络，i）在网络端鉴权用户和注册用户，ii）EPS会话和承载建立用于提供服务，iii）触发支持用户移动的移动性管理的功能。在这个时候，MME通过和用户建立信令连接并交换控制信息来负责这三个任务。<br>在用户和网络之间的移动性和会话管理是由UE和MME的控制面的NAS层的NAS协议来控制的。这两个实体使用NAS消息相互通信。NAS协议定义在3GPP 24.301中。NAS可以大致分为EPS移动性管理EMM和EPS会话管理ESM。通过一系列的技术文档，我们描述EMM和ESM这两个过程。当前这个文档是这个系列文档的第一个，将描述i）EMM状态，ii）一旦EMM过程发起，在EPS实体中会保存什么用户信息。</p>
-<p>本篇文档组织如下：第二章介绍EMM过程的类型和EMM相关的状态。第三章描述这些状态之间的转换。第四章总结在EPS实体中EMM的特征。第五章讨论在EMM/ECM/RRC状态的不同组合下EPS实体中保存着什么样的用户信息。</p>
-<h1 id="II-EMM-ECM-and-RRC-States"><a href="#II-EMM-ECM-and-RRC-States" class="headerlink" title="II. EMM, ECM and RRC States"></a>II. EMM, ECM and RRC States</h1><h2 id="2-1-EMM过程的类型"><a href="#2-1-EMM过程的类型" class="headerlink" title="2.1 EMM过程的类型"></a>2.1 EMM过程的类型</h2><p>表1列出了NAS协议支持的EMM过程的类型和属于这些类型的特定的EMM过程。详细的EMM过程将通过这个文档在下面解释。我先简要看看每一个EMM类型都包含哪些特定的过程。</p>
-<p><img src="http://img.blog.csdn.net/20150913171120523" alt="这里写图片描述"></p>
-<p>有三张类型的EMM过程：<br>i）EMM 一般过程：是指在UE和MME之间NAS信令连接存在时总是可以发起的过程。这类过程分为五种过程：GUTI allocation（GUTI分配）Authentication（鉴权）identification（身份认证）Security mode control（安全模式控制SMC）EMM information（EMM消息）<br>ii）EMM特殊过程：是指和用户移动性相关的过程（注册，位置更新）。可以分为三种过程，attach（附着）detach（去附着）TAU（TA更新）。在和3gpp网络共存的LTE网络中，额外的过程也包含在这类中（比如，combined attach联合附着，combined detach联合去附着，combined TAU联合TA更新）。但是因为这个文档仅仅讨论LTE网络，所以这几种没有列出在表1中。<br>iii）EMM连接管理过程：是指和NAS信令连接建立有关的过程。可以分为三种过程，service Request（服务请求）paging（寻呼）NAS消息的传输。</p>
-<h2 id="2-2-EMM-ECM-RRC状态"><a href="#2-2-EMM-ECM-RRC状态" class="headerlink" title="2.2 EMM/ECM/RRC状态"></a>2.2 EMM/ECM/RRC状态</h2><p>EMM是NAS层的一个子层。随着EMM过程的进行，UE处于七种EMM状态之一，MME处于四种EMM状态之一。在这些状态中，一些状态例如“EMM-registered”和“EMM-Dergistered”是这两个实体都具有的共同状态，在下文中，EMM状态就是指这两种状态。</p>
-<p>为了UE和MME之间相互交换NAS消息，在他们之间必须建立信令连接。这个连接叫EPS连接管理（ECM）连接。它包含UE与eNB之间的RRC连接和eNB与MME之间的S1信令连接的逻辑连接，如图1所示。也就是意味着，当ECM建立和终止时，RRC和S1信令连接全部建立和终止。对于UE，一个建立的ECM连接意味着与eNB之间具有RRC连接，对MME，意味着与eNB之间具有S1信令连接。</p>
-<p>图1描述了和UE与MME有关的EMM，ECM，RRC状态。EMM可以是“EMM-Registered” or “EMM-Deregistered”状态取决于附着到网络还是去附着到网络。ECM是可以是“ECM-Connected” or “ECM-Idle”取决于NAS信令连接是否建立。同样的，RRC可以是“RRCConnected” or “RRC-Idle”状态取决于是否有RRC连接建立。表2显示了什么条件下UE待在什么状态。</p>
-<p><img src="http://img.blog.csdn.net/20150913173806375" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20150913173813863" alt="这里写图片描述"></p>
-<h1 id="III-EMM-State-Transition"><a href="#III-EMM-State-Transition" class="headerlink" title="III. EMM State Transition"></a>III. EMM State Transition</h1><p>EMM，ECM和RRC状态随着EMM过程的处理发生改变。因为RRC连接是ECM连接的一部分，所以在UE的角度看ECM和RRC总是保持相同的状态。在图2中描述了状态转换的过程以及触发状态转换的事件。在图2中用户EMM，ECM/RRC连接的组合用A B C D表示。用户的过程将会是这样组合之一，见表3。</p>
-<p><img src="http://img.blog.csdn.net/20150913174628407" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20150913174635978" alt="这里写图片描述"></p>
-<h2 id="3-1-EMM-Deregistered状态"><a href="#3-1-EMM-Deregistered状态" class="headerlink" title="3.1 EMM-Deregistered状态"></a>3.1 EMM-Deregistered状态</h2><p>在A和B中，状态都是EMM-Deregistered，ECM-idle，RRC-idle，UE从网络去附着了。但是，在这两种情况下在网络端存储的手机信息是不一样的。在A情况中，在网络端处理提供的信息，没有包含任何UE信息。而在B情况下，网络保存着UE上次附着时网络获得的GUTI和NAS安全上下文。根据在状态A和B中，UE是否附着到网络，初始附着过程可能会有变化。</p>
-<p>在状态B，在UE再次附着到网络时，网络保持着鉴权和安全建立所需求的信息，过了一段时间之后，网络会删除这些信息，并转换到状态A。</p>
-<p>在EMM-Deregistered状态（A或者B），当选择PLMN和小区的时候，UE能分辨出来UE能通信的哪个网络和哪个小区。当UE请求接入网络获取服务的允许时，开始初始附着过程，然后UE状态转换到C（EMM-registered，ECM-connected，RRC-connected）。</p>
-<h2 id="3-2-EMM-Registered状态"><a href="#3-2-EMM-Registered状态" class="headerlink" title="3.2 EMM-Registered状态"></a>3.2 EMM-Registered状态</h2><p>在C和D状态，状态是EMM-registered，UE接入或注册到网络。但是ECM和RRC的状态是ECM-connected/RRC-connected或者是ECM-idle/RRC-idle状态取决于UE的激活特性。一旦UE成功地附着到网络，状态从EMM-Deregistered（A or B）转换到状态C，UE在使用服务的时候将会一直呆在状态C，当不用服务时转换到状态D。</p>
-<p>在状态C，在控制面无线和网路资源分配给信令连接，在用户面分配给EPS承载。当有一个比当前正在通信服务的小区更好无线信号质量的小区时UE可能执行切换到邻小区。但是，当在状态D，UE是去激活的，ECM/RRC连接被释放了。资源在控制面没有分配给ECM连接，也没有分配给EPS承载（DRB和S1承载），除了S5承载一直存在。在这个状态，没有发送到UE或者网络的上下行流量。为了在状态D能传输用户流量，就需要建立ECM连接，转换到状态C，需要建立新的DRB和S1承载来激活EPS承载。在状态D，UE通过测量服务小区和邻小区的无线信号强度根据小区重选准则来选择一个小区驻留（见文档LTE EMM Procedure: 7. Cell Reselection without TAU）。</p>
-<p>当i）上下行有新流量，ii）UE在idle状态由于TA改变或者TAU定时器超时，需要进行TAU请求时UE从状态D转换到状态C。另一方面，当i）UE去激活（也就说在一段时间内没有上下行UE流量）ii）UE在状态D完成TAU之后释放资源时UE状态从C转换到D。</p>
-<p>当在EMM-Registered（C或D），如果UE从网络去附着，如果UE是关机或者无线链路失败RLF（如果在无线链路上数据包错误率超过门限值），这种情况下，UE转换到B转台（EMM-deregistered）。另外，当UE在状态C执行切换到非LTE网络，或者UE请求附着到网络被拒绝，或者TAU更新请求被拒绝，这时候，UE状态从EMM-registered转换到EMM-deregistered。</p>
-<h1 id="IV-EMM-Features"><a href="#IV-EMM-Features" class="headerlink" title="IV. EMM Features"></a>IV. EMM Features</h1><p>在这章，我们将讨论在图2的各个状态由EPS实体支持的EMM过程相关的特性。下面，我们将讨论以下议题：i）在每一个状态，被EPS实体知道的UE位置信息的粒度，ii）在什么状态EPS承载和NAS信令连接建立，iii）在每一个状态和UE移动性相关的特性，iv）在每一个状态在EPS实体中都设置了什么类型的ID。</p>
-<h2 id="4-1-UE位置信息"><a href="#4-1-UE位置信息" class="headerlink" title="4.1 UE位置信息"></a>4.1 UE位置信息</h2><p>在表4中展示了被每一个EPS实体识别的UE位置信息的粒度。EMM-registered状态标示UE是附着到网络且网络知道UE的当前位置。在状态C，网络在小区的粒度上知道UE的位置，在状态D，网络在TA粒度上知道UE的位置。对于HSS，不像其他EPS实体，除了UE在状态A，是在MME粒度上知道UE的位置信息。</p>
-<p><img src="http://img.blog.csdn.net/20150915104656575" alt="这里写图片描述"></p>
-<h2 id="4-2-EPS承载和NAS信令连接"><a href="#4-2-EPS承载和NAS信令连接" class="headerlink" title="4.2 EPS承载和NAS信令连接"></a>4.2 EPS承载和NAS信令连接</h2><p>表5展示了在什么状态传输用户流量的EPS承载和传输NAS信令消息的NAS信令连接建立的。一旦UE成功附着到网络，变成EMM-registered状态，UE将通过EPS承载使用服务。一个EPS承载包含三个承载：DRB承载，S1承载和S5承载。如图3所示，当传输用户流量在ECM-connected/RRC-connected状态下，所有的这三种承载是建立和保持激活的，另一方面，当用户没有数据流量在ECM-idle/RRC-idle状态时，只有S5承载是建立，其他两种承载是去激活的。</p>
-<p>NAS信令连接包含RRC连接和S1信令连接，是在当传输用户流量时建立的。当用户从网络去附着，或者附着在网络上但是在idle状态下，这时候ECM连接时释放的。</p>
-<p><img src="http://img.blog.csdn.net/20150915105401396" alt="这里写图片描述"></p>
-<p><img src="http://img.blog.csdn.net/20150915105502558" alt="这里写图片描述"></p>
-<h2 id="4-3-移动性"><a href="#4-3-移动性" class="headerlink" title="4.3 移动性"></a>4.3 移动性</h2><p>表6列出了在每一个状态UE移动性相关的特性。<br>移动性：<br>在EMM-deregistered开机的UE通过选择PLMN和小区来知道需要驻留在哪个小区和哪个网络。当有一个无线信号质量比当前小区好的小区时，在EMM-registered状态使用服务的UE从当前小区切换到另外邻区。对一个当前不使用服务的UE，当有一个无线信号质量比当前小区好的小区时，在EMM-registered状态的UE从当前小区重选到另外邻区。</p>
-<p>TAU：<br>在EMM-registered状态下的UE，不论是否使用服务，当TA改变时就需要更新TA。但是当在ECM-idle/RRC-idle状态下，即使TA没有改变，当TAU定时器超时时也会更新TA。TA更新时由UE发送TAU request消息来发起的。<br>当UE在ECM-idle/RRC-idle状态，ECM/RRC应该首先建立，然后UE需要转移到ECM-connected/RRC-connected状态来更新TA。一旦UE在状态C发送TAU request消息并从MME接收到TAU accept消息，TAU过程就结束了。这时候，释放ECM/RRC连接，然后UE返回到ECM-idle/rrc-idle状态。</p>
-<p>寻呼：<br>当UE附着到网络，但是在idle状态，如果有用户流量传输，网络需要发起寻呼来唤醒UE，接下来UE状态转换到C。寻呼是根据在最后一次TA更新中由UE提供的TAI信息来进行的。<br><img src="http://img.blog.csdn.net/20150915110925007" alt="这里写图片描述"></p>
-<h2 id="4-4-UE-ID"><a href="#4-4-UE-ID" class="headerlink" title="4.4 UE ID"></a>4.4 UE ID</h2><p>表7列出了每一个实体在四种状态中所具有的UE ID。UE IP地址当UE初始附着到网络由PGW分配的，会建立默认承载，并且当默认承载去激活时释放。GUTI是当UE初始成功附着到网络由MME分配的，用来代替IMSI来使用。如果UE从网络成功的去附着，UE和MME会波爱吃UE最后一次的GUTI，并且在下次UE附着到网络时使用它，即使在附着之后。C-RNTI是由eNB分配，用来在一个小区中RRC-connected状态下区别UE的，只有当和小区中已经分配的C-RNTI关联才是有效的。eNB UE S1AP ID and MME UE S1AP ID是由eNB和MME来使用分辨在S1-MME接口上的UE的。Old eNB UE X2AP ID and New eNB UE X2AP ID是服务eNB和目标eNB用来在X2接口上分辨UE的（当UE在服务eNB和目标eNB之间执行切换时）。</p>
-<p><img src="http://img.blog.csdn.net/20150915112929185" alt="这里写图片描述"></p>
-<h1 id="V-EMM-User-Information"><a href="#V-EMM-User-Information" class="headerlink" title="V. EMM User Information"></a>V. EMM User Information</h1><p>这一章将描述在图2状态下EPS实体和用户关联的数据。</p>
-<h2 id="5-1-EMM-deregistered-ECM-idle-rrc-idle"><a href="#5-1-EMM-deregistered-ECM-idle-rrc-idle" class="headerlink" title="5.1 EMM-deregistered+ECM-idle/rrc-idle"></a>5.1 EMM-deregistered+ECM-idle/rrc-idle</h2><p>表8描述了在状态A下EPS实体包含的用户信息。在状态A，除了运营商提供的信息外，网络没有用户信息。也就是说，在状态A，在UE和NE中所有的信息都是运营商提供的。IMSI，LTE K，主秘钥在用户鉴权是需要，默认APN，EPS QoS签约信息和接入配置在建立EPS会话和默认EPS承载时都需要。在EPSQoS签约配置文件和接入配置包含如下信息：</p>
-<ul>
-<li>EPS QoS签约配置文件（在HSS中）：QCI，APR，APN-AMBR和UE-AMBR</li>
-<li>接入配置文件（在SPR中）：SDF过滤器，QCI，APR，APN-AMBR、UE-AMBR和计费方法。</li>
-</ul>
-<p><img src="http://img.blog.csdn.net/20150915113836009" alt="这里写图片描述"></p>
-<h2 id="5-2-EMM-deregistered-ECM-idle-rrc-idle"><a href="#5-2-EMM-deregistered-ECM-idle-rrc-idle" class="headerlink" title="5.2 EMM-deregistered+ECM-idle/rrc-idle"></a>5.2 EMM-deregistered+ECM-idle/rrc-idle</h2><p>表9描述了在状态B下EPS实体包含的用户信息。在状态B，最后一次UE附着网络使用的信息在UE和MME中保持有效，所以，在下次附着时UE可以使用相同的信息。这些信息包括由MME最后一次分配的GUTI，在UE最后一次更新TA时的TA信息，在UE和MME之间最后一次使用的NAS安全上下文，由MME分配给UE的UE-AMBR等等。在状态A中UE和NE中没有的用户信息，在状态B中包含的被标记为绿色，已经在状态A分配的是黑色的。如表9所示。</p>
-<p><img src="http://img.blog.csdn.net/20150915121453870" alt="这里写图片描述"></p>
-<h2 id="5-3-EMM-registered-ECM-connected-RRC-connected"><a href="#5-3-EMM-registered-ECM-connected-RRC-connected" class="headerlink" title="5.3 EMM-registered+ECM-connected+RRC-connected"></a>5.3 EMM-registered+ECM-connected+RRC-connected</h2><p>表10列出了在状态C下EPS实体所拥有的用户信息。在状态C，建立了EPS承载和NAS信令连接，执行切换和TA更新。所以，在这个状态设置了这些过程需要的所有用户信息。为了容易和状态B进行区分，在状态C中新加入的标记被蓝色，B状态的标记为绿色。</p>
-<p><img src="http://img.blog.csdn.net/20150915121851776" alt="这里写图片描述"></p>
-<h2 id="5-4-EMM-registered-ECM-idle-rrc-idle"><a href="#5-4-EMM-registered-ECM-idle-rrc-idle" class="headerlink" title="5.4 EMM-registered+ECM-idle/rrc-idle"></a>5.4 EMM-registered+ECM-idle/rrc-idle</h2><p>表11列出了在状态D中EPS实体拥有的用户信息。这个状态首先可以从A/B转移到C。在状态D，在状态C分配给EPS承载和NAS信令连接的所有资源，除了S5承载，都被释放了。这些释放的信息被标记成灰色。在S1承载上，下行资源被释放，但由PGW分配的上行资源被保持。所以，在下次转换到状态C时，在建立S1承载时，相同的上行承载将会使用。我们可以看到一旦UE从状态C变成idle状态，在UE和eNB之间的所有的资源都被释放。</p>
-<p><img src="http://img.blog.csdn.net/20150915122523502" alt="这里写图片描述"></p>
-<h1 id="VI-Closing"><a href="#VI-Closing" class="headerlink" title="VI. Closing"></a>VI. Closing</h1><p>我们学习了EMM，ECM，RRC状态。在ESM过程中讨论EPS会话和承载建立相关的更有意义。作为EMM过程的一部分，UE初始附着流程包含默认EPS承载的建立，ESM相关的相关的EMM过程也包含在这个文档中。基于我们对EMM，ECM，RRC状态的讨论，我们为更深入的学习EMM过程。</p>
-<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p>[1] 3GPP TS 24.301, “Non-Access-Stratum (NAS) protocol for Evolved Packet System (EPS); Stage 3”.<br>[2] Netmanias Technical Document, “LTE Network Architecture: Basic”, July 2013,<br><a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5904" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5904</a><br>[3] Netmanias Technical Document, “LTE Security II: NAS and AS Security”, August 2013,<br><a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5903" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5903</a><br>[4] NMC Consulting Group Confidential Internal Report, “E2E LTE Network Design”, August 2010.</p>
-
-          
+          原文链接：http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5909
+I. Introduction通过之前的技术文档，我们已经学习了LTE网络架构和LTE identification和LTE安全操作（当用户附着到LTE网络时需要
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/03/8-LTE-EMM-and-ECM-States/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -503,7 +497,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sun-day">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -593,130 +587,17 @@
       
         
           
-            <p>原文链接：<a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5908" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5908</a></p>
-<h1 id="I-Introduction"><a href="#I-Introduction" class="headerlink" title="I. Introduction"></a>I. Introduction</h1><p>SDF：Service Data Flow</p>
-<p>LTE服务提供商应该能够根据用户的不同订阅等级来定制不同的QoS的服务需求。所以，为了能够根据不同用户流量分配无线和网络资源，并为了合适的管理这些资源，服务提供商需要能感知每一个用户的订阅级别和能感知请求的服务类型。</p>
-<p>为了这种原因，LTE网络首先根据通过SDF提供服务的类型来把用户数据流分为不同的SDFs（具有不同QoS），然后对每一个SDF应用不同的QoS规则。因为SDF在LTE网络中是通过EPS承载来传送的，所以EPS承载QoS以保持SDF QoS的方式来控制。</p>
-<p>在这个文档中，适用于SDF的QoS机制和EPS承载将解释为LTE中的QoS机制，并且举例说明他们是怎么工作的。这个文档组织如下：第二章定义SDF和EPS承载。第三章描述适用于SDF和EPS承载的QoS参数。第四章介绍QoS提供和QoS实施，通过实体的QoS参数是怎么提供和在哪里实施的。在第五章，将举例说明LTE QoS是怎么工作的。</p>
-<h1 id="II-SDF-and-EPS-Bearer"><a href="#II-SDF-and-EPS-Bearer" class="headerlink" title="II. SDF and EPS Bearer"></a>II. SDF and EPS Bearer</h1><p>图1描述了SDF和EPS承载，和他们之间的关系。在LTE网络中，用户数据（IP数据包）被分为SDF数据流和EPS承载数据流。一个SDF是和用户正在使用的服务相关联的一组IP数据流，而EPS承载是具有相同QoS级别的聚合的SDFs数据流。</p>
-<p><img src="http://img.blog.csdn.net/20150912153615135" alt="这里写图片描述"></p>
-<p>SDF和EPS承载是通过使用不同的数据包过滤器匹配IP数据流来检测的（SDF template用于SDF，traffic flow template TFT用于EPS承载）。数据包过滤器是由网络运营商根据他们的策略预先配置的。他们每一个都有由五元组组成（源IP地址，目的IP地址，源端口，目的端口，协议ID）。</p>
-<p>换种说话，在ＬＴＥ网络中，具有相同服务特征（匹配SDF template数据包过滤器）的IP数据流被指定为一个SDF。匹配TFT数据包过滤器的SDFs被映射为EPS承载，最后交付给UE。具有相同QoS级别的SDFs被聚合在一起通过一个EPS承载传送，不同的QoS级别的SDF通过不同的EPS承载传送。</p>
-<p><strong>SDF</strong></p>
-<p>使用不同服务或应用的用户数据流具有不同的QoS。一个SDF是一个IP数据流或者是根据服务类型分类的用户IP数据流的聚合。不同的SDF由不同的QoS级别，因此一个SDF作为一个单元服务的，这个单元的QoS规则是按照LTE中PCC过程得到的。在图1中，到UE的IP数据流使用SDF template按照他们的服务类型被分类成不同的SDF。接着相应的QoS规则（例如，优先级，带宽控制等）在数据传输到ＵＥ之前应用到SDF上。QoS是当SDF在ＬＴＥ网络传输的时候由EPS承载提供的，每一个SDF被PGW映射到一个EPS承载来满足它的QoS需求，并交付给ＵＥ．</p>
-<p><strong>EPS承载</strong></p>
-<p>有两种类型的EPS承载：默认和专用的。当UE附着到LTE网络时，分配一个IP地址用于连接PDN，同时建立一个默认EPS承载。当用户通过默认承载试图接入需要高QoS（当前的默认承载满足不了这个QoS）时，就按需建立一个专用承载。专用承载建立的QoS是不同于当前已经存在的承载上的QoS。UE可以连接不止一个PDN，包含一个必须的默认EPS承载和零到多个可选的专用EPS承载。UE拥有的EPS承载的数目不超过11个。</p>
-<p>一旦在UE初始附着到网络时建立默认承载，这个承载会一直持续，即使没有服务在使用，直到UE从网络去附着。每一个PDN上都有一个默认承载。当UE初始附着到网络，网络MME需要关于怎样建立默认承载的信息，比如使用哪个QoS，需要连接哪个PDN。这些信息已经作为签约信息提供了HSS。所以，MME只需要下载这些签约信息即可（默认APN，EPS签约QoS信息等等），并基于这个APN选择一个PGW连接到PDN，并且基于签约QoS配置信息激活和这个PDN相关的默认承载。</p>
-<p>在图1中的SDF和EPS承载<br>图1展示了当通过EPS下行IP数据流交付给UE时的SDF和EPS承载。通过PDN IP数据流到达PGW并使用SDF templates过滤成不同的SDF。在这个图中，IP数据流1/2/3被过滤成SDF1/2/3，相应的IP数据流4/5倍过滤成SDF4。对每一个SDF适用不同的QoS策略，接着映射到通过使用TFT分类的EPS承载上。SDF1/2映射到默认承载，而SDF3/4映射到专用承载，接着都传输都ＵＥ。一旦到达UE，IP数据被发送到相应的目的应用。</p>
-<p>在图1中显示的EPS承载和SDF列出来表1中。在IP连接接入网（IP Connectivity Access NetworksI P-CAN）范围外的在3gpp标准中。这个文档只讨论EPS。所以这里讨论的所有的IP_CAN都是指EPS承载。</p>
-<p><img src="http://img.blog.csdn.net/20150913083312809" alt="这里写图片描述"></p>
-<h1 id="III-QoS-Parameters-of-SDF-and-EPS-Bearer"><a href="#III-QoS-Parameters-of-SDF-and-EPS-Bearer" class="headerlink" title="III. QoS Parameters of SDF and EPS Bearer"></a>III. QoS Parameters of SDF and EPS Bearer</h1><p>在第二章学习了使用数据包过滤器把用户承载分为SDF或EPS承载。SDF QoS和EPS承载QoS对应的应用于SDF和EPS承载。在第三章我们学习SDF和EPS承载的QoS，以及他们之间的关系。</p>
-<p>在LTE网络中，QoS在服务层面和承载层面上定义。SDF QoS参数一个服务层面的QoS参数，而EPS承载QoS参数是承载层面的QoS参数。服务层面和承载层面也被称为SDF层面和SDF聚合层面。一个SDF聚合就是一组具有相同QCI（QoS级别标识QoS Class Identifier）和ARP（分配和保留优先级Allocation and Retention Priority）的SDF，这些SDF属于同一个EPS承载。QCI和ARP都是基本的QoS参数，适用于所有的SDF和EPS承载。QCI特别重要，因为它作为一个参考标识SDF和EPS承载的性能特征。除了这两个基本的参数，还有其他的QoS参数，例如GBR、MBR、AMBR，这些参数指定SDF和EPS承载的 带宽/比特速率特征。SDF和EPS承载的参数如下所示：</p>
-<ul>
-<li>SDF QoS参数：QCI、ARP、GBR、MBR</li>
-<li>EPS承载QoS参数：QCI、ARP、GBR、MBR、APN-AMBR、UE-AMBR</li>
-</ul>
-<p><strong>SDF QoS参数</strong></p>
-<p>QCI和ARP使用于所有的SDF。QCI是1-9的整数，标识IP数据包9种不同的QoS性能特征，例如资源类型（GBR或NON-GBR）优先级（1-9）数据包延迟预算（50-300ms）数据包错误速率（10-2 ~ 10-6）。<br>MBR和GBR（最大比特速率和保证比特速率Maximum Bit Rate 和Guaranteed Bit Rate ）都是SDFQoS参数，他们用来标识SDF带宽/比特速率。MBR指定SDF的最大比特速率。如果网络流量不拥挤，则以SDF传输的用户流量可以以最大MBR传输。而，GBR是SDF保证的比特速率。这意味着无论什么情况，SDF能保证一个特定的GBR。所以即使网络流量是拥挤的，通过SDF传输的用户流量也至少能按照保证的GBR传输。</p>
-<p>有两种类型的SDF，GBR SDF和non-GBR SDF。对于GBR SDF，根据QCI指定的资源类型分配专用的网络资源。但是，对于non-GBR SDF，不分配专用的网络资源。GBR SDF分配一个GBR和MBR，而non-GBR SDF只分配一个MBR。这两种SDF的QoS参数如下所示：</p>
-<ul>
-<li>GBR SDF QoS参数：QCI、ARP、GBR（UL/DL）、MBR（UL/DL）</li>
-<li>non-GBR SDF QoS参数：QCI、ARP、MBR（UL/DL）</li>
-</ul>
-<p>匹配TFT过滤器的SDF在PGW中映射为一个EPS承载，并通过这个映射的EPS承载交付给ＵＥ．具有相同QCI和ARP的SDF聚合被映射到一个EPS承载上。</p>
-<p><strong>EPS承载QoS参数</strong></p>
-<p>QCI和ARP使用所有的EPS承载。EPS承载根据不同QCI的资源类型被分为GBR承载和non-GBR承载。默认承载必须是non-GBR，而专用承载可以是GBR，也可以是non-GBR。<br>除了QCI和ARP，EPS承载还有其他的QoS参数，MBR和GBR用来指示EPS承载的带宽/比特速率，AMBR（聚合最大比特速率Aggregated Maximum Bit Rate）指示多个EPS承载的总共带宽。MBR和GBR是EPS承载的最大和保证带宽，AMBR是多个EPS承载的最大总共带宽。</p>
-<p>GBR EPS承载分配GBR和MBR，意味着为这个承载分配专用的网络资源。而，non-GBR EPS承载分配一个AMBR，意味着对这个承载没有分配专用的网络资源，但是分配了一个和其他non-GBR承载共享的最大带宽。由两种类型的AMBR，APN-AMBR（是在PDN中由所有的non-GBR承载共享的最大带宽）和UE-AMBR（在ＵＥ中共同分享的最大带宽）。一个UE可以连接到不止一个PDN，也就是说，所有PDN的总APN-AMBR不能超过UE-AMBR。这两种类型的QoS参数如下：</p>
-<ul>
-<li>GBR承载QoS参数：QCI、ARP、GBR（UL/DL）、MBR（UL/DL）</li>
-<li>non-GBR承载QoS参数：QCI、ARP、APN-AMBR（UL/DL）、UE-AMBR（UL/DL）</li>
-</ul>
-<p><strong>SDF和EPS承载QoS参数</strong><br>图2显示了应用于SDF和EPS承载的QoS参数。</p>
-<p><img src="http://img.blog.csdn.net/20150913094816557" alt="这里写图片描述"></p>
-<p>在图2中，UE连接两个PDN。UE有两个IP地址：IP地址1由PGW1分配用于PDN1，IP地址2由PGW2分配用于PDN2。每一个PDN有一个默认承载和两个专用承载。在PGW使用SDF templates把用户IP数据流分成了不同的SDF。从PDN1和PDN2由两组SDF（1-5）。对于这些SDF，根据在PGW设置的QoS规则来分配网络资源和数据包转发策略。并基于他们特定的QCI和ARP映射到EPS承载上。图中，对于PDN1，SDF1/2映射到默认承载，SDF3/4映射到non-GBR专用承载，SDF5映射到GBR专用承载，所有的都传送到UE。这样的从SDF到EPS承载的映射是由TFT决定的。所有用户流量在通过EPS承载传输时都准守EPS承载QoS。</p>
-<p>所有和PDN关联的non-GBR承载都是由他们共享的最大APN-AMBR控制，而和UE关联的non-GBR承载都是由他们共享的最大UE-AMBR控制。</p>
-<p>表2 SDF和EPS承载的QoS参数</p>
-<table>
-<thead>
-<tr>
-<th>项</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>QCI</td>
-<td>指示不同的QoS性能特征；标准QoS特征值用QCI=1-9定义；QCI代表了QoS的下列特征：资源类型（GBR or non-GBR），优先级（1-9），数据包延迟预算（50-300ms），数据包错误丢失率（10-2~10-6）；在网络节点（eNB，SGW，PGW）上控制数据包转发（调度权重，准入阈值，队列管理阈值，链路层协议配置等等）；在运营商网络节点（例如eNB）预先配置。</td>
-</tr>
-<tr>
-<td>ARP</td>
-<td>ARP参数：优先等级，抢占能力，被抢占能力；优先级（1-15）：定义资源请求的相对重要性，1是最高。抢占能力（yes or no）：定义SDF是否占用已经分配给一个优先级较低的SDF/承载的资源。被抢占能力（yes or no）：定义SDF是否能失去已经分配给它了，但是为了建立更高优先级的SDF/承载的资源。用于控制呼叫准入：指示一个优先级值用于决定在网络资源有限的条件下一个新的SDF/EPS承载需要激活或者修改的情况下是否拒绝激活一个新的SDF/EPS承载或移除存在的SDF/EPS承载。仅当在决定是否激活一个新SDF/EPS承载时需要考虑。一旦成功的建立，ARP对数据包转发处理没有影响。</td>
-</tr>
-<tr>
-<td>GBR (UL/DL)</td>
-<td>应用于GBR SDF/承载。指示对GBR SDF/承载能保证的最小的带宽</td>
-</tr>
-<tr>
-<td>MBR（UL/DL）</td>
-<td>应用于GBR/non-GBR SDF和承载。指示对SDF/承载允许的最大带宽；任何超过指定MBR的数据流量都通过数据策略丢弃。</td>
-</tr>
-<tr>
-<td>APN-AMBR(UL/DL)</td>
-<td>每一个PDN定义一个。指示对所有和PDN相关的non-GBR承载所允许的最大带宽；只适用于non-GBR聚合带宽</td>
-</tr>
-<tr>
-<td>UE-AMBR(UL/DL)</td>
-<td>每一个UE定义一个。指示对所有和UE相关的non-GBR承载允许的最大带宽；只适用于non-GBR承载的聚合带宽；这个是由HSS提供的签约信息（UE-AMBR-HSS）。但是仍然可以由MME修改，只要不超过所有APN的APN-AMBR的许可范围即可（在UE-AMBR-HSS范围之内）。</td>
-</tr>
-<tr>
-<td>GBR SDF/承载</td>
-<td>给这种类型的SDF/承载分配专用的网络资源来达到保证的GBR。当没有流量的时候，网络总是为GBR SDF/承载保持GBR指定的带宽。</td>
-</tr>
-<tr>
-<td>non-GBR SDF/承载</td>
-<td>给这种类型的SDF/承载不分配专用的网络资源。依据网络的拥挤程度以最大能力来传输流量。</td>
-</tr>
-</tbody>
-</table>
-<h1 id="IV-QoS-Provisioning-and-Enforcement"><a href="#IV-QoS-Provisioning-and-Enforcement" class="headerlink" title="IV. QoS Provisioning and Enforcement"></a>IV. QoS Provisioning and Enforcement</h1><p>4.1节将讨论QoS分配：QoS参数是在哪个实体中设置的。4.2节讨论QoS实施：决定哪个实体设置和应用哪个用户流量参数。</p>
-<h2 id="4-1-QoS分配"><a href="#4-1-QoS分配" class="headerlink" title="4.1 QoS分配"></a>4.1 QoS分配</h2><p>图3展示了QoS参数是在哪个实体中设置的；<br><img src="http://img.blog.csdn.net/20150913113710510" alt="这里写图片描述"></p>
-<p><strong>SDF QoS分配</strong><br>SDF所有的QoS参数是由PCRF提供的（Policy and Charging Rules Function）。</p>
-<p><strong>EPS承载QoS分配</strong><br>应用于默认承载的QoS参数是由网络运营商作为签约信息提供给HSS的。当默认承载激活的时候，MME从HSS中下载关于这个承载的QoS配置信息，并发送给相应的EPS实体。一旦EPS回话建立，QoS规则经过PDRF授权时，由HSS提供给默认承载的QoS参数可以修改。由HSS提供的UE-AMBR由eNB控制，但可以由MME修改。在修改的情况下，MME可以使用所有正在激活的PDN的聚合APN-AMBR取代UE-AMBR，只要这个值没有超过由HSS提供的UE-AMBR-HSS值即可。</p>
-<p>应用于专用承载的QoS参数是由PCRF提供的。当承载激活时，PCRF基于从SPR接收到的签约信息来决定承载的QoS参数。</p>
-<h2 id="4-2-QoS实施"><a href="#4-2-QoS实施" class="headerlink" title="4.2 QoS实施"></a>4.2 QoS实施</h2><p>在QoS实施过程中，执行用户流量的检测，然后对每一个检测到的SDF和EPS承载执行相应的QoS规则。<br>图4显示了SDF和EPS承载是在哪个实体中设置和实施的。EPS承载QoS参数实施于SGW和实施于PGW是一样的，除了APN-AMBR之外。但是为了绘图方便，在这个图中只显示了QCI。</p>
-<p><img src="http://img.blog.csdn.net/20150913123733111" alt="这里写图片描述"></p>
-<p><strong>SDF QoS实施</strong><br>SDF QoS参数是存在于PGW中。表4显示了SDF QoS在哪个实体中实施。到达PGW的IP数据流使用SDF templates过滤为不同的SDF，接着这些SDF由SDF QoS参数控制安装在PGW中。</p>
-<p><img src="http://img.blog.csdn.net/20150913124053150" alt="这里写图片描述"></p>
-<p><strong>EPS承载QoS实施</strong><br>EPS承载的QoS参数实施在UE和PGW之间传输用户流量的EPS实体上。表5描述了每一个QoS参数在哪个EPS实体中实施。APN-AMBR被承载的两个端点（UE和PGW）应用在PDN上激活的所有non-GBR EPS承载。APN-AMBR在UE中仅仅用于上行流量，但是在PGW中应用于上行和下行流量。而UE-AMBR由所有PDN发端的eNB来应用在UE上激活的所有non-GBR EPS承载。也就是说APN-AMBR只应用于和它关联的APN所表示的PDN，而UE-AMBR应用于UE，所有和UE关联的PDN。<br>MBR只用于GBR承载，在UE和eNB中是用于上行流量，而在SGW和PGW中只应用于下行流量。GBR只适用于GBR EPS承载，对上行和下行除了UE之外的所有实体都适用。</p>
-<p><img src="http://img.blog.csdn.net/20150913132200815" alt="这里写图片描述"></p>
-<h1 id="V-An-Example-for-SDF-and-EPS-Bearer-QoS"><a href="#V-An-Example-for-SDF-and-EPS-Bearer-QoS" class="headerlink" title="V. An Example for SDF and EPS Bearer QoS"></a>V. An Example for SDF and EPS Bearer QoS</h1><p>在第五章，举例说明LTE QoS是如何基于SDF和EPS承载QoS提供的。通过这个实例，可以学习SDF和EPS承载QoS怎么工作和他们是在哪个实体中提供的。使用的场景如下：</p>
-<ul>
-<li>UE连接到一个PDN（因特网）</li>
-<li>UE通过三个承载和因特网通信（一个默认承载，一个GBR承载和一个non-GBR承载）</li>
-<li>他们承载的ID（EPS承载ID EBI）是5,8,10.</li>
-</ul>
-<h2 id="5-1-下行的QoS操作"><a href="#5-1-下行的QoS操作" class="headerlink" title="5.1 下行的QoS操作"></a>5.1 下行的QoS操作</h2><p>图5显示了下行QoS操作的实例。在每一个实体的操作详细在下面描述。这里，可适用的流量控制包括流量监管和流量成型。图5和图6是应用流量监管的实例。</p>
-<p><img src="http://img.blog.csdn.net/20150913133018940" alt="这里写图片描述"></p>
-<p> ❶ [P-GW] 下行IP数据流到达<br>IP数据流到达PGW，数据流1-5分别是语音数据（RTP），视频数据流，语音信令（SIP），双向的游戏，尽力而为的因特网流量。</p>
-<p>❷ [P-GW] IP数据包过滤 (SDF Templates)<br>一旦PGW接收到数据包，IP数据通过IP数据包过滤器 (SDF templates)被过滤成不同的SDF。在这里，五元组（源IP地址，目的IP地址，源端口，目的端口，协议ID）用来充当过滤规则。IP数据流1被分类为GBR SDF1，数据流2被分类为GBR SDF2，IP数据流3/4被分类为non-GBR SDF3，IP数据流5被分类为non-GBR SDF4.</p>
-<p>❸ [P-GW] SDF QoS实施: MBR速率策略<br>MBR速率策略对每一个SDF执行，任何超过指定下行MBR的流量都将被丢弃。</p>
-<p>❹ [P-GW] SDF – EPS 承载映射: IP 数据包过滤 (Traffic Flow Templates; TFT)<br>SDF使用IP数据包过滤TFT被过滤成不同的EPS承载。SDF1和SDF2映射到GBR专用承载EBI=10。SDF3被映射被non-GBR专用承载EBI=8，SDF4被映射为non-GBR默认承载EBI=5。</p>
-<p>❺ [P-GW] EPS 承载QoS 实施: MBR/APN-AMBR 速率策略<br>EPS承载QoS适用于每一个承载。对于GBR承载，MBR速率策略是使用下行MBR来执行，任何IP数据包超过指定下行MBR的都被丢弃。对于non-MBR承载，APN-AMBR速率策略被执行。也就是说，对于所有发往EBI=5/8的IP数据流都是适用速率策略，任何IP数据包超过指定的下行APN-AMBR的都被丢弃。</p>
-<p>❻ [eNB] EPS 承载QoS 实施: UE-AMBR 调度<br>eNB对non-AMBR执行UE-AMBR速率策略，并且在无线链路上调度。也就是说对于所有发往EBI=5/8的IP数据流都执行下行UE-AMBR。在图5中，因为只有一个PDN，下行UE-AMBR和下行APN-AMBR是相等的。</p>
-<h2 id="5-2-上行QoS操作"><a href="#5-2-上行QoS操作" class="headerlink" title="5.2 上行QoS操作"></a>5.2 上行QoS操作</h2><p>图6显示了上行LTE QoS的操作。不像下行，MBR和APN-AMBR的控制在上行方向在ＵＥ和PGW中都执行。</p>
-<p><img src="http://img.blog.csdn.net/20150913135046775" alt="这里写图片描述"></p>
-<p>❶ [UE] 上行IP 数据流到达<br>从用户应用层的IP数据流到达ＵＥ，在这里，应用层和下行的是一样的。</p>
-<p>❷ [UE] IP数据包过滤 (TFT)<br>上行IP数据流被IP数据包过滤TFT过滤为EPS承载。在这里，IP和TCP/UDP协议头中的五元组用于过滤规则。IP数据流1/2映射到GBR专用承载EBI=10，IP数据流3/4被映射到non-GBR专用承载EBI=8，IP数据流5被映射为默认承载EBI=5.</p>
-<p>❸ [UE] EPS 承载QoS 实施: MBR/APN-AMBR速率策略<br>EPS承载QoS应用于每一个EPS承载。对于映射到GBR专用承载EBI=10的IP数据流，使用上行的MBR来执行速率策略，对于non-GBR专用承载EBI=5/8的所有IP数据流使用上行APN-AMBR来执行速率策略。</p>
-<p>❹ [eNB] EPS 承载QoS 实施: MBR/UE-AMBR速率策略<br>eNB对GBR承载EBI=10使用上行MBR执行速率策略和调度，对于non-GBR承载EBI=5/8使用上行UE-AMBR来执行速率策略和调度。认为只有一个PDN，上行UE-AMBR和上行APN-AMBR是相等的。</p>
-<p>❺ [P-GW] 承载流量到达<br>承载数据流通过SGW到达PGW</p>
-<p>❻ [P-GW] EPS 承载QoS 实施: APN-AMBR 速率策略<br>对所有的从non-GBR承载接收到的IP数据流执行APN-AMBR。任何超过上行APN-AMBR的数据包都被丢弃。</p>
-<p>❼ [P-GW] IP数据包过滤 (SDF Templates)<br>EPS bearers are filtered through IP packet filters (SDF templates) into different SDFs. IP flows 1 and 2 from<br>the GBR dedicated bearer (EBI=10) are mapped to SDFs 1 and 2, IP flows 3 and 4 from non-GBR dedicated<br>bearer (EBI=8) are mapped to SDFs 3 and 4, and finally IP flows 5 from the default bearer (EBI=5) is<br>mapped to SDF 5.<br>EPS承载被IP数据包过滤SDF templates过滤成不同的SDF。GBR专用承载EBI=10的IP数据流1/2被映射为SDF1/2。non-GBR专用承载EBI=8的IP数据流3/4被映射为SDF3/4。默认承载的IP数据流5被映射为SDF5.</p>
-<p>❽ [P-GW] SDF QoS 实施: MBR 速率策略<br>对每一个SDF执行MBR速率策略，任何超过指定上行MBR的IP数据包都会被丢弃。</p>
-<h1 id="VI-Closing"><a href="#VI-Closing" class="headerlink" title="VI. Closing"></a>VI. Closing</h1><p>我们已经学习了在服务层次和承载层次上的LTE QoS机制。我们也学习了用户IP数据流在服务层次上被分为不同的SDF，接着用户数据流在承载层次上被分类为不同的EPS承载。我们也讨论了SDF和EPS的他们互相映射的关系。<br>在eNB的MAC层给ＵＥ分配无线资源并基于EPS承载QoS参数来执行数据包调度。eNB数据包调度不在本文档的范围内。决定和鉴权QoS参数的具体过程将会在接下来的文档中描述。</p>
-<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p>[1] Netmanias Technical Document, “LTE Identification III: EPS Session/Bearer Identifiers”, August 2013,<br><a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5907" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5907</a><br>[2] 3GPP TS23.203, “Policy and charging control architecture”.<br>[3] NMC Consulting Group Confidential Internal Report, “E2E LTE Network Design”, August 2010.</p>
-
-          
+          原文链接：http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5908
+I. IntroductionSDF：Service Data Flow
+LTE服务提供商应该能够根据用户的不同订阅等级来定制不同的QoS的服务需求。所以，为了能
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/03/7-LTE-QoS-SDF-and-EPS-Bearer-QoS/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -777,7 +658,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sun-day">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -867,119 +748,16 @@
       
         
           
-            <p>原文链接：<a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5903" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5903</a></p>
-<h1 id="I-Introduction"><a href="#I-Introduction" class="headerlink" title="I. Introduction"></a>I. Introduction</h1><p>在LTE安全的第一个文档，我们介绍了基于EPS AKA过程的LTE鉴权，并在鉴权结束后，UE和MME之间共享了相同的K-ASME。在这个文档中，我们将基于K-ASME来介绍NAS和AS安全，学习在安全建立过程后用户和控制面的数据是怎样传输的。</p>
-<p>第二章将介绍NAS安全建立过程，和在这个过程后NAS消息时怎么发送和接收的。第三章介绍AS安全建立过程，并介绍RRC和IP数据包时怎么传输的。第四章在EPS实体上使用的EPS安全上下文和安全数据。最后第五章总结在两篇LTE安全文档中的所有安全秘钥。</p>
-<p>在我们开始介绍安全建立过程之前，我们先看下NAS和AS所有应用的协议栈。图1表示NAS和AS安全建立相关的协议栈。</p>
-<p><img src="http://img.blog.csdn.net/20150912103511820" alt="这里写图片描述"></p>
-<ul>
-<li>NAS安全：NAS安全的目的是为了确保UE和MME之间控制面NAS消息是使用NAS安全秘钥安全传送的。NAS安全秘钥是从K-ASME中计算出来，并且每次执行EPS AKA都会有一个新的秘钥。在NAS安全建立完成之后，UE和MME之间在传输之前共享了相同的NAS安全秘钥（K-NASenc）和NAS完整性秘钥（K-NASinc）分别用于加密和完整性保护。</li>
-<li>AS安全：AS安全的目的是为了确保UE和eNB之间控制面RRC消息和用户面IP数据包是使用AS安全秘钥安全传送的。AS安全秘钥是从K-eNB中计算出来的，并且每次一个新的无线链路建立后都会产生一个新的秘钥。在AS安全建立完成后，UE和eNB之间共享了RRC完整性秘钥（K-RRCinc）、RRC加密秘钥（K-RRCenc）和用户加密秘钥（K-UPenc）。使用这些秘钥的加密和完整性包保护都是在PDCP层执行的。RRC完整性秘钥（K-RRCinc）、RRC加密秘钥（K-RRCenc）都用来确保在无线链路控制面上通过SRB传输的RRC消息的传输安全。RRC消息在发送之前在PDCP层使用K-RRCinc完整性保护和使用K-RRCenc加密。K-UPenc用于在无线链路上用户面通过DRB传输的IP数据包的安全传输。IP数据包在传输之前在PDCP层使用K-UPenc来加密。</li>
-</ul>
-<h1 id="II-NAS-Security"><a href="#II-NAS-Security" class="headerlink" title="II. NAS Security"></a>II. NAS Security</h1><p>下面将对NAS安全展开详细描述。NAS安全建立过程包含在UE和MME之间的Security Mode Command消息（MME发送到UE的）和Security Mode complete消息（UE发送给MME的）。这个NAS安全过程和NAS消息怎么传输在2.1和2.2节分别阐述。</p>
-<h2 id="2-1-NAS安全建立"><a href="#2-1-NAS安全建立" class="headerlink" title="2.1 NAS安全建立"></a>2.1 NAS安全建立</h2><p>（1）、Security Mode Command消息的传输<br>图2展示了在NAS安全建立过程中Security Mode Command消息时怎么传送的。MME通过发送Security Mode Command消息给UE来通知UE，MME是被网络鉴权的，并且表示用于消息安全传输的NAS安全建立过程已经发起。Security Mode Command消息时完整性保护的，接着发送给ＵＥ，然后ＵE计算出NAS安全秘钥（加密秘钥和完整性秘钥）并使用完整性秘钥来验证这个消息的完整性。</p>
-<p>NAS安全建立过程之前的LTE鉴权过程在图2中<img src="http://img.blog.csdn.net/20150912110350911" alt="这里写图片描述"> <img src="http://img.blog.csdn.net/20150912110400600" alt="这里写图片描述">显示。LTE鉴权的结果是在UE和MME之间共享了K-ASME。我们开始介绍NAS安全建立过程，假定MME分配KSI-ASME=1来标识K-ASME。</p>
-<p><img src="http://img.blog.csdn.net/20150912110618993" alt="这里写图片描述"></p>
-<p>1、[MME]选择安全算法<br>MME在从UE接收到的Attach Request消息中基于网络能力信息选择加密和完整性算法用于NAs消息。图2展示了选择EEA1作为加密算法，EIA1作为完整性算法。</p>
-<p>2、[MME]计算出NAS安全秘钥<br>MME使用算法ID（Alg-ID）和选择安全算法的算法分辨器来从K-ASME中计算出K-NASinc和K-NASenc。表1列出了算法ID和算法分辨器。<br><img src="http://img.blog.csdn.net/20150912111105268" alt="这里写图片描述"></p>
-<p>3、[MME]为完整性保护产生NAS-MAC<br>MME生成Security Mode Command消息发送给ＵＥ，并使用ＥＩＡ算法和输入参数计算出NAS-MAC。图3是展示了NAS-MAC是怎么生成的。<br>参数说明：</p>
-<ul>
-<li>Count：32bit下行NAS计数</li>
-<li>Message：NAS消息，在这里是Security Mode Command</li>
-<li>Direction：1bit表示传输的方向，0是上行，1是下行</li>
-<li>Bearer：5bit的承载ID，固定值，设置为0</li>
-<li>K-NASinc：128bit的NAS完整性秘钥</li>
-</ul>
-<p><img src="http://img.blog.csdn.net/20150912111735627" alt="这里写图片描述"></p>
-<p>4、[UE&lt;-MME]发送Security mode command消息<br>MME把计算出来的NAs-MAC包裹在Security mode command消息中发送给ＵＥ。这个消息时完整性保护而没有加密的。<br>消息参数有以下几个：</p>
-<ul>
-<li>KSI-ASME：3bit和K-ASME关联的值，用来表示K-ASME</li>
-<li>重返UE安全能力：UE安全能力包裹在UE发送的attach Request消息中的UE网络能力，指示UE可以支持的安全算法。</li>
-<li>NAS加密算法：由MME选择的NAS加密算法，这里为EEA1</li>
-<li>NAS完整性算法：由MME选择的NAS完整性算法，这里为EIA1</li>
-</ul>
-<p>5、[UE]设置K-ASME表示（KSI-ASME）<br>当UE从MME接收到Security mode command消息，UE设置在消息中的KSI-ASME，并使用它来表示当前的K-ASME。</p>
-<p>6、[UE]产生NAS安全秘钥<br>UE识别出MME选择的NAS安全算法，并使用算法ID和算法分辨器从K-ASME中计算出K-NASinc和K-NASenc。</p>
-<p>7、[UE]检查Security mode command消息的完整性<br>UE通过使用包裹在消息中的NAS-MAC来检查Security mode command消息的完整性。UE识别出由MME选择的NAS完整性算法是EIA1，并使用Security mode command消息中选择的EIA1算法计算出XNAS-MAC消息鉴权码和K-NASinc。图4是介绍XNAS-MAC是怎么通过相同的EIA计算出来的。UE通过比较由自己计算出来的XNAS-MAC和由MME计算出来NAS-MAC是否匹配来验证这个消息的完整性。如果匹配，它表示Security mode command消息是没有在途中被篡改的。</p>
-<p><img src="http://img.blog.csdn.net/20150912113734165" alt="这里写图片描述"></p>
-<p>（2）、Security mode complete消息的传输<br>图5展示了Security mode complete消息在NAS安全建立过程中是怎么传输的。UE通过发送Security mode complete消息给MME来通知MME在UE中生成了和MME中相同的NAS安全秘钥，并且Security mode command消息完整性验证通过。Security mode complete消息传输是加密和完整性保护的。</p>
-<p><img src="http://img.blog.csdn.net/20150912123549147" alt="这里写图片描述"></p>
-<p>8、[UE]使用选择的加密算法EEA1加密消息<br>UE生成和加密Security mode complete消息发送给MME。Security mode complete消息的加密数据流（Cipher Text Block加密数据块）是通过Security mode complete消息（Plane Text Block面数据块）和由EEA1、K-NASenc生成的加密秘钥流（Key Stream Block秘钥流块）经过bit位执行XOR异或操作来生成的。图6展示了NA消息时怎么加密的。用来产生秘钥流块的EEA算法的输入数据包括以下：</p>
-<ul>
-<li>Count：32bit上行NAS计数</li>
-<li>Bearer：5bit的承载ID，固定值，设置为0</li>
-<li>Direction：1bit表示传输的方向，0是上行，1是下行</li>
-<li>Length：通过加密算法陈胜的秘钥流的长度</li>
-<li>K-NASenc：128bit的NAS加密秘钥</li>
-</ul>
-<p><img src="http://img.blog.csdn.net/20150912124429617" alt="这里写图片描述"></p>
-<p>9、[UE]产生NAS-MAC用于完整性保护<br>UE使用EIA算法计算出NAS-MAC和K-NASint。图3a是NAS-MAC是怎么使用下面的EIA参数生成的。</p>
-<ul>
-<li>Count：32bit上行NAS计数</li>
-<li>Message：NAS消息，在这里是Security Mode complete</li>
-<li>Direction：1bit表示传输的方向，0是上行，1是下行</li>
-<li>Bearer：5bit的承载ID，固定值，设置为0</li>
-<li>K-NASinc：128bit的NAS完整性秘钥</li>
-</ul>
-<p><img src="http://img.blog.csdn.net/20150912124841854" alt="这里写图片描述"></p>
-<p>10、[UE-&gt;MME]发送Security Mode complete消息<br>UE把计算得到的NAS-MAC包裹在Security Mode complete消息中，并发送给MME。在这里这个消息是加密和完整性保护的，在这个之后，所有的UE发送给MME的NAS消息都是安全传输的。</p>
-<p>11、[MME]验证Security Mode complete消息的完整性<br>MME通过验证包含在消息中的NAS-MAC来检查Security Mode complete的完整性。MME使用在Security Mode complete消息中选择的EIA1算法和K-NASint来计算出XNAS-MAC。图4a展示了XNAS-MAC是怎么使用相同的EIA参数来计算出来的。MME通过检查自己计算出来的XNAS-MAC和从UE计算出来的NAS-MAC是否匹配来验证这个消息的完整性。如果匹配，它表示Security Mode complete消息在传输过程中没有被篡改。</p>
-<p><img src="http://img.blog.csdn.net/20150912125520560" alt="这里写图片描述"></p>
-<p>12、[MME]解密Security Mode complete消息<br>在成功验证Security Mode complete消息之后，MME开始使用EEA算法解密这个消息。Security Mode complete消息（UE产生的原来消息）是通过加密的Security Mode complete消息和秘钥流块XOR异或产生的。图7表示这个消息怎么使用EEA算法被解密的。</p>
-<p><img src="http://img.blog.csdn.net/20150912125831997" alt="这里写图片描述"></p>
-<h2 id="2-2-NAS安全建立后"><a href="#2-2-NAS安全建立后" class="headerlink" title="2.2 NAS安全建立后"></a>2.2 NAS安全建立后</h2><p>一旦NAS安全建立完成，在随后所有的UE和MME之间传输的NAS消息都是在发送之前加密和完整性保护的。图8显示了在NAS安全建立之后，ＵＥ和MME之间的NAS消息时怎么传送的。</p>
-<p><img src="http://img.blog.csdn.net/20150912130134923" alt="这里写图片描述"></p>
-<p>当NAS消息发送之前，首先加密然后完整性保护。原NAS消息首先使用K-NASenc加密然后包含K-NASint计算出来的NAS-MAC做完整性保护，所有这些消息都是加密和完整性保护传送的。</p>
-<p>当接收到NAS消息，首先做完整性验证，然后解密，和发送时相反的过程。首先对比使用K-NASint计算出来的XNAS-MAC和接收到的NAS-MAC对比来检查NAS消息的完整性，接着解密得到原始的NAS消息。</p>
-<p><img src="http://img.blog.csdn.net/20150912130647607" alt="这里写图片描述"></p>
-<h1 id="III-AS-Security"><a href="#III-AS-Security" class="headerlink" title="III. AS Security"></a>III. AS Security</h1><p>下面详细介绍AS安全。AS安全建立过程包含在UE和MME之间的Security Mode Command消息（MME发送到UE的）和Security Mode complete消息（UE发送给MME的）。通过RRC信令来AS安全建立过程的描述和RRC消息在控制面、IP数据包在用户面怎么传输在3.1和3.2节分别阐述。</p>
-<h2 id="3-1-AS安全建立"><a href="#3-1-AS安全建立" class="headerlink" title="3.1 AS安全建立"></a>3.1 AS安全建立</h2><p>（1）、Security mode command消息的传送<br>图9和图10描述了在AS建立过程中Security mode command消息是怎样传输的。首先，在图9中显示eNB怎样生成AS安全秘钥，并传输Security mode command消息给UE。K-eNB（AS安全基本秘钥）是从K-ASME计算出的，然后eNB从K-eNB中计算出AS安全秘钥。因为K-ASME不会传送到eNB，所以MME从K-ASME计算出K-eNB，然后传输给eNB，接着从传递的K-eNB中计算出AS安全秘钥。<br>1和2展示了LTE鉴权过程。</p>
-<p><img src="http://img.blog.csdn.net/20150912131606012" alt="这里写图片描述"></p>
-<p>1、【MME】计算出K-eNB<br>MME使用秘钥生成函数KDF用K-ASME和UL NAS Count计算出K-eNB。</p>
-<p>2、【eNB&lt;-MME】发送K-eNB<br>MME作为对attach Request的响应发送attach accept消息给UE。这个NAS消息时通过initial context setup Request消息（这是一个eNB和MME之间的S1信令消息）传输的。消息的参数如下：</p>
-<ul>
-<li>UE安全能力：MME从UE发送的attach Request中的UE网络能力中选择的安全算法。</li>
-<li>Security key：256bit K-eNB</li>
-</ul>
-<p>3、【eNB】选择安全算法<br>eNB根据从MME接收到的initial context setup Request消息中包含的UE安全能力选择加密和完整性保护算法应用于RRc消息和IP数据包。图9展示了选择EEA1作为加密算法，选择EIA1作为完整性保护算法。</p>
-<p>4、【eNB】产生AS安全秘钥<br>eNB使用算法ID和选择的安全算法的算法分辨器从K-eNB中衍生出K-RRCint、K-RRCenc、K-UPenc。<br><img src="http://img.blog.csdn.net/20150912132816872" alt="这里写图片描述"></p>
-<p>5、【eNB】为完整性保护产生MAC-I<br>eNB生成Security Mode Command消息发送给ＵＥ，并使用ＥＩＡ算法和K-RRCint计算出MAC-I。图3是展示了MAC-I是怎么生成的。<br>参数说明：</p>
-<ul>
-<li>Count：32bit下行PDCP计数</li>
-<li>Message：RRC消息，在这里是Security Mode Command</li>
-<li>Direction：1bit表示传输的方向，0是上行，1是下行</li>
-<li>Bearer：5bit的承载ID</li>
-<li>K-RRCinc：128bit的NAS完整性秘钥（此处原文有误）</li>
-</ul>
-<p>6、[UE&lt;-eNB]发送Security mode command消息<br>eNB把计算出来的MAC-I包裹在Security mode command消息中发送给ＵＥ。这个消息时完整性保护而没有加密的。<br>消息参数有以下几个：</p>
-<ul>
-<li>AS加密算法：由eNB选择的AS加密算法，这里为EEA1</li>
-<li>AS完整性算法：由eNB选择的AS完整性算法，这里为EIA1</li>
-</ul>
-<p>图10展示了UE怎么从Security mode command消息中获得AS秘钥并用于消息的完整性检查。</p>
-<p><img src="http://img.blog.csdn.net/20150912133540763" alt="这里写图片描述"></p>
-<p>7、[UE]识别安全算法：EEA1、EIA1<br>UE从接收到的Security mode command消息中识别出eNB选择的AS安全算法和完整性保护算法，图10是选择EEA1和EIA1的实例。</p>
-<p>8、[UE]产生AS安全秘钥<br>UE并使用算法ID和算法分辨器从K-eNB中计算出K-RRCinc和K-RRCenc和K-UPenc。</p>
-<p>9、[UE]检查Security mode command消息的完整性<br>UE通过使用K-RRCint来验证包裹在消息中的MAC-I来检查Security mode command消息的完整性。UE通过比较由自己计算出来的XMAC-I和由eNB计算出来MAC-I是否匹配来验证这个消息的完整性。如果匹配，它表示Security mode command消息是没有在途中被篡改的。图4是XMAC-I计算的过程。</p>
-<p>（2）、Security mode complete消息的传输<br>图11展示了Security mode complete消息在AS安全建立过程中是怎么传输的。UE通过发送Security mode complete消息给MME来通知MME在UE中生成了和MME中相同的AS安全秘钥，并且Security mode command消息完整性验证通过。Security mode complete消息传输是加密和完整性保护的。</p>
-<p><img src="http://img.blog.csdn.net/20150912134308354" alt="这里写图片描述"></p>
-<p>10、[UE]产生NAS-MAC用于完整性保护<br>UE使用EIA算法计算出MAC-I和K-RRCint。图3是MAC-I是怎么使用下面的EIA参数生成的</p>
-<p>11、[UE-&gt;MME]发送Security Mode complete消息<br>UE把计算得到的MAC-I包裹在Security Mode complete消息中，并发送给eNB。在这里这个消息是加密和完整性保护的。</p>
-<p>12、[MME]验证Security Mode complete消息的完整性<br>MME通过验证包含在消息中的MAC-I来检查Security Mode complete的完整性。eNB使用在Security Mode complete消息中选择的EIA1算法和K-RRCint来计算出XMAC-I。eNB通过检查自己计算出来的XMAC-I和从UE计算出来的MAC-I是否匹配来验证这个消息的完整性。如果匹配，它表示Security Mode complete消息在传输过程中没有被篡改。</p>
-<h2 id="3-2-AS安全建立后"><a href="#3-2-AS安全建立后" class="headerlink" title="3.2 AS安全建立后"></a>3.2 AS安全建立后</h2><p>一旦AS安全建立完成，在随后所有的UE和eNB之间传输的RRC消息都是在发送之前加密和完整性保护的，所有的IP数据包也是加密的。图12显示了在AS安全建立之后，ＵＥ和eNB之间的RRC消息和IP数据包是怎么传送的。</p>
-<p><img src="http://img.blog.csdn.net/20150912134908008" alt="这里写图片描述"></p>
-<p>当RRC消息发送之前，不像NAS消息，它会首先完整性保护然后加密发送。原NAS消息首先包含K-RRCint计算出来的MAC-I做完整性保护接着使用K-RRCenc加密，所有这些消息都是加密和完整性保护传送的。</p>
-<p>当接收到RRC消息，首先做解密，然后完整性验证，和发送时相反的过程。首先使用K-RRCenc解密获得完整性保护的RRC消息，然后对比使用K-NASint计算出来的XNAS-MAC和接收到的NAS-MAC对比来检查NAS消息的完整性，确认得到原始的NAS消息。</p>
-<p><img src="http://img.blog.csdn.net/20150912135318659" alt="这里写图片描述"></p>
-<p>用户面数据是加密的但是不进行完整性保护。用户数据包在发送端使用K-UPenc进行加密，在接收端使用K-UPenc进行解密获得原始的用户数据包。</p>
-<h1 id="IV-Security-Context"><a href="#IV-Security-Context" class="headerlink" title="IV. Security Context"></a>IV. Security Context</h1><p>到目前为止，我们已经讨论完了LTE鉴权过程，NAS安全和AS安全过程。在这些过程中和安全相关的数据会在EPS实体中设置，这些数据叫EPS安全上下文，可以使NAS安全上文也可以是AS安全上下文。NAS安全上下文可以有两种类型：”full native” or “partial native”。在EPS AKA执行之后，第一个SMC进行之前的NAS安全上下文叫”partial native”。一个”partial native”的EPS NAS安全上下文在SMC过程完成之后转变为”full native” 。表2列出了这些EPS安全上下文。<br><img src="http://img.blog.csdn.net/20150912140011568" alt="这里写图片描述"></p>
-<p>图13显示了在EPS AKA和NAS/AS安全建立之后存储在EPS实体中的LTE安全数据。它显示了这些每一个安全数据是如何生成的，并且数据传输流指示从哪个数据开始安全数据开始传输。</p>
-<p><img src="http://img.blog.csdn.net/20150912140337600" alt="这里写图片描述"></p>
-<h1 id="V-Closing"><a href="#V-Closing" class="headerlink" title="V. Closing"></a>V. Closing</h1><p>LTE安全文档已经覆盖包括基于EPS AKA的LTE鉴权，和NAS、AS安全建立过程、在EPS实体中安全数据等的LTE安全技术。我们还学会了LTE安全秘钥的层次结构，他们是分离的，用于不同的目的。顶级的秘钥是K（LTE秘钥），它是一个固定的值存储在USIM和HSS/AuC中。从K，衍生出了CK、IK，然后从CK、IK衍生出K-ASME。NAS秘钥和K-eNB从K-ASME中衍生。从K-eNB又衍生出了AS安全秘钥。我们还发现从UE、eNB、MME衍生的秘钥取决于他们是用于NAS层还是AS，是用于控制面还是用户面，是用于加密还是完整性保护，或者是使用哪一个种算法。表3列出了所有的LTE安全秘钥。</p>
-<p><img src="http://img.blog.csdn.net/20150912141013742" alt="这里写图片描述"></p>
-<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p>[1] Netmanias Technical Document, “LTE Security I: LTE Security Concept and LTE Authentication”, July<br>2013, <a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5902" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5902</a><br>[2] 3GPP TS 33.401, “3GPP System Architecture Evolution (SAE); Security architecture”.<br>[3] 3GPP TS 24.301, “Non-Access-Stratum (NAS) protocol for Evolved Packet System (EPS); Stage 3”.<br>[4] NMC Consulting Group Confidential Internal Report, “E2E LTE Network Design”, August 2010.</p>
-
-          
+          原文链接：http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5903
+I. Introduction在LTE安全的第一个文档，我们介绍了基于EPS AKA过程的LTE鉴权，并在鉴权结束后，UE和MME之间共享了相同的K-ASME。在
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/03/6-LTE-Security-II-NAS-and-AS-Security/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1040,7 +818,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sun-day">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1130,64 +908,16 @@
       
         
           
-            <p>原文链接：<a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5902" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5902</a></p>
-<h1 id="I-Introduction"><a href="#I-Introduction" class="headerlink" title="I. Introduction"></a>I. Introduction</h1><p>实际中的无线通信，因为数据是原始的发送和接收的，这些数据可能被接收，并被意想不到的用户非法使用，存在窃听和篡改的风险。用户的位置和移动轨迹也是可以通过追踪用户连接的小区很容易的跟踪。这将会引起隐私侵权。移动通信提供安全特性来保证在空中接口传输的数据避免被篡改，且阻止意想不到的用户非授权的接入来接收数据，并保护用户的隐私。</p>
-<p>LTE安全文档描述LTE网络提供的基本安全特征，包括LTE鉴权，NAS安全，AS安全。LTE鉴权是判定试图接入网络的用户是否是合法的签约用户。NAS安全和AS安全是在NAS和AS级别上在LTE空中接口上传输的数据确保能安全地传送。</p>
-<p>LTE安全文档包含两个部分，part I II。第一个部分主要介绍LTE安全的概念和LTE鉴权的详细过程，第二部分主要介绍NAS和AS安全建立过程。</p>
-<p>第一部分组成如下：在第二章，将介绍这两个文档的范围和概述，第三张介绍LTE鉴权过程，第四章总结LTE鉴权和LTE鉴权相关的秘钥。</p>
-<h1 id="II-LTE-Security-Concept"><a href="#II-LTE-Security-Concept" class="headerlink" title="II. LTE Security Concept"></a>II. LTE Security Concept</h1><h2 id="2-1-LTE安全的范围和概念"><a href="#2-1-LTE安全的范围和概念" class="headerlink" title="2.1 LTE安全的范围和概念"></a>2.1 LTE安全的范围和概念</h2><p>图1展示了LTE安全文档的范围和概念。这些文档的将包含以下三个区域。<br>1、LTE鉴权：在UE和网络之间执行相互的鉴权。<br>2、NAS安全：在UE和MME之间执行完整性保护验证和NAS信令的加密（加密和解密）<br>3、AS安全，在UE和eNB之间执行完整性保护验证和RRC信令消息的加密，执行用户数据的加密。<br><img src="http://img.blog.csdn.net/20150911150356580" alt="这里写图片描述"></p>
-<h3 id="LTE鉴权"><a href="#LTE鉴权" class="headerlink" title="LTE鉴权"></a>LTE鉴权</h3><p>在移动网络中，鉴权是判定试图接入网络的用户是否是合法的签约用户。在多种多样的可用的鉴权过程中，在LTE网络中，在用户和网络之间使用EPS AKA（Authentication and Key Agreement鉴权和秘钥协商）过程来相互鉴权。</p>
-<p>EPS AKA过程是由两步组成，第一步，HSS生成EPS鉴权向量（RAND, AUTN, XRES, K-ASME），并把他们发送给MME。第二步，MME选择EPS鉴权向量中的一个，并使用它来双向鉴权，并相互共享这同一个鉴权秘钥-KASME。相互鉴权是网络和UE相关鉴权的过程。在LTE网络，因为当生成鉴权向量时用户服务网络的ID是需要的，所以网络的鉴权是由用户来执行，用户的鉴权是由网络来执行。</p>
-<p>ASME（Access Security Management Entity 接入安全管理实体）是一个从HSS接收顶层秘钥的实体，用在接入网络中。在EPS中，MME充当ASME的功能，K-ASME作为一个顶层秘钥在接入网络中使用。MME代表HSS使用K-ASME和UE实施相互鉴权。一旦相互鉴权，UE和MME共享K-ASME作为鉴权秘钥。</p>
-<p>为了避免在无线链路上数据的窃听和篡改，K-ASME不是通过E-UTRAN传输给UE。而是，MME传输鉴权向量的部分内容给UE，使用这些内容来鉴权网络，并像HSS那样生成K-ASME。</p>
-<h3 id="NAS安全"><a href="#NAS安全" class="headerlink" title="NAS安全"></a>NAS安全</h3><p>NAS安全，是设计用来在无线链路UE和MME之间安全地传输信令信息的，用来执行NAS信令消息的完整性检查和加密。不懂得秘钥用于完整性检查和加密。完整性检查是必须的，而加密是可选的功能。NAS安全秘钥，例如，完整性秘钥（K-NASint）和加密秘钥（K-NASenc）。</p>
-<h3 id="AS安全"><a href="#AS安全" class="headerlink" title="AS安全"></a>AS安全</h3><p>AS安全是用来确保在无线链路上UE和eNB之间数据传输的安全。在控制面对RRC信令消息实施完整性检查和加密，在用户面对IP数据包仅执行加密。不同的秘钥用于RRC信令消息的完整性检查/加密和IP数据包的加密。完整性保护是必须的，而加密是可选的功能。<br>AS安全秘钥，例如，K-RRCint，K-RRCenc和K-UPenc，是由UE和eNB从K-eNB中衍生的，K-RRCint和K-RRCenc是用于控制面数据的完整性检查和加密，K-UPenc用于用户面数据的加密。完整性检查和加密是在PDCP层执行的。</p>
-<p>UE可以从K-ASME中衍生出K-eNB，因为K-ASME是不传输到eNB的，而是由MME从K-ASME中衍生出K-eNB，然后传递给eNB。</p>
-<h2 id="2-2-LTE安全过程的概述"><a href="#2-2-LTE安全过程的概述" class="headerlink" title="2.2 LTE安全过程的概述"></a>2.2 LTE安全过程的概述</h2><p>图2展示了LTE安全过程的概述。<img src="http://img.blog.csdn.net/20150911190320082" alt="这里写图片描述">1显示了LTE鉴权过程，<img src="http://img.blog.csdn.net/20150911190346937" alt="这里写图片描述"> <img src="http://img.blog.csdn.net/20150911190402290" alt="这里写图片描述">2和3展示了相应的NAS和AS安全建立过程。下面对每一个过程的简要描述。然后在第三章和第二篇文档中详细介绍每一个过程。</p>
-<p><img src="http://img.blog.csdn.net/20150911190607256" alt="这里写图片描述"></p>
-<h3 id="1、LTE鉴权"><a href="#1、LTE鉴权" class="headerlink" title="1、LTE鉴权"></a>1、LTE鉴权</h3><p>当用户请求接入LTE网络时，在用户和网络之间使用EPS KAK过程来进行相互鉴权。MME一旦接收到了这样的请求，使用用户的IMSI来标识用户，并向HSS请求鉴权向量（AV）。HSS使用EPS AKA算法生成AV，AV={RAND, XRES, AUTN-HSS, K-ASME}，并转发给MME。</p>
-<p>在MME存储AV之后，MME从中选择一个，使用这个AV来和UE执行相互鉴权。MME会转发RAND和AUTH-HSS给UE，然后UE使用EPS AKA算法计算出RES，AUTN-UE和K-ASME。UE比较自己的AUTN-UE和从MME接收到的AUTH-HSS来执行网络鉴权。一旦鉴权完成，发送RES给MME，MME比较从HSS接收到的XRES和从UE接收到的RES来执行用户鉴权。如果ＵＥ和网络都鉴权了，则他们就共享了相同的Ｋ－ＡＳＭＥ（尽管Ｋ－ＡＳＭＥ不在UE和MME之间传送）。</p>
-<h3 id="2、NAS安全"><a href="#2、NAS安全" class="headerlink" title="2、NAS安全"></a>2、NAS安全</h3><p>一旦UE和MME相互鉴权完毕并具有相同的秘钥K-ASME，NAS安全过程开始。在这个过程中，当传送NAS信令消息时，NAS安全秘钥从K-ASME中衍生，用于这些NAS消息的安全传送。这个过程包含NAS消息的一个来回（Security Mode Command 和 Security Mode Complete消息），并在MME传送Security Mode Command 消息给UE是开始。</p>
-<p>第一，MME选择一个NAS安全算法（Alg-ID：算法ID），并使用它们来从K-ASME来产生K-NASinc和K-NASenc。接着MME把K-NASinc算法用于Security Mode Command消息产生一个NAS消息鉴权码（NAS-MAC：Message Authentication Code for NAS for Integrity)。MME接着传输包含选择的NAS安全算法和NAS-MAC的Security Mode Command消息给UE。因为UE并不知道选择的加密算法，所以这个消息是完整性保护的，但是没有加密。</p>
-<p>一旦接收到了Security Mode Command消息，UE使用MME选择的NAS完整性算法来验证完整性，并使用NAS完整性/加密算法从K-ASME中产生NAS安全秘钥（K-NASinc，K-NASenc）。接着使用K-NASenc加密Security Command Complete消息，并使用K-NASinc生成消息鉴权码NAS-MAC用于加密的消息。现在UE可以传输包含NAS-MAC的加密和完整性保护的消息到MME了。</p>
-<p>一旦NAS安全建立起来，在UE和MME之间的NAS信令都是通过NAS安全秘钥加密和完整性保护的，在无线链路上安全的传输。</p>
-<h3 id="3、AS-安全"><a href="#3、AS-安全" class="headerlink" title="3、AS 安全"></a>3、AS 安全</h3><p>在NAS安全建立完成之后，在UE和eNB之间AS安全建立过程开始。在这个过程中，当传输RRC信令消息和IP数据包时，使用从K-eNB产生的AS安全秘钥用于这些数据的安全传输。这个过程包括RRC信令消息的一个来回（Security Mode Command 和 Security Mode Complete 消息），并且这个过程在eNB传输Security Mode Command消息给UE时开始。</p>
-<p>第一，MME从K-ASME中计算出K-eNB并传输给eNB，eNB使用K-eNB来执行AS安全过程。eNB选择AS安全算法（Alg-ID：算法ID）并使用这个算法ID从K-eNB中计算出完整性秘钥（K-RRCinc）和加密秘钥（K-RRCenc）用于RRC信令消息，计算出加密秘钥（K-UPenc）用于用户面。接着，应用K-RRCint到Security Mode Command消息产生一个消息鉴权码（MAC-I，Message Authentication Code for Integrity）。现在eNB开始传输包含选择的AS安全算法和MAC-I的Security Mode Command消息到UE。</p>
-<p>一旦从eNB接收到Security Mode Command消息，UE使用eNB选择的AS完整性算法验证完整性，并使用AS完整性/加密算法来计算出AS加密秘钥 (K-RRCint, K-RRCenc and K-UPenc)。接着UE使用RRC完整性秘钥产生一个消息鉴权码MAC-I给Security Mode Complete 消息，接着转发包含MAC-I的这条消息给eNB。</p>
-<p>当eNB使用AS安全秘钥成功的验证了接收到的Security Mode Complete 消息的完整性，AS安全建立过程完成的。</p>
-<p>在AS安全建立之后，UE和eNB之间的RRC信令消息都是使用AS安全秘钥加密的和完整性保护的，在空中链路上传输的用户IP数据包是加密的。</p>
-<h1 id="III-LTE-Authentication-Procedure"><a href="#III-LTE-Authentication-Procedure" class="headerlink" title="III. LTE Authentication Procedure"></a>III. LTE Authentication Procedure</h1><p>在第二章简要介绍了LTE鉴权过程，接下来将详细介绍。图3是当UE附着到LTE网络时执行基于EPS AKA的LTE鉴权过程。在USIM和HSS/AuC上存储着固定的秘钥（LTE 秘钥K，IMSI）。当UE被生产的时候，在USIM卡上就存储了LTE K和IMSI，并且当用户开始签约LTE网络时在HSS/AuC中提供。</p>
-<p><img src="http://img.blog.csdn.net/20150912084712477" alt="这里写图片描述"></p>
-<h2 id="3-1-由UE请求的鉴权"><a href="#3-1-由UE请求的鉴权" class="headerlink" title="3.1 由UE请求的鉴权"></a>3.1 由UE请求的鉴权</h2><p>1、[UE -&gt; MME] UE请求对网络的鉴权</p>
-<p>当UE在初始附着时试图接入网络，UE传送Attach Request消息给MME，这个消息触发了EPS AKA过程。在Attach Request消息中包含(IMSI, UE网络能力, KSIA-SME=7)参数。<br>其中</p>
-<ul>
-<li>IMSI：（ International Mobile Subscriber Identity），是和用户关联的唯一的ID。</li>
-<li>UE网络能力：UE可用的安全算法。</li>
-<li>KSIA-SME=7：指示UE没有安全秘钥。</li>
-</ul>
-<p>UE网络能力通知MME 连接到EPS的UE具有什么样的能力，并指示UE支持的NAS和AS算法，比如EEA和EIA（EPS Encryption Algorithms 和 EPS Integrity Algorithms）。他们是用1bit的值来标识是否存在，（比如EEA0=0，EEA1=1……EIA1=1，EIA2=1….），表1列出了UE网络能力信息。</p>
-<p><img src="http://img.blog.csdn.net/20150912085939485" alt="这里写图片描述"><br>KSI-ASME标识UE和MME中的K-ASME，由3bit组成，从000到111（0-7），7是标识在UE中没有可用的K-ASME。</p>
-<h2 id="3-2-在MME和HSS之间鉴权数据的交换"><a href="#3-2-在MME和HSS之间鉴权数据的交换" class="headerlink" title="3.2 在MME和HSS之间鉴权数据的交换"></a>3.2 在MME和HSS之间鉴权数据的交换</h2><p>2、[MME -&gt; HSS]MME向HSS请求鉴权数据</p>
-<p>MME识别到UE没有可用的K-ASME，通过向HSS发送Authentication Information Request消息来发起LTE鉴权过程获取新的鉴权数据。Authentication Information Request消息包含(IMSI, SN ID, n, Network Type)参数。<br>其中</p>
-<ul>
-<li>IMSI：和用户关联的唯一的ID。</li>
-<li>SN ID（Serving Network ID服务网络ID）：是指用户接入的网络，由PLMN ID组成。</li>
-<li>n（鉴权向量的个数）：MME请求鉴权向量的个数</li>
-<li>Network Type：UE接入网络的类型（在此是E-UTRAN）。</li>
-</ul>
-<p>一旦从MME接收到Authentication Information Request消息，HSS生成RAND和SQN，并使用EPS AKA算法用LTE K，SQN，RAND计算出XRES，AUTN，CK，IK。然后使用KDF（Key Derivation Function秘钥派生函数）用CK，IK，SQN和SN ID（PLMN）计算出接入网络的顶级秘钥（K-ASME），然后传输给MME。KDF是一个单向函数。因为在生成K-ASME时需要SN ID，所以当服务网络发生变化时K-ASME需要重新生成。在K-ASME生成后，HSS形成鉴权向量组AV-i=（RAND-i，AUTN-i，XRES-i，K-ASME-i），i=0….n-1.</p>
-<p>3、[MME &lt;- HSS]HSS响应鉴权数据的请求</p>
-<p>HSS应MME请求生成需要AV，然后发送Authentication Information Answer (AVs)消息给MME。</p>
-<h2 id="3-3-UE和MME之间的相互鉴权"><a href="#3-3-UE和MME之间的相互鉴权" class="headerlink" title="3.3 UE和MME之间的相互鉴权"></a>3.3 UE和MME之间的相互鉴权</h2><p>MME存储从HSS接收到的AV，然后在UE的LTE鉴权中选择其中一个使用。在图3中，MME选择第i个AV。K-ASME是MME基本的秘钥，在接入网络中作为一个顶级的秘钥起作用。它只存在于EPC中，不会通过E-UTRAN传送给UE，因为那样传输是不安全的。MME分配KSI-ASME（K-ASME的索引）代替K-ASME传送给ＵＥ，因此UE和MME都能使用KSI-ASME来代替K-ASME（在图3中，KSI-ASME=1）。</p>
-<p>4、[UE&lt;-MME]MME请求对用户鉴权<br>MME保留在AV中的K-ASME-i和XRES-i，把KSI-ASME-i代替K-ASME-i，RAND-i，AUTN-i包含在Authentication Request消息中传递给ＵＥ。XRES-i会在待会鉴权用户的时候用到。</p>
-<p>UE一旦从MME接收到Authentication Request消息，传递RAND-i和AUTN-i给USIM，USIM使用和HSS相同的EPS AKA算法用存储的LTE K和接收到的RAND-i和HSS生成的SQN（SQN隐藏在AUTN中）计算出RES，AUTN-UE，CK，IK。UE比较通过EPS AKA算法产生AUTN-UE和从MME接收到的AUTN来鉴权LTE网络。</p>
-<p>5、[UE-&gt;MME]UE响应对用户的鉴权<br>一旦UE完成网络鉴权，UE发送包含由EPS AKA算法生成RES的Authentication Response消息给MME。如果使用AUTN网络鉴权失败，UE包含失败原因的Authentication Failure消息给MME。</p>
-<p>当MME接收到从UE的Authentication Response消息，将对比由UE生成的RES和从HSS接收到的AV中的XRES-i来鉴权用户。</p>
-<p>在完成网络鉴权之后，USIM卡传输CK，IK给UE。UE使用KDF函数用CK，IK，SQN，SN ID生成K-ASME，并使用从MME接收到的KSI-ASME作为它的索引存储。然后，在UE和MME之间NAS安全监理时用KSI-ASME代替K-ASME。</p>
-<h1 id="IV-Closing"><a href="#IV-Closing" class="headerlink" title="IV. Closing"></a>IV. Closing</h1><p>上面，我们已经讨论了LTE鉴权过程。LTE鉴权是基于EPS AKA过程的用户和网络之间的相互鉴权。在服务网络中的MME和UE代替HSS来执行相互鉴权，鉴权的结果是在UE和MME之间具有相同的K-ASME。在表2中总结了LTE鉴权相关的秘钥。在第二个文档将基于K-ASME来介绍NAS和AS安全。<br><img src="http://img.blog.csdn.net/20150912102644835" alt="这里写图片描述"></p>
-<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p>[1] Netmanias Technical Document, “LTE Security II: NAS and AS Security”, August 2013,<br><a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5903" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5903</a>.<br>[2] 3GPP TS 24.301, “Non-Access-Stratum (NAS) protocol for Evolved Packet System (EPS); Stage 3”.<br>[3] 3GPP TS 33.401, “3GPP System Architecture Evolution (SAE); Security architecture”.<br>[4] NMC Consulting Group Confidential Internal Report, “E2E LTE Network Design”, August 2010.</p>
-
-          
+          原文链接：http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5902
+I. Introduction实际中的无线通信，因为数据是原始的发送和接收的，这些数据可能被接收，并被意想不到的用户非法使用，存在窃听和篡改的风险。用户的位置和移
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/03/5-LTE-Security-I-LTE-Security-Concept-and-LTE-Authentication/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1248,7 +978,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sun-day">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1338,38 +1068,16 @@
       
         
           
-            <p>原文链接：<a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5907" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5907</a></p>
-<h1 id="I-Introduction"><a href="#I-Introduction" class="headerlink" title="I. Introduction"></a>I. Introduction</h1><p>在LTE Identification I II中我们学习了UE ID，ME ID，NE ID和Location ID。这篇文档将学习和用户数据传输有关的EPS会话/承载ID。端到端的会话包含应用层实体不在本篇文档讨论范围，仅仅包含提供用户用于PDN连接的EPS会话。在表1表示这篇文档讨论的ID。<br><img src="http://img.blog.csdn.net/20150910140828600" alt="这里写图片描述"><br>我们在LTE identification I II中学习了不同的UE，ME，NE，有多个EPS会话ID和承载ID在一个UE中使用。这意味着，在一个UE中可以同时建立不止一个EPS会话和承载，所以需要ID来标识他们。</p>
-<h1 id="II-EPS-Session-and-EPS-Bearer-Overview"><a href="#II-EPS-Session-and-EPS-Bearer-Overview" class="headerlink" title="II. EPS Session and EPS Bearer: Overview"></a>II. EPS Session and EPS Bearer: Overview</h1><p>在我们讨论和EPS会话和承载相关的ID之前，我们需要了解一下EPS会话和承载是什么，并且描述一下这些ID之间的关系。<br>图1显示了一个用户的EPS会话和承载，并在下面标识了ID。<br><img src="http://img.blog.csdn.net/20150910141940302" alt="这里写图片描述"></p>
-<h2 id="2-1-EPS会话"><a href="#2-1-EPS会话" class="headerlink" title="2.1 EPS会话"></a>2.1 EPS会话</h2><p>UE和PDN之间的IP连接叫PDN连接或EPS会话。每一个PDN连接是由UE的IP地址和PDN ID（也叫APN）描述的。它有不止一个EPS承载来传输用户数据（IP数据包），并应用从PCRF到EPS承载获得的服务质量（QoS）策略。最小最基本的承载是EPS会话的一个默认EPS承载。</p>
-<p>一旦EPS会话建立意味着1）已经选择一个用户使用服务的PDN（通过用户的输入或者基于HSS提供的签约信息），2）已经为用户分配了用于PDN内的IP地址，3）已经选择了用于用户IP数据包的策略规则（QoS和计费策略），4）在LTE网络上传送IP数据包的默认EPS承载已经建立了。通过已经建立的这个EPS承载，IP数据报可以通过运营商提供的策略在用户和PDN之间相关交换。<br>会话的管理和操作，包括PCRF会在其他文档讨论，PDN ID（APN）将会作为和EPS会话相关的一个ID在本文档中讨论。</p>
-<h2 id="2-2-EPS承载"><a href="#2-2-EPS承载" class="headerlink" title="2.2 EPS承载"></a>2.2 EPS承载</h2><p>EPS承载负责传送和处理标记了UE IP地址的IP数据流，并在UE和PDN之间传输（UE – P-GW – PDN）。另一个方面，一个EPS承载就是LTE网络上传输IP数据包的管道，例如，在UE和PGW之间(UE – eNB – SGW - P-GW)。一个UE可以同时又多个EPS承载。不同EPS承载使用MME分配的EPS bearer ID来标识。<br>如图1所示，一个EPS承载是由以下三个承载串接起来的（DRB，S1承载和S5承载）:</p>
-<ul>
-<li>[UE] - [eNB]: 无线数据承载 (DRB)，EPS承载在LTE-Uu接口上建立。用户数据（IP数据包）通过DRB来传输。不同的DRB使用eNB分配的不同的DRB ID来标识。</li>
-<li>[eNB] - [S-GW]: S1承载，EPS承载在S1-U接口上建立。用户数据通过GTP隧道传输。不同的S1承载使用由GTP隧道端点（(eNB and S-GW)）分配的TEID来标识。</li>
-<li>[S-GW] - [P-GW]: S5承载，EPS承载在S5接口上建立。用户数据通过GTP隧道传输。不同的S5承载使用由GTP隧道端点（(S-GW and P-GW) ）分配的TEID来标识。</li>
-</ul>
-<p>E-RAB是有UE和SGW两个端点的承载，包含DRB和S1承载。E-RAB是由DRB和S1承载串接，并在从UE到SGW连接(UE –eNB – S-GW)。不同的E-RAB使用由MME分配的E-RAB ID来标识。DRB ID和E-RAB ID是和EPS承载ID一对一映射的。</p>
-<h2 id="2-3-EPS承载的类型"><a href="#2-3-EPS承载的类型" class="headerlink" title="2.3 EPS承载的类型"></a>2.3 EPS承载的类型</h2><p>之前我们描述了EPS相关的承载ID，现在我们看看EPS承载的不同类型和他们是怎么工作的。图2描述了EPS承载的不同类型：默认承载和专用承载。每一个PDN必须有一个默认的EPS承载，但可以没有或者有多个专用ESP承载。<br><img src="http://img.blog.csdn.net/20150910152738149" alt="这里写图片描述"></p>
-<p>LTE网络是全IP网络，提供给用户永久在线的IP连接。这就意味着，一旦UE使用初始附着到网络分配的IP地址连接到PDN，在LTE网络上在默认EPS承载建立之后，IP连接将一直保持连接，直到UE从LTE网络去附着（比如，PDN连接终止了）。即使用户没有数据要发送，这个默认的EPS承载也是一直保持激活，并准备着可能到达的用户数据。</p>
-<p>如果默认的EPS承载不能足够满足QoS，则需要建立额外的EPS承载。建立的额外EPS承载叫做专用EPS承载，并且根据用户或者网络的需要可以建立多个专用承载。当没有用户数据，这些专用EPS承载可以被移除，但默认的EPS承载不会被移除，一直保持用户和网络之间的连接，直到用户从网络去附着。专用EPS承载是和默认EPS承载联接在一起的。这个联接的承载是用LBI（Linked EPS Bearer Identity）标识，指示他们都联接到同一个默认EPS承载。</p>
-<p>UE发送或者UE接收的IP数据都是在LTE网络上根据QoS等级通过适当的EPS承载来传输。上行IP数据从UE一直映射到EPS承载，而下行IP数据是从PGW一直映射到EPS承载。</p>
-<p>根据2.2和2.3节讨论的，和EPS承载相关的ID有EPS Bearer ID，E-RAB ID，DRB，TEID，LBI。第三章将详细介绍这些EPS会话和承载ID。</p>
-<h1 id="III-Identifiers-for-EPS-Session-Bearer-Session-Bearer-IDs"><a href="#III-Identifiers-for-EPS-Session-Bearer-Session-Bearer-IDs" class="headerlink" title="III. Identifiers for EPS Session/Bearer (Session/Bearer IDs)"></a>III. Identifiers for EPS Session/Bearer (Session/Bearer IDs)</h1><h2 id="3-1-识别PDN的ID：PDN-ID-APN"><a href="#3-1-识别PDN的ID：PDN-ID-APN" class="headerlink" title="3.1 识别PDN的ID：PDN ID(APN)"></a>3.1 识别PDN的ID：PDN ID(APN)</h2><p>PDN使用PDN ID（APN）来标识。一个APN关联一个用户想连接PDN的接入点。在图3是APN和格式。APN是由网络ID和运营商ID组成。网络ID用来识别PDN，像因特网、企业VPN，或者用来识别PDN提供的服务，像IMS。</p>
-<p>APN是在用户签约时由HSS作为签约信息提供的。一旦UE初始附着，一个默认的APN从HSS下载到MME。MME首先基于APN选择一个PDN连接UE，接着通过UE连接到的PDN选择PGW。在图3中，MME基于APN1选择PDN1，然后选择PGW 1建立PDN1连接。<br><img src="http://img.blog.csdn.net/20150910165208648" alt="这里写图片描述"></p>
-<h2 id="3-2-在EPS网络标识用户数据传输的ID：EPS承载ID"><a href="#3-2-在EPS网络标识用户数据传输的ID：EPS承载ID" class="headerlink" title="3.2 在EPS网络标识用户数据传输的ID：EPS承载ID"></a>3.2 在EPS网络标识用户数据传输的ID：EPS承载ID</h2><p>EPS承载是UE和PGW之间虚拟连接集合，用来LTE网络上传输用户数据。EPS承载中不同的承载是用4bit的EPS承载ID标识的。表2是EPS承载ID值。一个UE可以最多11个EPS承载，他们的ID值从5-15。<br><img src="http://img.blog.csdn.net/20150910165645110" alt="这里写图片描述"></p>
-<p>图4是EPS承载相关的ID和他们是谁分配的。EPS承载ID，不论默认的还是专用的，都是由MME分配的。当UE初始附着到LTE网络，MME从HSS中获得建立默认EPS承载需要的QoS配置文件，并基于接收到的QoS建立起承载。当MME分配EPS承载ID时，发起默认EPS承载建立的过程。<br><img src="http://img.blog.csdn.net/20150910170041493" alt="这里写图片描述"><br>EPS承载的两个端点是UE和PGW。他们都执行数据流过滤（UE过滤上行用户数据流，PGW过滤下行数据流）来通过数据流要发送的哪一个承载来决定。图2是包含五个IP数据流（1-5）的下行用户传输。当IP数据流从PDN到达PGW时，PGW实行数据流过滤来决定IP数据流传输使用哪一个承载，并使用相应的承载来传输。下行EPS承载数据是通过S5承载，S1承载和DRB最终到达UE，并把数据流以IP流的方式传输到上层。为了让这个过程进行，每一个实体都必须对每一个承载映射承载ID，如表3。图5是映射的过程。<br><img src="http://img.blog.csdn.net/20150911082359452" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20150911082407699" alt="这里写图片描述"></p>
-<h2 id="3-3-在UE和EPC之间来识别EPS的ID：E-RAB-ID"><a href="#3-3-在UE和EPC之间来识别EPS的ID：E-RAB-ID" class="headerlink" title="3.3 在UE和EPC之间来识别EPS的ID：E-RAB ID"></a>3.3 在UE和EPC之间来识别EPS的ID：E-RAB ID</h2><p>如图1/4/5所示，E-RAB是UE和SGW之间的一个EPS承载集合，用4bit的E-RAB ID来标识。E-RAB ID是由MME分配，通常和EPS承载ID有相同的值（根据EPS承载的建立），并和EPS承载ID一对一的对应。在EPS承载建立过程中，当MME请求eNB建立E-RAB时，eNB和UE创建DRB，和SGW创建S1承载。</p>
-<p>默认EPS承载使UE一直和网络保持连接。当没有用户数据，UE保持在空闲状态，E-RAB是去激活的，只有S5承载保持存在。但是，只要用户数据到达，E-RAB重建，然后允许传送数据流从UE到PGW。</p>
-<h2 id="3-4-在无线链路上标识EPS承载的ID：DRB-ID"><a href="#3-4-在无线链路上标识EPS承载的ID：DRB-ID" class="headerlink" title="3.4 在无线链路上标识EPS承载的ID：DRB ID"></a>3.4 在无线链路上标识EPS承载的ID：DRB ID</h2><p>如图1/4/5所示，DRB是在UE和eNB之间在无线链路上的一个集合，用4bit的DRB ID来标识。一旦建立EPS承载，DRB ID由eNB分配，并且和EPS承载ID一对一对应。在EPS承载建立过程中，当MME请求eNB建立E-RAB时，eNB分配DRB ID创建DRB来和UE通信，并基于需求的QoS选择合适的逻辑信道配置参数。</p>
-<h2 id="3-5-识别GTP隧道端点的ID：TEID"><a href="#3-5-识别GTP隧道端点的ID：TEID" class="headerlink" title="3.5 识别GTP隧道端点的ID：TEID"></a>3.5 识别GTP隧道端点的ID：TEID</h2><p>S1承载和S5承载，都是EPS承载的一个部分，分别在eNB和SGW之间，在SGW和PGW之间以GTP隧道的方式建立。GTP隧道是以上行和下行两个端点的TEID标识的，TEID是32bit。图4显示S1和S5 GTP隧道上TEID的分配。当EPS承载建立时，对于S5承载，SGW分配DL S5 TEID，PGW分配UL S5 TEID。对于S1承载，SGW分配UL S1 TEID，eNB分配DL S1 TEID。</p>
-<h2 id="3-6-连接默认EPS承载和专用EPS承载的ID：LBI"><a href="#3-6-连接默认EPS承载和专用EPS承载的ID：LBI" class="headerlink" title="3.6 连接默认EPS承载和专用EPS承载的ID：LBI"></a>3.6 连接默认EPS承载和专用EPS承载的ID：LBI</h2><p>如图2所示，一个EPS会话有不止一个EPS承载。默认EPS承载在当EPS会建立时建立，在EPS会话结束时结束。另一方面，专用EPS承载可以在EPS会话建立后随时创建和删除。因为默认承载和专用承载都属于同一个用户的同一个PDN，所以需要一个ID来标识用于同一个PDN的两个不同的承载。这个引入的ID是LBI，默认EPS承载ID用作LBI。</p>
-<p>当默认EPS承载创建时，MME分配一个承载ID，这个ID也作为一个LBI指定。接着，当专用EPS承载创建时，MME分配LBI（和承载ID一起）来标识默认承载。</p>
-<h1 id="IV-Summary"><a href="#IV-Summary" class="headerlink" title="IV. Summary"></a>IV. Summary</h1><p>我们已经表1中分类了EPS会话和承载相关的ID。表4分类和列出他们使用的范围等。表5总结所有的LTE ID。<br><img src="http://img.blog.csdn.net/20150911144201560" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20150911144218481" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20150911144228361" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20150911144244656" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20150911144253609" alt="这里写图片描述"></p>
-<h1 id="V-Closing"><a href="#V-Closing" class="headerlink" title="V. Closing"></a>V. Closing</h1><p>通过LTE identification文档，我们全部介绍了表1中的LTE ID，并且简要的介绍了他们的功能和目的。基于我们经学到的LTE网络架构和LTE identification，我们可以继续讨论高主要的议题。</p>
-<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p>[1] Netmanias Technical Document, “LTE Identification I: UE and ME Identifiers”, August 2013,<br><a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5905" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5905</a><br>[2] Netmanias Technical Document, “LTE Identification II: NE and Location Identifiers”, August 2013,<br><a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5906" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5906</a><br>[3] Netmanias Technology Document, “LTE Network Architecture: Basic”, July 2013,<br><a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5904" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5904</a><br>[4] NMC Consulting Group Confidential Internal Report, “E2E LTE Network Design”, August 2010.</p>
-
-          
+          原文链接：http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5907
+I. Introduction在LTE Identification I II中我们学习了UE ID，ME ID，NE ID和Location ID。这篇文档将学
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/03/4-LTE-Identification-III-EPS-Session-Bearer-Identifiers/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1430,7 +1138,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sun-day">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1520,33 +1228,16 @@
       
         
           
-            <p>原文链接：<a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5906" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5906</a></p>
-<h1 id="I-Introduction"><a href="#I-Introduction" class="headerlink" title="I. Introduction"></a>I. Introduction</h1><p>在之前的文档，LTE identification I介绍了UE和ME的标识。这篇文档，将介绍网络设备（Network Equipment）和Location ID。在这篇文章中被标识的网络设备包括eNB，MME，PGW，都是EPS实体。另外小区（eNB下由一个天线覆盖的区域）和这些网络设备一起讨论。Location ID包括所有标识UE位置的ID。UE在网络中是以TA级别注册的。所以，在这篇文档中TA相关的ID和Location ID一起讨论。</p>
-<p>在第二章和第三章，NE ID和Location ID基于分类分别讨论。在第四章，总结这些ID的共同特征。</p>
-<p>这篇文档设计的ID的范围和类型在图1和表1中展示。如果运营商的策略需要eNB报告UE（属于这个eNB）的位置，在方框中的ID（ECGI，TAI）会从eNB到PCRF传输。</p>
-<p><img src="http://img.blog.csdn.net/20150910110844615" alt="这里写图片描述"></p>
-<p><img src="http://img.blog.csdn.net/20150910110909495" alt="这里写图片描述"></p>
-<h1 id="II-Identifiers-for-Network-Equipment-NE-IDs"><a href="#II-Identifiers-for-Network-Equipment-NE-IDs" class="headerlink" title="II. Identifiers for Network Equipment (NE IDs)"></a>II. Identifiers for Network Equipment (NE IDs)</h1><p>这章描述LTE 网络设备相关的ID。属于NE ID组的ID有MME的GUMMEI和MMEI，eNB的全球eNB ID和eNB ID，小区的ECGI和ECI，PGW的PGW ID。LTE NE ID被分为两类，一类是有PLMN ID，一类是没有PLMN ID，取决于他们是在PLMN内或者是全球的唯一标识。</p>
-<h2 id="2-1-标识MME的ID：-GUMMEI-MMEI-MMEGI-and-MMEC"><a href="#2-1-标识MME的ID：-GUMMEI-MMEI-MMEGI-and-MMEC" class="headerlink" title="2.1 标识MME的ID： GUMMEI, MMEI, MMEGI and MMEC"></a>2.1 标识MME的ID： GUMMEI, MMEI, MMEGI and MMEC</h2><p>MME处于E-UTRAN和EPC之间。它是关键性的控制设备，它通过和HSS交换控制信号允许UE附着到LTE网络上，在HSS中包含UE的用户签约信息。它在核心网侧通过和SGW（或PGW）交换控制信号支持承载的管理，在E-UTRAN侧通过和eNB交换控制信号支持UE的移动性。通常，LTE运营商把多个MME分为一组，把他们作为MME组来操作。MME ID用来标识MME，是当MME安装时由运营商分配的。</p>
-<p>MMEI用来标识在运营商的网络中的MME（比如，A LTE运营商的网络管理人员需要标识在A LTE网络中的MME）。GUMMEI包含PLMN ID和MMEI，是在运营商外部用来识别MME的（比如，当C操作A和B LTE运营商的网络时，C需要标识在A LTE网络中的MME）。MME组是由运营商构建的，MMEI包含MMEGI和MMEC，MMEGI代表MME组，MMEC代表一个组内的特定的MME。图2是MME相关的ID和他们的格式。<br><img src="http://img.blog.csdn.net/20150910114907732" alt="这里写图片描述"></p>
-<h2 id="2-2-标识eNB的ID：eNB-ID和Global-eNB-ID"><a href="#2-2-标识eNB的ID：eNB-ID和Global-eNB-ID" class="headerlink" title="2.2 标识eNB的ID：eNB ID和Global eNB ID"></a>2.2 标识eNB的ID：eNB ID和Global eNB ID</h2><p>eNB ID是用来标识运营商网络内的一个eNB，而Global eNB ID是由PLMN ID和eNB ID组成，是用来在网络外面标识一个eNB。图3是eNB和小区相关的ID和他们格式。为了标识属于一个eNB的小区，通过在eNB ID和Global eNB ID上加上一个小区ID。</p>
-<p>eNB ID和小区ID是在eNB安装时由网络运营商分配的。一旦安装，eNB开始和MME之间建立S1连接的过程。当eNB请求MME 建立S1连接时，eNB报告Global eNB ID/所支持的TA/所支持的CSG（Closed Subscriber Group）。CSG是一种只对一部分签约用户开放的小区，它是由单一或者一些小区组成。MME发送服务的GUMMEI给eNB作为对S1连接建立请求的响应，并提供MME池的信息。<br><img src="http://img.blog.csdn.net/20150910120120794" alt="这里写图片描述"></p>
-<h2 id="2-3-识别PGW的ID：PGW-ID"><a href="#2-3-识别PGW的ID：PGW-ID" class="headerlink" title="2.3 识别PGW的ID：PGW ID"></a>2.3 识别PGW的ID：PGW ID</h2><p>当一个UE尝试附着在LTE 网络上，LTE网络提供给UE PDN连接。为了在UE和PDN之间建立PDN连接，MME需要知道UE连接的PDN和UE附着的PGW。默认的PDN作为签约用户的配置文件在HSS中已经提供了。所有，MME只需要从HSS中下载这些信息就可以了。对于PGW，有两种方式分配固定分配（由网络运营商提供，在HSS中作为签约用户的配置文件）和动态分配（根据运营商提供的PGW选择策略，MME选择一个PGW）。对于固定分配，HSS把PGW ID通知给MME，所以MME可以请求PGW建立PDN连接。</p>
-<p>PGW ID用来标识PGW，可以是IP地址或者FQDN（Fully Qualified Domain name全称域名）格式。图4是依据固定分配策略分配的PGW ID和格式。举例，UE的默认PDN中一个PDN1用于因特网服务，一个PDN2用于语音服务。当UE发起接入到LTE网络，MME向HSS请求UE的签约信息，HSS通知MME 1）UE的默认PDN是PDN1（因特网）和PDN2（IMS），2）PGW连接PDN1的是PGW 1，连接PDN2的是PGW 3。MME接着通过PGW 1在UE和因特网之间建立PDN连接，通过PGW 3在UE和IMS之间建立PDN连接。<br>对于根据动态分配策略的PGW ID分配，MME从DNS中获取PGW IP地址列表，从列表中选择一个，然后请求PGW建立PDN连接。如果PGW列表是由DNS提供，MME按照PGW选择策略从列表中选择一个。</p>
-<p><img src="http://img.blog.csdn.net/20150910122035954" alt="这里写图片描述"></p>
-<h1 id="III-Identifiers-for-UE-Location-Location-IDs"><a href="#III-Identifiers-for-UE-Location-Location-IDs" class="headerlink" title="III. Identifiers for UE Location (Location IDs)"></a>III. Identifiers for UE Location (Location IDs)</h1><p>MME负责管理UE的移动性，所以必须根据UE的位置来更新信息。如果UE在激活状态并且使用服务，UE的位置在LTE网络中是小区级别已知的。如果UE是在空闲状态并没有使用服务时，UE的位置则是TA级别已知的。因为在第二章已经介绍了小区ID，所以这一章只介绍TA ID。</p>
-<h2 id="3-1-识别UE位置的ID：TAC和TAI"><a href="#3-1-识别UE位置的ID：TAC和TAI" class="headerlink" title="3.1 识别UE位置的ID：TAC和TAI"></a>3.1 识别UE位置的ID：TAC和TAI</h2><p>UE在TA级别注册到网络。MME在TA级别定位空闲状态的UE。标识TA的ID是TAC(Tracking Area Code)和TAI (Tracking Area Identifier)。TAC用来在一个运营商网络中标识一个TA。TAI是包括PLMN ID和TAC，用来唯一的标识一个TA。图5是TA ID不同类型和格式。<br><img src="http://img.blog.csdn.net/20150910133007617" alt="这里写图片描述"><br>当UE初始附着到一个LTE网络上，UE通过MME注册到网络上。在初始附着时，MME为UE分配一个TAI列表，并保持对UE位置的更新。UE把自己的新位置通知给MME，并当离开注册的TA时请求TA更新。用这种方法，MME就知道UE当前所待在的TA，并保存UE更新过的TAI列表。如果UE移动到包含在TAI列表中的TA区域，UE不会请求TA更新。但是，如果当前TA的更新周期超时，UE需要把自己当前的TA通知给MME，即使UE待在的TA包含在TAI列表中，让MME知道UE可以接收数据。</p>
-<p>当在LTE网络有到达UE的数据，MME需要知道UE的位置来发送数据。如果UE是在激活状态，MME知道UE待在哪一个小区，因此可以容易地转发数据。但是如果UE在空闲状态，MME不知道UE待在哪一个具体的小区。所以，MME搜索UE最后一次报告的TA。空闲状态下的UE会在特定的周期醒来检查是否有寻呼消息。如果发现被寻呼了（通过检查在寻呼消息中的S-TMSI），它会相应寻呼消息来接收数据。TA区域越大意味着能容易地找到UE的概率越大。但是，在同一时间，TA区域越大意味着需要寻呼更多的eNB，因此需要更多的信令消耗。怎么分配TAI列表是一个优化的问题。</p>
-<p>eNB通过安装时服务开通消息知道它属于哪个MME和TA。eNB中的每一个小区在系统消息中广播自己的小区ID（ECI，ECGI）和TA信息（TAC，TAI）。尝试接入新小区的UE通过监听广播系统消息判断新的小区是否和当前的小区有不同的TA，它的TA需要改变，或者新小区在UE的当前TA。<br>图5展示了分配TA列表的UE的行为。在图中，eNB1是在TA1，eNB在TA2，eNB3和eNB4是在TA3（一个TA可以包括几个小区和eNB）。UE1注册到MME1，被分配了{TAI1, TAI2}的TAI列表。UE2注册到MME2，被分配了{TAI2, TAI3}的TAI列表。在UE1接入到eNB1后变为空闲状态，因为它沿着点线移动（eNB1 -&gt;eNB2-&gt;eNB3）,UE1的行为描述如下（TA在小区级别检测，但，当在同一个eNB下不同小区之间转移不在这里讨论）：</p>
-<ul>
-<li>在eNB1：UE当前的TA是TA1</li>
-<li>当从eNB1移动到eNB2：UE1当尝试接入新小区时，从新小区广播的系统信息知道新小区是TA2。UE检查TAI列表，发现TA2包含在TAI列表，所以，不需要请求TA更新。</li>
-<li>当从eNB2移动到eNB3：UE1当尝试接入新小区时，从新小区广播的系统信息知道新小区是TA3。UE检查TAI列表，发现TA3不包含在TAI列表，所以，需要发送TAU请求消息到MME来更新自己的位置。</li>
-</ul>
-<h1 id="IV-Closing"><a href="#IV-Closing" class="headerlink" title="IV. Closing"></a>IV. Closing</h1><p>我们在之前的文档知道了LTE ID中的UE ID和ME ID，在当前文档学习了NE ID和Location ID。表2总结了这篇文档涉及的ID，其他的ID将会在第三篇文档中介绍。<br><img src="http://img.blog.csdn.net/20150910140152636" alt="这里写图片描述"></p>
-<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p>[1] Netmanias Technical Document, “LTE Identification I: UE and ME Identifiers”, August 2013,<br><a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5905" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5905</a><br>[2] Netmanias Technology Document, “LTE Network Architecture: Basic”, July 2013,<br><a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5904" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5904</a><br>[3] 3GPP TS 23.003, “Numbering, addressing and identification”.<br>[4] NMC Consulting Group Confidential Internal Report, “E2E LTE Network Design”, August 2010.</p>
-
-          
+          原文链接：http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5906
+I. Introduction在之前的文档，LTE identification I介绍了UE和ME的标识。这篇文档，将介绍网络设备（Network Equipm
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/03/3-LTE-Identification-II-NE-and-Location-Identifiers/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1607,7 +1298,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sun-day">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1697,84 +1388,16 @@
       
         
           
-            <p>原文链接：<a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5905" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5905</a></p>
-<h1 id="I-Introduction"><a href="#I-Introduction" class="headerlink" title="I. Introduction"></a>I. Introduction</h1><p>在LTE网络中，根据和其他ID的关系使用不同的ID来标识每一个实体。就像在人际网络中使用不同的名字和头衔来标识一个人。理解这些ID和EPS实体是对理解LTE技术很必要。</p>
-<p>我们之前讨论了第一个问题–LTE网络架构。现在我们讨论LTE标识，这是我们的第二个问题，将会有三个相关的文档来讨论。这个文档是第一个，聚焦在用户设备（UE） ID。第二个和第三个文档将f分别涉及到网络设备（NE）ID和EPS会话/承载标识。</p>
-<p>这个文档组织如下。第二章，对LTE ID分为几个组。第三章和第四章，将分别描述UE ID和ME ID。第五章，总结UE和ME ID的总体特征。</p>
-<hr>
-<h1 id="II-Classification-of-LTE-Identification"><a href="#II-Classification-of-LTE-Identification" class="headerlink" title="II. Classification of LTE Identification"></a>II. Classification of LTE Identification</h1><p>图1表示，在LTE网络参考模型一些实体和接口使用和定义的ID。这些LTE ID将按照他们的生成时间/属性类型（固定的或暂时的）/其唯一标识的范围。</p>
-<p>创建时间：LTE ID的创建时间有以下几种</p>
-<ul>
-<li>一旦设备安装上就委任的</li>
-<li>在服务操作之前或者进行中由运营商提供的</li>
-<li>根据需求，当用户接入网络或者使用服务才创建</li>
-</ul>
-<p>LTE ID的分配或者提供是在图1中在相应的实体上用蓝色方块表示。</p>
-<p>类型：LTE ID有一个属性类型，固定的（一旦创建就保持固定），临时的（当激活时发生变化）。被委任的或者分配都有固定的值，但根据需求，当用户接入网络或者使用服务时分配的是临时的值。</p>
-<p>范围（其ID被唯一标识的内部）：每一个LTE ID在全世界/运营商网络/实体还是信道上是唯一标识的。<br><img src="http://img.blog.csdn.net/20150909191327692" alt="这里写图片描述"><br>图1中，不同的ID根据LTE标识实际执行的地方来使用，例如，在哪个层，在哪个接口，或者在哪个物理区域。为了描述的方便，图1中的ID被分类展示在表1中。<br>首先，EPS实体的ID被分组为UE ID，ME ID，NE ID。这些EPS实体被分类为UE和NE。ME是UE的一部分，被从UE中分离，被分为一个独立的组。NE是由LTE运营商操作的网络实体，比如，MME，eNB，PGW。像IMSI/GUTI/S-TMSI/IP地址/C-RNTI/UE S1AP ID/UE X2AP ID这样子的ID标识一个用户的，属于UE ID组。像IMEI/IMEISV这样的ID标识一个设备的，属于ME ID组。<br>像MME的GUMMEI和MMEI，eNB的全球eNB ID和eNB ID，小区的ECGI和ECI，PGW的PGW ID，这些都属于NE ID组。像TAI和TAC这样的Location ID来标识用户附着的区域。<br>最后，像PDN ID（or APN），EPS承载ID，E-RAB ID，DRB ID，TEID，LBI这样的会话/承载ID是和用户数据传送有关，用来识别EPS会话和EPS承载。</p>
-<p>这个文档，描述了在表1中灰色的UE和ME的LTE ID。第二个文档将涉及LTE NE ID和Location ID用来标识UE的位置区域。第三个文档将讨论EPS会话和承载ID。</p>
-<p>表1，LTE ID的分类</p>
-<table>
-<thead>
-<tr>
-<th>ID group</th>
-<th>LTE ID</th>
-<th>相关的文档</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>UE ID</td>
-<td>IMSI, GUTI, S-TMSI, IP address (PDN address), C-RNTI, eNB UE S1AP ID,MME UE S1AP ID, Old UE X2AP ID, UE X2AP ID</td>
-<td>LTE Identification I</td>
-</tr>
-<tr>
-<td>ME ID</td>
-<td>IMEI</td>
-<td>LTE Identification I</td>
-</tr>
-<tr>
-<td>NE ID</td>
-<td>GUMMEI, MMEI, Global eNB ID, eNB ID, ECGI, ECI, P-GW ID</td>
-<td>LTE Identification II</td>
-</tr>
-<tr>
-<td>Location ID</td>
-<td>TAI TAC</td>
-<td>LTE Identification II</td>
-</tr>
-<tr>
-<td>会话/承载ID</td>
-<td>PDN ID(APN), EPS Bearer ID, E-RAB ID, DRB ID, TEID, LBI</td>
-<td>LTE Identification III</td>
-</tr>
-</tbody>
-</table>
-<h1 id="III-Identifiers-for-User-Equipment-UE-IDs"><a href="#III-Identifiers-for-User-Equipment-UE-IDs" class="headerlink" title="III. Identifiers for User Equipment (UE IDs)"></a>III. Identifiers for User Equipment (UE IDs)</h1><p>LTE网络是全IP网络。因为这个特性，在LTE网络中的UEs共享无线和网络资源。LTE网络的EPS实体给每一个UE分配UE ID来识别不同的UE。因为UEs在不同层和接口共享资源，所以需要多种多样的UE ID。<br>在移动通信网络中最必要的ID是PLMN ID，用来识别特定网络的运营商。我们首先开始包含PLMN ID的UE ID的描述。</p>
-<h2 id="3-1-PLMN-ID指示用户需要签约的网络"><a href="#3-1-PLMN-ID指示用户需要签约的网络" class="headerlink" title="3.1 PLMN ID指示用户需要签约的网络"></a>3.1 PLMN ID指示用户需要签约的网络</h2><p>PLMN是运营商分配和操作的，用来为公众提供移动通信服务。PLMN ID通常用来识别用户需要签约的移动通信网络。它包含MCC和MNC，如图2所示。MCC的三个数字表示用户所在的移动网络所属的国家。每一个国家有一个或多个PLMN ID。MCC的分配需要ITU-T的授权，定义在ITU-T E.212 [3]。例如韩国的MCC是450.一个MNC标识移动通信网络的运营商，是由每一个国家分配的。例如，在韩国有三个移动运营商，SK电信，KT和LG U+，他们的MNC如图2所示。<br><img src="http://img.blog.csdn.net/20150909212334046" alt="这里写图片描述"></p>
-<h2 id="3-2-IMSI-分配给签约用户的固定ID"><a href="#3-2-IMSI-分配给签约用户的固定ID" class="headerlink" title="3.2 IMSI:分配给签约用户的固定ID"></a>3.2 IMSI:分配给签约用户的固定ID</h2><p>IMSI（International Mobile Subscriber Identity）是全球为一个号码来标识一个签约用户。图3表示了IMSI的分配过程和IMSI的格式。一个IMSI是由指示签约用户网络的PLMN和由运营商分配的MSIN（Mobile Subscriber Identification Number）。IMSI长度最大15个数字。MSIN识别一个PLMN中的签约用户。<br><img src="http://img.blog.csdn.net/20150909212947495" alt="这里写图片描述"><br>当用户购买一个USIM卡并签约一个移动网络，就有了一个内建的唯一的IMSI开始启用并和用户关联。IMSI是存储在手机的USIM卡中，IMSI和用户签约信息是由运营商提供给HSS和SPR。在提供之后，当UE attach LTE网络的时候，UE发送IMSI给移动网络。在接收到UE的IMSI之后，MME开始LTE网络的默认EPS承载和基本传输路径的建立（通过1）基于从UE接收到的IMSI，识别出签约用户的本地网络，2）选择持有用户签约信息的HSS，3）从HSS中下载信息）。</p>
-<p>存放在USIM/HSS/SPR中的IMSI是不可移除的固定值。另一方面，存储在MME/SGW/PGW/PCRF中的IMSI，在UE初始附着过程建立默认EPS承载时是一个临时值，当默认承载终止时被移除。</p>
-<h2 id="3-3-IDs-Used-at-MME-GUTI-S-TMSI-and-M-TMSI"><a href="#3-3-IDs-Used-at-MME-GUTI-S-TMSI-and-M-TMSI" class="headerlink" title="3.3 IDs Used at MME: GUTI, S-TMSI and M-TMSI"></a>3.3 IDs Used at MME: GUTI, S-TMSI and M-TMSI</h2><p>IMSI是一个固定唯一的ID来标识签约用户。如果它经常暴露在无线链路上将会不安全。为了增强安全性，当UE附着在网络时MME给UE分配一个GUTI（Globally Unique Temporary Identifier）用来代替IMSI来标识UE。图4是GUTI的分配过程和格式。<br><img src="http://img.blog.csdn.net/20150910082700443" alt="这里写图片描述"><br>GUTI分配：当UE第一次附着到LTE网络时，它使用IMSI请求接入网络并从网络获得GUTI。当UE再次附着网络时，UE使用GUTI代替IMSI。当再次附着到网络时，UE使用IMSI或者GUTI作为ID取决于下次更新时临时标识（TIN）设置的是什么。</p>
-<p>一旦UE的初始附着过程和TAU过程是成功执行，MME分配和发送GUTI给UE，接着设置GUTI作为它的TIN。其后，当UE附着网络或者请求TAU更新时都使用GUTI代替IMSI。</p>
-<p>GUTI格式：LTE运营商有一个或者多个MME组包含多个MME。因此MMEI（MME Identifier）是由代表MME组的MMEGI（MME Group Identifier）和代表组内一个MME的MMEC（ MME Code）组成。GUMMEI（Globally Unique MME Identifier）是在MMEI基础上加上PLMN。每一个MME每一个注册的用户分配M-TMSI，这是在MME中唯一的值，来保护签约用户的机密性。</p>
-<p>GUTI是由GUMMEI和M-TMSI组成，是全球唯一的值，用来代替IMSI标识UE。不像IMSI有一个固定的值，GUTI是临时的值，当UE注册到LTE网络时由MME分配的。所以，当GUTI经常暴露在无线链路上也是保持安全的。S-TMSI由MMEC和M-TMSI组成，用来唯一标识MME组中的UE。如果运营商没有多个MME组时，可以使用比较短的S-TMSI来提高在无线链路上传输的有效性。</p>
-<h2 id="3-4-IP地址：连接PDN必须的ID"><a href="#3-4-IP地址：连接PDN必须的ID" class="headerlink" title="3.4 IP地址：连接PDN必须的ID"></a>3.4 IP地址：连接PDN必须的ID</h2><p>IP地址，也称为PDN地址，是当UE初始附着在LTE网络时LTE网络分配给UE的用来连接PDN。因为UE可以根据不同的服务通过LTE网络连接到多个PDN，所以LTE网络针对每一个UE连接到的PDN为UE分配不同的IP地址（例如两个IP地址用于两个连接的PDN，三个IP地址用于三个连接的PDN等等）。当IP数据包从LTE网络到PDN转发，或者从PDN接收数据包时，这些IP地址用来标示IP数据包发送或接收的UE。</p>
-<p>IP地址固定或者动态地分配用于UE连接PDN。这两种分配方式称为静态IP分配和动态IP地址分配。<br>对于静态IP地址分配，运营商在签约的时候分配给UE一个固定的IP地址，并把这个UE的IP地址提供给HSS。不管UE附着的时间和地点，每次UE发起附着到PDN时，UE都被分配相同的IP地址。<br>对于动态的IP地址分配，PGW有一个IP地址池，每次UE执行初始附着到LTE网络时，UE被动态地从IP地址池中分配一个可用的IP地址。因此，每次UE初始附着LTE网络时，分配给UE的IP地址都不一样。</p>
-<p>图5是动态IP地址分配的实例。它简单介绍了在初始附着过程，默认承载建立时，PGW动态分配临时IP地址的过程和在初始附着过程分配动态IP地址后，UE使用因特网服务的过程。<br><img src="http://img.blog.csdn.net/20150910091112896" alt="这里写图片描述"></p>
-<h2 id="3-5-C-RNTI：在一个小区内分辨UE需要的ID"><a href="#3-5-C-RNTI：在一个小区内分辨UE需要的ID" class="headerlink" title="3.5 C-RNTI：在一个小区内分辨UE需要的ID"></a>3.5 C-RNTI：在一个小区内分辨UE需要的ID</h2><p>C-RNTI（Cell Radio Network Temporary Identifier）是在随机接入过程中由eNB分配的，并仅仅在当前的服务小区有效。在小区中的UE是使用C-RNTI来唯一标识的。当UE离开当前小区，通过随机接入过程移动到一个新的小区时，分配一个新的C-RNTI。图6是C-RNTI是怎么样分配的，和C-RNTI应用于哪一层。</p>
-<p>在上行和下行链路，eNB负责无线资源的分配。它通过在PDCCH（Physical Downlink Control Channel）上广播C-RNTI通知在下一个TTI（Transmission Time Interval）哪一个UE可以使用无线资源。如果UE在它所接入小区的PDCCH信道上发现自己的C-RNTI，则UE就获知在在下一个上行或下行TTI上可以使用无线资源。</p>
-<p><img src="http://img.blog.csdn.net/20150910092323414" alt="这里写图片描述"></p>
-<h2 id="3-6-在S1-MME接口上需要成对的UE-S1AP-ID来分辨UE"><a href="#3-6-在S1-MME接口上需要成对的UE-S1AP-ID来分辨UE" class="headerlink" title="3.6 在S1-MME接口上需要成对的UE S1AP ID来分辨UE"></a>3.6 在S1-MME接口上需要成对的UE S1AP ID来分辨UE</h2><p>S1AP层成功优酷S1-MME接口上eNB和MME之间的控制信息。在同一时间有多个UE和eNB保持连接。eNB和UE对应的MME交换所有的S1AP控制信息时使用相同的S1链路。所以，为了识别那个S1AP消息对应于哪一个UE，当eNB发送UE的第一个S1AP消息给MME时，eNB为每一个UE分配了一个ID（eNB UE S1AP ID）。同样的，MME通过多个S1链路和多个eNB交换S1AP信息。为了识别哪一个S1AP消息对应于哪一个eNB的哪一个UE，当MME发送第一个UE消息给eNB时分配一个ID（MME UE S1AP ID）。</p>
-<p>在S1AP消息的第一个来回后，在S1-MME接口上交换的所有用户控制消息（S1AP）是使用一对UE S1AP ID来传输的（eNB UE S1AP ID, MME UE S1AP ID），目的是为了eNB和MME都能分辨出来哪一个S1AP消息对应于哪一个UE。然后，根据这对ID，MME可以找到接收到的S1AP消息是来自哪一个eNB的哪一个UE，并且eNB可能知道接收到S1AP消息来自哪一个UE。图7是UE S1AP ID的分配过程和UE S1AP ID应用在S1AP层。<br><img src="http://img.blog.csdn.net/20150910095355399" alt="这里写图片描述"></p>
-<h2 id="3-7-在X2接口上需要成对的UE-X2AP-ID来区别UE"><a href="#3-7-在X2接口上需要成对的UE-X2AP-ID来区别UE" class="headerlink" title="3.7 在X2接口上需要成对的UE X2AP ID来区别UE"></a>3.7 在X2接口上需要成对的UE X2AP ID来区别UE</h2><p>X2AP层处理在X2接口上两个相邻的eNB之间的控制信息。在两个相邻的eNB之间UE的切换时，X2AP消息使用相同的X2链路从UE发送到对端的eNB。第一次eNB（源eNB或者目的eNB）发送X2AP给对端eNB时，eNB为每一个UE分配ID，并使用这个ID发送消息来标识是哪一个UE的X2AP消息。源eNB在第一个到目的额NB的消息（切换请求消息）中分配一个Old eNB UE X2AP ID，目的eNB在第一个到源eNB的响应消息（切换请求确认消息）中分配一个New eNB UE X2AP ID。</p>
-<p>在第一次来回信息交换后，所有的在X2接口上和切换相关的X2AP消息都使用成对的ID(Old eNB UE X2AP ID, New eNB UE X2AP ID)来交换，目的是为了源eNB和目的eNB都能识别出来哪一个X2AP消息对应于哪一个UE。图8是UE X2AP ID的分配过程和UE X2AP ID应用在X2AP层。<br><img src="http://img.blog.csdn.net/20150910100941929" alt="这里写图片描述"></p>
-<h1 id="IV-Identifiers-for-Mobile-Equipment-ME-IDs"><a href="#IV-Identifiers-for-Mobile-Equipment-ME-IDs" class="headerlink" title="IV. Identifiers for Mobile Equipment (ME IDs)"></a>IV. Identifiers for Mobile Equipment (ME IDs)</h1><p>第四章将描述ME ID。在讨论ME ID之前先认识下UE和ME的关系。一个UE由ME和USIM（UMTS Subscriber identity Module）卡组成。ME可以分为TE（Terminal Equipment）和MT（Mobile Terminal）。MT是负责无线接入协议工作，而TE是负责MT控制功能工作。图9是这些功能组的组成。MT和TE是集成在手机里，但是在note PC上是分开的。<br><img src="http://img.blog.csdn.net/20150910101522931" alt="这里写图片描述"></p>
-<h2 id="4-1-IMEI和IMEISV：ME拥有的固定ID"><a href="#4-1-IMEI和IMEISV：ME拥有的固定ID" class="headerlink" title="4.1 IMEI和IMEISV：ME拥有的固定ID"></a>4.1 IMEI和IMEISV：ME拥有的固定ID</h2><p>IMEI（International Mobile Equipment Identity）是为每一个ME分配的唯一值。IMEI是在ME出厂的时候被给出的，包含了和生产厂商的信息，型号，和ME的序列号。图10是IMEI的格式和IMEI使用的举例。IMEI是由TAC（Type Allocation Code）和SNR（Serial Number）和CD（Check Digit）组成。一个IMEI/SV是由TAC（Type Allocation Code）和SNR（Serial Number）和SVN（Software Version Number）组成。<br>TAC是由RBID和ME type ID组成，其中RBID是指示认证机构的RBID（Reporting Body Identifier），ME type ID代表生产厂商的名字和型号ID。序列号是由生产厂商所分配的。在图10的例子中，RBID=35标示ME是由BABT（British Approvals Board for Telecommunications英国电信认证委员会）批准的，ME ID=643205表示ME是由三星生产的智能手机。</p>
-<p>运营商有数据库存储IMEI信息，使用这个数据库可以拒绝任何被报告被盗和丢失ME的接入尝试。<br><img src="http://img.blog.csdn.net/20150910104555713" alt="这里写图片描述"></p>
-<h1 id="V-Closing"><a href="#V-Closing" class="headerlink" title="V. Closing"></a>V. Closing</h1><p>在我们认识LTE技术之前，我们已经讨论了LTE标识。在这个文档，我们首先解释了UE和ME ID，接下来我们根据他们的范围/分配/属性分类和总结了这些ID，见表2。其他的ID将会在LTE identification II III中讨论。<br><img src="http://img.blog.csdn.net/20150910104916487" alt="这里写图片描述"></p>
-<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p>[1] Netmanias Technology Document, “LTE Network Architecture: Basic”, July 2013,<br><a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5904" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5904</a><br>[2] 3GPP TS 23.003, “Numbering, addressing and identification”.<br>[3] ITU-T E.212, “The international identification plan for public networks and subscriptions”.<br>[4] GSMA TS.06, “IMEI Allocation and Approval Guidelines”.<br>[5] NMC Consulting Group Confidential Internal Report, “E2E LTE Network Design”, August 2010.</p>
-
-          
+          原文链接：http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5905
+I. Introduction在LTE网络中，根据和其他ID的关系使用不同的ID来标识每一个实体。就像在人际网络中使用不同的名字和头衔来标识一个人。理解这些ID和
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/03/2-LTE-Identification-I-UE-and-ME-Identifiers/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1835,7 +1458,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sun-day">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1925,208 +1548,16 @@
       
         
           
-            <p>原文地址：<a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5904" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5904</a></p>
-<h1 id="I-Introduction"><a href="#I-Introduction" class="headerlink" title="I. Introduction"></a>I. Introduction</h1><p>这篇文章主要介绍LTE网络结构，是LTE的第一篇技术文章。LTE网络也叫EPS，是一个端到端的全IP网络；EPS分为两个部分，LTE部分负责处理和接入网络E-UTRAN相关的技术，EPC部分负责处理和核心网相关的技术。一个端到端的全IP网络一位置所有的数据流，从UE到连接服务实体的PDN之间的所有通路，在EPS内部，所有的传输都是基于IP协议的。</p>
-<p>为了通过LTE网络提供给用户LTE服务，引入了一个端到端LTE网络的参考模型（NRM），这个模型除了基本的EPS域之外，还包含三个额外的域（用户的BSS/OSS域，提供服务的应用域，发送IP包的IP传输网络域）。这篇文章的范围集中在基本的EPS域。其他的EPS域特性，例如，LTE和其他3gpp/3gpp2的互操作性和漫游，这些特性是在本文档范围之外，后续会在其他文档中涉及。</p>
-<p>这个文档剩余部分的组织如下，在第二章，定义LTE网络参考模型，解释EPS实体和接口。第三章描述协议栈架构。第四章描述整个LTE网络的数据流。</p>
-<hr>
-<h1 id="II-LTE-Network-Reference-Model"><a href="#II-LTE-Network-Reference-Model" class="headerlink" title="II. LTE Network Reference Model"></a>II. LTE Network Reference Model</h1><p>图1是LT网络的参考模型，包含LTE实体（UE和eNB）和EPC实体（SGW/PGW/MME/HSS/PCRF/SPR/PCSOFCS）。PDN是和UE进行通信的运营商内部或者外面IP域，它提供给UE服务，比如，因特网，IMS。表1和表2是LTE和EPC实体的功能。表3列出了LTE网络参考模型的参考点，并对EPS实体之间的接口进行了描述。</p>
-<p><img src="http://img.blog.csdn.net/20150909120950694" alt="这里写图片描述"></p>
-<p>表格1：LTE实体</p>
-<table>
-<thead>
-<tr>
-<th>实体</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>UE</td>
-<td>UE通过LTE-Uu接口连接eNB</td>
-</tr>
-<tr>
-<td>eNB</td>
-<td>eNB提供用户无线接口，并负责无线资源管理功能，例如，动态资源分配（调度器），eNB测量配置和规定，无线准入控制，连接移动性控制，无线承载控制，小区间干扰协调。</td>
-</tr>
-</tbody>
-</table>
-<p>表格2：EPC实体</p>
-<table>
-<thead>
-<tr>
-<th>实体</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>MME</td>
-<td>MME是E-UTRAN的主控制实体。它和HSS通信来用户鉴权和用户配置文件下载，并使用NAS信令提供给UE EPS移动性管理（EMM）和EPS会话管理（ESM）功能。MME支持的主要功能包括：NAS信令（EMM/ESM/NAS安全）；通过S6a接口和HSS通信负责用户鉴权和漫游；移动性管理（寻呼/TAI管理/切换管理）；EPS承载管理。</td>
-</tr>
-<tr>
-<td>SGW</td>
-<td>SGW终止E-UTRAN方向的接口。它为eNB间和3gpp间切换的数据传输提供了本地移动锚点。</td>
-</tr>
-<tr>
-<td>PGW</td>
-<td>PGW通过从PDN的地址空间分配IP地址提供给UE接入PDN的能力。PGW作为在3gpp和non-3gpp之间切换的移动锚点。PGW也执行策略实施，数据包过滤和由PCRF提供的基于PCC规则的计费。PGW主要的功能包括：IP路由和转发，数据包过滤，UE IP地址分配，在3gpp和non-3gpp之间切换的移动锚点，PCEF功能，计费。</td>
-</tr>
-<tr>
-<td>HSS</td>
-<td>HSS是存储用户配置的中心数据库。它提供给MME用户鉴权信息和用户配置文件。</td>
-</tr>
-<tr>
-<td>PCRF</td>
-<td>PCRF是策略和计费控制实体。它为服务数据流（SDF）提供策略决策，并且提供给PCEF（PCEF在PGW内）策略和计费控制（PCC）规则（包括QoS和计费规则）</td>
-</tr>
-<tr>
-<td>SPR</td>
-<td>SPR提供给PCRF用户信息（每个用户的接入配置文件）。PCRF接收到这个信息后，将执行基于用户的策略并创建策略和计费控制（PCC）规则。</td>
-</tr>
-<tr>
-<td>OCS</td>
-<td>OCS提供实时的信用控制和基于体积/时间/事件的计费功能。</td>
-</tr>
-<tr>
-<td>OFCS</td>
-<td>OFCS提供基于计费数据记录（CDR）的计费信息。</td>
-</tr>
-</tbody>
-</table>
-<p>CDR：charging data record<br>OCS：online charging system<br>OFCS：offline charging system<br>OSS：operations support system<br>PCC：policy and charging control<br>PCEF：policy and charging enforcement function<br>PCRF：policy and charging rules function<br>SDF：service data flow<br>SPR：subscriber profile repository</p>
-<p>表3：LTE接口</p>
-<table>
-<thead>
-<tr>
-<th>参考点</th>
-<th>协议</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>LTE-Uu</td>
-<td>E-UTRA（控制面和用户面）</td>
-<td>UE和E-UTRAN（eNB）之间控制和用户面的接口。在LTE-Uu接口上，信令连接是用SRB表示的RRC连接，用户面连接是用DRB表示的逻辑信道。</td>
-</tr>
-<tr>
-<td>X2</td>
-<td>X2-AP（控制面）GTP-U（用户面）</td>
-<td>两个eNB之间的控制和用户面的接口。它用于在X2切换或自组网（SON）相关的功能。控制面是使用的X2-AP协议，用户面为数据转发的每一个承载提供GTP-U隧道。</td>
-</tr>
-<tr>
-<td>S1-U</td>
-<td>GTP-U</td>
-<td>在eNB和SGW之间用户面的接口。它为每一个承载提供GTP隧道。</td>
-</tr>
-<tr>
-<td>S1-MME</td>
-<td>S1-AP</td>
-<td>eNB和MME之间控制面的接口。</td>
-</tr>
-<tr>
-<td>S11</td>
-<td>GTP-C</td>
-<td>MME和SGW之间控制面的接口。它为每一个承载提供GTP隧道。</td>
-</tr>
-<tr>
-<td>S5</td>
-<td>GTP-C（控制面）GTP-U（用户面）</td>
-<td>SGW和PGW之间的控制和用户面接口。S5接口为用户面每一个承载提供GTP隧道，为控制面的每一个用户提供GTP隧道管理（创建/修改/删除）。对PLMN间，使用S8接口替代。S8接口在本文档范围之外，将在其他文档中描述。</td>
-</tr>
-<tr>
-<td>S6a</td>
-<td>Diameter</td>
-<td>HSS和MME之间控制面的接口。它用于交换用户订阅和鉴权信息</td>
-</tr>
-<tr>
-<td>Sp</td>
-<td>Diameter</td>
-<td>SPR和PCRF之间控制面的接口。</td>
-</tr>
-<tr>
-<td>Gx</td>
-<td>Diameter</td>
-<td>PCRF和PGW之间控制面的接口。它从PCRF到PGW传输策略控制和计费规则来支持QoS策略和计费控制。</td>
-</tr>
-<tr>
-<td>Gy</td>
-<td>Diameter</td>
-<td>OCS和PGW之间控制面的接口。</td>
-</tr>
-<tr>
-<td>Gz</td>
-<td>GTP’</td>
-<td>OFCS和PGW之间控制面的接口。</td>
-</tr>
-<tr>
-<td>SGi</td>
-<td>IP</td>
-<td>PGW和PDN之间控制和用户面的接口。在用户面使用基于IETF的IP数据包转发协议，在控制面使用DHCP和RADIUS/Diameter协议。</td>
-</tr>
-</tbody>
-</table>
-<hr>
-<h1 id="III-LTE-Protocol-Stacks"><a href="#III-LTE-Protocol-Stacks" class="headerlink" title="III. LTE Protocol Stacks"></a>III. LTE Protocol Stacks</h1><p>这一章主要介绍LTE用户面和控制面的协议栈。</p>
-<h2 id="3-1-用户面协议栈"><a href="#3-1-用户面协议栈" class="headerlink" title="3.1 用户面协议栈"></a>3.1 用户面协议栈</h2><p>图2是LTE网络参考模型的用户面协议栈。接着介绍协议栈主要层的功能描述。<br><img src="http://img.blog.csdn.net/20150909135820709" alt="这里写图片描述"></p>
-<h3 id="1）LTE-Uu接口"><a href="#1）LTE-Uu接口" class="headerlink" title="1）LTE-Uu接口"></a>1）LTE-Uu接口</h3><ul>
-<li>PDCP：PDCP支持在无线链路上IP数据包的有效性传输。它可以执行协议头压缩，接入层安全（加密和完整性保护），数据包重排序和重传。</li>
-<li>RLC：在发送端，RLC构建RLC PDU，并提供给MAC层。RLC协议负责PDCP PDU的分片和串接。在接收端，RLC协议通过对RLC PDU的重组来重新构建PDCP PDU。RLC协议有三种操作模式（透明模式，确认模式，非确认模式），每一种模式提供不同的可靠性级别。RLC也数据包（RLC PDU）的重排序和重传。</li>
-<li>MAC：MAC层在RLC和PHY层之间。它通过逻辑信道和RLC层连接，通过传输信道和PHY层连接。因此，MAC层协议在逻辑信道和传输信道之间支持复用和解复用。高层使用不同的逻辑信道来满足不同的QoS要求。MAC层通过对逻辑信道数据的调度和优先级来支持不同的QoS。eNB调度器可以使无线资源动态分配给UE，并通过执行QoS控制来确保每一个承载都分配了协商的QoS。</li>
-</ul>
-<h3 id="2-S1-U-S5-X2-接口"><a href="#2-S1-U-S5-X2-接口" class="headerlink" title="2) S1-U/S5/X2 接口"></a>2) S1-U/S5/X2 接口</h3><ul>
-<li>GTP-U：GTP-U协议通过在S1-U/S5/X2接口上来转发IP数据包。当在LTE切换过程中已经建立了用于数据转发的GTP隧道，则结束标记数据包应该在GTP隧道上作为最后一个数据包传输。</li>
-</ul>
-<h2 id="3-2-控制面协议栈"><a href="#3-2-控制面协议栈" class="headerlink" title="3.2 控制面协议栈"></a>3.2 控制面协议栈</h2><p>图3是LTE网络参考模型的控制面协议栈。接着介绍协议栈主要层的功能描述。<br><img src="http://img.blog.csdn.net/20150909144404890" alt="这里写图片描述"></p>
-<h3 id="1-LTE-Uu接口"><a href="#1-LTE-Uu接口" class="headerlink" title="1) LTE-Uu接口"></a>1) LTE-Uu接口</h3><ul>
-<li>NAS：NAS协议负责移动性管理和承载管理功能。</li>
-<li>RRC：RRC协议对NAS信令的传输提供支持。它也负责无线资源的有效性管理功能。主要的功能包括：系统消息的广播，RRC连接的建立/重配/重建/释放，无线承载的建立/修改/释放。</li>
-</ul>
-<h3 id="2-X2接口"><a href="#2-X2接口" class="headerlink" title="2) X2接口"></a>2) X2接口</h3><ul>
-<li>X2AP：X2AP协议支持在E-UTRAN内UE的移动性和自组网功能。为了支持UE移动性，X2AP协议提供了例如用户数据转发，序列号状态的传输，UE上下文的释放的功能。对自组网功能，eNB之间交换资源状态信息，负载信息，eNB配置更新信息，使用X2AP协议来相互协调来满足移动性参数。</li>
-</ul>
-<h3 id="3-S1-MME接口"><a href="#3-S1-MME接口" class="headerlink" title="3) S1-MME接口"></a>3) S1-MME接口</h3><ul>
-<li>S1AP：S1AP协议支持例如S1接口管理，E-RAB管理，NAS信令传输和UE上下文管理。它传输初始UE上下文给eNB来建立E-RAB，并且管理后续UE上下文的修改和释放。</li>
-</ul>
-<h3 id="4-S11-S5-S10接口"><a href="#4-S11-S5-S10接口" class="headerlink" title="4) S11/S5/S10接口"></a>4) S11/S5/S10接口</h3><ul>
-<li>GTP-C：GTP-C协议支持GTP隧道的建立/修改/终止控制信息的交换。它在LTE切换时创建数据转发的隧道。</li>
-</ul>
-<h3 id="5-S6a接口"><a href="#5-S6a接口" class="headerlink" title="5) S6a接口"></a>5) S6a接口</h3><ul>
-<li>Diameter：Diameter协议支持在HSS和MME之间用户订阅和鉴权信息的交换。</li>
-</ul>
-<h3 id="6-Gx接口"><a href="#6-Gx接口" class="headerlink" title="6) Gx接口"></a>6) Gx接口</h3><ul>
-<li>Diameter：Diameter协议支持把PCC规则从PCRF发送到PCEF（PGW）。</li>
-</ul>
-<h3 id="7-Gy接口"><a href="#7-Gy接口" class="headerlink" title="7) Gy接口"></a>7) Gy接口</h3><ul>
-<li>Diameter：Diameter协议支持在PGW和OCS之间实时信用控制信息的交换。</li>
-</ul>
-<h3 id="8-Gz接口"><a href="#8-Gz接口" class="headerlink" title="8) Gz接口"></a>8) Gz接口</h3><ul>
-<li>GTP’：GTP’协议支持CDR从PGW发送到OFCS。</li>
-</ul>
-<hr>
-<hr>
-<h1 id="IV-Traffic-Flow-on-the-LTE-Network"><a href="#IV-Traffic-Flow-on-the-LTE-Network" class="headerlink" title="IV. Traffic Flow on the LTE Network"></a>IV. Traffic Flow on the LTE Network</h1><p>图4是在LTE网络参考架构中，用户面数据流接入因特网的过程。图4a是数据流从UE到因特网，图4b是数据流从因特网到UE。IP数据包是在S1-U和S5接口上通过GTP隧道来转发的。这些隧道是在用户附着在LTE网络时对每一个EPS承载建立的。</p>
-<p>在S1-U和S5的每一个接口上有多个EPS承载建立。因此，为了识别这些承载，每一个GTP隧道的端点都分配了一个TEID（隧道端点标识），（通常识别一个GTP隧道，采用TEID，IP地址，UDP端口号。但是，在这里，为了描述的方便，仅仅使用了TEID）。GTP隧道的接收端本地分配的TEID，发送端必须使用。TEID的交换是在隧道端点使用控制面协议交换的。</p>
-<p><img src="http://img.blog.csdn.net/20150909144940673" alt="这里写图片描述"></p>
-<p>当在S1-U接口上建立了GTP隧道时，SGW分配一个TEID用于上行传输，eNB分配一个TEID用于下行传输。S1 GTP隧道TEID是在eNB和SGW之间使用S1AP和GTP-C消息来交换的。同样的，当在S5接口上建立了GTP隧道时，PGW分配一个TEID用于上行传输，SGW分配一个TEID用于下行传输。S5 GTP隧道TEID是在SGW和PGW之间使用GTP-C消息来交换的。</p>
-<p>当用户的数据包在S1-U和S5接口上通过GTP隧道传输时，eNB/SGW/PGW通过封装接收对端GTP实体分配的TEID来转发用户IP数据包。在上行方向，SGW在S1 GTP（UL S1-TEID）隧道和S5 GTP（UL S5-TEID）隧道间建立一对一的映射，来终止S1 GTP隧道，并转发用户数据包到S5 GTP隧道。同样的，在下行方向，SGW在S5 GTP（DL S5-TEID）隧道和S1 GTP（DL S1-TEID）隧道间建立一对一的映射，来终止S5 GTP隧道，并转发用户数据包到S1 GTP隧道。在图4中，通过哪一个EPS实体转发因特网数据流的过程如下所示：</p>
-<h3 id="a）上行方向数据流，从UE到因特网"><a href="#a）上行方向数据流，从UE到因特网" class="headerlink" title="a）上行方向数据流，从UE到因特网"></a>a）上行方向数据流，从UE到因特网</h3><ol>
-<li>UE通过LTE-Uu接口传输用户IP数据包到eNB。</li>
-<li>eNB使用S1 GTP隧道协议头封装用户IP数据包，并转发封装好的IP数据包给SGW。在这里，eNB使用TEID/目的IP地址/源IP地址作为S1 GTP隧道协议头。</li>
-<li>在接收到封装好的IP数据包后，SGW剥离掉S1 GTP隧道协议头，并且使用S5 GTP隧道协议头封装用户IP数据包，并转发封装后的IP数据包。在这里，SGW使用TEID/目的IP地址/源IP地址作为S5 GTP隧道协议头。</li>
-<li>在接收到封装好的IP数据包之后，PGW剥离掉S5 GTP隧道协议头得到用户IP数据包，并通过IP路由转发到因特网。</li>
-</ol>
-<h3 id="b）下行方向数据流，从因特网到UE"><a href="#b）下行方向数据流，从因特网到UE" class="headerlink" title="b）下行方向数据流，从因特网到UE"></a>b）下行方向数据流，从因特网到UE</h3><ol>
-<li>PGW从因特网接收到一个目的为UE的IP数据包。</li>
-<li>PGW使用S5 GTP隧道协议头封装用户IP数据包，并转发封装好的IP数据包给SGW。在这里，PGW使用TEID/目的IP地址/源IP地址作为S5 GTP隧道协议头。</li>
-<li>在接收到封装好的IP数据包后，SGW剥离掉S5 GTP隧道协议头，并且使用S1 GTP隧道协议头封装用户IP数据包，并转发封装后的IP数据包。在这里，SGW使用TEID/目的IP地址/源IP地址作为S1 GTP隧道协议头。</li>
-<li>在接收到封装好的IP数据包之后，eNB剥离掉S1 GTP隧道协议头得到用户IP数据包，并在无线链路上通过DRB传输给UE。</li>
-</ol>
-<h1 id="V-Closing"><a href="#V-Closing" class="headerlink" title="V. Closing"></a>V. Closing</h1><p>LTE网络架构作为第一个LTE系列技术文档。这个文档描述的LTE网路架构只适用于单一运营商的LTE only网络，并描述EPS系统最基本的部分。为了更理解以后的LTE文档，对实体/接口的基本理解是必须的。下一个文档，是另一个基本的文档，讨论应用于LTE网络参考模型的LTE标识。这些基本文档对很好的理解后续的文档有很大帮助，会接着讨论LTE网络更高级的功能，包括LTE互操作和漫游。</p>
-<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p>[1] 3GPP TS 36.300, “Evolved Universal Terrestrial Radio Access (E-UTRA) and Evolved Universal<br>Terrestrial Radio Access Network (E-UTRAN); Overall description; Stage 2”.<br>[2] 3GPP TS 23.401, “General Packet Radio Service (GPRS) enhancements for Evolved Universal<br>Terrestrial Radio Access Network (E-UTRAN) access”.<br>[3] Magnus Olsson, et. al., SAE and the Evolved Packet Core – Driving the Mobile Broadband Revolution,<br>AP, 2009.<br>[4] NMC Consulting Group Confidential Internal Report, “E2E LTE Network Design”, August 2010.</p>
-
-          
+          原文地址：http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5904
+I. Introduction这篇文章主要介绍LTE网络结构，是LTE的第一篇技术文章。LTE网络也叫EPS，是一个端到端的全IP网络；EPS分为两个部分，LTE
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/03/1-LTE-Network-Architecture-Basic/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2187,7 +1618,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sun-day">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -2252,9 +1683,16 @@
       
         
           
-            <p>This is my first blog.</p>
+          This is my first blog.
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/03/我的第一篇博客/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2330,6 +1768,10 @@
       <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="sun-day" />
             
               <p class="site-author-name" itemprop="name">sun-day</p>
               <p class="site-description motion-element" itemprop="description"></p>
@@ -2443,6 +1885,24 @@
 
           
           
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.google.com/" title="Google" target="_blank">Google</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.baidu.com/" title="百度" target="_blank">百度</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
 
           
             
@@ -2468,11 +1928,11 @@
       <div class="footer-inner">
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+<div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2018</span>
   <span class="with-love" id="animate"> 
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">sun-day</span>
+  <span class="author" itemprop="copyrightHolder">true</span>
 
   
 
@@ -2502,7 +1962,30 @@
 
 
 
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共110.2k字</span>
+</div>
+
         
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
 
 
 
@@ -2643,6 +2126,33 @@
   
 
   
+  
+
+  
+  
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+  
+
 
   
   

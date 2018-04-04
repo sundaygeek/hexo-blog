@@ -17,6 +17,13 @@
 
 
 
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
 
 
 
@@ -41,6 +48,32 @@
 
 
 
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
 
 
 
@@ -77,7 +110,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '6.1.0',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: false,
     fastclick: false,
     lazyload: false,
@@ -304,7 +337,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sun-day">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -394,26 +427,15 @@
       
         
           
-            <h1 id="RR-Channel-Request"><a href="#RR-Channel-Request" class="headerlink" title="RR  : Channel Request"></a>RR  : Channel Request</h1><p>信道请求具有各种功能，在上电之后的信道请求相当于UMTS和LTE的RACH过程。简单地说，这个消息是告诉网络“我想驻留上你，我开始连接过程，请分配无线资源”。<br>一个用于初始注册如下。 （在良好的信道状态，以及在开放的空间中，第一个信道请求将到达网络并获得立即分配，只有一个信道请求。以下为一种最坏的情况下的，其中初始信道请求不能由NW解码或UE对初始直接分配解码失败）</p>
-<p><img src="http://img.blog.csdn.net/20151121195956641" alt="这里写图片描述"></p>
-<p>注：在“信道请求”的最后一个重传时启动T3126，并在UE得到“立即支配”时停止。如果UE没有得到“立即支配”，直到T3126到期时，UE开始小区重选。</p>
-<p>一个信道请求的确切功能由消息的第一个8位和第一字节的描述中，由下表中44.018中指定决定。<br><img src="http://img.blog.csdn.net/20151121200250597" alt="这里写图片描述"></p>
-<h1 id="RR-Immediate-Assignment"><a href="#RR-Immediate-Assignment" class="headerlink" title="RR  : Immediate Assignment"></a>RR  : Immediate Assignment</h1><p>立即分配是对最初的“信道请求”的应答消息。这就是说，以MS“好吧，我会接受你的‘信道请求’，你可以使用以下步骤获得无线资源”。<br>一个信道请求的例子将如下所示。你必须要注意的最重要的事情是，立即指派应该重放的整个信道请求消息。所有的MS（UE）的尝试连接的小区将接收相同的“立即指派”，但是，如果包含在“立即指派”的’信道请求”部分与它送出信道请求字节不匹配，UE应当丢弃“立即指派”消息，因为它不是对本身。<br><img src="http://img.blog.csdn.net/20151121200608855" alt="这里写图片描述"></p>
-<h1 id="RR：Channel-Release"><a href="#RR：Channel-Release" class="headerlink" title="RR：Channel Release"></a>RR：Channel Release</h1><p>GSM信道释放是基于44.018 3.4.13.1.1，信道释放过程是在专用模式和组传输模式下发起的。</p>
-<p><strong>什么时候使用？</strong></p>
-<ul>
-<li>在呼叫释放后释放TCH</li>
-<li>当分配给信令的专用信道被释放时用以释放DCCH</li>
-<li>去激活SACCH</li>
-</ul>
-<p><strong>UE在收到信道释放之后应该怎么做？</strong></p>
-<p>UE启动定时器T3110并断开主信令链路。当T3110超时，或当确认被断开时，移动台停用所有信道，认为RR连接已经释放，并返回到CCCH空闲模式，返回到PCCCH或CCCH分组空闲模式或进入数据包传送模式。</p>
-<p><strong>信道释放原因</strong></p>
-<p>有许多释放原因如下所示，但只有其中的一些在44.018 3.4.13.1.1中描述。我会继续增加更多的说明。<br><img src="http://img.blog.csdn.net/20151121202600028" alt="这里写图片描述"></p>
-<p><strong>在信道释放消息中重要的IE</strong></p>
-<p>以下为信道释放进行整体结构和IE（信息元素）。<br><img src="http://img.blog.csdn.net/20151121221312886" alt="这里写图片描述"><br>BA范围：<br>一个UE在其小区选择算法可以使用这个字段（参见3GPP TS45.008和3GPP TS23.022）。<br>所有TCH的释放和SDCCH后的小区选择指示：<br>移动台的所有TCH和SDCCH释放后在小区选择算法可以使用该指示（参见3GPP TS45.008）<br>Individual priorities：移动台可以用它来传达单独优先级信息到MS（见第3.2.3.3）。当MS接收到一个单独优先级IE应启动定时器T3230的一个实例，在个人的优先级IE提供的值。<br>《end》</p>
-
-          
+          RR  : Channel Request信道请求具有各种功能，在上电之后的信道请求相当于UMTS和LTE的RACH过程。简单地说，这个消息是告诉网络“我想驻留上你，我开始连接过程，请分配无线资源”。一个用于初始注册如下。 （在良好的信道状态，以及在开放的空间中，第一个信道请求将到达网络并获得立即分
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/03/GSM-RR信道请求-立即分配-信道释放/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -474,7 +496,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sun-day">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -564,69 +586,16 @@
       
         
           
-            <p>原文链接：<br><a href="http://www.sharetechnote.com/html/FrameStructure_GSM.html" target="_blank" rel="noopener">http://www.sharetechnote.com/html/FrameStructure_GSM.html</a></p>
-<h1 id="帧结构概述"><a href="#帧结构概述" class="headerlink" title="帧结构概述"></a>帧结构概述</h1><p>当我第一次学习GSM的时候，我对帧结构感到很迷惑。主要的一个原因是整个结构的每一个周期都有需要实习和帧，很难在一张纸上形象化地画出整个帧结构。<br>我没有找到任何形象化描述整个超帧中每一个时隙的方法，但是GSM帧层次图如下。<br>你必须详细的理解时隙，帧，多帧，超帧。</p>
-<p><img src="http://img.blog.csdn.net/20151114132200288" alt="这里写图片描述"></p>
-<p><strong>有用的视频连接</strong><br>视频连接是YouTube上的，国内的小伙伴还是翻墙看吧。<br>Teleysia - GSM TDMA Frame 1<br><a href="http://www.youtube.com/watch?v=HZtBIcUTop8&amp;feature=related" target="_blank" rel="noopener">http://www.youtube.com/watch?v=HZtBIcUTop8&amp;feature=related</a></p>
-<p>Teleysia - GSM Logical Channels 1<br><a href="http://www.youtube.com/watch?v=wwEO_muXD2M" target="_blank" rel="noopener">http://www.youtube.com/watch?v=wwEO_muXD2M</a></p>
-<h1 id="每一种Burst的结构"><a href="#每一种Burst的结构" class="headerlink" title="每一种Burst的结构"></a>每一种Burst的结构</h1><p>每一种无线通信中，我们都会使用不同种类的信道类型。这些不同信道具有他们自己的物理（或者传输）结构。在GSM中，也有不同种类的物理和逻辑信道，这些信道在时隙层次上都是用他们自己的物理结构。下面是一些GSM/GPRA中使用的不同burst类型。</p>
-<p><img src="http://img.blog.csdn.net/20151114132803243" alt="这里写图片描述"></p>
-<p>每一种GSM/GPRS物理信道都映射成这些burst类型。每一种物理信道也都映射为高层逻辑信道。<br>这些信道的映射见其他文章描述。</p>
-<h2 id="lt-Frequency-Correction-Burst-gt-频率校正突发脉冲序列"><a href="#lt-Frequency-Correction-Burst-gt-频率校正突发脉冲序列" class="headerlink" title="&lt; Frequency Correction Burst &gt;频率校正突发脉冲序列"></a>&lt; Frequency Correction Burst &gt;频率校正突发脉冲序列</h2><ul>
-<li>这个burst仅仅用于FCCH信道</li>
-<li>整个数据区域有142bit，用于承载非调制的再摸（纯正弦），或者承载全零的调制载波。</li>
-<li>频率为1625/24kHz（或者接近67kHz）</li>
-<li>这个纯载波是beacon频率（定标频点，或者叫BCCH频率，基准频率）和FCCH时隙的标识。</li>
-</ul>
-<h2 id="lt-Synchronization-Burst-gt-同步脉冲序列"><a href="#lt-Synchronization-Burst-gt-同步脉冲序列" class="headerlink" title="&lt; Synchronization Burst &gt;同步脉冲序列"></a>&lt; Synchronization Burst &gt;同步脉冲序列</h2><ul>
-<li>这个burst仅仅用于SCH信道</li>
-<li>这个信道使手机和基站时钟保持时间同步。这也是相对于其他burst来说，这个burst的训练序列这个长的原因。</li>
-<li>在这个burst中仅仅定义一个训练序列</li>
-</ul>
-<h2 id="lt-Access-Burst-gt-接入脉冲序列"><a href="#lt-Access-Burst-gt-接入脉冲序列" class="headerlink" title="&lt; Access Burst &gt;接入脉冲序列"></a>&lt; Access Burst &gt;接入脉冲序列</h2><ul>
-<li>这个burst用于RACH和AGCH信道</li>
-</ul>
-<p>当手机发送RACH消息，并接收到AGCH回应，MS和BTS都没有时间提前信息。但是实际消息是相对较短，并且有较长的保护间隔（GP guard band），这是为了确保和下一个burst之间不会有重叠。在接入脉冲序列中保护间隔的长度（68.25bit x 3.69 = 251.16ms）是相当于37.5km传输时延。GSM允许小区半径是35km。也就说从最大距离基站35km的MS发送的RACH消息到达基站天线时是和下一个burst没有重叠的。FACCH信道是在切换操作的时候使用这个burst（当新小区的时间提前信息不知道的时候）。在这个burst中仅仅定义了一个训练序列。</p>
-<h2 id="lt-Normal-Burst-gt-正常脉冲序列"><a href="#lt-Normal-Burst-gt-正常脉冲序列" class="headerlink" title="&lt; Normal Burst &gt;正常脉冲序列"></a>&lt; Normal Burst &gt;正常脉冲序列</h2><ul>
-<li>这个burst用于其他除FCCH/SCH/RACH/AGCH之外的所有的信道</li>
-<li>正常burst用于TCH/SDCCH/SACCH/FACCH/BCCH/PCH</li>
-</ul>
-<p>这个burst有一些重要的特征：</p>
-<ul>
-<li>一个burst中最大传输57*2=114bit的语音或者数据</li>
-<li>Flag bit是用来只是这个信道是携带的用户负载（flag=0）,或者是控制消息bit（flag=1）,也就是说，在TCH中，flag=0。在其他信道中，Flag=1。</li>
-</ul>
-<h2 id="lt-Dummy-Burst-gt-哑脉冲序列"><a href="#lt-Dummy-Burst-gt-哑脉冲序列" class="headerlink" title="&lt; Dummy Burst &gt;哑脉冲序列"></a>&lt; Dummy Burst &gt;哑脉冲序列</h2><p>这个burst像正常脉冲学列，但是没有任何有意义的bit传输。</p>
-<h1 id="多帧的帧结构"><a href="#多帧的帧结构" class="headerlink" title="多帧的帧结构"></a>多帧的帧结构</h1><p>GSM中有两种类型的多帧。一种叫控制多帧，另外一种叫负载多帧。<br>（slot–frame–multiframe(control or traffic)–super frame–hyperfame）</p>
-<p>下面一个示例描述<strong>控制多帧</strong>。每一个multi-frame有51x8个时隙，值得注意的是在每一帧的第一个时隙都用于控制信道。在这个图中，每一帧的第二个时隙用于控制信道，但是不总是这样。</p>
-<p><img src="http://img.blog.csdn.net/20151114135727168" alt="这里写图片描述"></p>
-<h1 id="通信中时隙分配"><a href="#通信中时隙分配" class="headerlink" title="通信中时隙分配"></a>通信中时隙分配</h1><p>这个实例中的部分参考下面的文档。<br><a href="http://www6.conestogac.on.ca/~mkabir/TCOM1010_ConEd_Cellular/GSM%20Phy%20Part-1.pdf" target="_blank" rel="noopener">http://www6.conestogac.on.ca/~mkabir/TCOM1010_ConEd_Cellular/GSM%20Phy%20Part-1.pdf</a><br><a href="http://www.teletopix.org/gsm/how-26-and-51-multiframes-in-gsm/" target="_blank" rel="noopener">http://www.teletopix.org/gsm/how-26-and-51-multiframes-in-gsm/</a></p>
-<p>下面的图展示了时隙层面上的结构。可以看到，最小的单位是时隙，8个时隙组成一帧。<br><img src="http://img.blog.csdn.net/20151114140217070" alt="这里写图片描述"></p>
-<p>上面的图示很接近于实际物理信号流。但是很难描述出不同的调度信息，因为基本的调度室基于帧为单元的。</p>
-<p>下面是一个<strong>traffic多帧</strong>的实例。<strong>有26个多帧用于TCH/FR和TCH/ER。</strong></p>
-<p>这个实例描述了两个用于在使用全速率语音信道FR。（一个用于使用每一帧的时隙2，另一个用户使用每一帧的时隙4）。在26帧traffic多帧的中间，也就是Frame-12，是SACCH，携带了ME和BTS之间的链路控制信息。最后的帧是一个空帧。所有剩余的帧都分配了负载。没有专用的FACCH帧或者时隙。FACCH会在需要的时候偷取TCH帧。<br><img src="http://img.blog.csdn.net/20151114140950128" alt="这里写图片描述"></p>
-<p>下面的这个是用于半速率语音信道HR的26多帧结构，两个用户使用HR语音。在这个实例中，两个用户交替共享每一帧中的时隙2。你可以注意到有两个SACCH。帧12用于用户1的SACCH，帧25用于用户2的SACCH。<br><img src="http://img.blog.csdn.net/20151114141701444" alt="这里写图片描述"></p>
-<hr>
-<p>控制信道的多帧结构更加复杂，结构会根据控制信道类型而变化。但是一个公共的地方是所有的控制信道帧结构都是基于51多帧的。</p>
-<p>下面是Beacon信道（base信道）的控制系电脑多帧结构，它是由FCCH，SCH，BCCH，CCCH组成。图中描述的是下行多帧结构。对于上行base信道中，每一帧都是用于单一信道–RACH。下行base控制信道的主要特点有：</p>
-<ul>
-<li>在51多帧结构中有5个等空间的FCCH</li>
-<li>每一个FCCH后面跟随者SCH，意味着同样有5个SCH</li>
-<li>四个帧（帧2-5）都用于BCCH</li>
-<li>最后一个帧（帧50）是空的</li>
-<li>所有剩余的帧都分配给CCCH（eg，PCH or AGCH）</li>
-</ul>
-<p><img src="http://img.blog.csdn.net/20151114142326798" alt="这里写图片描述"></p>
-<p>上面的实例真是的独立信道。（例如，传输信道和控制信道相互独立的情况）。实际上，这些调度是融合在一起的，形成一个复杂的表格。</p>
-<p><img src="http://img.blog.csdn.net/20151114142748387" alt="这里写图片描述"></p>
-<p>下面引用“GSM Phy part-1”中的描述。<br>GSM的BTS有一个或者多个GSM频率信道（ARFCN）。这些频率信道使用base-frequency（beason频率或者BCCH频率）定义的。base-frequency的第一个时隙用于base-control信道，这个频率信道剩余的部分（slot1-7）用于传输和控制信道的混合。所有的其他频率都是用于traffic，但是也可以用于控制信道。traffic和控制信道的混合取决于每一BTS的频率信道数和traffic模式。<br>例如：</p>
-<ul>
-<li>很少电话需要很少的RACH信道</li>
-<li>短电话需要很少的TCH</li>
-<li>高traffic小区有大量的频率信道，可能base-frequency信道没有traffic信道。</li>
-</ul>
-
-          
+          原文链接：http://www.sharetechnote.com/html/FrameStructure_GSM.html
+帧结构概述当我第一次学习GSM的时候，我对帧结构感到很迷惑。主要的一个原因是整个结构的每一个周期都有需要实习和帧，很难在一张纸上形象化地画出整个帧结构。我没有找到任何形象化描
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/03/GSM帧结构/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -687,7 +656,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sun-day">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -777,10 +746,15 @@
       
         
           
-            <p>当前页是基于在MS与GSM网络模拟器之间的呼叫信令处理序列。序列和消息内容的细节将根据不同网络而有些不同，但我认为这将包含呼叫处理的所有重要组成部分。在值“时间/备注”一栏只是一个参考，让您的每一步和下一步的粗糙时间间隔。这不是很精确的绝对值。<br>（这是在整个页面，我计划的早期阶段，所以我会持续更新很长一段时间）。</p>
-<p><img src="http://img.blog.csdn.net/20151121195443249" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20151121195452556" alt="这里写图片描述"></p>
-
-          
+          当前页是基于在MS与GSM网络模拟器之间的呼叫信令处理序列。序列和消息内容的细节将根据不同网络而有些不同，但我认为这将包含呼叫处理的所有重要组成部分。在值“时间/备注”一栏只是一个参考，让您的每一步和下一步的粗糙时间间隔。这不是很精确的绝对值。（这是在整个页面，我计划的早期阶段，所以我会持续更新很长
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/03/GSM-Basic-Call-Processing-Voice/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -841,7 +815,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sun-day">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -931,23 +905,17 @@
       
         
           
-            <p>在前面的博客，我们描述了UE执行评估无线电链路的状况的活动，以确定它是否是in-syn或不同步。根据供应商的实现，一个不同步指示的，可能会导致下降的会话。</p>
-<p>在这篇博客中，我们将集中在由eNodeB进行的活动在检测到无线链接失败时。</p>
-<p>失败的eNodeB可检测（再次，这些可以是供应商特定的）的类型是：<br>A）DL失败（RLC失败）<br>B）UL失败（物理层失败）。</p>
-<p><strong>在RLC层DL失败</strong></p>
-<p>在RLC层发生了故障时所通过空中发送数据或信令不成功并且所述RLC层停止尝试。当数据被发送的空气，但不正确地接收，接收机将发送NACK。此外，发射机可以发送请求对所有接收到的分组的确认，通过设置轮询位。接收机将发送所有接收到的分组的列表。如果没有接收到发送的分组时，它被认为是丢失的。在这两种情况下，发射器将重新传送。见下图。</p>
-<p>  <img src="http://lteuniversity.com/cfs-file.ashx/__key/communityserver-blogs-components-weblogfiles/00-00-00-00-92/1581.Fig1.png" alt="这里写图片描述"></p>
-<p>这个过程可以重复，但在某些时候发射器将放弃该数据包。如果出现这种情况，发射器宣称无线链路失败，并启动程序，以传达给对方。</p>
-<p>参数MaxRetxThreshold确定次数的分组被重发在RLC层中的下行链路的数目。如果这个数字达到中，eNodeB声明的DL RLC失败和“破坏”为示于下面的图像的背景。</p>
-<p>  <img src="http://lteuniversity.com/cfs-file.ashx/__key/communityserver-blogs-components-weblogfiles/00-00-00-00-92/0511.Fig2.jpg" alt="这里写图片描述"></p>
-<p><strong>在物理层UL失败</strong></p>
-<p>并非所有供应商的实现支持这种类型的故障检测。它本质上包括测量由UE在UL发送的探测参考信号（SRS）的功率。如果功率低于给定的SINR阈值，计时器被启动。如果SINR仍在定时器的整个持续时间的所述SINR的阈值，则e节点B宣告所述UL为不同步，并进入“杀死”的上下文。如果SRS的SINR变为上面的定时器持续时间期间的第二指定阈值，所述UL被说成是在型同步和没有动作的方式实施。</p>
-<p>下面，由eNodeB的执行行动都显示检测到UL物理层故障时。</p>
-<p><img src="http://lteuniversity.com/cfs-file.ashx/__key/communityserver-blogs-components-weblogfiles/00-00-00-00-92/7455.Fig3.png" alt="这里写图片描述"><br>你是对的！！！但想想后果了！</p>
-<p>是的，增加maxretxthreshold的值可能会导致由于RLC DL失败降会话的数量减少。</p>
-<p>但是，为了避免大量滴，做的最好的事情就是清理射频环境您的网络。</p>
-
-          
+          在前面的博客，我们描述了UE执行评估无线电链路的状况的活动，以确定它是否是in-syn或不同步。根据供应商的实现，一个不同步指示的，可能会导致下降的会话。
+在这篇博客中，我们将集中在由eNodeB进行的活动在检测到无线链接失败时。
+失败的eNodeB可检测（再次，这些可以是供应商特定的）的类型是：A
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/03/LTE-drop-part2/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1008,7 +976,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sun-day">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1098,33 +1066,16 @@
       
         
           
-            <p>有多种原因可以使LTE drop。然而，会话是否被丢弃依赖于特定的供应商的实现。也就是说，下降可能会由UE消息或由eNodeB进行的测量所引起的。</p>
-<p>两个UE和eNodeB可检查无线电链路是否in-syn。在该博客，我们将描述该UE执行，以确定是否所述无线电链路是in-syn及其后果的活动。这个博客的第2部分，将展示该eNodeB可进行以确定无线电链路是，同步或不活动。</p>
-<p><strong>什么时候无线链路in-syn？</strong></p>
-<p>UE监控下行链路中的RS。基于所述参考信号（即RSRP）的信号强度，则UE确定它是否能够基于在规范中提供的一组特定的参数来解码PDCCH。每个UE都会有不同的RSRP阈值，低于阈值它会认为它无法读取PDCCH。如果参考信号具有足够的强度，使得该UE能够始终如一解码PDCCH，则链路的in-syn。</p>
-<p><strong>我们如何确定无线链路不同步？</strong></p>
-<p>确定是否由于不同步而链路失败的全部程序示于下图。在画面中，有示出三个参数：</p>
-<p><strong>N310</strong>：该参数表示当UE由于检测到低的RSRP而无法成功解码PDCCH的200毫秒间隔。即该参数表示的时间内UE无法成功解码连续20帧在下行链路的数目。</p>
-<p><strong>T310</strong>：它是一个定时器，在几秒钟内，用于允许UE取回与所述eNodeB的同步。</p>
-<p><strong>N311</strong>：该参数表示的100毫秒的间隔，该UE必须成功解码所述PDCCH的数量，从而重新和eNodeB in-syn。即该参数表示的时间内在下行链路中UE必须成功解码连续10帧，为了使UE认为无线电链路是in-syn的数目。</p>
-<p>如果UE检测N310连续失同步指示，它会启动T310定时器。如果计时器超时，链接失败。如果UE检测N311连续在同步之前的T310定时器没有超时，则定时器停止，链路没有失败。</p>
-<p>  <img src="http://img.blog.csdn.net/20151122153102947" alt="这里写图片描述"></p>
-<p><strong>UE检测到链路故障后，会发生什么？</strong></p>
-<p>如果UE确定无线电链路失败，则UE将尝试重新连接的RRC连接重建请求消息。有一些情况下，可能发生基于供应商实现。</p>
-<p><strong>如果eNodeB不支持RRC连接重建呢？</strong></p>
-<p>在下面的图中所示的情况是在eNB不支持RRC连接重建时最简单的情况。在这种情况下，eNB响应RRC连接重建拒绝消息。同时，则eNB将认识到，无线链路已失败，并请求连接释放到MME。它首先请求删除UE上下文或到UE的连接。原因值被设置为“与UE丢失无线连接。”该MME将UE Context Release Command作出响应。此时，所述eNodeB将响应UE Context Release Complete消息发送到MME，并通过发送RRC Connection Release消息到UE释放与UE的RRC连接。根据不同的射频情况下，则UE可以接收或不接收该消息。</p>
-<p><img src="http://img.blog.csdn.net/20151122153701470" alt="这里写图片描述"></p>
-<p><strong>如果eNodeB确实支持RRC连接重建？</strong></p>
-<p>如果所述eNodeB支持RRC连接重建，并假设eNodeB发现两个UL和DL同步（当它接收到RRC连接重建请求消息时），可能会出现两种情况：RRC连接重建的成功和失败。</p>
-<p>在一个RRC连接重建成功的情况下，下面的信令进行交换。</p>
-<p>  <img src="http://img.blog.csdn.net/20151122153826944" alt="这里写图片描述"></p>
-<p>如果RRC连接被成功地重建，则会话不会被删除。</p>
-<p>如果RRC连接重建过程失败的其步骤之一，则eNodeB将发送UE context release request消息发送到MME。需要注意的是在RRC连接重建过程可以在几个步骤失败。下面，在图中，仅示出一个案件。</p>
-<p><img src="http://img.blog.csdn.net/20151122154058620" alt="这里写图片描述"></p>
-<p>如果RRC连接重建失败，则会话被丢弃。</p>
-<p>如果增加了RS的功率，如果增加N310，如果增加T310，或者如果你减少N311为最小值，drop数量将减少。</p>
-
-          
+          有多种原因可以使LTE drop。然而，会话是否被丢弃依赖于特定的供应商的实现。也就是说，下降可能会由UE消息或由eNodeB进行的测量所引起的。
+两个UE和eNodeB可检查无线电链路是否in-syn。在该博客，我们将描述该UE执行，以确定是否所述无线电链路是in-syn及其后果的活动。这个博客的
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/03/LTE-drop-part1/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1185,7 +1136,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sun-day">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1275,69 +1226,17 @@
       
         
           
-            <p>原文链接：<br><a href="http://lteuniversity.com/get_trained/expert_opinion1/b/lauroortigoza/archive/2012/05/09/downlink-throughput-troubleshooting.aspx" target="_blank" rel="noopener">http://lteuniversity.com/get_trained/expert_opinion1/b/lauroortigoza/archive/2012/05/09/downlink-throughput-troubleshooting.aspx</a></p>
-<hr>
-<p>在这篇博客中，我们将简要介绍下行吞吐量LTE网络与2×2 MIMO的一般故障排除指南。建议读者去寻找各自的OEM的文档，以解决每个低于探索领域的特定计数器。</p>
-<p>一般故障排除策略进行说明，并覆盖的原因，坏的吞吐量见下图。</p>
-<p>  <img src="http://img.blog.csdn.net/20151122144249125" alt="这里写图片描述"></p>
-<p>图1.低吞吐量导致的下行链路中的LTE网络。</p>
-<h2 id="第1步：确定低DL（下行链路）的吞吐量的小区"><a href="#第1步：确定低DL（下行链路）的吞吐量的小区" class="headerlink" title="第1步：确定低DL（下行链路）的吞吐量的小区"></a>第1步：确定低DL（下行链路）的吞吐量的小区</h2><p>a）第一件事就是找出那些低吞吐量的小区。此阈值由网络策略和做法定义（这也取决于你的设计参数）。报告应运行几天使得数据在统计学上是有效的。</p>
-<h2 id="第2步：确定下行链路干扰"><a href="#第2步：确定下行链路干扰" class="headerlink" title="第2步：确定下行链路干扰"></a>第2步：确定下行链路干扰</h2><p><strong>a）</strong>小区的下行链路干扰是那些CQI值比较低（一个例外是当大部分的流量是在小区边缘（小区位置不好））。分析由UE报告的CQI值。</p>
-<ol>
-<li>发射分集</li>
-<li>MIMO一层</li>
-<li>MIMO两层</li>
-</ol>
-<p>针对发射分集的典型值在7到8之间。</p>
-<p>用于MIMO一层和两层典型值10到12之间。</p>
-<p><strong>b）</strong>若获得CQI报告之后发现低CQI值，下行干扰可能是低吞吐量的原因。</p>
-<p><strong>c）</strong>普通干扰的来源是，在700 MHz频段（LTE部署在美国）：互调干扰，小区干扰器和无线麦克风</p>
-<h2 id="步骤3：BLER值"><a href="#步骤3：BLER值" class="headerlink" title="步骤3：BLER值"></a>步骤3：BLER值</h2><p>a）确定小区特定的BLER报告。BLER应小于10％或相等。如果该值较大，那么，这就是RF环境不好的指示。</p>
-<p>B）不良BLER的典型原因是下行干扰，覆盖不好（在网络中孔等）</p>
-<h2 id="步骤4：MIMO参数"><a href="#步骤4：MIMO参数" class="headerlink" title="步骤4：MIMO参数"></a>步骤4：MIMO参数</h2><p>a）确定你的网络的传输方式。有七种传输模式中所示的下表</p>
-<p><img src="http://img.blog.csdn.net/20151122145711879" alt="这里写图片描述"></p>
-<p>b）调整由OEM建议的传输模式的SINR阈值。请求链路级仿真它们用于设置这些阈值，看看是否被计算在该值的条件适用于您的网络。否则，更新它们如果参数可设置并没有限制。</p>
-<h2 id="第5步：低需求"><a href="#第5步：低需求" class="headerlink" title="第5步：低需求"></a>第5步：低需求</h2><p>a）使用由OEM提供的计算方法运行报告</p>
-<ol>
-<li>每小区支持的RRC连接的最大数目（参数或功能）</li>
-<li>每个小区活性的RRC连接最大数量</li>
-<li>每个小区活跃RRC连接平均数</li>
-<li>每个TTI每小区支持的的最大用户数（参数或功能）</li>
-<li>在感兴趣的小区（多个）用户每个TTI调度的最大数量</li>
-<li>每个TTI在感兴趣的小区（多个）的平均用户数量</li>
-</ol>
-<p>b）若每个小区活性的无线资源控制连接最大数量是接近或等于RRC连接的支持的最大数量，则低吞吐量的原因是负载过大。</p>
-<p>c）在每个TTI有大量的调度的用户并不一定意味着需求是导致低吞吐量。</p>
-<h2 id="第6步：调度类型"><a href="#第6步：调度类型" class="headerlink" title="第6步：调度类型"></a>第6步：调度类型</h2><p>a）找到OEM支持的调度类型</p>
-<p>b）选择一个是更方便的您正在调查的小区的类型。调度的例子有：循环赛，比例公平，最大C / I，平等机会等OEM允许你切换调度网络中，但推荐一个特别。</p>
-<p>c）错误的调度可能是坏的吞吐量的原因。</p>
-<h2 id="第7步：CQI报告参数"><a href="#第7步：CQI报告参数" class="headerlink" title="第7步：CQI报告参数"></a>第7步：CQI报告参数</h2><p>a）检查您的网络是否使用周期性或非周期性CQI报告（或两者）。</p>
-<p>b）核实CQI报告进行定期报告的频率以及每秒支持的用户的最大数量。</p>
-<p>c）若与RRC活动连接的最大数目相比较，这个值过小，那么，增加的参数CQIConfigIndex与RIConfigIndex。</p>
-<p>D）如果您的网络不使用非周期性CQI报告，然后启用它。</p>
-<p>E）CQI慢频率报告可能会产生不好的信道估计，可能组织eNodeB的数据调度和给UE适量的调制和编码方案。</p>
-<h2 id="步骤7：其他"><a href="#步骤7：其他" class="headerlink" title="步骤7：其他"></a>步骤7：其他</h2><p>a）运行的VSWR报告或要求您的OEM来运行它。</p>
-<p>b）VSWR过高导致低吞吐量。</p>
-<p>c）检查您的回程容量。很多时候，回程链路多种RAT中共享。请确保您的回程正确尺寸。</p>
-<p>在这种方法的结束时，你将能够确定是否在你的小区低的原因是通过以下或者其组合，它们中的一个：</p>
-<ul>
-<li><p>BLER（坏的报道）</p>
-</li>
-<li><p>下行干扰（坏CQI）</p>
-</li>
-<li><p>MIMO参数</p>
-</li>
-<li><p>调度算法</p>
-</li>
-<li><p>低需求</p>
-</li>
-<li><p>CQI报告频率</p>
-</li>
-<li><p>其他（VSWR，回程容量）</p>
-</li>
-</ul>
+          原文链接：http://lteuniversity.com/get_trained/expert_opinion1/b/lauroortigoza/archive/2012/05/09/downlink-throughput-troubleshooting.aspx
 
-          
+在这篇博客中，我们将简要介绍下
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/03/LTE下行吞吐量Troubleshooting/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1398,7 +1297,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sun-day">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1488,20 +1387,16 @@
       
         
           
-            <p>原文链接：<a href="http://lteuniversity.com/get_trained/expert_opinion1/b/hongyanlei/archive/2010/02/18/how-to-calculate-peak-data-rate-in-lte.aspx" target="_blank" rel="noopener">http://lteuniversity.com/get_trained/expert_opinion1/b/hongyanlei/archive/2010/02/18/how-to-calculate-peak-data-rate-in-lte.aspx</a></p>
-<p>您可能会听到很多次了，LTE的峰值数据速率约为300Mbps的？如何计算出来的数字？背后什么是假设？让我们用一个简单的方法估计它。假设20 MHz信道带宽，正常的CP，4×4 MIMO。</p>
-<p>首先，计算资源元素（RE）的数目与20MHz信道带宽的子帧：12个子载波×7个OFDMA符号×100个资源块×2个时隙=每子帧16800个RE。每个RE可携带调制符号。<br>其次，假设64 QAM调制，并没有编码，一个调制符号将携带6位。总比特在子帧（1ms的）超过20MHz信道是16800调制符号×6比特/调制符号= 100800比特。所以数据速率为100800比特/ 1毫秒= 100.8 Mbps的。<br>第三，具有4×4的MIMO，峰值数据速率上升至100.8 Mbps的×4 = 403 Mbps的。<br>第四，估计约25％的开销，例如PDCCH，参考信号，同步信号，PBCH，和一些编码。我们得到403 Mbps的x 0.75 = 302 Mbps的。<br>好吧，它是通过估算完成。有没有一种方法更准确地计算呢？如果这是你寻找什么，你需要检查3GPP规范36.213，表7.1.7.1-1和表7.1.7.2.1-1。表7.1.7.1-1显示MCS（调制和编码方案）指数和TBS（传输块大小）指数之间的映射。让我们挑选的最高MCS索引28（64 QAM用最少的编码），这是映射26.  表7.1.7.2.1-1 TBS指数表示传输块大小。这表明可以在一个子帧/ TTI（发送时间间隔）中发送的比特数。例如，具有100个RB和TBS 26指数，TBS是75376.  假定4×4的MIMO，峰值数据速率将是75376×4 = 301.5 Mbps的。</p>
-<p>表7.1.7.1-1：调制和TBS索引表PDSCH（3GPP TX 36.213）</p>
-<p> <img src="http://img.blog.csdn.net/20151122133808914" alt="这里写图片描述"></p>
-<p>表7.1.7.2.1-1：传输块大小表（3GPP TS 36.213）</p>
-<p> <img src="http://img.blog.csdn.net/20151122134132494" alt="这里写图片描述"></p>
-<p>[Q：想尝试一个小的锻炼？在这里，您是：什么是峰值数据速率，如果MCS 20时？假定信道带宽为10MHz和的2×2MIMO配置。]</p>
-<p>我们还知道，有不同的设备能力，这在3GPP TS 36.306，表4.1-1和4.1-2表定义。例如，与cat2装置中，所支持的峰值数据速率是在DL大约50 Mbps的速度，UL约为25Mbps。所有的UE类应该支持所有的信道带宽（1.4 / 3/5/10/15/20 MHz）的所有双工模式（FDD / TDD / H-FDD）LTE中。cat1〜4的设备最多可支持在DL的2×2MIMO。只有cat5设备可以支持在UL DL和64QAM的4×4 MIMO。</p>
-<p>现在，如果cat3装置用在与2×2的MIMO配置一个10MHz的信道，可以得到100 Mbps的在DL的峰值数据率是多少？让我们来计算。我们知道，在网络侧，峰值数据速率是300Mbps的用于与4×4的MIMO信道的20MHz，所以10MHz的2×2MIMO峰值数据速率是75 Mbps的。因此，如果cat3装置10 MHz与2×2的MIMO信道的，预期的峰值数据速率通过空中接口是：min （设备能力，网络能力）=min （cat3，10MHz的带的​​2×2MIMO）=（100， 75）= 75 Mbps的。</p>
-<p>你声称你掌握了峰值数据速率计算之前，还有一件事，QoS 配置中还可以限制对用户期望的实际峰值数据速率的限制。</p>
-<p>答：39.7 Mbps的。</p>
-
-          
+          原文链接：http://lteuniversity.com/get_trained/expert_opinion1/b/hongyanlei/archive/2010/02/18/how-to-calculate-peak-data-rate-in-lte.aspx
+您可能会听到很多次了，LTE的峰
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/03/LTE峰值数据率的计算方法/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1562,7 +1457,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sun-day">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1652,40 +1547,16 @@
       
         
           
-            <p>原文链接<br><a href="http://lteuniversity.com/get_trained/expert_opinion1/b/prakash/archive/2013/04/24/discontinuous-reception-drx-in-rrc-idle-part-2.aspx" target="_blank" rel="noopener">http://lteuniversity.com/get_trained/expert_opinion1/b/prakash/archive/2013/04/24/discontinuous-reception-drx-in-rrc-idle-part-2.aspx</a></p>
-<p>在空闲模式下的UE监听PDCCH信道P-RNTI用于寻呼从基站接收寻呼消息。 UE需要只在某些特定的UE寻呼时机来监视PDCCH，即只在特定的无线电帧特定子帧。在其他时间，UE可以进入睡眠模式，以节省电池电量。该DRX参数和各DRX参数的意义，在这个博客的第一部分讨论。一个DRX参数“NB”是用于寻呼容量在小区中的决定因素。让我们来讨论不同的方案在这个博客考虑NB的不同的价值观和理解上的寻呼容量这个参数的影响。</p>
-<h2 id="方案1：NB-T-2"><a href="#方案1：NB-T-2" class="headerlink" title="方案1：NB = T / 2"></a>方案1：NB = T / 2</h2><p>  <img src="http://img.blog.csdn.net/20151122142842008" alt="这里写图片描述"></p>
-<p>观察：</p>
-<ul>
-<li>UE需要唤醒每32毫秒，并查找寻呼消息（共32个无线帧UE的DRX周期）</li>
-<li>其中每2无线帧（NB = 16），可在UE的DRX周期的寻呼。即总共16个寻呼帧单元中配置的</li>
-<li>按照寻呼帧的一个寻呼子帧（NS = 1），可用于寻呼</li>
-<li>根据预定义的图案对于FDD，为Ns个= 1，i_s = 0，子帧9被用于寻呼在寻呼帧</li>
-<li><p>总的跨哪些UE基于UE标识分布式16寻呼时机（NB = 16）每UE的DRX周期。</p>
-<p><img src="http://img.blog.csdn.net/20151122143018434" alt="这里写图片描述"></p>
-</li>
-</ul>
-<h2 id="方案2：NB-2T"><a href="#方案2：NB-2T" class="headerlink" title="方案2：NB = 2T"></a>方案2：NB = 2T</h2><p>  <img src="http://img.blog.csdn.net/20151122143025459" alt="这里写图片描述"></p>
-<p>观察：</p>
-<ul>
-<li>每一个无线帧是寻呼帧</li>
-<li>每PF（NS = 2）2子帧中的UE的DRX周期用于寻呼</li>
-<li>根据预定义的图案对于FDD，为Ns个= 2和i_s = 0，子帧0和4被用于寻呼在寻呼帧和寻呼时机用于UE中的讨论，是子帧4</li>
-<li><p>32寻呼帧和64寻呼场合（NB = 64）是内UE的DRX周期跨越哪些UE基于UE标识分布式可用。</p>
-<p><img src="http://img.blog.csdn.net/20151122143033644" alt="这里写图片描述"> </p>
-</li>
-</ul>
-<h2 id="方案3：NB-4T"><a href="#方案3：NB-4T" class="headerlink" title="方案3：NB = 4T"></a>方案3：NB = 4T</h2><p> <img src="http://img.blog.csdn.net/20151122143040746" alt="这里写图片描述"> </p>
-<p>观察：</p>
-<ul>
-<li>每一个无线帧是寻呼帧</li>
-<li>每PF（NS = 4）的4个子帧中的UE的DRX周期用于寻呼</li>
-<li>根据预定义的图案用于FDD为Ns个= 4，子帧0,4,5和9用于寻呼在用于UE中讨论的寻呼帧和寻呼时机是子帧5</li>
-<li>32寻呼帧和128寻呼场合（NB = 128）是内UE的DRX周期可以跨哪些UE基于UE标识分布式</li>
-</ul>
-<p><img src="http://img.blog.csdn.net/20151122143048985" alt="这里写图片描述"></p>
-
-          
+          原文链接http://lteuniversity.com/get_trained/expert_opinion1/b/prakash/archive/2013/04/24/discontinuous-reception-drx-in-rrc-idle-part-2.aspx
+在空闲模式下的UE监听P
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/03/LTE-Discontinuous-Reception-DRX-in-RRC-IDLE-Part-2/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1746,7 +1617,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sun-day">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1836,47 +1707,17 @@
       
         
           
-            <p>原文链接：<br><a href="http://lteuniversity.com/get_trained/expert_opinion1/b/prakash/archive/2013/04/17/discontinuous-reception-drx-in-rrc-idle-part-1.aspx" target="_blank" rel="noopener">http://lteuniversity.com/get_trained/expert_opinion1/b/prakash/archive/2013/04/17/discontinuous-reception-drx-in-rrc-idle-part-1.aspx</a></p>
-<hr>
-<p>RRC空闲模式期间由UE执行的一个重要活动是监听寻呼消息。该UE应该监听寻呼消息了解来电，系统信息的变化，并ETWS（地震和海啸预警服务）通知ETWS的UE。在LTE中，UE需要连续监视PDCCH（每1ms）用于P-RNTI的收听寻呼消息和这将会导致UE电池功耗严重。相反，如果允许UE监视的P-RNTI的PDCCH中，仅在规定期间，比如说每60毫秒或100毫秒，这将减少UE的功率消耗。不连续地监视的PDCCH用于P-RNTI的过程期间RRC空闲状态被称为在RRC_IDLE非连续接收（DRX）收听寻呼消息。</p>
-<h2 id="什么是LTE终端的空闲模式？"><a href="#什么是LTE终端的空闲模式？" class="headerlink" title="什么是LTE终端的空闲模式？"></a>什么是LTE终端的空闲模式？</h2><ul>
-<li>UE与核心网络之间不存在的NAS信令连接</li>
-<li>至少一个PDN连接中存在</li>
-<li>UE被注册的MME＆EMM上下文存在于MME</li>
-<li>UE位置是已知的MME与跟踪区域的列表的精度</li>
-<li>UE与eNB之间不存在RRC连接</li>
-<li>该基站没有上下文信息</li>
-</ul>
-<h2 id="空闲模式的寻呼"><a href="#空闲模式的寻呼" class="headerlink" title="空闲模式的寻呼"></a>空闲模式的寻呼</h2><p>寻呼是处于RRC空闲模式或EMM注册状态用来发送寻呼消息到UE的一个过程。寻呼消息可以通过MME在核心网络或eNB触发。</p>
-<h2 id="不连续接收的寻呼"><a href="#不连续接收的寻呼" class="headerlink" title="不连续接收的寻呼"></a>不连续接收的寻呼</h2><p>UE的寻呼信息由在由PDCCH指示的资源块PDSCH上承载。在PDCCH上寻呼指示是单一固定指示器（FFFE）称为寻呼-RNTI（P-RNTI）。不同UE群组的监视其寻呼消息不同的子帧。</p>
-<p>在空闲模式下的UE监听PDCCH信道P-RNTI用于从基站接收寻呼消息。 UE只在某些特定的UE寻呼时机来监视PDCCH，即只在特定的无线电帧特定子帧。在其他时间，UE可以去为睡眠模式，以节省电池电量。</p>
-<p>让我们来讨论UE如何能够找出寻呼帧和寻呼时机的寻呼消息。</p>
-<p><strong>寻呼帧（PF）</strong>：一个寻呼帧（PF）是一个无线帧，其中UE正在寻找寻呼消息。一个寻呼帧可以含有一个或多个寻呼时机。</p>
-<p><strong>寻呼时机（PO）</strong>：这是在有可能的P-RNTI发送PDCCH上寻址用于UE的寻呼消息的子帧。对每个UE来说，在DRX周期中永远只有一个寻呼时机。</p>
-<p>要找出PF（寻呼帧）和PO（寻呼场合），UE使用广播系统信息SIB2 DRX参数。</p>
-<p>  <img src="http://img.blog.csdn.net/20151122140053452" alt="这里写图片描述"></p>
-<h2 id="DRX参数的意义"><a href="#DRX参数的意义" class="headerlink" title="DRX参数的意义"></a>DRX参数的意义</h2><p><strong>DRX周期</strong>：表示在寻呼周期的无线电帧的数目。这个参数的值越大，UE电池功耗越少。而DRX周期的值小，增加在UE电池功耗。 DRX周期可以是特定小区或UE特定的参数。当它被在eNB上配置并在系统信息中的SIB2作为默认寻呼周期广播到所有UE，这样的DRX周期是小区特异性的。 当DRX周期是UE特定的时，MME可以配置DRX周期，并在NAS信令中’UE特定的DRX周期“将其提供给UE和向eNB中的PAGING S1 AP消息为”寻呼DRX’（对于MME发起的寻呼消息）。UE和基站将使用默认和专用的DRX周期这两个中最小的一个。<br><img src="http://img.blog.csdn.net/20151122140956411" alt="这里写图片描述"></p>
-<p>128个无线帧的DRX周期，需要UE每隔1.28秒唤醒，并查找寻呼消息。</p>
-<p><strong>nB</strong>：在小区中特定的DRX周期用于指示寻呼时机的小区特定参数。 nB值的配置取决于小区中所需的寻呼容量。 nB的值配置为较大的，具有较大的寻呼容量。同样地，较小的寻呼容量时nB的值越小。</p>
-<p>  <img src="http://img.blog.csdn.net/20151122141315127" alt="这里写图片描述"></p>
-<p>与此我们可以推断，一个最大1无线帧的可每UE以用于寻呼的DRX周期。此外，每无线电帧1的子帧的4个子帧的最小（NB≤1T）和最大（对于NB = 4T）可用于为UE寻呼消息。</p>
-<h2 id="寻呼帧号的计算"><a href="#寻呼帧号的计算" class="headerlink" title="寻呼帧号的计算"></a>寻呼帧号的计算</h2><p>eNB和UE计算由以下关系的寻呼帧号码：</p>
-<p>  <img src="http://img.blog.csdn.net/20151122141441292" alt="这里写图片描述"></p>
-<p>该基站将寻呼接收UE_ID从MME S1AP消息“UE标识指数值”为MME发起的寻呼消息。</p>
-<p>UE将找出UE_ID通过关系IMSI国防部1024（编号：TS 36.304 7.1）</p>
-<p>该IMSI是作为类型整数（0..9）的数字序列。该IMSI应，在上述式中，被解释为一个十进制整数，其中该序列中给出的第一个数字代表的最高阶位。</p>
-<p>例如：IMSI = 12（digit1 = 1，digit2 = 2）。在计算中，这应被解释为十进制整数“12”，而不是“1×16 + 2 = 18”。</p>
-<h1 id="寻呼时机的计算（在一个寻呼帧寻呼子帧号）"><a href="#寻呼时机的计算（在一个寻呼帧寻呼子帧号）" class="headerlink" title="寻呼时机的计算（在一个寻呼帧寻呼子帧号）"></a>寻呼时机的计算（在一个寻呼帧寻呼子帧号）</h1><p>  <img src="http://img.blog.csdn.net/20151122141608110" alt="这里写图片描述"></p>
-<p>  <img src="http://img.blog.csdn.net/20151122141615165" alt="这里写图片描述"></p>
-<p>从基于Ns的值的预定义子帧模式（36.304第7.2节，下面所示为快速参考）中获得的寻呼场合为UE，i_s。例如，如果Ns个= 2和i_s = 1中，UE解释该子帧4和9被配置用于寻呼在小区和子帧9是用于它寻呼时机。</p>
-<p>副车架模式（参考：TS 36.304 7.2节）</p>
-<p>FDD</p>
-<p>  <img src="http://img.blog.csdn.net/20151122141542773" alt="这里写图片描述"></p>
-<p>TDD（所有DL / UL模式）</p>
-<p><img src="http://img.blog.csdn.net/20151122141553971" alt="这里写图片描述"></p>
-<p>《end》</p>
+          原文链接：http://lteuniversity.com/get_trained/expert_opinion1/b/prakash/archive/2013/04/17/discontinuous-reception-drx-in-rrc-idle-part-1.aspx
 
-          
+RRC空闲模式期间由
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/03/LTE-Discontinuous-Reception-DRX-in-RRC-IDLE-Part-1/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1937,7 +1778,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sun-day">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -2027,49 +1868,15 @@
       
         
           
-            <p>什么是设备故障的处理最棘手的部分？我的经验说：“如果做一些使用时中间的问题发生，就比较容易找到问题的根源并解决它（可能是我可能有过分简化的情况 - :)，但是如果有的话开始前发生了一件事，那将是一场噩梦。”例如，您设置的所有参数在网络仿真器要测试一个UE，然后打开了UE。在几秒之后，UE开始启动，然后再几秒之后，你看到一对的信号条在UE屏幕顶部的地方..然后在几秒钟内你看到’SOS’或’服务不可用“，而不是显示在屏幕和普通天线条网络运营商的名称。这就是我所说的“问题做一些中间”。在这种情况下，如果你收集客户端日志和设备日志，至少你可以很容易地针点出了问题发生的位置，并从那里开始的进一步细节。但如果你是在这种情况下怎么办？您将所有的参数在网络仿真器侧并打开UE .. UE启动开机..显示消息说“搜索网络…”，结果卡在那里..没有信号条吧..连“SOS”都没有..只是说“不服务”。我收集了UE侧记录和网络仿真器端日志，但没有信令消息。这是我们头痛的开始。</p>
-<p>作为例子，<br>1）当你在WCDMA UE打开，如果你没有看到’RRC Connection Request’？<br>2）当你对GSM UE打开，若您没有看到 ‘Channel Request’？<br>3）当你的LTE UE打开，如果你没有看到 ‘RACH Preamble’ ？</p>
-<p>首先你要做的是了解不仅在更高的信令层这一过程的每一个细节，也要涉及到关于这一步从高层到物理层一直下去的每一个细节。而你也必须使用适当的设备可以显示这些详细的过程。如果您有不提供日志记录的设备或提供日志，但只有高层信令日志，这将是很难解决。既然你有合适的工具，接下来的事情，你必须做好准备是要了解这些过程的详细知识。没有知识，即使有好的工具，这并不意味着任何东西给我。所以 ，我想在这里教我关于LTE信号的第一步，这是RACH过程。 （有人会说，即使在RACH之前，还有很多其他的步骤，如频率同步，时间同步，MIB / SIB解码..但它把这些放在一边，现在..因为它更像是基带处理）。</p>
-<p><strong>为什么RACH？ （RACH什么功能？）</strong></p>
-<p>当你第一次听到这个词RACH或RACH过程时，在你的心中第一个问题将是“为什么RACH？”，“什么是RACH过程，功能/目的是什么？”，“为什么我们需要这种复杂（看起来过分复杂的）？“。<br>肯定的，这不是为了混淆你:)，RACH具有非常重要的功能，尤其在LTE中（在WCDMA中也一样）。 </p>
-<p><strong>RACH的主要目的可以如下所述。</strong><br>1）实现高达UE与eNB之间链路同步<br>2）为消息3获取资源（例如，RRC连接请求）</p>
-<p>在大多数的通信（无论它是有线或无线的，特别是数字通信中），最重要的先决条件是建立接收机和发射机之间的定时同步。所以，无论你学习什么通信技术，你会看到一种是专门特定的通信同步机制。</p>
-<p>在LTE（在WCDMA中也一样），在下行链路的同步（发送是基站，接收机是UE），这种同步是通过特别的同步​​信道（专用物理信号模式）来实现的。请参阅时间同步处理页面的详细信息。这个下行同步信号被广播给大家，它是以一定的时间间隔一直发送的。<br>然而，在上行链路（发射机是UE，接收机是eNB），如果UE正在使用广播/始终发送同步机制，它是没有效率的（实际上浪费能源，造成了很多其他UE的干扰）。你可以很容易地理解这样的问题。在上行链路的情况下，这种同步过程应符合下列标准<br>1）仅仅在立即需要的时候才应该发生同步过程<br>2）同步应该只专用于特定UE</p>
-<p>在这个页面中关于程序讨论的所有复杂的专门设计机制，都满足这些标准。</p>
-<p>RACH过程的另一目的是为消息3获得资源（消息3）。 RRC连接请求是消息3的一个例子，根据不同的情况，有几种不同类型的消息3。你会找出这部分通过此网页阅读，这是不是很复杂，很好理解。</p>
-<p><strong>什么时候RACH发生？</strong></p>
-<p>当你想到WCDMA中RRC连接发生时（或当PRACH发生时），这将很好帮助你理解。当你想到GSM中信道请求发生时，这将很好帮助你理解。</p>
-<p>我的LTE RACH过程的印象是PRACH过程（WCDMA）和信道请求（GSM）的组合。它可能不是100％正确的比喻……但无论如何，我得到了这样的印象。在LTE中，RACH过程发生在下列情况下（3GPP规范中，36.300 10.1.5随机接入过程）<br>1）RRC_IDLE首次访问<br>2）RRC连接重建程序<br>3）切换（基于竞争的还是非竞争为主）<br>4）在RRC_CONNECTED状态DL数据到达，需要随机接入过程。例如，当UL同步状态为非同步<br>5）在RRC_CONNECTED 状态UL数据到达，需要随机接入过程。例如，当UL同步状态为“非同步”或不存在可以使用SR的PUCCH资源。<br>6）对于RRC_CONNECTED 状态下定位目的，需要随机接入过程;    例如。当UE定位需要定时超前TA</p>
-<p><strong>两种类型的RACH过程：基于竞争和非竞争的</strong></p>
-<p>当UE发送PRACH前导码，它发送特定的序列，这个序列被称为“签名”。在每个LTE小区，总共64个前导签名可用与UE随机选择这些签名中的其中一个。</p>
-<p>UE选择“随机”这些签名中的其中一个？<br>这是否意味着有一些可能性，即多个UE发送PRACH具有相同的签名？是。有这样的可能性。它意味着同样的PRACH前置码从多个UE同时到达NW..这种PRACH碰撞被称为“争用”。在RACH过程中，允许这种类型的“争用”被称为“基于竞争”的RACH过程。在这种基于竞争的RACH过程，网络会经历另外的过程，在稍后的步骤来解决这些争用和这个过程被称为“竞争解决”步骤。</p>
-<p>但有一些情况下，这些种类的争用是不能接受的，由于某些原因（例如，时序限制），这些争用可被防止。通常在这种情况下，网络通知使用的每个确切时间和UE的前导签名。当然，在这种情况下，网络将分配这些前导签名，以便它不会发生碰撞。这种RACH过程被称为“无竞争”RACH程序。要启动的“无竞争”RACH过程中，UE应在连接模式的RACH过程，在切换之前。</p>
-<p><strong>典型的“基于竞争的”RACH程序如下：</strong><br>1）UE - &gt;NW  ：RACH前导码（RA-RNTI，指示L2 / L3消息的大小）<br>2）UE &lt; - NW ：随机接入响应（定时提前TA，T_C-RNTI，对L2 / L3消息的UL授权）<br>3）UE - &gt;NW ：L2 / L3消息<br>4）关于早竞争解决的消息</p>
-<p>现在让我们假设一个竞争发生在步骤1）。例如，两个UE发送PRACH。在这种情况下，在步骤2）两个UE的将收到同一T_C-RNTI和资源分配。其结果是在步骤3），UE将通过相同的资源分配（具有相同的时间/频率位置）发送L2 / L3消息到NW。会发生什么，当两个UE的发射在完全相同的时间/频率位置完全相同的信息？一种可能性是，这两个信号充当彼此干扰和NW都不能解码码它们。在这种情况下，没有UE能获得从NW任何响应（HARQ ACK），并且它们都认为RACH过程失败，并返回到步骤1）。另一种可能性将是NW可以成功地从仅一个UE解码所述消息并且未能另外一个UE的解码。在这种情况下，NW成功的L2 / L3解码的UE将从网络得到HARQ ACK。此HARQ ACK过程步骤3）消息被称为“竞争解决”的过程。</p>
-<p><strong>典型的“无竞争”RACH程序如下：</strong><br>1）UE &lt; - NW：RACH前导码（PRACH）分配<br>2）UE - &gt;NW：RACH前导码（RA-RNTI，指示L2 / L3消息的大小）<br>3) UE &lt; - NW：随机接入响应（定时提前，C-RNTI，UL授权L2 / L3消息）</p>
-<p><strong>信息是如何编码成PRACH（RACH前导）？</strong></p>
-<p>在LTE中，在PRACH前导码之后所有的信息（数据）都具有其自己的二进制结构，这意味着它们翻译成一定的数据结构。然而，在PRACH前导码中的信息是由纯粹的物理特性表示的。形成的信息中的PRACH物理性质如下。<br>1）PRACH前导码传输时序（t_id）<br>2）PRACH传输的频域位置（F​​_ID）<br>3）PRACH信号的整个I / Q数据的序列（如下所示的一个示例）</p>
-<p><img src="http://img.blog.csdn.net/20151121104544870" alt="这里写图片描述"></p>
-<p>从1）和2）中，RA-RNTI被描述下面的链接中。从3）中，可以得出前导码索引（RAPID）。<br>在了解RA RNTI的推导时，你可能不会有太大的困难，但它不会是那么简单理解序列索引部分的推导。涉及到这个过程，大多数本页面有很多公式和复杂的表格，但我不认为我的工作做得很好以至于可以简单/清楚地描述这一部分。我将在未来添加其他短节，当我把一切都理清了。在此同时，请参阅Matlab的LTE工具箱：PRACH页面在你的大脑获得直观的形象，并了解在本页面PRACH前导信号生成部的部分。当然，你不会得到一切都一样。没有那么简单的工程:)</p>
-<p><strong>究竟在何时何一个UE的发射RACH？</strong><br>要回答这个问题，你需要参考3GPP规范TS36.211 - 表5.7.1-2。<br><img src="http://img.blog.csdn.net/20151121165747335" alt="这里写图片描述"></p>
-<p>它准确显示当UE应该根据一个所谓的“PRACH配置索引”参数来发送RACH。</p>
-<p>例如，如果UE正在使用“PRACH配置索引0”时，它应该只在偶数SFN（系统帧号）发送所述RACH。这是足够好的答案吗？这是否意味着该UE可以以指定的SFN在任何时间发送RACH呢？这个问题回的答案在表中的“子帧号”列。它说：“1”为“PRACH配置索引0”。它意味着在UE仅被允许在每一个偶数SFN的子帧号1上发送的RACH。</p>
-<p>检查你的表的理解，我会给你一个问题。使用哪个“PRACH配置索引”，网络能更容易的检测到来自UE的RACH？为什么？<br>答案是14，因为UE可以在任何SFN和帧内的任何时隙发送RACH。</p>
-<p>在一个大的图片上，你应该知道，如下图的所有维度。 （红色矩形是PRACH信号）。<br><img src="http://img.blog.csdn.net/20151121170341665" alt="这里写图片描述"></p>
-<p>该R_Slot由PRACH配置指标确定，R_length由Premable格式决定。当前导码格式0〜3时，F_offset由以下方程决定。 这个方程式中n_RA_PRBoffset是由PRACH-FreqOffset在SIB2规定。 （参考36.2115.7物理随机接入信道的细节）<br><strong>&lt; FDD &gt;</strong><br><img src="http://img.blog.csdn.net/20151122133051207" alt="这里写图片描述"><br><strong>&lt; TDD : Preamble format 0-3 &gt;</strong><br><img src="http://img.blog.csdn.net/20151122133116489" alt="这里写图片描述"><br><strong>&lt; TDD : Preamble format 4 &gt;</strong><br><img src="http://img.blog.csdn.net/20151122133134946" alt="这里写图片描述"></p>
-<p><strong>什么是前导码格式？</strong><br> 如果你看到上面的表5.7.1-1展示，你看到标题为“序言格式”的列。什么是前导码格式？它被定义为下面的图。</p>
-<p>你会看到，PRACH前导码的长度取决于前导码格式。例如，PRACH前导码格式0的长度为（3186+24567）的抽样。 （如你所知，一个抽样（TS）为1/30.72（=0.03255）us，它在36.2114帧结构定义为1 /（15000×2048）s（=0.03255us））。</p>
-<p><img src="http://img.blog.csdn.net/20151130164127081" alt="这里写图片描述"></p>
-<p>你可能会问：“为什么我们需要这么多个前导码格式？”，特别是“为什么我们需要与不同时间长度的不同PRACH格式？”。<br>其中一个主要的原因是，他们使用根据小区的半径不同使用不同的前导码格式，但是这是过于简单的回答。<br>我想推荐一本名为“LTE：UMTS的从理论到实践”第19.4.2的PRACH结构。这是描述PRACH在最详细的级别我曾经阅读材料。</p>
-<p>正如简短的结论为小区大小，我们可以如下重写表。<br><img src="http://img.blog.csdn.net/20151130164352694" alt="这里写图片描述"></p>
-<p>Note 1 : T_CP (in ms) = T_CP(in Ts) x 0.03255 x 1/1000,<br>Note 2 : T_SEQ (in ms) = T_SEQ(in Ts) x 0.03255 x 1/1000,<br>Note 3 : Guard Time (in ms) = Number of Subframe - Total Length<br>Note 4 : 小区半径大约是电磁波传输距离除以2。</p>
-<p><strong>如何网络知道什么时候UE将发送RACH？</strong></p>
-<p>这很简单。网络知道当UE将发送所述RACH之前UE发送它，因为网络通知UE的当UE应该发送所述RACH。 （如果UE未能正确地解码有关的RACH的网络信息，网络将无法检测到它，即使UE发送RACH）。</p>
-<p>以下部分将描述在RACH网络，情报。</p>
-<p>其中RRC消息中包含RACH配置？</p>
-<p>正是在SIB2，你可以找到在3GPP36.331的细节。</p>
-
-          
+          什么是设备故障的处理最棘手的部分？我的经验说：“如果做一些使用时中间的问题发生，就比较容易找到问题的根源并解决它（可能是我可能有过分简化的情况 - :)，但是如果有的话开始前发生了一件事，那将是一场噩梦。”例如，您设置的所有参数在网络仿真器要测试一个UE，然后打开了UE。在几秒之后，UE开始启动，然
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/03/LTE-RACH过程/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2145,6 +1952,10 @@
       <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="sun-day" />
             
               <p class="site-author-name" itemprop="name">sun-day</p>
               <p class="site-description motion-element" itemprop="description"></p>
@@ -2258,6 +2069,24 @@
 
           
           
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.google.com/" title="Google" target="_blank">Google</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.baidu.com/" title="百度" target="_blank">百度</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
 
           
             
@@ -2283,11 +2112,11 @@
       <div class="footer-inner">
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+<div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2018</span>
   <span class="with-love" id="animate"> 
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">sun-day</span>
+  <span class="author" itemprop="copyrightHolder">true</span>
 
   
 
@@ -2317,7 +2146,30 @@
 
 
 
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共110.2k字</span>
+</div>
+
         
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
 
 
 
@@ -2458,6 +2310,35 @@
   
 
   
+  
+
+  
+  
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+  
+
 
   
   

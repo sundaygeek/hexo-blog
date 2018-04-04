@@ -17,6 +17,13 @@
 
 
 
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
 
 
 
@@ -41,6 +48,32 @@
 
 
 
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
 
 
 
@@ -77,7 +110,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '6.1.0',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: false,
     fastclick: false,
     lazyload: false,
@@ -304,7 +337,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sun-day">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -394,19 +427,16 @@
       
         
           
-            <p>原文链接：<br><a href="http://lteuniversity.com/get_trained/expert_opinion1/b/hongyanlei/archive/2009/08/06/cqi-reporting-in-lte.aspx" target="_blank" rel="noopener">http://lteuniversity.com/get_trained/expert_opinion1/b/hongyanlei/archive/2009/08/06/cqi-reporting-in-lte.aspx</a></p>
-<p>CQI = Channel Quality Indicator;信道质量指示;<br>RI = rank indication;秩指示;<br>PMI = Precoding Matrix Indicator;预编码矩阵指示;</p>
-<p>CQI用来反映下行PDSCH的信道质量。用0~15来表示PDSCH的信道质量。0表示信道质量最差，15表示信道质量最好。<br>–&gt;UE在PUCCH/PUSCH上发送CQI给eNB。eNB得到了这个CQI值，就质量当前PDSCH无线信道条件好不好。 这样就可以有根据的来调度PDSCH。<br>–&gt;换句话说，LTE中下行的自适应编码调制（AMC）的依据是什么？其中一个依据就是CQI。<br>–&gt;再通俗一点的说法：信道质量好，那eNB就多发送点数据；信道质量不好，那就保险点，少发送点数据。</p>
-<p>RI用来指示PDSCH的有效的数据层数。用来告诉eNB，UE现在可以支持的CW数。也就是说RI=1，1CW，RI&gt;1，2 CW. CW-Code Word码字</p>
-<p>PMI用来指示码本集合的index。由于LTE应用了多天线的MIMO技术。在PDSCH物理层的基带处理中，有一个预编码技术。<br>–&gt;这里的预编码简单的说，就是乘以各种不同的precoding矩阵。而这个矩阵，可以采用TM3这样没有反馈的方式。<br>–&gt;也可以采用TM4这样通过UE上报PMI来决定这个预编码矩阵。从原理上说，这样使得PDSCH信号是最优的。</p>
-<p>下行的传输模式(TM)很多，在R9版本下行定义了TM1~TM8；其中TM4,6,8的情况下，才需要有PMI的反馈。</p>
-<p>更多详细的内容参见36.211、213。</p>
-<p>CQI（信道质量指示）报告是LTE的一个重要因素，并具有对系统性能显著影响。有两种类型的CQI报告在LTE中：周期性和非周期性。周期性CQI报告是由PUCCH携带。但是，如果UE需要在同一子帧发送的UL数据，周期性CQI报告将使用的PUSCH，连同UL数据传输。这是因为UE不能PUCCH和PUSCH的同时发送。在此情况下，周期性PUCCH资源将是空闲的。由于定期CQI报告带来了“永远在线”的信令开销，报告粒度相对粗糙。为了获得更详细的CQI报告，则eNB可以在需要时触发不定期CQI报告。非周期性CQI报告被发送PUSCH上，连同UL数据或独自发送。</p>
-<p>CQI报告的粒度可分为三个层次：宽带，UE选择的子带，和更高层配置的子带。宽带报告为整个下行链路系统带宽一个CQI值。该UE选择子带CQI报告将系统带宽划分为多个子带，选择一组优选子带（最好的M个子带）中，然后报告了宽带和一个差分CQI值设定一个CQI值（假设传输只能通过选择M个子带）。高层配置的子带报告提供了最高的粒度。它将整个系统带宽划分为多个子带，然后报告一个宽带CQI值和多个差分CQI值，每个子带一个。</p>
-<p>在闭环MIMO的情况下，PMI（预编码矩阵指示符）和RI（秩指示）也报告。基于对接收的参考信号的评价，PMI指示在eNB应该使用多个天线进行数据传输中的码本（预先约定的参数）。 RI指示传输层，该UE能够区分的数目。只有当RI&gt; 1，空间复用可被支持。对于空间复用，CQI是基于每码字的报告。码字的LTE中的最大数目是2。</p>
-<p>在LTE中有七种传输模式，每一个对应于某多天线技术。对于每个传输模式下，CQI报告的某些组合在规范中定义的基础上，定期/不定期，宽带/ UE选择的子带/更高层配置的子带，没有PMI /单PMI /多PMI。因为RI变化比CQI / PMI慢，所以用一个较长的时间间隔报告。它与CQI / PMI报告一起在非周期性的报告，因为PUSCH资源是有限的。</p>
-
-          
+          原文链接：http://lteuniversity.com/get_trained/expert_opinion1/b/hongyanlei/archive/2009/08/06/cqi-reporting-in-lte.aspx
+CQI = Channel Quality Indicator;信道
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/04/LTE-参数CQI-RI-PMI/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -467,7 +497,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sun-day">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -532,20 +562,16 @@
       
         
           
-            <p>ubuntu(16.04)创建windows启动U盘，使用woeusb，而不是dd</p>
-<p>使用dd创建经常不能启动，听说是必须使用isohybrid转换以后才能到u盘（另外，对于克隆linux系统，如果已经有现成的linux系统，安装一个squashfs-tools,直接把光盘里的根unsquashfs拷贝到一个分区，然后chroot进去改一下密码就行了）</p>
-<p>那么我们必须使用另外一个工具：woeusb</p>
-<p>安装：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:nilarimogard/webupd8  </span><br><span class="line">sudo apt update   </span><br><span class="line">sudo apt install woeusb</span><br></pre></td></tr></table></figure>
-<p>图形界面的使用就不讲了，讲了命令行的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo woeusb --device &lt;/path/to/windows.iso&gt; &lt;device&gt;  </span><br><span class="line">for example  </span><br><span class="line">sudo woeusb --device /home/windows.iso /dev/sdc</span><br></pre></td></tr></table></figure></p>
-<p>Update: if you get an error like this: “Error: Partition(s) on /dev/sdb are being used” when WinUSB / WoeUSB tries to format the USB stick from the command line, or “Error 256” in the beginning of the process when using the GUI, you must unmount the partitions. Firstly, to get a list of partitions, run the following command (“mount” also works):<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -aTh</span><br></pre></td></tr></table></figure></p>
-<p>This should list all the partitions mounted on your system. If you got here, you should already know the USB device drive, e.g. /dev/sdc, so you need to look for the partitions (it could also only be one) on this drive, like /dev/sdc1, /dev/sdc2, etc. Then, unmount them like this (example):<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo umount /dev/sdc1  </span><br><span class="line">sudo umount /dev/sdc2</span><br></pre></td></tr></table></figure></p>
-<p><img src="/2018/04/04/转载-ubuntu下使用woeusb创建windows启动U盘/2018-04-04 07-33-22屏幕截图.png" alt="你想输入的替代文字"></p>
-<p><img src="/2018/04/04/转载-ubuntu下使用woeusb创建windows启动U盘/2018-04-04 07-34-23屏幕截图.png" alt="你想输入的替代文字"></p>
-<p><img src="/2018/04/04/转载-ubuntu下使用woeusb创建windows启动U盘/2018-04-04 07-34-39屏幕截图.png" alt="你想输入的替代文字"></p>
-<p><img src="/2018/04/04/转载-ubuntu下使用woeusb创建windows启动U盘/2018-04-04 07-34-55屏幕截图.png" alt="你想输入的替代文字"></p>
-
-          
+          ubuntu(16.04)创建windows启动U盘，使用woeusb，而不是dd
+使用dd创建经常不能启动，听说是必须使用isohybrid转换以后才能到u盘（另外，对于克隆linux系统，如果已经有现成的linux系统，安装一个squashfs-tools,直接把光盘里的根unsquashfs拷
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/04/转载-ubuntu下使用woeusb创建windows启动U盘/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -606,7 +632,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sun-day">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -689,19 +715,20 @@
       
         
           
-            <p>通信类：</p>
-<p>RTLSDR<br>USRP<br>Hacking RF </p>
-<p>流行的开源硬件<br>Arduino<br>Raspberry Pi</p>
-<p>树莓派社区<br><a href="http://www.raspberrypi.org/community/" target="_blank" rel="noopener">http://www.raspberrypi.org/community/</a></p>
-<p>Arduino论坛<br><a href="http://forum.arduino.cc/" target="_blank" rel="noopener">http://forum.arduino.cc/</a></p>
-<p>几个不错的开源硬件社区<br><a href="http://www.openhardware.net/" target="_blank" rel="noopener">http://www.openhardware.net/</a><br><a href="https://wiki.debian.org/open_hardware" target="_blank" rel="noopener">https://wiki.debian.org/open_hardware</a><br><a href="http://p2pfoundation.net/Category:Design" target="_blank" rel="noopener">http://p2pfoundation.net/Category:Design</a><br><a href="http://harkopen.com/" target="_blank" rel="noopener">http://harkopen.com/</a></p>
-<p>还有一些不错的HACK网站 ，以下这两个都是比较有意思的硬件hack的网站<br><a href="http://hackaday.com/" target="_blank" rel="noopener">http://hackaday.com/</a><br><a href="http://hackedgadgets.com/" target="_blank" rel="noopener">http://hackedgadgets.com/</a></p>
-<p>几个有意思的开源硬件项目<br>Hacking RF项目<br><a href="http://greatscottgadgets.com/hackrf/" target="_blank" rel="noopener">http://greatscottgadgets.com/hackrf/</a></p>
-<p>开源汽车<br><a href="http://www.osvehicle.com/download/" target="_blank" rel="noopener">http://www.osvehicle.com/download/</a></p>
-<p><a href="http://www.oschina.net/news/47698/10-incredible-open-source-hardware-projects-in-2013?from=20140112" target="_blank" rel="noopener">http://www.oschina.net/news/47698/10-incredible-open-source-hardware-projects-in-2013?from=20140112</a></p>
-<p><a href="http://www.csdn.net/article/2014-06-30/2820457/1" target="_blank" rel="noopener">http://www.csdn.net/article/2014-06-30/2820457/1</a><br><a href="http://www.csdn.net/article/2014-06-30/2820457/2" target="_blank" rel="noopener">http://www.csdn.net/article/2014-06-30/2820457/2</a></p>
-
-          
+          通信类：
+RTLSDRUSRPHacking RF 
+流行的开源硬件ArduinoRaspberry Pi
+树莓派社区http://www.raspberrypi.org/community/
+Arduino论坛http://forum.arduino.cc/
+几个不错的开源硬件社区http://w
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/03/开源硬件列表/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -762,7 +789,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sun-day">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -845,11 +872,16 @@
       
         
           
-            <p>修改树莓派更新源及设置代理配置</p>
-<p>更新源<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">默认树莓派的更新源使用的是英国的源，速度奇慢；改成国内树莓派的更新源方法，看下边：</span><br><span class="line"></span><br><span class="line">备份源列表文件</span><br><span class="line">sudo cp /etc/apt/sources.list /etc/apt/sources.list.old</span><br><span class="line"></span><br><span class="line">在这里找到适合国内的更新源，我一般使用的是中科大的源</span><br><span class="line"></span><br><span class="line">编辑源列表</span><br><span class="line">sudo nano /etc/apt/sources.list</span><br><span class="line"></span><br><span class="line">删除原先的内容</span><br><span class="line">deb http://mirror.ox.ac.uk/sites/archive.raspbian.org/archive/raspbian wheezy main contrib non-free rpi</span><br><span class="line"></span><br><span class="line">修改成以下内容</span><br><span class="line">deb http://mirrors.ustc.edu.cn/raspbian/raspbian/ wheezy main contrib non-free rpi</span><br><span class="line"></span><br><span class="line">Ctrl + X确认并保存</span><br><span class="line"></span><br><span class="line">系统更新（看速度是否上来了）</span><br><span class="line">sudo apt-get update</span><br><span class="line"></span><br><span class="line">sudo apt-get upgrade</span><br></pre></td></tr></table></figure></p>
-<p>代理设置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">有时候上网需要设定代理，方法看这边：</span><br><span class="line"></span><br><span class="line">到下面的路径</span><br><span class="line">cd /etc/apt/apt.conf.d</span><br><span class="line"></span><br><span class="line">新建一个名为10proxy的文件</span><br><span class="line">sudo nano 10proxy</span><br><span class="line"></span><br><span class="line">编辑其中内容</span><br><span class="line">sudo nano /etc/apt/apt.conf.d/10proxy</span><br><span class="line"></span><br><span class="line">如果不需要认证，以下格式即可</span><br><span class="line">Acquire::http::Proxy &quot;http://web-proxy.corp.xx.com:8080&quot;;</span><br><span class="line"></span><br><span class="line">如果需要认证，按照以下格式</span><br><span class="line">Acquire::http::Proxy &quot;http://username:password@yourproxyaddress:proxyport/&quot;;</span><br><span class="line"></span><br><span class="line">Ctrl + X确认并保存，然后查看树莓派是否可以在代理下上网</span><br></pre></td></tr></table></figure></p>
-
-          
+          修改树莓派更新源及设置代理配置
+更新源12345678910111213141516171819202122默认树莓派的更新源使用的是英国的源，速度奇慢；改成国内树莓派的更新源方法，看下边：备份源列表文件sudo cp /etc/apt/sources.list /etc/apt/sources.l
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/03/树莓派更新源及设置代理配置/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -910,7 +942,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sun-day">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -993,9 +1025,15 @@
       
         
           
-            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install ttf-wqy-zenhei</span><br><span class="line">sudo apt-get install scim-pinyin</span><br><span class="line">sudo raspi-config</span><br><span class="line">然后选择change_locale，在Default locale for the system environment:中选择zh_CN.UTF-8,配置完成之后，输入命令</span><br><span class="line">sudo reboot</span><br></pre></td></tr></table></figure>
-
-          
+          12345sudo apt-get install ttf-wqy-zenheisudo apt-get install scim-pinyinsudo raspi-config然后选择change_locale，在Default locale for the system environment:
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/03/树莓派配置中文输入法/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1056,7 +1094,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sun-day">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1139,10 +1177,17 @@
       
         
           
-            <p>树莓派配置静态wlan IP<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">路径 /etc/network/interfaces</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://img.blog.csdn.net/20161213224413481?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbW91c2UxNTk4MTg5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+          树莓派配置静态wlan IP1路径 /etc/network/interfaces
+
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/03/树莓派配置静态WLAN-IP/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1203,7 +1248,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sun-day">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1286,12 +1331,19 @@
       
         
           
-            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo raspi-config</span><br></pre></td></tr></table></figure>
-<p><img src="http://img.blog.csdn.net/20161212233839072?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbW91c2UxNTk4MTg5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p><img src="http://img.blog.csdn.net/20161212233909697?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbW91c2UxNTk4MTg5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p><img src="http://img.blog.csdn.net/20161212233957932?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbW91c2UxNTk4MTg5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+          1sudo raspi-config
+
+
+
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/03/树莓派-配置raspi-config/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1352,7 +1404,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sun-day">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1435,16 +1487,23 @@
       
         
           
-            <p>树莓派-蓝牙1<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bluetoothctl</span><br></pre></td></tr></table></figure></p>
-<p><img src="http://img.blog.csdn.net/20161212233506571?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbW91c2UxNTk4MTg5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pair</span><br><span class="line">paired-devices</span><br></pre></td></tr></table></figure>
-<p><img src="http://img.blog.csdn.net/20161212233543516?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbW91c2UxNTk4MTg5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">scan off</span><br><span class="line">power off</span><br><span class="line">exit</span><br></pre></td></tr></table></figure>
-<p><img src="http://img.blog.csdn.net/20161212233640220?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbW91c2UxNTk4MTg5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">help</span><br></pre></td></tr></table></figure>
-<p><img src="http://img.blog.csdn.net/20161212234725436?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbW91c2UxNTk4MTg5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+          树莓派-蓝牙11bluetoothctl
+
+12pairpaired-devices
+
+123scan offpower offexit
+
+1help
+
 
           
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/03/树莓派-蓝牙-基础/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1505,7 +1564,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sun-day">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1595,50 +1654,18 @@
       
         
           
-            <p>&lt;continute….&gt;</p>
-<h1 id="LTE特有的测量"><a href="#LTE特有的测量" class="headerlink" title="LTE特有的测量"></a>LTE特有的测量</h1><p>尽管LTE射频测量类似于其他技术有许多共同的特征，有几个测量是LTE唯一的。你能猜出这将是LTE具体测试？如果你还记得的LTE信号，我上面描述的独特性能，你会做一个很好的猜测。</p>
-<p><strong>IBE（In-Band Emission 带内放射)</strong></p>
-<p>LTE的最独特的特征之一将是，在大多数情况下，UE不使用全系统带宽，这意味着它仅使用一部分射频带宽。对于射频特性而言，RF频带的这部分使用不会引起任何严重的问题，但如果所述部分被分配给中心频率的另外一边呢？你会看到频谱如下。（我无法解释这幅画的细节。只要仔细看，并试图在这张照片看，你会知道这个意思，为什么我们需要衡量这个项目）。UE发射器设计目标是尽量减少在中心频率和其他部分（image signal）的发射。</p>
-<p><img src="http://img.blog.csdn.net/20151121145609329" alt="这里写图片描述"></p>
-<p><strong>功率控制 - 绝对功率容差</strong></p>
-<p>当UE发送第一PUSCH发送时，功率由P0-NominalPUSCH和PUSCH功率控制算法来确定。这项测试是为了检查UE是否根据P0-NominalPUSCH和PUSCH功率控制算法设置精确的初始PUSCH功率（这和我们所说的在3G网络中开环功率控制不同的，当我们说“开环功率控制”，它通常意味着初始的PRACH功率。相反，绝对功率容差约为初始PUSCH功率）。</p>
-<p><img src="http://img.blog.csdn.net/20151121145957856" alt="这里写图片描述"></p>
-<p><strong>功率控制 - 相对功率容差</strong></p>
-<p>另一个方面我想提的是关于功率的控制。总体功率控制测试方法和WCDMA ILPC（内环功率控制）测试是非常相似的。网络（SS）发送TPC命令（发送功率控制命令）的连续序列，就像Up, Up, Up, Up… Down, Down, Down, Down,… 并检查UE是否正确解码命令，并设置UE TX各UP / DOWN指令（+ 1dB，1dB）指示功率。 LTE采用了类似的方法。但是，如果你看到下面的测试，你会看到在中间有一个巨大的跳跃，这是不与WCDMA相同。这是否意味着LTE具有特殊的TPC命令状10分贝或-10 dB的跳转呢？<br>您在测试中看到的大的跳跃不是因为大的TPC命令的结果，而是RB的数量增加的结果。即使UE在每个子载波上发送相同的功率，如果UE正在使用更多的子载波，总功率就会变大。</p>
-<p> <img src="http://img.blog.csdn.net/20151121150351397" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20151121150412730" alt="这里写图片描述"></p>
-<p><strong>总功率控制容差</strong></p>
-<p>这个测试是用来检查在无任何附加调整情况下，UL功率如何保持平稳。这个测试项是重要的，因为有在此期间，有很多种情况就像测量间隙或连接模式DRX时，UE将不能在接收任何功率控制的命令。<br>由于该功率稳定被应用于PUCCH和PUSCH两者，此测试是有两个子试验，一个用于PUCCH和另一个用于PUSCH，如下所示。</p>
-<p>下图是PUCCH总功率控制公差。<br><img src="http://img.blog.csdn.net/20151121150921446" alt="这里写图片描述"></p>
-<p>下图是PUSCH总功率控制公差。<br><img src="http://img.blog.csdn.net/20151121151022594" alt="这里写图片描述"></p>
-<h1 id="射频测试设备与-UE连接图"><a href="#射频测试设备与-UE连接图" class="headerlink" title="射频测试设备与 UE连接图"></a>射频测试设备与 UE连接图</h1><p><img src="http://img.blog.csdn.net/20151121151649559" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20151121151858462" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20151121151905415" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20151121151911838" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20151121151918384" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20151121151925351" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20151121151934946" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20151121151940907" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20151121151949589" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20151121151957066" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20151121152004345" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20151121152011470" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20151121152024320" alt="这里写图片描述"></p>
-<h1 id="射频一致性测试"><a href="#射频一致性测试" class="headerlink" title="射频一致性测试"></a>射频一致性测试</h1><p>射频一致性测试的总体协议序列在36.508定义。但大多数的设备供应商有一个小的变化。我把下面有一个例子序列。</p>
-<p>1) MIB<br>2) SIB 1, 2, 3<br>3) RRC : PRACH Preamble<br>4) RRC : RACH Response<br>5) RRC : RRC Connection Request<br>6) RRC : RRC Connection Setup<br>7) RRC : RRC Connection Setup Complete + NAS : Attach Request<br>8) RRC : DL Information Transfer + NAS : Authentication Request<br>9) RRC : UL Information Transfer + NAS : Authentication Response<br>10) RRC : DL Information Transfer + NAS : Security Mode Command<br>11) RRC : UL Information Transfer + NAS : Security Mode Complete<br>12) RRC: DLInformationTransfer + TC: ACTIVATE TEST MODE<br>13) RRC: ULInformationTransfer + TC: ACTIVATE TEST MODE COMPLETE<br>14) RRC : Security Mode Command<br>15) RRC : Security Mode Complete<br>16) RRC: UECapabilityEnquiry<br>17) RRC: UECapabilityInformation<br>15) RRC : RRC Connection Reconfiguration + NAS : Attach Accept + NAS : Activate Default EPS Bearer Context Req<br>16) RRC : RRC Connection Reconfiguration Complete + NAS : Attach Complete<br>17) RRC : RRC Connection Release<br>&lt; MO or MT call &gt; : In MT call, Paging should be sent.<br>18) RRC : PRACH Preamble<br>19) RRC : RACH Response<br>20) RRC : RRC Connection Request<br>21) RRC : RRC Connection Setup<br>22) RRC : RRC Connection Setup Complete<br>23) RRC : Security Mode Command<br>24) RRC : Security Mode Complete<br>25) RRC : RRC Connection Reconfiguration<br>26) RRC : RRC Connection Reconfiguration Complete<br>&lt; Perform Test Case &gt;<br>27) RRC : RRC Connection Release</p>
-<p>和普通的呼叫处理协议序列不同的一个重要步骤，主要不同的部分是“TC：ACTIVE TEST MODE”。这一部分中详细地下列规格说明。</p>
-<p>36.509 - 6.5 ACTIVATE TEST MODE<br>36.509 - 5.3.2.3 Reception of ACTIVATE TEST MODE message by UE</p>
-<p>不像在UMTS测试模式，LTE射频一致性测试的测试模式不建立环回模式。 LTE中的测试模式的主要目的，在36.509中描述 - 5.3.2.3如下。</p>
-<p>当UE测试模式是激活的，则UE应当接受任何请求建立数据无线承载与相关联的EPS承载上下文，既包含在相同RRC消息，并在UE的无线接入功能。</p>
-<h1 id="射频一致性测试-TRX一致性（36-521-1）"><a href="#射频一致性测试-TRX一致性（36-521-1）" class="headerlink" title="射频一致性测试 - TRX一致性（36.521-1）"></a>射频一致性测试 - TRX一致性（36.521-1）</h1><p>似乎很多人都认为射频一致性仅用于测试手机的射频前端部分的性能/功能。这可能是事实，但这些测试的最终目的是为了确保UE在实网中的没有任何问题。所以每个测试项目都是和实网中的一个或多个步骤相关联。<br>因此，具有实网中UE和网络之间交互过程的大画面是非常重要的，并发现这些一致性测试项目和步骤与实网过程/步骤之间的相关性。<br>经常有人问我：“为什么我们需要测试这些测试项目？这些试验的目的是什么？”。如果你看到的3GPP规范（36.521），以查找对此类问题..答案被描述在“试验目的”部分，如下所示。<br>下面的例子是6.3 动态输出功率。</p>
-<p><strong>当功率设置为最小值时，为了验证该UE是否有能力以一个低于测试设备上指定的输出功率传输。</strong></p>
-<p>这是否有任何意义吗？至少对我来说，没有太多。这说明有利于测试成功或者失败的标准，但并没有给我的测试目的有任何实际意义。</p>
-<p>我建议是描述整个活网络程序以高层的水平如下，并尝试各一致性测试用例来映射到您的高层描述的步骤中。<br>1）UE处于关闭状态<br>2）UE开机<br>3）&lt;频率搜索&gt;<br>4）&lt;小区搜索&gt;：正常情况下，在这个过程中UE会发现多个小区<br>5）&lt;小区选择&gt;<br>6）MIB解码<br>7）SIB 解码<br>8）&lt;初始RACH过程&gt;<br>9）&lt;注册/验证/连接&gt;<br>10）&lt;默认EPS承载设置&gt;<br>11）现在UE处于空闲模式<br>12）&lt;（如果当前的电池变弱或UE移动到另一个小区注册）小区重选&gt;<br>13）&lt;（当寻呼消息到来或用户拨打电话）RACH过程&gt;<br>14）&lt;设置专用EPS承载&gt;<br>15）接收数据<br>16）发送数据<br>17）（如果网络接收到UE功率太弱）网络发送TPC命令来增加UE Tx功率<br>18）（如果网络接收到UE功率太强）网络发送TPC命令减少UE Tx功率<br>19）&lt;（如果UE移动到另一小区区域）的网络和UE执行切换过程&gt;<br>20）用户停止呼叫，UE进入空闲模式</p>
-<p>如果你只是一味地寻找到一致性测试规范，你可能会对大量的测试用例的数量不知所措。有没有可能让我理解所有这些？我必须放弃挖掘细节，只按测试系统上的按钮，并采取盲目测试而不管机器吐出来什么东西？<br>但是，一旦你得到了这些测试用例的大图，你会发现，所有这些测试用例可以分组称为这个框架的一部分。</p>
-<p>首先我对你的建议是去理解每章的概念（大图），而不是直接跳跃到每个测试用例。</p>
-<p>让我们来看看TRX一致性36.521-1的每个章节。这四个章节都与上述的3）5）19）相关联的。<br>第6章，第7章是直截了当，他们是测试最广泛的，从开发阶段到生产线的测试。看到第8章的标题，你可能会得到一点点的混淆，当我们说“性能”，很多人会认为“IP吞吐量”。但在这种情况下，它是不正确的。在这种情况下，“性能”是指“UE如何在各种嘈杂的信道条件成功解码下行链路信号”。第9章是衡量“UE如何精确地测量各种信道条件，并报告给网络？”。总之，它是测量CQI（信道质量指示符），RI（秩指数），PMI（预编码矩阵索引）。<br><img src="http://img.blog.csdn.net/20151121154136289" alt="这里写图片描述"></p>
-<p>现在，让我们看看在每章每一个测试用例。<br>第6章（发射机特性）有以下测试用例。正如你看到的，它只是衡量UE发射功率的不同情况和数据调制质量。大部分的测试项目，是LTE独有的。</p>
-<p>第7章几乎是和WCDMA相同的接收机的测量。基本上这些测试用例都是测量多少数据被正确解码，在各种UE的接收机功率（网络传输功率）多少数据丢失。</p>
-<p>第8章主要是测试关于各种嘈杂/衰落信道条件下，UE如何解调重要的下行信号（例如，PDSCH，PCFICH/ PDCCH，PHICH）。正如你可能已经猜到，这些测试用例是用像A9，A10，A11的测试系统配置（如前面的章节（TS36.508附录A））。</p>
-<p>第9章是用于测量UE关于无线信道状态各种反馈（CQI，RI，PMI）。对于这个测量，我们要模仿各种信道条件，所以我们需要使用像A9，A10等测试配置如前面的章节（TS36.508附录A）</p>
-<h1 id="射频一致性测试-RRM一致性（36-521-3）"><a href="#射频一致性测试-RRM一致性（36-521-3）" class="headerlink" title="射频一致性测试 - RRM一致性（36.521-3）"></a>射频一致性测试 - RRM一致性（36.521-3）</h1><p><img src="http://img.blog.csdn.net/20151121164425240" alt="这里写图片描述"></p>
-<h1 id="射频-物理层性能测试概述"><a href="#射频-物理层性能测试概述" class="headerlink" title="射频/物理层性能测试概述"></a>射频/物理层性能测试概述</h1><p>性能测试RF/ PHY的基本理念是非常简单的。正如在下面的图中所见，一个DUT（UE）连接至SS（信令模拟器），单个小区和衰减器和AWGN，被连接到下行链路路径。<br>目的是测试UE如何能够在恶劣的信道条件解码的各种下行链路物理信道（例如，在AWGN和/或衰落的存在）。</p>
-<p><img src="http://img.blog.csdn.net/20151121164702118" alt="这里写图片描述"></p>
-<p>你可以找到来自36.521-18性能要求的性能测试的细节。有此章中相当多的测试用例如前一节的表格，但我们可以简化整套测试在一个简单的表如下。</p>
-<p><strong>测试信道（UE必须解码的信道）</strong><br>PDSCH，PCFICH/ PDCCH，PBCH，PHICH<br><strong>测试参数（测试条件）</strong><br>Rho A，Rho B，NOC，调制方式<br><strong>衰落条件</strong><br>EVA5，ETU70，ETU300，HST<br><strong>SNR</strong><br>-1.0〜19.1</p>
-<p>注意：如果你有兴趣更详尽的测试，是指物理层吞吐量/性能测试（我个人的测试）</p>
-<p><img src="http://img.blog.csdn.net/20151121164927871" alt="这里写图片描述"></p>
-<p><img src="http://img.blog.csdn.net/20151121165031959" alt="这里写图片描述"></p>
-<p>《end》</p>
-
-          
+          &lt;continute….&gt;
+LTE特有的测量尽管LTE射频测量类似于其他技术有许多共同的特征，有几个测量是LTE唯一的。你能猜出这将是LTE具体测试？如果你还记得的LTE信号，我上面描述的独特性能，你会做一个很好的猜测。
+IBE（In-Band Emission 带内放射)
+LTE的最独
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/03/RF-Test-and-Measurement-2/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1699,7 +1726,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sun-day">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1789,47 +1816,16 @@
       
         
           
-            <p>在任何无线通信设备，我们必须要经过两个大组的测试。一个用于检测发射路径，另一个用于测试接收路径。</p>
-<p>用于无线通信装置要正常工作，它应满足下面的硬件要求<br>1）该装置应传输是足够强大的功率，使之确保它到达通信对方的信号要求。<br>2）设备不应发送太强的信号，而干扰其他各方之间的通信信号。<br>3）该装置应发送足够好的信号质量，另一方可解码/校正的信号。<br>4）该装置应当在已分配的用于通信的精确频率上发射信号。<br>5）装置不应该产生任何噪音，除了分配给该装置的频率区域之外的其他频率区域。</p>
-<p>如果任何这些条件和规范偏离过多，该装置不能与另一方进行通信或不能让一些其它设备进行通信。在测量设备中，1）和2）属于“功率测量”，3）是有关“调制分析”和4）属于“频率误差测量”。5）也是一种“功率测量”的，但是测量区的频域范围和1）2）不同。无论如何，如果你有一个可以执行以下三个测量你的通信技术的任何设备，你可以做传输路径的最关键的部分。</p>
-<p>A）功率测量<br>B）调制分析<br>C）频率误差测量</p>
-<p>现在，让我们想想接收路径测量。什么是用于通信设备的最重要的接收机特性？<br>1）本接收机必须能够成功地解码从发射器来的信号，即使信号强度是很低。<br>二）接收机必须能够成功地解码发射机传来的信号，即使当有一定水平的信号周围噪声。</p>
-<p>在测量逻辑中，1）和2）的条件是相同的。设备发送已知信号，并让接收机解码，来比较由接收机解码信号和设备的原来信息有多大不同。差别越大，表明接收机质量越差。我们称这种方法叫“BER（误码率）测量”。1）是在输入信号非常低是测量BER，2）是在有噪声的输入信号时测量BER。</p>
-<p>在我们前进到LTE测量之前，随便选中你已经很熟悉的技术，在你的测试计划列出来要测量的列表，并试图映射这些项目与我上面描述的测量原理。一旦你熟悉这种映射，你就会更容易明白LTE测量项目。</p>
-<h1 id="LTE射频测量项目"><a href="#LTE射频测量项目" class="headerlink" title="LTE射频测量项目"></a>LTE射频测量项目</h1><p>现在，让我们来一点点看看LTE射频测量的细节。第一件事，我所做的是使来自3GPP36.521-1测量项目清单，并试图映射我的测量原理与每个测量项目。</p>
-<p>在这里，首先进入的发射机测量项目。你看很多的“功率测量”和一些“调制分析”。为什么我们有这么多不同的功率测量和多种不同调制分析。他们如何各不相同？这是你必须要找到自己的答案。答案本身在3GPP36.521-1描述，但问题是，我多少可以理解所描述，那里只是通过阅读它。</p>
-<p>第一步读每个测试的情况下的“测试目的”，“初始条件”，“测试程序”一节，并尝试至少要熟悉每个测试用例。<br><img src="http://img.blog.csdn.net/20151121110837593" alt="这里写图片描述"><br>下面是一些接收机测试项<br><img src="http://img.blog.csdn.net/20151121110919547" alt="这里写图片描述"></p>
-<h1 id="LTE上行信号的RF测试快照"><a href="#LTE上行信号的RF测试快照" class="headerlink" title="LTE上行信号的RF测试快照"></a>LTE上行信号的RF测试快照</h1><p>正如我刚才所说，仅仅通过阅读说明书，这是不容易理解LTE射频测量的所有细节。我已阅读测试案例的目的，“初始条件”，“测试程序”一遍一遍地……但还是一切都是模糊的。当我试图让更多的进入细节，第一个障碍，阻止我的是很多描述测试条件复杂表。当然，我们看到了这种在其他技术规范像CDMA，WCDMA表，但似乎表LTE测量看起来更大，更复杂。所以，我决定去看看一些在频谱分析仪的说明书中描述的信号模式，以便我能得到的每个条件的整体RF特性的一些直观的想法。</p>
-<p>例如，下表显示了关于MPR（最大功率衰减）的每个子测试的试验条件。如果你看到第一列上行链​​路配置 - RB分配。您将看到资源块分配的各种不同情况为同一道带宽。一些子试验使用“最大RB号”（FULL的RB）的特定信道的BW，但一些子测试的使用RB数，它比RB（部分的RB）的最大数目要少。</p>
-<p><img src="http://img.blog.csdn.net/20151121111529151" alt="这里写图片描述"></p>
-<p>&lt; Full RB Signals &gt;<br><img src="http://img.blog.csdn.net/20151121111609984" alt="这里写图片描述"></p>
-<p><img src="http://img.blog.csdn.net/20151121111705373" alt="这里写图片描述"></p>
-<p><img src="http://img.blog.csdn.net/20151121111729183" alt="这里写图片描述"></p>
-<p><img src="http://img.blog.csdn.net/20151121111751147" alt="这里写图片描述"></p>
-<p><img src="http://img.blog.csdn.net/20151121111758264" alt="这里写图片描述"></p>
-<p>&lt; Partial RB signals &gt;<br>对于分配的RB的数量小于最大的RB（特别是指当RB的数量小于1/2最大的RB，可以有根据信号的位置，有许多不同的情况。例如，该信号可以位于在信道的最左侧或在中心或者最右边。从理论上讲，它可以位于频带的任何地方，但射频一致性仅指定三个地点作为测试点，低范围，中范围，高范围。最低范围意味着，从信道的最左侧的信号开始，中间装置的信号位于所述通道的中心，高范围意味着该信号是在的最右边侧渠道。</p>
-<p>下面的示例信号是从生成一个非常好的信号质量的矢量信号发生器和功率也非常低，所以你看到的只是信号的一部分，没有任何载波泄漏或带图像。但在现实中，你会看到在大多数的情况下的载波泄漏和带图像信号。</p>
-<p><img src="http://img.blog.csdn.net/20151121112225747" alt="这里写图片描述"></p>
-<p><img src="http://img.blog.csdn.net/20151121112242470" alt="这里写图片描述"></p>
-<p><img src="http://img.blog.csdn.net/20151121112258765" alt="这里写图片描述"></p>
-<p>尽管我们每隔几年都有新的技术和LTE对很多人来说是新的，RF测试和测量技术与其他无线通信技术具有很多共同点。如果你有经验，任何无线技术，如CDMA，GSM，WCDMA，蓝牙，WLAN，您可能会发现在LTE的共同逻辑。</p>
-<h1 id="对于LTE射频测试挑战"><a href="#对于LTE射频测试挑战" class="headerlink" title="对于LTE射频测试挑战"></a>对于LTE射频测试挑战</h1><p>在LTE测量中，UE开发或测试工程师面临的最大挑战将是，有太多的不同的参数设置。我进一步详细太多的子测试之前，我想通过从C2K整体射频测量简要说明。</p>
-<p>我对C2K测量没有太多经验，但只有一点点的经验，我可以告诉你们，有在这方面相对于比较WCDMA / HSDPA，C2K测量项目要少得多，甚至相比GSM / GPRS网络相比较。至于我记得，下面是所有我做过的<strong>C2K</strong>。</p>
-<p>1）总信道功率<br>2）CDP（码域功率）<br>3）Rho<br>4）频谱辐射<br>5）ACLR<br>6）OBW（占用带宽）</p>
-<p>但是，上面列出的项目超过我经历的C2K。对于一致性，我想我们可能要经过所有这些项目。但由于C2K是非常成熟的技术，现在在射频部分的开发阶段，我们不会去通过所有的这些测试项目。我听到的一个极端的情况下，“只是测量总功率，如果没有问题的。通常其它部件没有问题”。</p>
-<p>现在让我们看看到<strong>WCDMA</strong>。对于WCDMA R99（non-HSPA），如果我简要地列入名单</p>
-<p>1）最大功率<br>2）最小功率<br>3）开/关功率<br>4）RACH 功率<br>5）EVM<br>6）频谱辐射<br>7）ACLR<br>8）OBW（占用带宽）</p>
-<p>在名单上，它看起来并不像从C2K太大的差别。但实际上工程师将满足这看起来可能C2K完全不同的各种特性。我们能想到的第一件事是，和C2K相比，信道带宽得到了两倍，这将引入大量复杂的RF设计。另一个问题是在WCDMA的RACH过程比C2K的探测过程中添加几个重要的测试步骤，变的更为复杂。</p>
-<p>现在，让我们再看看<strong>HSDPA</strong>。你可能会认为HSDPA在上行链路测量方面和R99不会有很大不同，因为HSDPA仅用于下行链路数据速率。这是在高层协议方面真实的，但在物理/ RF层上，在HSDPA上在上行加入了一个重要因素。它是HS-DPCCH。 HS-DPCCH是用于UE来报告CQI和ACK / NACK并发送到基站。问题是，即使有这样的附加信道的UE还必须保持总的上行链路功率和以前一样。因此，UE重新计算/重新安排每个物理信道的功率。所以，如果你看一下射频一致性测试案例列表中，你不会找到测试用例项目方面有很大的差异，但你会发现相当多的人加入到现有的测试用例子项目，就是因为引入HS-DPCCH。 （如果你想进入进一步的细节，开拓3GPP 34.121，找到测试用例关键字“HSDPCCH”的测试）。</p>
-<p>往前一步到<strong>HSUPA</strong>，你还可能没有找到这样的测试项目方面有很大的区别。但如在HSDPA中的情况下，HSUPA也有一个新的物理信道被引入，它被称为E-DPCH。即使有这样的附加信道，UE还具有和R99一样保持总信道功率。所以，你可能已经猜到，UE必须重新计算/重新安排每个物理信道功率。其结果是，我们将得到几个附加子项添加到射频测试。</p>
-<p>最后..让我们想想<strong>LTE</strong>。LTE在PHY / RF层方面和C2K / WCDMA / HSPA之间最大的区别是什么？这将是OFDM。是的。由于OFDM，什么样的附加测量项目将引入射频测试？因为OFDM是由大量具有非常窄的带宽子载波组成，我们必须对每个OFDM子载波测量上述列出的大部分特性。但是，如果我们对每个子载波做所有测试项目，只为一个项目也需要一整天。另一个很大的不同将是LTE规范允许许多不同类型的系统带宽，而在C2K / WCDMA，系统带宽始终是一样的。它意味着你要测量多个不同的系统带宽乘以在测量设备上测量时间和参数设置。根据LTE规范，LTE系统带宽可以是任何的1.4MHz，3MHz，5MHz，10MHz，15MHz，20MHz。而C2K只能有1.28MHz单带宽，WCDMA只能有3.84MHz单带宽。当然，特定的系统运营商在他们的网络中将只使用一个带宽，但是移动设备的制造商的应设计成它支持所有的这些带宽的UE。在此之上，还有另外一个因素，使LTE的测试更加复杂特别是对于手机设计/测试。它是被用来在特定的时间实际带宽可以动态地改变。</p>
-<p>一个直观的例子如下面的测量屏幕。此捕获用于LTE呼叫连接和数据传输的RF信号。当您发起呼叫，移动设备会通过呼叫建立协议信令，然后数据流量将开始。如果您在测量屏幕的屏幕（频谱）的底部看，你会发现在此期间频率分配（正在使用的带宽）的变化。在这个屏幕上，数据流量的频率分配并没有改变，但是在现网中这个带宽会动态改变。</p>
-<p><img src="http://img.blog.csdn.net/20151121144519894" alt="这里写图片描述"></p>
-<p>这些多系统带宽和动态带宽改变对手机设计和测试工程师意味着什么呢？对于设计师来说，最大的问题将是如何优化这些频段的各种设计参数是最适合的。对于测试工程师来说，最大的问题将是测试情况下，他们必须经历巨大数量的测试项目。<br>所有这些在多个带宽和动态带宽改变的最终结果，可以举出如下所示的表。这仅用于一个测试用例的表。查看所有这些不同的系统带宽，你都要测试。不同的RB分配是我上面提到的动态频率分配。在LTE中，对于每一个测试用例，你会有这样的表，这对设计和测试工程师来说将是巨大的头痛。</p>
-<p><img src="http://img.blog.csdn.net/20151121144959098" alt="这里写图片描述"></p>
-<p>《to be continue…》</p>
-
-          
+          在任何无线通信设备，我们必须要经过两个大组的测试。一个用于检测发射路径，另一个用于测试接收路径。
+用于无线通信装置要正常工作，它应满足下面的硬件要求1）该装置应传输是足够强大的功率，使之确保它到达通信对方的信号要求。2）设备不应发送太强的信号，而干扰其他各方之间的通信信号。3）该装置应发送足够好的信
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/03/RF-Test-and-Measurement-1/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1905,6 +1901,10 @@
       <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="sun-day" />
             
               <p class="site-author-name" itemprop="name">sun-day</p>
               <p class="site-description motion-element" itemprop="description"></p>
@@ -2018,6 +2018,24 @@
 
           
           
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.google.com/" title="Google" target="_blank">Google</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.baidu.com/" title="百度" target="_blank">百度</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
 
           
             
@@ -2043,11 +2061,11 @@
       <div class="footer-inner">
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+<div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2018</span>
   <span class="with-love" id="animate"> 
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">sun-day</span>
+  <span class="author" itemprop="copyrightHolder">true</span>
 
   
 
@@ -2077,7 +2095,30 @@
 
 
 
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共110.2k字</span>
+</div>
+
         
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
 
 
 
@@ -2218,6 +2259,35 @@
   
 
   
+  
+
+  
+  
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+  
+
 
   
   

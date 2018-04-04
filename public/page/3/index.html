@@ -17,6 +17,13 @@
 
 
 
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
 
 
 
@@ -41,6 +48,32 @@
 
 
 
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
 
 
 
@@ -77,7 +110,7 @@
     root: '/',
     scheme: 'Gemini',
     version: '6.1.0',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: false,
     fastclick: false,
     lazyload: false,
@@ -304,7 +337,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sun-day">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -394,28 +427,15 @@
       
         
           
-            <p>我们中的大多数将被专门某个或某几个特定的​​区域/层的一名工程师。从技术上讲这是可以理解的，因为没有一个人可以掌握一切，但我强烈建议你尝试把整个过程的大图掌握。只要你有一些问题或东西给你的工作，尝试着问你自己“当前的问题是位于整个画面的哪部分？”。<br>你不必去尝试死记硬背这些全过程，但如果你继续努力映射整个画面中的当前问题，这些全序列会自动在你的记忆弹出。我常常告诉我的孩子和我的晚辈“不要试图记住它，只需重复，直到你自动调用”（他们都看着我说 :“那有什么区别吗？”我只是微笑 - ： ）。</p>
-<p>以下是我的版本的LTE全过程..但如果​​你试图去描述它，你将有一点点的不同版本..但我觉得总体逻辑是相似的。时不时地，只要回想一下这些序列，在你的心中，并问你自己“如何在细节上我可以解释有关的每个步骤？”。其实每个步骤可以在一本厚厚的书一章描述。</p>
-<p>1）UE处于关闭状态<br>2）UE开机<br>3）&lt;频率搜索&gt;<br>4）&lt;小区搜索&gt;：正常情况下，在这个过程中UE会发现多个小区<br>5）&lt;小区选择&gt;<br>6）MIB解码<br>7）SIB 解码<br>8）&lt;初始RACH过程&gt;<br>9）&lt;注册/验证/连接&gt;<br>10）&lt;默认EPS承载设置&gt;<br>11）现在UE处于空闲模式<br>12）&lt;（如果当前的电池变弱或UE移动到另一个小区注册）小区重选&gt;<br>13）&lt;（当寻呼消息到来或用户拨打电话）RACH过程&gt;<br>14）&lt;设置专用EPS承载&gt;<br>15）接收数据<br>16）发送数据<br>17）（如果网络接收到UE功率太弱）网络发送TPC命令来增加UE Tx功率<br>18）（如果网络接收到UE功率太强）网络发送TPC命令减少UE Tx功率<br>19）&lt;（如果UE移动到另一小区区域）的网络和UE执行切换过程&gt;<br>20）用户停止呼叫，UE进入空闲模式</p>
-<h2 id="基本信息"><a href="#基本信息" class="headerlink" title="基本信息"></a>基本信息</h2><p><strong>UE能力</strong>：UE类别，频带带宽，同步信号序列，通用无线资源信息，MIMO参数，双工模式，前导序列生成算法</p>
-<p><strong>USIM</strong>：网络运营商的PLMN列表，签约信息</p>
-<p><strong>存储的信息</strong>：最近使用的频段，PLMN，跟踪区域代码，小区ID，S-TMSI，Inter-RAT频段</p>
-<p><strong>UE需求获取的信息</strong>：频率和时间同步信息，系统带宽，MIMO天线数量，标识（C-RNTI，物理小区ID，跟踪区域代码），网络（PLMN），信号系统和广播源，RACH_ROOT_SEQUENCE与PRACH配置。</p>
-<h1 id="1-LTE-Basic-Procedure：Initialization-Sequence-From-Power-On-to-PRACH"><a href="#1-LTE-Basic-Procedure：Initialization-Sequence-From-Power-On-to-PRACH" class="headerlink" title="1-LTE Basic Procedure：Initialization Sequence : From Power-On to PRACH"></a>1-LTE Basic Procedure：Initialization Sequence : From Power-On to PRACH</h1><hr>
-<p>以下步骤列出从上电到初始PRACH的每个步骤。虽然它看起来很简单，但每一个步骤可能是UE内发生的最复杂的过程之一。更困难的是，都没有明确规定在3GPP规范了这些步骤，大部分均达到UE实现。此外，如果你的移动设备验证/验证工程师，你将有一个很大的困难，因为没有那么多详细的log，它是可将需要很长的时间和练习，直到你得到熟悉这些log。</p>
-<p>1）UE处于关闭<br>2）开机UE<br>3）&lt;频率搜索&gt;<br>4）时间和帧同步<br>5）&lt;小区搜索&gt;：正常情况下，客户端会发现多细胞在这个过程中<br>6）MIB解码<br>7）SIB deconding<br>8）&lt;小区选择&gt;：UE可以找到多个合适的细胞，但它尝试驻留到HPLM细胞具有最高优先级<br>9）&lt;初始RACH过程&gt;</p>
-<h2 id="1-频率和带宽检测"><a href="#1-频率和带宽检测" class="headerlink" title="1-频率和带宽检测"></a>1-频率和带宽检测</h2><p><strong>1）</strong>搜索中心频率<br>注1：该算法将是最复杂的，是由每一个芯片制造商实现<br>注2：根据UE的PHY协议栈实现中，UE可以测量RSSI并确定其是否进行到下一步骤或没有。</p>
-<p><strong>2）</strong>解码PSS（主同步信号）</p>
-<p><strong>3）</strong>解码SSS（辅同步信号）<br>注1：UE结合PSS/SSS的结果，UE可以计算出小区ID。 （所以，如果你在UE log中看到小区ID并且它eNodeB的配置匹配，这意味着UE成功地检测到的PSS/SSS.<br><strong>4）</strong>结合步骤2)和3)的结果，UE可以检测小区特定参考信号</p>
-<p><strong>5）</strong>解码BCH占用在中心频率的72个子载波（6个RB）。</p>
-<p><strong>6）</strong> BCH（MIB）告诉系统的频率信息（例如，系统频率带宽）</p>
-<p><strong>MasterInformationBlock</strong> ::= SEQUENCE {<br>dl-Bandwidth ENUMERATED { n6, n15, n25, n50, n75, n100},<br>phich-Config PHICH-Config,<br>systemFrameNumber BIT STRING (SIZE (8)),<br>spare BIT STRING (SIZE (10))<br>}</p>
-<h2 id="2-时间同步过程"><a href="#2-时间同步过程" class="headerlink" title="2-时间同步过程"></a>2-时间同步过程</h2><p><strong>1）</strong>UE解码主同步用三种不同主同步序列找出哪些序列被分配给该小区并获得主定时同步。<br><strong>2）</strong>用主同步序列解码辅同步码，并计算出被分配给该单元的序列。</p>
-<p>此同步检测每5毫秒进行一次。 （你会明白，如果你看一下LTE下行链路帧结构的DL 帧结构部分，就可以解释了这个时间间隔）</p>
-<p>正如我在上一节所提到的，三个不同的序列被用作主要同步信号和有各自的三个序列，小区标识组内的小区ID和这三个序列之间一对一映射。UE检测这个小区标识组后，就可以确定帧定时。从这个小区标识组中，UE也找出哪些伪随机序列被用于产生在小区的参考信号。</p>
-<p><strong>3）</strong>一旦这个定时同步得到确立，UE可以解码MIB并找出SFN号码，因为MIB携带SFN号码。</p>
-<h2 id="3-小区搜索"><a href="#3-小区搜索" class="headerlink" title="3-小区搜索"></a>3-小区搜索</h2><h2 id="4-小区选择"><a href="#4-小区选择" class="headerlink" title="4-小区选择"></a>4-小区选择</h2><h2 id="5-初始RACH过程"><a href="#5-初始RACH过程" class="headerlink" title="5-初始RACH过程"></a>5-初始RACH过程</h2>
-          
+          我们中的大多数将被专门某个或某几个特定的​​区域/层的一名工程师。从技术上讲这是可以理解的，因为没有一个人可以掌握一切，但我强烈建议你尝试把整个过程的大图掌握。只要你有一些问题或东西给你的工作，尝试着问你自己“当前的问题是位于整个画面的哪部分？”。你不必去尝试死记硬背这些全过程，但如果你继续努力映射
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/03/LTE基本过程/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -476,7 +496,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sun-day">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -566,32 +586,15 @@
       
         
           
-            <p>上行时隙结构如下。当我第一次读LTE材料，几乎所有的书籍和文章中说“LTE采用SC（单载波）FDMA用于上行链路信号”，因为这个词“单载波”，并让我非常困惑，创造不出上行时隙结构的任何图像。即使是现在，我不认为我能解释清楚有关“SC FDMA”。你可能会问到FPGA或DSP工程师有关的SC FDMA机制的细节。</p>
-<h1 id="时隙结构"><a href="#时隙结构" class="headerlink" title="时隙结构"></a>时隙结构</h1><p>但无论如何，让我感到高兴的是也是最重要的部分是，上行时隙是和下行时隙相同的。下面看一看整体上行时隙结构。</p>
-<p><img src="http://img.blog.csdn.net/20151121090659389" alt="这里写图片描述"></p>
-<p>如在下行链路中，在上行链路上帧时间和时隙时间是和下行链路中相同的。在资源块结构上，上行链路和下行链路相同。如上所示，在一个时隙中有7个符号，这也是在上行链路和下行链路是相同的。</p>
-<p>不同之处在于，你会发现，每个信道的位置不同。通常在下行链路的情况下，一个信道往往横亘整个带宽，但在上行链路时隙中的信道似乎更本地化。例如，PUCCH位于仅在频域的最低端和最高端，参考信号也局限在时域或时域和频域两者。</p>
-<h1 id="PUCCH-RS"><a href="#PUCCH-RS" class="headerlink" title="PUCCH RS"></a>PUCCH RS</h1><p>承载参考信号用于解调PUCCH。这意味着，如果这一部分没有正确配置或eNodeB的未能检测出这一部分，eNodeB将不能解码PUCCH。</p>
-<h1 id="PUCCH"><a href="#PUCCH" class="headerlink" title="PUCCH"></a>PUCCH</h1><p>这个信道可以携带大量的信息（UCI），但根据不同的配置中，它可以携带只有少数的以下信息。</p>
-<ul>
-<li>收到的PDSCH数据的ACK / NACK</li>
-<li>CQI</li>
-<li>RI</li>
-<li>PMI</li>
-</ul>
-<p>正如在时隙结构看到的，PUCCH位于上行链路频域的两个极端，以一个子帧两个时隙中交替使用的方式，也就是说，如果在PUCCH是在时隙0的频域的最低部分（第一时隙），它会被位于在时隙1频域的最高部分（第二时隙）。究竟有多少资源元素被分配给PUCCH是由网络确定，配置是由广播经SIB2到UE。</p>
-<h1 id="PUSCH-RS"><a href="#PUSCH-RS" class="headerlink" title="PUSCH RS"></a>PUSCH RS</h1><p>承载参考信号用于解调的PUSCH。这意味着，如果这一部分没有正确配置或eNodeB的未能检测出这一部分，eNodeB的不能解码PUSCH。这总是位于上行时隙的中心。</p>
-<h1 id="PUSCH"><a href="#PUSCH" class="headerlink" title="PUSCH"></a>PUSCH</h1><p>携带该UE试图发送的上行数据。而且还可以承载用于PDSCH的ACK / NACKUE。</p>
-<h1 id="SRS（探测参考信号）"><a href="#SRS（探测参考信号）" class="headerlink" title="SRS（探测参考信号）"></a>SRS（探测参考信号）</h1><p>参见SRS的快速参考<br><a href="http://www.sharetechnote.com/html/Handbook_LTE_SRS.html" target="_blank" rel="noopener">http://www.sharetechnote.com/html/Handbook_LTE_SRS.html</a></p>
-<h1 id="上行链路资源网格"><a href="#上行链路资源网格" class="headerlink" title="上行链路资源网格"></a>上行链路资源网格</h1><p>介绍详细信息，上行链路资源也具有一种网格格式，如下图所示。尝试熟悉在该图中参数名，因为这个参数将在本说明书的所有其它部分中使用。如果你不熟悉这些参数，当你阅读说明书的其他部分，你将无法想象的内容。</p>
-<p>正如你看到的，最小的单位是”资源元素（RE）”，最小的资源分配单位是RB（资源块），横跨时域的7个RE和频域的12个RE。这意味着一个RB有84 RE（7×12）在里面。</p>
-<p><img src="http://img.blog.csdn.net/20151121092310572" alt="这里写图片描述"></p>
-<h1 id="实际通信中的信道"><a href="#实际通信中的信道" class="headerlink" title="实际通信中的信道"></a>实际通信中的信道</h1><p>下面的图表显示上行/下行数据传输的整体序列。你就可以将数据传输的序列图和在DL / UL帧结构的每个信道的特定位置相关联。</p>
-<p><img src="http://img.blog.csdn.net/20151121092354217" alt="这里写图片描述"></p>
-<h1 id="Gallery"><a href="#Gallery" class="headerlink" title="Gallery"></a>Gallery</h1><p><img src="http://img.blog.csdn.net/20151121092420899" alt="这里写图片描述"></p>
-<p>《end》</p>
-
-          
+          上行时隙结构如下。当我第一次读LTE材料，几乎所有的书籍和文章中说“LTE采用SC（单载波）FDMA用于上行链路信号”，因为这个词“单载波”，并让我非常困惑，创造不出上行时隙结构的任何图像。即使是现在，我不认为我能解释清楚有关“SC FDMA”。你可能会问到FPGA或DSP工程师有关的SC FDMA
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/03/LTE帧结构-上行/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -652,7 +655,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sun-day">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -742,181 +745,18 @@
       
         
           
-            <p>学习这个东西并获得实践理解的好的途径是从高层开始，一步一步的逐步深入。</p>
-<h1 id="Overview-FDD"><a href="#Overview-FDD" class="headerlink" title="Overview - FDD"></a>Overview - FDD</h1><p>高层如下所示，36.211 FDD LTE。下面展示了时域一帧的结构。没有展现任何频域的结构。<br>从这个高层描述图中你可以得到：</p>
-<ol>
-<li>一帧的时长是10ms（一个无线帧，一个系统帧）。也就是意味着一秒有100个无线帧。</li>
-<li>一帧中的采样个数是307200个。也就是意味着一秒有307200*100=30.72M个采样。</li>
-<li>一帧包含10个子帧。</li>
-<li>一个子帧包含两个时隙。也就是意味着一帧包含20个时隙。</li>
-</ol>
-<p><img src="http://img.blog.csdn.net/20151120173913705" alt="这里写图片描述"></p>
-<p>一个时隙是时域中最小的结构吗？不是。如果你进一步放大这个帧结构，你得到下面的图。<br>现在你可以看到一个时隙有7个符号组成。（一个符号是信号的某个时间跨度，在I/ Q星座图携带一个点）。<br>而你看到一个符号内甚至更小的结构。在符号的开始，你看到一个非常小的“循环前缀”，剩余部分才是真正的符号数据。<br>有两种不同类型的循环前缀。一种是正常的循环前缀，而另一个是“扩展循环前缀’，它比正常循环前缀较长。 （由于一个时隙的长度是固定的，不能改变，如果使用“扩展循环前缀’，即可以一时隙内容纳的符号数目减少。因此，如果我们使用”扩展循环前缀’，仅具有6个符号）。<br><img src="http://img.blog.csdn.net/20151120174639237" alt="这里写图片描述"><br>如果放大的子帧，以显示的确切时间和采样，它可以如下图说明。<br><img src="http://img.blog.csdn.net/20151120174822537" alt="这里写图片描述"></p>
-<p>有关上面显示的帧结构需要注意几点：</p>
-<ul>
-<li>第一OFDM CP符号比其他OFDM符号的CP要长一点</li>
-<li>在此图中所示的采样数是基于采样率是30.072 M个samples/s和2048 bins/ IFFT（N_ifft）的假设。因为实际情况下的采样率和N_ifft取决于系统带宽，则需要根据特定的BW缩放这个数字。</li>
-<li>每个系统带宽下的典型N_ifft如下</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>system BW</th>
-<th>number of RBs</th>
-<th>N IFFT (bins/IFFT)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1.4</td>
-<td>6</td>
-<td>128</td>
-</tr>
-<tr>
-<td>3.0</td>
-<td>15</td>
-<td>256</td>
-</tr>
-<tr>
-<td>5.0</td>
-<td>25</td>
-<td>512</td>
-</tr>
-<tr>
-<td>10.0</td>
-<td>50</td>
-<td>1024</td>
-</tr>
-<tr>
-<td>15.0</td>
-<td>75</td>
-<td>2048</td>
-</tr>
-<tr>
-<td>20.0</td>
-<td>100</td>
-<td>2048</td>
-</tr>
-</tbody>
-</table>
-<p>下面显示了“LTE资源网格”的总体子帧结构（<a href="http://dhagle.in/LTE）" target="_blank" rel="noopener">http://dhagle.in/LTE）</a></p>
-<p><img src="http://img.blog.csdn.net/20151120175907830" alt="这里写图片描述"></p>
-<p>现在，让我们进一步放大帧结构，但这次扩大在频域，而不是在时域。你会得到下面的全部细节图。<br><img src="http://img.blog.csdn.net/20151120175952596" alt="这里写图片描述"></p>
-<p>作为从事LTE一个工程师，你的第一件事情是得非常熟悉上面这张图。</p>
-<p>我们可以在二维上表示LTE信号，如上所示。水平轴是时域，而垂直轴是频域。垂直轴的最小单位是一个子载波和横轴的最小单位是符号。对于在时域和频域，这是这些单元的多层级组合，意思是多个较小的单位成为一个更大的单元。</p>
-<p>让我们首先来看看在频域结构。<br>LTE（任何OFDM / OFDMA）频带由多个小间隔的信道组成，我们称每个小信道为“子载波”。<br>无论在LTE频带的系统带宽，所述两个信道的空间总是相同的。<br>因此，如果LTE的系统带宽发生变化，信道（子载波）数目也发生变化，但信道之间的空间不会改变。</p>
-<p>Q&gt;一个子载波和下一个子载波之间的空间？<br>A&gt; 15kHz</p>
-<p>Q&gt;20MHz的LTE频段的信道（子载波）数量是？<br>A&gt; 12x100=1200个子载波。</p>
-<p>Q&gt;10MHz的LTE频段的信道（子载波）数量是？<br>A&gt; 12x50=600个子载波。</p>
-<p>Q&gt;5MHz的LTE频段的信道（子载波）数量是？<br>A&gt; 12x25=300个子载波。</p>
-<p>是不是感受到子载波和系统的带宽有关系？</p>
-<p>现在，让我们来看看横轴的基本单位是时域。时域的最小单位是一个符号，这相当于66.7us。无论带宽，符号长度不会改变。在时域中的最大的单位是一帧，长度10ms。每帧包括10个子帧，每个子帧长度1ms。每个子帧的由2个时隙，其中每一个时隙是0.5ms。每个时隙由7个符号，每一个67.7us。</p>
-<p>Q&gt;一个时隙有多少符号？ A&gt; 7个符号。<br>Q&gt;一个子帧有多少符号？ A&gt; 14个符号。<br>Q&gt;一个帧有多少时隙？ A&gt; 20个时隙。</p>
-<p>现在，让我们来看看由两个时域（横轴）和频域（纵轴）的单元。让我们把这种类型的单元叫二维单元。</p>
-<p>最小二维单元是由在时域中的一个符号和一个子载波的频域资源元素。另一个二维单位是资源块（RB），其是由在时域中的一个时隙和12个子载波组成。资源块（RB）是LTE中的最重要的单位，常用于协议侧和RF测量侧。</p>
-<p>Q&gt;一个资源块多少个符号？ A&gt; 7个符号。<br>Q&gt;一个资源块多少个子载波？ A&gt; 12个子载波。<br>Q&gt;一个资源块有多少个资源单元？ A&gt; 84个资源单元。</p>
-<p>现在是时候我们所有涉及单位结合起来。下面的问题是读取任何LTE规范的很重要的。</p>
-<p>Q&gt;20 MHz频段有多少资源块？ A&gt; 100个资源块。<br>Q&gt;10 MHz频段有多少资源块？ A&gt; 50个资源块。<br>Q&gt;5 MHz频段有多少资源块？ A&gt; 25个资源块。</p>
-<p>我已经看到了这类型映射了这么多次，从这么多不同的来源，但我真正明白了地图的所有细节？还没有。这将需要几年的时间来了解这张图的每一个方面。</p>
-<p>也许是我做的第一个步骤就是口头形式描述地图的每个部分。</p>
-<h1 id="Overview-TDD"><a href="#Overview-TDD" class="headerlink" title="Overview-TDD"></a>Overview-TDD</h1><p><img src="http://img.blog.csdn.net/20151120191310403" alt="这里写图片描述"></p>
-<h1 id="PBCH（物理广播信道）"><a href="#PBCH（物理广播信道）" class="headerlink" title="PBCH（物理广播信道）"></a>PBCH（物理广播信道）</h1><ul>
-<li>它仅携带的MIB。</li>
-<li>它是使用QPSK。</li>
-<li>映射到6个资源块（72个子载波），在子帧0，围绕DC子载波。</li>
-<li>映射到未被预留用于传输参考信号/PDCCH或PCHICH的资源元素</li>
-</ul>
-<h1 id="前L（1或2或3）个符号"><a href="#前L（1或2或3）个符号" class="headerlink" title="前L（1或2或3）个符号"></a>前L（1或2或3）个符号</h1><p>这是因为这个区域是二位图中最混乱的地区之一，多个信道分配在这里。第一个符号是PCFICH，但PCFICH仅仅占用第一符号上的资源块的一部分不是全部。 PHICH也是在这个区域承载。而不被PCFICH和PHICH占用的剩余空间分配给PDCCH。</p>
-<h1 id="PCFICH（物理控制格式指示信道）"><a href="#PCFICH（物理控制格式指示信道）" class="headerlink" title="PCFICH（物理控制格式指示信道）"></a>PCFICH（物理控制格式指示信道）</h1><ul>
-<li>它携带了用于控制信道（PDCCH和PHICH）的符号的数目。</li>
-<li>映射到在每个下行链路子帧的第一OFDM符号，包含从PBCH上接收的PDCCH的OFDM符号的数目和PHICH的符号持续时间的信息，UE解码此信道找出多少OFDM符号分配给PDCCH</li>
-<li>它是由这个子帧的第一OFDM码元的16个子载波来承载。</li>
-<li>PCFICH的数据由4个REG承载，不管带宽多大，这四个的REG是均匀分布在整个频带上。</li>
-<li>PCFICH的确切位置是由小区ID和带宽决定的。</li>
-</ul>
-<p>有关详细信息，请参阅PCFICH页面。<br><a href="http://www.sharetechnote.com/html/Handbook_LTE_PCFICH.html" target="_blank" rel="noopener">http://www.sharetechnote.com/html/Handbook_LTE_PCFICH.html</a></p>
-<h1 id="PDCCH（物理下行链路控制信道）"><a href="#PDCCH（物理下行链路控制信道）" class="headerlink" title="PDCCH（物理下行链路控制信道）"></a>PDCCH（物理下行链路控制信道）</h1><ul>
-<li>映射到在每个下行链路子帧的前L个OFDM符号。</li>
-<li>符号（L）的PDCCH的数目可以是1,2，或3。</li>
-<li>由PCFICH指定PDCCH符号数</li>
-<li>PDCCH携带DCI。DCI携带​​传输格式，资源分配，和与DL-SCH，UL-SCH和PCH相关的H-ARQ信息。</li>
-<li>PDCCH也携带DCI 0，这是用于UL调度分配（例如，UL授权）。</li>
-<li>支持多个PDCCH，UE监视一组控制信道。</li>
-<li>调制方式为QPSK。</li>
-<li>PDCCH就像是HSDPA的HS-SCCH，R99的PDCCH，HSUPA的E-AGCH / E-RGCH。</li>
-<li>即使PDCCH有很多的功能，并非所有的功能都在在同一时间使用，PDCCH配置应灵活进行。</li>
-<li>如果你有兴趣有关映射此通道的详细信息，参考36.211 6.8.1。以下是这个章节的初始描述。</li>
-</ul>
-<p>物理下行链路控制信道携带调度分配和其他控制信息。物理控制信道是在一个或几个连续控制信道元素（CCE）的组合上传送的，其中一个控制信道元素对应于9个资源元素组。没有分配到PCFICH或PHICH资源元素组的数量是REG N。在系统中可用的CCE的编号为从0到N_CCE-1，其中N_CCE =floor（N_REG/9）。该PDCCH支持多种格式，如表6.8.1-1中列出。占用n个连续的CCE的PDCCH可以从一个CCE满足i mod N =0的开始，其中i是CCE号。</p>
-<h1 id="PHICH"><a href="#PHICH" class="headerlink" title="PHICH"></a>PHICH</h1><ul>
-<li>携带H-ARQ反馈</li>
-<li>在UE UL 传输数据后，它在等待PHICH中的ACK。</li>
-<li>它像HSPA中的E-HICH</li>
-<li>有时几个PHICH构成使用相同的资源元素的PHICH组。</li>
-</ul>
-<h1 id="PDSCH（物理下行链路共享信道）"><a href="#PDSCH（物理下行链路共享信道）" class="headerlink" title="PDSCH（物理下行链路共享信道）"></a>PDSCH（物理下行链路共享信道）</h1><ul>
-<li>携带用户特定的数据（DL有效载荷）。</li>
-<li>携带随机接入响应消息。</li>
-<li>它可以使用AMC以QPSK，16QAM和64QAM</li>
-</ul>
-<h1 id="PRACH"><a href="#PRACH" class="headerlink" title="PRACH"></a>PRACH</h1><ul>
-<li>它所携带的随机接入前导码</li>
-<li>它在频域占用72个子载波的带宽。如果随机接入前导码成功被接收，随机接入消息上将会在UL-SCH上发送。</li>
-<li>随机接入前导是由Zadoff-Chu序列生成的。</li>
-</ul>
-<h1 id="P-SS（主同步信号）"><a href="#P-SS（主同步信号）" class="headerlink" title="P-SS（主同步信号）"></a>P-SS（主同步信号）</h1><ul>
-<li>映射到72个活动的子载波（6资源块），在0时隙（子帧0）和10时隙（子帧5​​）的DC子载波的周围。</li>
-<li>由62的Zadoff-chu序列值</li>
-<li>用于下行链路帧同步</li>
-<li>其中一个关键因素是用来确定物理小区ID</li>
-</ul>
-<p>如果你是一个开发人员，负责LTE芯片组的初期工作，这将是你必须实现第一信号之一。<br>但是，当你有以下的数据和信息，你能找出到底是哪频道映射的一部分，将进行该消息？这是理解LTE协议的最棘手的部分之一，它需要很长的时间进行研究。 （如果你是一个RF工程师，这未必是对你那么重要）。</p>
-<h1 id="S-SS（辅同步信号）"><a href="#S-SS（辅同步信号）" class="headerlink" title="S-SS（辅同步信号）"></a>S-SS（辅同步信号）</h1><p>SSS是用于无线电帧同步的特定的物理层信号。它的特点如下所示。</p>
-<ul>
-<li>映射到72活动子载波（6资源块），在FDD中，分布在0时隙（子帧0）和10时隙（子帧5​​）的DC子载波的周围。</li>
-<li>SSS的在子帧0的序列和子帧5是彼此不同</li>
-<li>由62扰码序列（基于m序列）</li>
-<li>在奇数索引的资源元素和偶数索引的资源元素的值由不同的公式产生</li>
-<li>用于下行链路帧同步</li>
-<li>其中一个关键因素是用于确定物理小区ID</li>
-</ul>
-<p>但是，如果你是一个开发人员的LTE芯片组的初期工作，这也将是你必须实现第一信号之一。</p>
-<h1 id="RS（参考信号）-小区特有"><a href="#RS（参考信号）-小区特有" class="headerlink" title="RS（参考信号） - 小区特有"></a>RS（参考信号） - 小区特有</h1><p>大部分的信道（例如，DPSCH，DPCCH，PBCH等）是用于携带特有信息（比特序列）和有一些较高层的信道连接到它们，但参考信号是只存在于PHY层的特殊信号。这不是用于递送任何特定信息。此参考信号的目的是为下行链路功率提供的参考点。</p>
-<p>当UE测量DL功率（即从eNodeB信号的功率），它衡量这一参考信号的功率，并把它作为下行小区功率。</p>
-<p>这些参考信号是通过在每一个时隙的特定资源元素，这些资源元素的位置是根据专门由天线配置确定的。</p>
-<p>在下面的附图中，红/蓝/绿/黄是携带参考信号的部分，被标记为灰色的资源元素是保留用于参考信号的，但对那个特定天线并不携带参考信号。<br><img src="http://img.blog.csdn.net/20151121080750908" alt="这里写图片描述"></p>
-<p>有两种不同类型的参考信号：小区固有参照信号和UE特定的参考信号</p>
-<ul>
-<li><strong>小区专用参考信号</strong>：该参考信号在每个子帧上传输，并涉及所有的工作带宽中。它是由天线端口0,1,2,3发送。</li>
-<li><strong>UE特定参考信号</strong>：该参考信号被仅分配给特定UE的资源块中传输，并正在通过天线端口5发送。</li>
-</ul>
-<p><strong>Q&gt;对于小区特定参考信号的资源元素是否固定？</strong><br>A&gt;不，位置根据物理小区ID，如下所述变化。</p>
-<ul>
-<li>参考信号的时域索引（I）是固定的。 （I= [0,4]）</li>
-<li>参考信号的频域索引k是根据物理小区ID的变化而变化的，根据36.2116.10.1.2中描述映射到资源元素。<ul>
-<li>主要原则是：k=6m +（v+v_shift）mod 6，其中v_shift=物理小区ID mod 6. 有关进一步详情，请参阅36.211 6.10.1.2</li>
-</ul>
-</li>
-</ul>
-<p><strong>Q&gt;下行参考信号携带的是什么样的值？</strong></p>
-<p>A&gt;该值是通过在36.211 6.10.1.1所定义的序列生成算法产生的伪随机序列（注：上行链路参考信号 - DMRS - 是的Zadoff Chu序列）。<br>该序列的一个决定值是物理小区ID，这意味着物理小区ID影响参考信号的值。</p>
-<h1 id="RS（参考信号）-MBSFN"><a href="#RS（参考信号）-MBSFN" class="headerlink" title="RS（参考信号） - MBSFN"></a>RS（参考信号） - MBSFN</h1><p>以下是根据36.211图6.10.2.2-1：MBSFN参考信号映射（扩展循环前缀，ΔF= 15 kHz）</p>
-<p><img src="http://img.blog.csdn.net/20151121081948421" alt="这里写图片描述"></p>
-<h1 id="RS（参考信号）-UE特定"><a href="#RS（参考信号）-UE特定" class="headerlink" title="RS（参考信号） - UE特定"></a>RS（参考信号） - UE特定</h1><p>以下基于36.211图6.10.3.2-1：UE专用的映射参考信号，天线端口5（正常循环前缀）<br> <img src="http://img.blog.csdn.net/20151121082034932" alt="这里写图片描述"><br> <img src="http://img.blog.csdn.net/20151121082047774" alt="这里写图片描述"></p>
-<h1 id="RS（参考信号）-定位"><a href="#RS（参考信号）-定位" class="headerlink" title="RS（参考信号） - 定位"></a>RS（参考信号） - 定位</h1><p>以下是根据36.211图6.10.4.2-1：定位基准信号映射（正常循环前缀）<br><img src="http://img.blog.csdn.net/20151121082129803" alt="这里写图片描述"></p>
-<h1 id="RS（参考信号）-CSI"><a href="#RS（参考信号）-CSI" class="headerlink" title="RS（参考信号） - CSI"></a>RS（参考信号） - CSI</h1><p>以下是基于36.211图6.10.5.2-1：CSI参考信号（CSI配置0，正常循环前缀）的映射<br> <img src="http://img.blog.csdn.net/20151121082209392" alt="这里写图片描述"></p>
-<h1 id="全帧快照"><a href="#全帧快照" class="headerlink" title="全帧快照"></a>全帧快照</h1><p>以下是示出了上述全信道的快照。当然，这不是给你的详细信息。这是给你的整体框架的整体画面。你能够识别上述各信道的位置？刚刚尝试它，这将是一个很好的做法。</p>
-<p>在这个网格中的每个组件都有自己的作用，并以各种不同的上下文中使用。如果你有兴趣在如何这些渠道在实际通信过程中使用，请参考下面的快速参考页节。</p>
-<p> <img src="http://img.blog.csdn.net/20151121082345895" alt="这里写图片描述"></p>
-<h1 id="通信中的物理信道"><a href="#通信中的物理信道" class="headerlink" title="通信中的物理信道"></a>通信中的物理信道</h1><p>下面的图表显示上行/下行数据传输的整体序列。你就可以将数据传输的序列图和在DL / UL帧结构的每个信道的特定位置相关联。</p>
-<p><img src="http://img.blog.csdn.net/20151121082508811" alt="这里写图片描述"></p>
-<h1 id="画廊"><a href="#画廊" class="headerlink" title="画廊"></a>画廊</h1><p>我不会把太多的评论以下捕获。这些捕获是你的做法，以关联你在前面的章节中读取到现实生活中的信号模式是什么。</p>
-<p><img src="http://img.blog.csdn.net/20151121082704417" alt="这里写图片描述"></p>
-<p><img src="http://img.blog.csdn.net/20151121082718201" alt="这里写图片描述"></p>
-<p><img src="http://img.blog.csdn.net/20151121082727168" alt="这里写图片描述"></p>
-<p><img src="http://img.blog.csdn.net/20151121082736791" alt="这里写图片描述"></p>
-<end></end>
-          
+          学习这个东西并获得实践理解的好的途径是从高层开始，一步一步的逐步深入。
+Overview - FDD高层如下所示，36.211 FDD LTE。下面展示了时域一帧的结构。没有展现任何频域的结构。从这个高层描述图中你可以得到：
+
+一帧的时长是10ms（一个无线帧，一个系统帧）。也就是意味着一秒有100
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/03/LTE帧结构-下行/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -977,7 +817,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sun-day">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1067,50 +907,16 @@
       
         
           
-            <p>原文链接：<a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=7257" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=7257</a></p>
-<h1 id="I-Introduction"><a href="#I-Introduction" class="headerlink" title="I. Introduction"></a>I. Introduction</h1><p>在之前的文档我们已经覆盖了基本IP地址分配过程，解释了在用户同一个地点不同时间接入网络时LTE网络是怎么分配IP地址的。这个文档有一点不同，学习用户在不同物理位置上接入网络时的分配IP过程。和之前的文档意一样，要讨论两种分配方式：静态和动态的。另外我们要学习UE和PDN之间的连接PGW是怎么选择的，默认承载路径是怎么设置的。</p>
-<p>对于动态分配方式，不管UE接入到哪个城市，LTE网络都分配一个动态的IP地址给UE，并且UE可以使用这个IP地址通过PGW连接到PDN。这个IP地址不管用户的接入位置和之前文档介绍的分配方式一样。但是对于静态分配方式，网络分配一个固定的IP地址，允许UE通过一个指定的PGW接入到PDN，不管UE接入到哪里。这个过程和之前文档根据用户的签约配置文件分配固定IP地址的方式一样。但是不同点在于默认承载路径要在城市内或者两个物理城市之间设置，现在有一个指定的PGW。</p>
-<p>这个文档组织如下：第二章，讨论不同IP地址分配类型–静态和动态的以及他们的特点。第三章和第四章将提供动态和静态分配的详细过程。</p>
-<h1 id="II-Types-of-IP-Address-Allocation"><a href="#II-Types-of-IP-Address-Allocation" class="headerlink" title="II. Types of IP Address Allocation"></a>II. Types of IP Address Allocation</h1><p>下面，我们将使用两个城市的模型来描述分配过程。在这个场景中，我们假设在每一个城市（city1和city2）都包含MME和SGW和PGW。每一个PGW有自己的IP地址池，只有city1有HSS。UE仅仅使用一个PDN服务（Internet）。当请求PDN连接时，UE请求dns服务器地址和PDN地址。详细的场景如下：</p>
-<ol>
-<li>在city1，用户打开UE，接入LTE网络，使用PDN服务</li>
-<li>在使用Internet服务后，用户关闭UE，并移动到city2</li>
-<li>一旦到达city2，用户打开UE，接入LTE网络，使用PDN服务。</li>
-</ol>
-<p>在city1或者city2初始附着时，UE向MME请求PDN连接。一旦请求，MME通过UE接入的PDN选择一个PGW，这个PGW决定IP地址。当默认承载建立之后PGW转发IP地址给UE，UE可以使用这个IP地址来使用PDN服务。</p>
-<p>在这个两个城市的模型中，IP地址以两种类型分配–动态和静态。动态分配在第三章讨论，静态在第四章讨论。每一种方式的IP地址是谁选择和PGW选择的方式是不同的，如下表所示：</p>
-<p><img src="http://img.blog.csdn.net/20151021164240472" alt="这里写图片描述"></p>
-<h1 id="III-Dynamic-IP-Address-Allocation"><a href="#III-Dynamic-IP-Address-Allocation" class="headerlink" title="III. Dynamic IP Address Allocation"></a>III. Dynamic IP Address Allocation</h1><p>对于动态分配方式，IP地址不论用户什么时候执行初始附着到网络都是动态分配的。MME通过用户接入的PDN选择一个PGW，并要求建立一个EPS会话。PGW动态选择一个IP地址供UE使用来接入PDN。图1描述了在两个城市模型中动态IP地址分配的情况。<br><img src="http://img.blog.csdn.net/20151021164533729" alt="这里写图片描述"></p>
-<p><strong>PGW中IP地址提供</strong><br>在PGW1和PGW2中，IP地址池包含待分配的IP地址，dns服务器地址已经由网络运营商提供了。<br><img src="http://img.blog.csdn.net/20151021164819551" alt="这里写图片描述"><br><strong>IP地址获取和PDN连接</strong><br>用户打开UE，向当地的MME请求PDN连接。从hss下载的签约配置文件中，MME知道UE不是使用静态IP地址。所以MME选择一个本地的PGW（PGW1 PGW2），接着从这个PGW IP地址池中选择一个可用的IP地址分配给UE。当默认承载建立时，UE从本地PGW中获得dns服务器地址和UE IP地址，接着，通过本地PGW连接PDN使用Internet服务。</p>
-<p><strong>动态IP地址分配过程</strong><br>在city1或者city2动态IP地址分配的过程在之前的文档已经详细叙述过了。</p>
-<h1 id="IV-Static-IP-Address-Allocation"><a href="#IV-Static-IP-Address-Allocation" class="headerlink" title="IV. Static IP Address Allocation"></a>IV. Static IP Address Allocation</h1><p>对于静态IP地址分配，i）UE使用的IP地址，ii）PGW的ID，这些都已经作为签约配置文件在PDN中提供了。不管用户在哪里接入LTE网络，MME选择指定的PGW，这个PGW分配存储存在用户签约配置文件中的静态IP地址。不管初始接入的位置，UE一直会分配相同的固定IP地址，并且在UE和指定PGW之间建立默认承载。图2描述了静态IP在两个城市模型中是怎么分配的。</p>
-<p><img src="http://img.blog.csdn.net/20151021181558154" alt="这里写图片描述"></p>
-<p><strong>hss中提供IP</strong><br>在hss中每一个用户提供签约配置文件。没有签约配置文件包含PDN类型，PDN地址和PGW ID。<br><img src="http://img.blog.csdn.net/20151021181724863" alt="这里写图片描述"></p>
-<p><strong>PGW提供IP</strong><br>在PGW中，分配给UEdns服务器地址。<br><img src="http://img.blog.csdn.net/20151021181817194" alt="这里写图片描述"></p>
-<p><strong>IP地址获取和PDN连接</strong><br>在开机后，UE1向本地MME请求PDN连接。MME从HSS中下载UE的签约配置文件，并确认UE有一个静态IP地址和指定的PGW。基于这些信息，MME开始创建EPS会话和建立EPS承载。<br>这种方式，无关UE1是在哪里接入LTE网络，i)分配相同的静态IP地址，ii）建立连接指定PGW（PGW1）的默认承载路径，iii）UE1通过PGW1连接到PDN。这个默认承载路径是每一一个城市是这样的：<br>city1： UE1- eNB-SGW1-PGW1<br>city2：UE1-eNB-SGW2-PGW1</p>
-<p><strong>静态IP地址分配过程</strong><br>图3描述了在两个城市模型中静态IP地址分配的过程。<br><img src="http://img.blog.csdn.net/20151021182244045" alt="这里写图片描述"></p>
-<p><strong>在city1</strong></p>
-<p><strong>1）【UE1-&gt;MME1】请求PDN连接</strong><br>在city1，开机后，UE1通过发送PDN connectivity request消息(PDN Type=IPv4, PCO=DNS Server IPv4 Address Request) 来请求MME1建立PDN连接。这时，除了包含UE的IPv4地址还包含请求的dns服务器地址。</p>
-<p><strong>2）【MME1-&gt;HSS】请求LTE网络注册</strong><br>MME1通过发送update location request消息通知HSS，UE1已经在控制之下，并且在网络上注册UE1。</p>
-<p><strong>3）【MME1&lt;-HSS】转发签约配置文件</strong><br>HSS识别到UE1已经在MME上注册了，通过发送update location answer(IMSI, PDN Type=IPv4, PDN Address=Static UE IP(1.1.1.1))消息来转发UE1的签约配置文件。这个签约配置文件包含静态IP地址和PGW ID。</p>
-<p><strong>4）~5）【MME1-&gt;SGW1-&gt;PGW1】请求会话创建</strong><br>在从HSS接收到UE签约配置文件后，MME1知道UE1已经有一个静态IP地址了。MME1准备create session request消息(IMSI, PDN Type=IPv4, PDN Address=Static UE IP(1.1.1.1), PCO=DNS Server IPv4 Address Request)并发送给PGW1。这时，这个消息在PDN地址域包含从hss接收到的静态IP地址，在PCO域包含从UE接收到的PCO信息。</p>
-<p><strong>6）~7）【MME1&lt;-SGW1&lt;-PGW1】对创建会话请求的响应</strong><br>作为对4-5步请求的响应，PGW1发送create session response消息(IMSI, PDN Type=IPv4, PDN Address=Static UE IP(1.1.1.1), PCO={Primary DNS IP, Secondary DNS IP})给MME1。这个消息在PDN地址域包含静态IP地址，在PCO域包含dns服务器地址。</p>
-<p><strong>8）【UE1&lt;-MME1】请求默认承载上下文的激活</strong><br>MME1通过发送active default EPS bearer context request消息(PDN Type=IPv4, PDN Address=Static UE IP(1.1.1.1), PCO={Primary DNS IP, Secondary DNS IP})请求默认承载上下文的创建。这个ESM消息包含UE的静态IP地址和dns服务器地址，嵌入到attach accept消息中。</p>
-<p><strong>9）【UE1】获得静态IP地址来使用PDN服务</strong><br>UE1获得静态IP地址和dns服务器IP地址。UE和PGW之间(UE1 – eNB – S-GW1 – P-GW1)建立了默认承载。UE现在连接了PDN，可以通过静态IP地址使用Internet服务了。</p>
-<p>在使用Internet服务之后，UE1关机，从LTE网络detach，一旦到达city2，UE1重选开机。</p>
-<p><strong>在city2</strong></p>
-<p><strong>1）【UE1-&gt;MME1】请求PDN连接</strong><br>在city1，开机后，UE1通过发送PDN connectivity request消息(PDN Type=IPv4, PCO=DNS Server IPv4 Address Request) 来请求MME2建立PDN连接。这时，除了包含UE的IPv4地址还包含请求的dns服务器地址。</p>
-<p><strong>2）【MME2-&gt;HSS】请求LTE网络注册</strong><br>MME1通过发送update location request消息通知HSS，UE1已经在控制之下，并且在网络上注册UE1。</p>
-<p><strong>3）【MME2&lt;-HSS】转发签约配置文件</strong><br>HSS识别到UE1已经在MME2上注册了，删除在MME1中的UE上下文，通过发送update location answer(IMSI, PDN Type=IPv4, PDN Address=Static UE IP(1.1.1.1))消息来转发UE1的签约配置文件。这个签约配置文件包含静态IP地址和PGW ID。</p>
-<p><strong>4）~5）【MME2-&gt;SGW2-&gt;PGW1】请求会话创建</strong><br>在从HSS接收到UE签约配置文件后，MME2知道UE1已经有一个静态IP地址了。MME1准备create session request消息(IMSI, PDN Type=IPv4, PDN Address=Static UE IP(1.1.1.1), PCO=DNS Server IPv4 Address Request)并发送给PGW1。这时，这个消息在PDN地址域包含从hss接收到的静态IP地址，在PCO域包含从UE接收到的PCO信息。</p>
-<p><strong>6）~7）【MME2&lt;-SGW2&lt;-PGW1】对创建会话请求的响应</strong><br>作为对4-5步请求的响应，PGW1发送create session response消息(IMSI, PDN Type=IPv4, PDN Address=Static UE IP(1.1.1.1), PCO={Primary DNS IP, Secondary DNS IP})给MME2。这个消息在PDN地址域包含静态IP地址，在PCO域包含dns服务器地址。</p>
-<p><strong>8）【UE&lt;-MME】请求默认承载上下文的激活</strong><br>MME2通过发送active default EPS bearer context request消息(PDN Type=IPv4, PDN Address=Static UE IP(1.1.1.1), PCO={Primary DNS IP, Secondary DNS IP})请求默认承载上下文的创建。这个ESM消息包含UE的静态IP地址和dns服务器地址，嵌入到attach accept消息中。</p>
-<p><strong>9）【UE】获得静态IP地址来使用PDN服务</strong><br>UE1获得静态IP地址和dns服务器IP地址。UE和PGW之间(UE1 – eNB – S-GW2 – P-GW1)建立了默认承载。UE现在连接了PDN，可以通过静态IP地址使用Internet服务了。</p>
-<h1 id="V-Closing"><a href="#V-Closing" class="headerlink" title="V. Closing"></a>V. Closing</h1><p>当UE试图初始附着到LTE网络，LTE网络根据用户签约的服务提供PDN连接，一旦连接上，网络保持这个连接直到用户从网络detach。这就意味着网络分配一个IP地址来使用。PDN连接是为每一个PDN提供的。所以IP地址也是为每一个PDN提供的。</p>
-<p>我们目前已经学习到LTE网络在两个城市模型中是怎么分配IP地址的。</p>
-<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p>[1] Netmanias Technical Document, “LTE IP Address Allocation Schemes I: Basic”, February 2015,<br><a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=7246" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=7246</a><br>[2] Netmanias Technical Document, “EMM Procedure 1. Initial Attach - Part 1. Cases of Initial Attach”,<br>December 2013, <a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6098" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6098</a><br>[3] 3GPP TS 23.401, “General Packet Radio Service (GPRS) enhancements for Evolved Universal<br>Terrestrial Radio Access Network (E-UTRAN) access”<br>[4] NMC Consulting Group Confidential Internal Report, “E2E LTE Network Design”, August 2010</p>
-
-          
+          原文链接：http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=7257
+I. Introduction在之前的文档我们已经覆盖了基本IP地址分配过程，解释了在用户同一个地点不同时间接入网络时LTE网络是怎么分配IP地址的。这个文档有一
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/03/26-LTE-IP-Address-Allocation-II-A-Case-for-Two-Cities/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1171,7 +977,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sun-day">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1261,35 +1067,16 @@
       
         
           
-            <p>原文链接：<a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=7246" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=7246</a></p>
-<h1 id="I-Introduction"><a href="#I-Introduction" class="headerlink" title="I. Introduction"></a>I. Introduction</h1><p>lte是全IP网络。这就意味着交付所有用户流量时都是以IP数据包的形式，提供给用户always on IP connectivity的服务。当UE加入LTE网络，会给UE分配一个PDN地址让UE连接这个PDN，并建立默认承载。默认承载保持连接知道UE从LTE网络中detach掉。<br>默认承载对用户拥有的没有APN建立，为每一个APN分配独立的IP地址，一个IP地址可以为ipv4，ipv6，ipv4/ipv6三种类型。</p>
-<p>这篇文件主要解释当用户初始接入网络时LTE网络怎么给用户分配IP地址的，并通过实例来解释。</p>
-<p>在接下来的文档中我们将会涉及到两种类型的IP地址，这篇文档涉及到基本IP地址分配机制和过程，描述熊地址是怎样分配给用户的（用户处于一个位置，对网络执行多次初始attach）。接下来文档我们将学习不同类型的IP地址分配（用户在两个物理分割区域cityA和cityB执行初始附着）。<br>这篇文档组织如下：第二章，不同类型的IP地址分配–动态的和静态的，并讨论他们的特点。第三章和第四章将详细讨论动态和静态IP地址的分配过程。</p>
-<h1 id="II-Types-of-IP-Address-Allocation"><a href="#II-Types-of-IP-Address-Allocation" class="headerlink" title="II. Types of IP Address Allocation"></a>II. Types of IP Address Allocation</h1><p>当UE初始附着到LTE网络，UE请求PDN连接。PGW分配一个IP地址供UE连接PDN，并在U默认承载建立时连接UE和PDN，转发给UE。使用这个IP地址，UE可以获得PDN提供的服务。<br>PGW分配IP地址有两种方式：动态的和静态的分配。对于动态分配，当UE每次接入网络时自动分配一个IP地址。对于静态分配，一旦用户签约后指定给UE一个固定的IP地址，并在每次UE接入网络时都分配这个指定的IP地址。图1比较两种方式的不同。<br><img src="http://img.blog.csdn.net/20151021121418827" alt="这里写图片描述"></p>
-<p>对于动态分配，网络PGW自动为UE选择IP地址。在PGW中网络运营商有一个IP地址池。的那个UE初始附着到LTE网络时，PGW动态为UE分配一个IP地址。所以每次UE初始附着到网络时分配的一个新的动态IP地址。<br>但是，对于静态分配，一旦UE签约网络之后网络运营商就分配了一个固定的IP地址。运营商在hss中和其他签约信息一起为UE分配了静态的IP地址。接着当UE初始附着到LTE网络时，PGW从hss中获得这个静态IP地址并转发给UE。所以在每次UE初始附着网络时给UE分配的都是特定的IP地址。</p>
-<p>当在初始附着请求PDN连接时，UE通过使用协议配置选项PCO可以请求和外部协议/应用相关的协议数据（eg请求dns服务器地址，P-CSCF地址）。这篇文档将详细解释dns服务器地址和IP地址的请求。</p>
-<h1 id="III-Dynamic-IP-Address-Allocation"><a href="#III-Dynamic-IP-Address-Allocation" class="headerlink" title="III. Dynamic IP Address Allocation"></a>III. Dynamic IP Address Allocation</h1><p>对于动态IP地址分配，PGW为UE保留IP地址池，并在UE初始附着到LTE网络时为其分配一个IP地址。<br><img src="http://img.blog.csdn.net/20151021122301279" alt="这里写图片描述"></p>
-<p><strong>PGW中提供IP地址</strong><br>在PGW中，分配了一个IP地址池，并且dns服务器IP地址已经分配了。<br><img src="http://img.blog.csdn.net/20151021134900737" alt="这里写图片描述"></p>
-<p><strong>动态IP地址分配过程</strong><br>用户打开UE，试图初始附着到LTE网络上。</p>
-<p><strong>1）【UE-&gt;MME】请求PDN connectivity</strong><br>UE通过发送PDN connectivity request(PDN type=IPv4, PCO=DNS Server IPv4 Address Request)消息给MME请求PDN连接。这是，除了请求ipv4地址，也请求dns服务器地址。PDN connectivity request消息是一个ESM消息，但是这个消息是嵌入在attach request(IMSI，ESM Message Container)消息中传输的。</p>
-<p><strong>2）~3）【MME-&gt;SGW-&gt;PGW】请求会话创建</strong><br>MME基于从hss接收到的签约配置文件，发送create session request(IMSI, PDN Type=IPv4, PDN Address=0.0.0.0, PCO=DNS Server IPv4 Address Request) 消息给SGW请求EPS会话创建。因为是动态IP分配，这个签约配置文件中不包含IP地址信息，在create sessionrequest消息中PDN地址域是0.0.0.0，从UE接受到的PCO信息也包含在PCO域中。</p>
-<p><strong>4）【PGW】分配PDN地址和dns服务器地址</strong><br>PGW在检查PDN类型和PDN地址（0.0.0.0）之后发现需要分配ipv4地址。PGW从ipv4地址池中选择一个IP地址(e.g. UE IP=1.1.1.5)，并分配给UE。根据PCO域的请求，也分配相应的dns服务器IP地址。</p>
-<p><strong>5）~6）【MME&lt;-SGW&lt;-PGW】对请求会话创建的响应</strong><br>作为对2-3步请求的响应，PGW发送create session response消息给MME。这个消息包含PDN地址域的UE IP地址，PCO域的dns服务器IP地址。</p>
-<p><strong>7）【UE&lt;-MME】请求默认承载上下文的激活</strong><br>MME给UE发送activate default EPS bearer context request(PDN Type=IPv4, PDN Address=UE IP(1.1.1.5), PCO={Primary DNS IP, Secondary DNS IP})消息来请求对默认承载上下文的激活。这个ESM消息包含dns服务器IP地址和UE IP地址，嵌入到attach accept消息中传输。</p>
-<p><strong>8）【UE】获得动态IP地址使用PDN服务</strong><br>UE获得动态IP地址和dns服务器地址。UE和PGW之间建立默认承载。UE现在已经连接到PDN上，可以以动态IP地址来使用Internet服务。</p>
-<h1 id="IV-Static-IP-Address-Allocation"><a href="#IV-Static-IP-Address-Allocation" class="headerlink" title="IV. Static IP Address Allocation"></a>IV. Static IP Address Allocation</h1><p>对于静态IP地址分配，当用户第一次签约网络时网络运营商为用户指定了一个UE IP地址，在hss中提供用户签约配置文件，并在用户每次初始附着到网络时分配一个存储在配置文件中的静态IP地址。详细的过程如图3所示。<br><img src="http://img.blog.csdn.net/20151021145233115" alt="这里写图片描述"><br><strong>hss中提供IP</strong><br>在hss中，提供了每一个签约用户的签约配置文件。这个配置文件包括PDN类型，用于PDN连接的PDN地址。<br><img src="http://img.blog.csdn.net/20151021150651205" alt="这里写图片描述"><br><strong>PGW中IP提供</strong><br>在PGW中，dns服务器IP地址已经设置了。<br><img src="http://img.blog.csdn.net/20151021150809355" alt="这里写图片描述"></p>
-<p><strong>静态IP地址分配的过程</strong><br>用户打开UE，试图初始化附着到LTE网络。</p>
-<p><strong>1）【UE-&gt;MME】请求PDN连接</strong><br>UE通过发送PDN connectivity request消息(PDN type=IPv4, PCO=DNS Server IPv4 Address Request)消息给MME请求PDN连接。这时，除了IPv4地址，包括dns服务器地址也请求了。</p>
-<p><strong>2）【MME-&gt;HSS】为了注册请求LTE网络</strong><br>MME通过发送update location request消息通知HSS，UE已经在MME的控制之下，请求在网络上注册UE。</p>
-<p><strong>3）【MME&lt;-HSS】转发签约配置文件</strong><br>HSS识别到UE已经在MME上注册了，通过发送update location answer(IMSI, PDN Type=IPv4, PDN Address=Static UE IP(1.1.1.1))消息来转发UE的签约配置文件。这个签约配置文件包含静态IP地址。</p>
-<p><strong>4）~5）【MME-&gt;SGW-&gt;PGW】请求会话创建</strong><br>在从HSS接收到UE签约配置文件后，MME知道UE已经有一个额静态IP地址了。MME准备create session request消息(IMSI, PDN Type=IPv4, PDN Address=Static UE IP(1.1.1.1), PCO=DNS Server IPv4 Address Request)并发送给PGW。这时，这个消息在PDN地址域包含从hss接收到的静态IP地址，在PCO域包含从UE接收到的PCO信息。</p>
-<p><strong>6）~7）【MME&lt;-SGW&lt;-PGW】对创建会话请求的响应</strong><br>作为对4-5步请求的响应，PGW和SGW发送create session response消息(IMSI, PDN Type=IPv4, PDN Address=Static UE IP(1.1.1.1), PCO={Primary DNS IP, Secondary DNS IP})给MME。这个消息在PDN地址域包含静态IP地址，在PCO域包含dns服务器地址。</p>
-<p><strong>8）【UE&lt;-MME】请求默认承载上下文的激活</strong><br>MME通过发送active default EPS bearer context request消息(PDN Type=IPv4, PDN Address=Static UE IP(1.1.1.1), PCO={Primary DNS IP, Secondary DNS IP})请求默认承载上下文的创建。这个ESM消息包含UE的静态IP地址和dns服务器地址，嵌入到attach accept消息中。</p>
-<p><strong>9）【UE】获得静态IP地址来使用PDN服务</strong><br>UE获得静态IP地址和dns服务器IP地址。UE和PGW之间建立了默认承载。UE现在连接了PDN，可以通过静态IP地址使用Internet服务了。</p>
-<h1 id="V-Closing"><a href="#V-Closing" class="headerlink" title="V. Closing"></a>V. Closing</h1><p>到目前为止，我们讨论了两种分配IP的方式：静态和动态。当用户试图初始附着到LTE网络时，LTE网络分配一个IP地址来连接到PDN上和默认承载。只要用户网络注册有效，PDN地址和默认承载一直保持有用，即使用户没有在使用服务。这种方式叫做always-on IP connectivity。<br>这个文档解释了IP地址分配的机制和过程。下面一个文章我们将讨论在不同的位置UE连接PDN时的情况。</p>
-<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p>[1] Netmanias Technical Document, “LTE IP Address Allocation Schemes II: A Case for Two Cities”,<br>February 2014 (TBD)<br>[2] Netmanias Technical Document, “EMM Procedure 1. Initial Attach - Part 1. Cases of Initial Attach”,<br>December 2013, <a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6098" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6098</a><br>[3] NMC Consulting Group Confidential Internal Report, “E2E LTE Network Design”, August 2010</p>
-
-          
+          原文链接：http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=7246
+I. Introductionlte是全IP网络。这就意味着交付所有用户流量时都是以IP数据包的形式，提供给用户always on IP connectivity
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/03/25-IP-Address-Allocation-I-Basic/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1350,7 +1137,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sun-day">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1440,43 +1227,17 @@
       
         
           
-            <p>原文链接： <a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=7179" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=7179</a></p>
-<h1 id="I-Introduction"><a href="#I-Introduction" class="headerlink" title="I. Introduction"></a>I. Introduction</h1><p>之前的PCC文档，我们的焦点在讨论关于QoS规则的PCC策略。现在我们的焦点是付费策略，特别是离线付费策略。</p>
-<p>在LTE网络中，服务是按照承载（eg，EPC）/子系统（eg.IMS）/服务级别（eg MMS）或者是在线和离线来付费的。<br>对于在线付费，当用户请求网络资源，网络运行账户查询并决定是否授权用户用户使用请求的网络资源。这个情况，用户的网络资源利用被实时测量，所以说付费信息对提供的服务有实时的影响。这个方法应用在预付套餐上。（预付套餐是神马？？）<br>另一方面，对于离线付费，用户为已经使用过的网络资源付费。也就是说，网络通过转发用户的CDR（付费数据记录）到账单系统来报告特定用户的资源使用情况。用户使用的信息定期的收集，或者在没有会话结束时收集。所以付费信息对提供的服务没有实时性影响。<br>通常上，在线付费是使用在预付费套餐上，离线付费使用在后付费套餐上。例如，多数韩国的移动用户是后付费套餐使用者，他们都属于离线付费策略。这种类型套餐的使用者首选使用服务，然后他们的运营商每月再计算他们的使用情况付费。在全球范围内，预付费用户比后付费用户要多。预付费用户首先付费，然后保证他们的配额。一旦他们的配额超出，激活的会话就会终止。<br>这篇文档主要讨论当在承载级别后付费用户使用Internet服务时运用离线付费策略的付费过程。<br>这篇文档组织如下：第二章提供付费相关的接口和离线付费是怎么工作的，第三章解释离线付费的过程。第四章总结CDR参数，离线付费参数。</p>
-<h1 id="II-Overview-of-Offline-Charging"><a href="#II-Overview-of-Offline-Charging" class="headerlink" title="II. Overview of Offline Charging"></a>II. Overview of Offline Charging</h1><p>下面我们将定义LTE参考模型中付费相关的接口。图1描述了LTE付费架构和相关的接口。<br><img src="http://img.blog.csdn.net/20151021093007771" alt="这里写图片描述"></p>
-<ul>
-<li>策略和付费规则功能PCRF：当决定到用户SDF的PCC策略时，PCRF选择一个付费策略适用于SDF（service data flow），并通过Gx接口转发这个策略到PGW中的PCEF（policy and charging enforcement function）。</li>
-<li>PGW：PGW对用户的SDF执行PCRF转发的付费策略。在离线付费，PGW根据付费策略生成CDR，并通过Gz接口转发至OFCS（offline charging system）。在在线付费，PGW首先请求和获得配额，然后通过Gy接口和OCS（online charging system）执行信用控制来测量和报告用户的使用情况。</li>
-<li>OFCS离线付费系统：一旦接收到Gz接口上PGW的CDR，OFCS后处理他们并转发至账单系统billing system、</li>
-<li>OCS在线付费系统：通过Gy接口和PGW执行信用控制来给用户分配配额（eg，这个会话持续多长时间，用户交付多少数据等等）</li>
-</ul>
-<p>遮普文档只关于离线付费的，图1展示了PCRF PGW OFCS怎么工作的。在我们进一步详细讨论之前，我们先简要介绍一下离线付费系统是怎么工作的。</p>
-<p>图2提供了离线付费工作的概况，特别的付费规则的交付和CDR的传输。<br><img src="http://img.blog.csdn.net/20151021104021889" alt="这里写图片描述"></p>
-<p><strong>1）PCRF</strong>，一旦EPS会话建立，PCRF选择一个付费策略，并嵌入到PCC策略中转发给PCRF（PGW）。同事，付费策略的名字被定为PCC规则的名字。像付费方法（在线或者离线），排序组（服务是怎么付费，每分钟100元，100M 1000元等等）这些信息作为付费规则包含在PCC规则中。在图2中，Internet会话建立了，在上面应用了offline的付费方法和rgInternet排序方法的付费规则。</p>
-<p><strong>2）PGW</strong>从PCRF接收到付费规则，PGW知道使用的是离线付费。PGW决定应该测量或者产生什么样的付费信息，通过那个接口传输这些信息。接着PGW创建默认承载，在上面应用这些付费规则，并打开CDR，准备好生成付费信息。</p>
-<p><strong>3）</strong>现在IP数据包通过PGW传输。PGW开始通过Internet SDF开始测量网络使用量，生成付费信息。</p>
-<p><strong>4）</strong>一旦EPS会话终止，PGW把这些CDR记录信息转发给OFCS。在这个实例中，每一个排序组的使用量都报告了，CDR包含以下信息：</p>
-<ul>
-<li>用户信息（eg用户ID，用户位置）</li>
-<li>网络/承载信息（eg服务网络ID，APN，PGW，SGW地址，请求的QoS，授权的QoS）</li>
-<li>网络资源使用量（eg传输的字节数）</li>
-<li>使用量信息（eg总的获取时间，数据包传输时间）</li>
-<li>服务信息（eg服务id，数据包过滤）</li>
-</ul>
-<h1 id="III-Offline-Charging-Procedure"><a href="#III-Offline-Charging-Procedure" class="headerlink" title="III. Offline Charging Procedure"></a>III. Offline Charging Procedure</h1><p>图3是LTE网络中离线付费过程。这个文档只关注在付费处理过程。<br><img src="http://img.blog.csdn.net/20151021105257818" alt="这里写图片描述"></p>
-<p><strong>1）【PCRF&lt;-SPR】获得用户配置</strong><br>在用户初始附着过程中，PCRF从SPR中请求和获得用户的签约配置文件为了决定PCC规则。</p>
-<p><strong>2）【PGW&lt;-PCRF】请求会话建立</strong><br>PCRF基于用户签约配置文件决定Internet会话的付费策略。PCRF通过CCA（credit control answer消息）转发PCC规则“Internet”给PGW。</p>
-<p><strong>3)【PGW】CDR创建</strong><br>PGW根据PCC规则创建默认承载，并且对这个承载执行付费策略。接着PGW通过创建CDR准备好生成付费信息。</p>
-<p><strong>4）【PGW】生成付费信息</strong><br>一旦用户开始使用Internet，PGW记录用户网络资源使用情况和详细使用信息，生成付费信息。</p>
-<p><strong>5）【PGW】CDR关闭</strong><br>PGW一旦在用户detach之后EPS会话结束后关闭CDR。</p>
-<p><strong>6）【PGW-&gt;OFCS】CDR传输</strong><br>PGW通过data record transfer request（CDR）消息通过GTP’协议把CDR传输给OFCS。报告的信息包括每一个排序组的使用信息，数据包交付时间，字节交付时间等等。</p>
-<p><strong>7）【PGW&lt;-OFCS】CDR接收确认</strong><br>OFCS通过发送data  record transfer accept消息确认CDR的接收。</p>
-<p>OFCS收集CDR，后处理他们，并且把他们转发给运营商计费系统。这个计费系统分析接收到的CDR来获得统计值决定要付费多少钱。接着使用这些结果向用户收费或者运营商之间账户。</p>
-<h1 id="IV-Parameters-for-Charging-Data-Record-CDR"><a href="#IV-Parameters-for-Charging-Data-Record-CDR" class="headerlink" title="IV. Parameters for Charging Data Record (CDR)"></a>IV. Parameters for Charging Data Record (CDR)</h1><p>图2和图3总结了CDR的主要参数。除了这些参数，CDR还有其他另外的付费参数。表1列出了在承载级别上使用的CDR参数。<br><img src="http://img.blog.csdn.net/20151021113658809" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20151021113732062" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20151021113756769" alt="这里写图片描述"></p>
-<h1 id="V-Closing"><a href="#V-Closing" class="headerlink" title="V. Closing"></a>V. Closing</h1><p>我们讨论了付费过程。下一个文档将讨论在线付费系统。</p>
-<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p>[1] Netmanias Technical Document, “LTE Policy and Charging Control (PCC)”, August 2014,<br><a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6562" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6562</a><br>[2] 3GPP TS 32.240, “Telecommunication management; Charging management; Charging architecture<br>and principles”<br>[3] Netmanias Technical Document, “LTE Network Architecture: Basic”, July 2013,<br><a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5904" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5904</a><br>[4] 3GPP TS 32.295, “Telecommunication management; Charging management; Charging Data Record<br>(CDR) transfer”<br>[5] Netmanias Technical Document, “EMM Procedure 1. Initial Attach - Part 2. Call Flow of Initial Attach”,<br>January 2014, <a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6102" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6102</a><br>[6] 3GPP TS 32.298, “Telecommunication management; Charging management; Charging Data Record<br>(CDR) parameter description”<br>[7] Netmanias Technical Document, “LTE Charging: Online”, TBD<br>[8] NMC Consulting Group Confidential Internal Report, “E2E LTE Network Design”, August 2010</p>
-
-          
+          原文链接： http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=7179
+I. Introduction之前的PCC文档，我们的焦点在讨论关于QoS规则的PCC策略。现在我们的焦点是付费策略，特别是离线付费策略。
+在LTE网络中，服务
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/03/23-LTE-Charging-I-Offline/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1537,7 +1298,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sun-day">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1627,71 +1388,16 @@
       
         
           
-            <p>原文链接：<a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6562" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6562</a></p>
-<h1 id="I-introduction"><a href="#I-introduction" class="headerlink" title="I. introduction"></a>I. introduction</h1><p>为了使用LTE服务，用户必须购买一个LTE设备，和运营商签署一个账户，并选择服务类型和想要的计划。为了支持和管理这些选择的服务，运营商根据用户的签约信息来配置签约文件。当用户使用LTE服务时，对每一个和不同服务相关的APN建立EPS会话。这时，网络决定一个策略：当EPS会话建立或者修改是,网络资源时怎么分配的，这些服务时怎么付费的。接着，当会话保持激活状态时，应用这个策略到EPS会话。这个过程叫做策略和付费控制PCC，主要由策略付费控制功能PCRF和策略付费增强功能PCEF实现。</p>
-<p>当建立或者修改EPS会话，基于运营商的策略PCRF决定每一个服务数据流SDF的PCC规则。 PCEF (P-GW)检测一个SDF，并适用一个PCC规则，这个规则对用户数据包上的一个特定的SDF是特定的。它可以绑定SDF QoS和承载QoS，适用承载QoS到EPS承载。也就说，EPS承载上下文是在EPS实体(UE, eNB, S-GW, P-GW, and MME)上设置和修改的。</p>
-<p>EPS会话的建立，修改和结束的执行时和PCC过程一致的。EPS会话修改过程可能包含EPS承载的建立修改和结束。在这个过程中，UE和MME之间的EPS承载上下文是按照NAS层的EPS会话管理功能ESM来处理的。</p>
-<p>这篇文档讨论PCC规则和过程，是按照如下组织的：第二章定义PCC规则并描述PCC规则对于不同的服务烈性在GX接口时怎么提供的。第三章讨论伴随ESM过程的EPS会话建立和修改需要的PCC规则。第四章介绍当使用策略控制时，IP数据包是怎么处理的。第五章总结EPS实体中策略控制相关的信息。</p>
-<h1 id="II-PCC-rules"><a href="#II-PCC-rules" class="headerlink" title="II.PCC rules"></a>II.PCC rules</h1><p>PCRF决定每一个SDF的PCC规则，并通过Gx接口把这些规则转发给PCEF（PGW）。PGW接着对每一个SDF执行这些PCC规则。在执行PCC规则后，当IP数据包到达，检测到每一个数据包属于的SDF，并根据他们的SDF对每一个数据包适用PCC规则。3GPP29.312按照如下定义PCC规则：</p>
-<ul>
-<li>目的：PCC规则的目的是检测一个数据包属于哪个SDF，并识别出SDF作用的服务，为这个SDF提供合适的付费参数，并为这个SDF提供策略控制。</li>
-<li>适用：适用于不同的SDF。PCEF (P-GW)通过使用数据包过滤器（SDF templates）来匹配对IP数据包进行分类，并对这些数据包应用上匹配的PCC规则。</li>
-<li>类型：动态PCC规则，或者预定义的PCC规则。动态PCC规则是在EPS会话建立或者修改时，由PCRF动态地提供给PGW的。预定义的PCC规则是在PGW中预先配置的，可以由PCRF激活或者去激活。</li>
-<li>elements：PCC规则包含策略规则名字，service ID，SDF templates，gate status，QoS参数，付费参数等等，并根据运营商的策略而变化。</li>
-</ul>
-<p>下面，我们详细介绍不同类型的PCC规则是怎样通过Gx接口传送的，并且在PGW上执行的。2,1节描述预定义的PCC规则，2.2节描述动态PCC规则。</p>
-<h2 id="2-1-预定义PCC规则"><a href="#2-1-预定义PCC规则" class="headerlink" title="2.1 预定义PCC规则"></a>2.1 预定义PCC规则</h2><p>一些运营商适用限制不是他们服务的流量的比特率这样的策略，例如P2P。所以，我们使用P2P作为示例介绍下预定义PCC策略。图1描述了在PGW中预定义PCC策略是怎么配置的。</p>
-<p><img src="http://img.blog.csdn.net/20151020095634078" alt="这里写图片描述"></p>
-<p>在这个图中，预定义规则“P2P”是在PGW中预配置和去激活的。因为这个规则是预定义的，一旦PCRF决定，就需要给PGW这个策略规则的名字 ie“P2P”，来代替发送这个规则的所有元素。一旦接收到P2P这个规则名字，PGW激活之前去激活的P2P规则，并执行。</p>
-<h2 id="2-2-动态PCC规则"><a href="#2-2-动态PCC规则" class="headerlink" title="2.2 动态PCC规则"></a>2.2 动态PCC规则</h2><p>动态PCC规则是在当有时间时使用的。图2描述了动态PCC规则在用户使用Internet和语音服务是在PGW中怎么配置的。图中做如下假设：</p>
-<ul>
-<li>运营商策略：互联网服务的接入性在一定程度上取决于网络资源。并且可以保证语音服务的数据速率。</li>
-<li>APN：Internet和语音服务可以通过不同的APN接入。</li>
-<li>PCC规则名字：Internet服务“Internet”，语音服务“voice-C”（SIP信令）/“voice-U”（voice packet）</li>
-</ul>
-<p><img src="http://img.blog.csdn.net/20151020101401038" alt="这里写图片描述"></p>
-<p>“Internet”规则适用于接入Internet的所有数据包。它支持不限制的MBR（UL/DL），允许Internet接入最大可能的比特率。这个规则适用于接入Internet的默认承载。APN-AMBR(uL/DL)是设置为非限制的，如果没有其他用户在服务数据可以以最大速率传输。但是服务的用户越多，支持的速率越慢。</p>
-<p>“voice-C”规则适用于SIP信令数据包。它适用于接入IMS网络的默认承载，支持100Kbps的APN-AMBR(uL/DL)。</p>
-<p>“voice-U”规则适用于多媒体数据包，是用户语音数据包，支持GBR。在激活的语音会话中，分配的网络资源确保数据包随时是按照UL/DL 88 Kbps的速率交付的。专用承载建立，也是允许数据包以UL/DL 88 Kbps的速率交付。</p>
-<p>每次建立或者修改一个EPS会话，PCRF动态决定PCC规则，包含根据选择服务类型特定规则的规则名字和规则参数。接着PCRF把这些参数提供给PGW。接着PGW在把这些参数映射到承载QoS参数上之后对IP数据包执行这些策略。</p>
-<p>一旦用户通过初始附着过程接入Internet和IMS网络，用户默认承载保持连接直到UE从LTE网络中去附着。所以基本上，“Internet”“voice-C”规则在PGW中保持激活。另外一旦检测到语音电话，就在IMS APN上建立专用承载，并在通话结束时终止承载。</p>
-<h1 id="3-PCC-procedures"><a href="#3-PCC-procedures" class="headerlink" title="3. PCC procedures"></a>3. PCC procedures</h1><p>我们再第二章讨论了PCC规则。在第三章，我们将通过EPS会话建立和修改过程在探索PCC规则。在LTE中，语音服务和Internet服务使用不同的PDN，所以他们有自己的默认承载。语音信令消息是使用SIP协议通过默认承载传输的，而媒体数据包（用户语音数据包）是使用RTP协议通过专用承载传输的。</p>
-<p>Internet服务用户的初始附着和EPS会话建立过程已经在LTE初始附着的文档中讨论过了。我们深入讨论在EPS会话建立或者修改过程对用户接入IMS拨打语音通话时PCC是如何工作的。<br>为了在LTE网络拨打语音通话，附着LTE和IMS注册时提前必须的。一旦语音服务的EPS会话通过LTE attach过程建立了，attach到IMS网络的默认承载也在LTE网络中创建了。在这个过程中，voice-C语音服务信令的PCC规则适用于这个承载。通过这个承载，交付SIP信令消息，用户和IMS网络之间的IMS鉴权注册接着执行。<br>接着当有一个语音通话，IMS网络监测到它，并通过PCRF。PCRF决定PCC规则（“voice-U”）并转发至PGW。PGW为语音数据包传输创建专用承载，并且通过这个专用承载传输语音数据包。</p>
-<h2 id="3-1-语音会话建立：默认承载建立和IMS注册"><a href="#3-1-语音会话建立：默认承载建立和IMS注册" class="headerlink" title="3.1 语音会话建立：默认承载建立和IMS注册"></a>3.1 语音会话建立：默认承载建立和IMS注册</h2><p>图3描述了通过IMS APN初始attach的用户时如何建立EPS会话的。我们假设EPS会话建立是由用户打开UE而发起的。随着使用EMM消息完成初始附着过程，EMM之前我们已经介绍了，现在我们简要过一下ESM过程。</p>
-<p><img src="http://img.blog.csdn.net/20151020105105973" alt="这里写图片描述"></p>
-<p> <strong> 1）【UE-&gt;MME】PDN connectivity request </strong><br>UE通过PDN connectivity request消息给MME请求接入IMS网络。在ESM消息中的PCO协议配置选项域用来要求代理呼叫会话控制功能P-CSCF地址。这个消息是包含在attach request消息中，发送给MME。</p>
-<p> <strong> 2）【MME-&gt;SGW-&gt;PGW】请求语音会话的创建 </strong><br>MME在位置更新时从hss接收到签约配置文件中获得APN和签约QoS配置。从APN，MME意识到APN要为语音服务创建默认承载，并为这个默认承载分配ID。这个签约配置文件获得QoS参数(QCI = 5, ARP = 6, APN-AMBR = 100 Kbps)，这些配置文件应用于默认承载。MME准备create session request消息，包含默认承载ID，APN，PCO和签约QoS配置文件，并把它转发给PGW。这时候，从UE接收到PCO域被透传给PGW。</p>
-<p> <strong> 3）【PGW】UE IP和P-CSCF地址分配 </strong><br>PGW为IMS APN分配UE IP，并选择P-CSCF的地址。</p>
-<p> <strong> 4）【PGW-&gt;PCRF】EPS会话建立的通知 </strong><br>PGW通过发送Credit-Control-Request (CCR)消息把用户签约QoS配置转发给PCRF，请求鉴权。</p>
-<p> <strong> 5）~6）【PCRF，SPR】用户配置获取 </strong><br>PCRF可以从SPR中获得用户签约配置文件，并使用配置文件来为语音服务决定PCC策略。</p>
-<p> <strong> 7）【PCRF】策略决定 </strong><br>基于签约配置文件，PCRF决定EPS会话的策略。这个实例中是SIP信令，选择“voice-C”作为PCC规则。<br>“Voice-C” rule: QCI = 5, ARP = 6, APN-AMBR (UL/DL) = 100 Kbps, Charging Rule: Offline, SIP Packet Filter</p>
-<p> <strong> 8）【PGW&lt;-PCRF】PCC规则提供 </strong><br>PCRF转发PCC规则(“Voice-C”) 给PGW。</p>
-<p> <strong> 9）【PGW】策略实施 </strong><br>一旦接收到(“Voice-C”) PCC策略，PGW执行策略参数，并把SDF QoS参数映射到默认承载QoS参数上。</p>
-<ul>
-<li>P-GW (SDF): QCI = 5, ARP = 6, MBR (UL/DL) = 100 Kbps/100 Kbps, SDF Template (UL/DL) = (UE IP, <em> ,SIP, </em> , UDP) /( <em> , UE IP, SIP, </em> , UDP)</li>
-<li>P-GW (Default Bearer): QCI = 5, ARP = 6, APN=AMBR (UL/DL) = 100 Kbps/100 Kbps, TFT (UL/DL) =<br>(UE IP, <em>, SIP, </em>, UDP)/( <em> , UE IP, SIP, </em>, UDP)<br><strong> 10）【MME&lt;-SGW&lt;-PGW】对语音会话创建的响应 </strong><br>作为对step-2请求的响应，PGW发送Create Session Response消息给MME。这个消息包含提供的QoS配置文件和上行策略参数，都需要转发给UE。<br><strong> 11）【UE&lt;-MME】请求默认承载上下文激活 </strong><br>MME通过发送Activate Default EPS Bearer Context Request消息请求UE激活默认承载上下文。这个ESM消息包含APN，UE IP，P-CSCF地址，PGW提供的策略参数，是嵌入在attach accept消息中的。<br><strong> 12）【UE】策略执行：默认承载上下文激活 </strong><br>UE执行上行策略并激活默认承载上下文<br>UE: QCI = 5, APN-AMBR (UL) = 100 Kbps, TFT (UL) = (UE IP, <em>, SIP, </em>, UDP)<br><strong> 13）【UE-&gt;MME】默认承载上下文激活的通知 </strong><br>UE通过发送Activate Default EPS Bearer Context Accept消息通知MME，用于传输SIP信令消息的默认承载上下文已经激活了。<br>一旦SIP信令的默认承载建立完成，IMS鉴权和注册过程将紧接着执行。使用SIP协议的IMS过程在本文档的讨论范围之外，我们将会在volte文档中叙述。一旦IMS注册完成，UE准备发送/接收语音通话了。<h2 id="3-2-语音会话修改：专用承载建立"><a href="#3-2-语音会话修改：专用承载建立" class="headerlink" title="3.2 语音会话修改：专用承载建立"></a>3.2 语音会话修改：专用承载建立</h2>一旦LTE附着和IMS注册完成，UE准备开始语音通话。但是，因为语音数据包需要实时传送，为SIP信令建立的默认承载提供的QoS不鞥呢满足语音数据包的QoS。所以，现在需要建立一个能盲足语音数据包QoS的新承载。对每一个语音通话，建立语音数据包的专用承载，通过语音会话修改过程。<br>图4展示了专用承载是怎么建立的，一旦检测到语音通话根据新的PCC策略语音会话时如何修改的。在途中，当发起端UE请求语音通话，PCRF从SIP信令（session progress消息）知道请求的是语音通话。接着PCRF决定一个PCC策略“Voice-U” rule (QCI = 1, ARP = 7, GBR/MBR = 88 Kbps)，并把它转发给PGW，接着PGW创建GBR类型的专用承载。当发起端UE通过默认承载接收到对端UE的200 OK的SIP消息时，UE通过专用承载转发语音数据包。<br><img src="http://img.blog.csdn.net/20151020134727905" alt="这里写图片描述"><br><strong> 1）【UE-&gt;P-CSCF】语音通话生成 </strong><br>发起端UE通过发送invite消息给IMS网络请求语音通话。详细的过程将会在IMS网络的文档中叙述。<br><strong> 2）【PCRF&lt;-P-CSCF】传送服务信息 </strong><br>一旦接收到这个SIP消息，IMS网络的P-CSCF就知道了请求的是语音电话。所以他发送一个AAR（AA-request）给PCRF，转发服务消息。这个AAR消息包含媒体信息，比如最大/最小带宽，IP数据流标识，codec等等。<br><strong> 3）【PCRF】策略决定 </strong><br>基于从P-CSCF接收到的服务信息，PCRF通过选择一个PCC规则和承载来决定EPS会话的策略。对于PCC规则，它选择voice-U规则来支持语音数据包。对于这个承载的QoS级别，选择QCI=1。由于语音数据包QoS不能被已经存在的默认承载的QoS支持，需要建立一个不同QoS等级的专用承载，接着修改EPS会话。<br>“Voice-U” rule: QCI = 1, ARP = 7, GBR (UL/DL) = 88 Kbps/88 Kbps, MBR (UL/DL) = 88 Kbps/88 Kbps,<br>Charging Rule: Offline, RTP Packet Filter<br><strong> 4）【PGW&lt;-PCRF】PCC规则提供 </strong><br>PCRF给PGW传输PCC规则(“Voice-U”)<br><strong> 5）【PGW】策略执行 </strong><br>一旦接收到这个PCC规则(“Voice-U”) ，PGW配置QoS和付费策略参数，并且把SDFQoS参数映射到专用承载QoS参数。</li>
-<li>P-GW (SDF): QCI = 1, ARP = 7, GBR (UL/DL) = 88 Kbps/88 Kbps, MBR (UL/DL) = 88 Kbps/88 Kbps, SDF Template (UL/DL)=(UE IP, <em>, RTP, </em>, UDP) /(<em>, UE IP, RTP, </em>, UDP)</li>
-<li>P-GW (Dedicated Bearer): QCI = 1, ARP = 7, GBR (UL/DL) = 88 Kbps/88 Kbps, MBR (UL/DL) = 88<br>Kbps/88 Kbps, TFT (UL/DL) = (UE IP, <em>, RTP, </em>, UDP)/(<em>, UE IP, RTP, </em>, UDP)<br><strong> 6）~7）【MME&lt;-SGW&lt;-PGW】专用承载创建请求 </strong><br>PGW给MME发送create bearer request消息来请求专用承载建立。这个消息 包含连接EPS承载标识LBI，专用承载ID，专用承载QoS和上行TFT信息。专用承载相关的信息包含LBI，是作为一个每一个专用承载所属的EPS会话的默认承载ID。从上图中，它是用语音会话的默认承载ID表示的。<br><strong> 8）【UE&lt;-MME】请求专用承载上下文的激活 </strong><br>MME通过发送activate dedicated EPS bearer context request消息来请求专用承载上下文的激活。在这个消息中包含PGW发送的策略参数。<br><strong> 9）【UE】策略执行：专用承载上下文的激活 </strong><br>UE执行上行策略，并激活专用承载上下文。<br>UE: QCI = 1, GBR (UL) = 88 Kbps, MBR (UL) = 88K bps, TFT (UL) = (UE IP, <em>, RTP, </em>, UDP)<br><strong> 10）【UE-&gt;MME】通知专用承载上下文激活 </strong><br>UE通过发送activate dedicated EPS bearer Context accept消息通知MME，用于语音数据包的专用承载上下文已经激活了。<br><strong> 11）~12）【MME-&gt;SGW-&gt;PGW】专用承载创建的通知 </strong><br>MME给PGW通知专用承载已经创建了。<br><strong> 13）【PGW-&gt;PCRF】通知PCC策略已经适用 </strong><br>PGW给PCRF通知PCC规则已经执行了。<h1 id="IV-How-Policy-Control-Affects-the-Way-IP-Packet-Flows-are-Handled"><a href="#IV-How-Policy-Control-Affects-the-Way-IP-Packet-Flows-are-Handled" class="headerlink" title="IV. How Policy Control Affects the Way IP Packet Flows are Handled"></a>IV. How Policy Control Affects the Way IP Packet Flows are Handled</h1>我们将学习了PCC策略是如何影响EPS会话中IP数据流的处理的。图5描述了EPS会话中UE产生的IP数据流。在图5a中，Internet流量通过为Internet服务创建的默认承载从Internet PDN传输。对于语音服务，SIP信令流通过为语音服务创建的默认承载在IMS PDN（PCSCF）传输。语音媒体流通过为语音服务创建的专用承载和呼叫对端之间传输。<br><img src="http://img.blog.csdn.net/20151021080829745" alt="这里写图片描述"><br>图6显示了应用于图5IP数据包流的策略控制。在途中，在图2中列出的策略参数在PGW中执行。PGW检测上下行的SDF，并对每一个SDF的每一个IP数据包执行策略控制。在EPS承载上，设置EPS承载QoS参数。<br><img src="http://img.blog.csdn.net/20151021080803848" alt="这里写图片描述"><br><strong> 下行 </strong><br>IP数据包流到达PGW。根据PGW中设置的门状态，来自Internet和IMS网络的流量都是允许的。</li>
-<li>SIP流量（APN=IMS）是i)由PGW的数据包过滤PF1作为SDF1检测的，ii）限制MBR（100Kbps）速率，iii）映射到默认承载，iv）限制APN-AMBR（100Kbps）。在eNB，流量时根据UE-AMBR的速率来调度的，并传送给UE。</li>
-<li>语音流量（APN=IMS）是i）由PGW的数据包铝PF2作为SDF2来检测的，ii）保证GBR速率，iii）映射到专用承载，iv）再次保证GBR。在eNB，流量时以GBR调度的，并传送给UE。</li>
-<li><p>Internet流量（APN=Internet）是i）由PGW的数据包过滤PF3作为SDF3来检测的，ii）不限制速率，iii）映射到默认承载，iv）保证APN-AMBR速率，不受限。在eNB，流量是以UE-AMBR来调度的，并传送给UE。</p>
-<p><strong> 上行 </strong><br>IP数据包从应用层到达UE。上行IP数据包通过上行数据包过滤器(UL TFT; PF1, PF2, PF3)映射到相应的的承载，并对数据包适用每一个承载的QoS。接着转发给PGW，PGW适用数据包过滤器(SDF template; PF1, PF2, PF3)检测SDF，在应用SDF QoS之后转发到目的地。</p>
-</li>
-<li><p>SIP流量是i）在UE的PF1映射到连接IMS APN的默认承载，ii）限制MBR（100Kbps）速率，iii）发送给eNB。在PGW中，它是i）再次限制MBR（100Kbps）速率，ii）有PF1作为SDF1检测，iii）保证SDF MBR（100Kbps），iv）接着转发给IMS网络。</p>
-</li>
-<li>语音流量是i）在UE的PF1映射到连接IMS APN的专用承载，ii）以GBR发送给eNB，作为eNB调度。一旦到达PGW，它是i）有PF2作为SDF2检测，iii）保证SDF GBR（88Kbps）转发的。</li>
-<li>Internet流量是i）在UE的PF3映射到连接Internet APN的默认承载上的，ii）保证APN-AMBR速率，不限制，iii）发送给eNB。一旦到达PGW，它是i）再次保证上行 APN-AMBR，ii）由PF3作为SDF3检测，iii）保证SDF MBR，不限制，iv）转发到Internet。</li>
-</ul>
-<h1 id="V-EPS-entity-information"><a href="#V-EPS-entity-information" class="headerlink" title="V. EPS entity information"></a>V. EPS entity information</h1><p>下面我们介绍在PCC规则在Internet和语音流量上执行之后每一个APN上EPS实体信息的变化情况。</p>
-<h2 id="5-1-Internet服务"><a href="#5-1-Internet服务" class="headerlink" title="5.1 Internet服务"></a>5.1 Internet服务</h2><p>图7展示了对Internet服务流量执行PCC规则之后EPS实体中的信息。在初始接入Internet时，PCRF选择一个PCC规则“Internet”，并转发给PGW。接着PGW使用这个规则对Internet服务的EPS默认承载执行QoS参数。这个默认承载保持激活知道UEdetach。</p>
-<p><img src="http://img.blog.csdn.net/20151021083631584" alt="这里写图片描述"></p>
-<h2 id="5-2-语音服务"><a href="#5-2-语音服务" class="headerlink" title="5.2 语音服务"></a>5.2 语音服务</h2><p>图8展示了对语音服务榴莲根治性PCC规则之后保存在EPS实体中的信息。在实例中，一旦UE初始接入IMS网络，默认承载就建立了，就检测到了语音通话。在初始接入IMS网络时，PCRF选择一个PCC规则“voice-C”，PGW对SIP信令的EPS默认承载执行QoS参数。因为语音通话是在很短的时间内检测的，接着，PCRF选择voice-U规则，PGW对EPS专用承载执行QoS参数。</p>
-<p>一旦语音通话结束，P-CSCF通知PCRF。接着PCRF发起EPS会话修改过程，把专用承载终止，删除UE/eNB/SGW/PGW中的专用承载上下文。但是，SIP信令的默认承载还是保持激活直到UE从LTE网络中detach。</p>
-<p><img src="http://img.blog.csdn.net/20151021084213274" alt="这里写图片描述"></p>
-<h1 id="VI-closing"><a href="#VI-closing" class="headerlink" title="VI. closing"></a>VI. closing</h1><p>目前，我们已经学习了PCRF怎么决定PCC规则的以及当用户使用Internet和语音服务时PGW怎么执行规则的，并分析PCC规程。我们还学习了基于PCC规则PGW是怎么控制EPS承载的，并举例说明了策略控制是怎么影响IP数据包流的。<br>这篇文档覆盖了PCC规则，集中在QoS策略。下一个文档我们将介绍付费，讨论付费信息和过程。</p>
-<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p>[1] 3GPP TS 29.212, “Policy and Charging Control over Gx Reference Point”<br>[2] Netmanias Technical Document, “LTE EMM Procedure 1. Initial Attach – Part 2. Call Flow of Initial<br>Attach”, January 2014, <a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6102" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6102</a><br>[3] Netmanias Technical Document, “LTE QoS: SDF and EPS Bearer QoS”, September 2013,<br><a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5908" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5908</a><br>[4] Netmanias Technical Document, “Initial Attach procedure for VoLTE”, TBD<br>[5] Netmanias Technical Document, “LTE Charging: Offline”, TBD<br>[6] NMC Consulting Group Confidential Internal Report, “E2E LTE Network Design”, August 2010</p>
-
-          
+          原文链接：http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6562
+I. introduction为了使用LTE服务，用户必须购买一个LTE设备，和运营商签署一个账户，并选择服务类型和想要的计划。为了支持和管理这些选择的服务，运营
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/03/22-LTE-Policy-and-Charging-Control-PCC/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1752,7 +1458,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sun-day">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -1842,79 +1548,16 @@
       
         
           
-            <p>原文链接：<a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6354" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6354</a></p>
-<h1 id="I-introduction"><a href="#I-introduction" class="headerlink" title="I. introduction"></a>I. introduction</h1><p>随着UE的移动当服务小区的信号强度变弱时UE试图进行切换或者小区重选。如果在UE移动的周边没有邻区，信号强度将会逐步减弱直到UE最终从网络detach。接着一旦达到LTE覆盖区域，UE重选通过小区选择初始注册到网络。</p>
-<p>这篇文档讨论当UE移动到一个LTE覆盖范围之外从网络detach，并移动到另外一个LTE网络重新attach到网络。</p>
-<p><img src="http://img.blog.csdn.net/20151019090844653" alt="这里写图片描述"></p>
-<p>EMM  case-10 move to another city<br>EMM case-11 initial attach in another city<br>这两个EMM case，本文档假设移动运营商：</p>
-<ul>
-<li>在不同城市服务</li>
-<li>只有LTE-only网络，没有2/3G</li>
-<li>每一个城市有MME SGW PGW</li>
-<li>HSS PCRF SPR仅仅安装在一个城市</li>
-<li>所有的MME通过S10接口</li>
-</ul>
-<p>图1显示了city1和city2，车里的用户从city1移动到city2.<br>在EMM case10中，随着UE离开city1，UE从网络detach，移动出LTE覆盖范围。不论是connected 模式下使用服务还是在idle模式下驻留在服务小区，随着UE离开city1，UE被MME网络detach掉。</p>
-<p>在EMM case11中，随着在city2 UE移动进入LTE覆盖范围，UE再次attach到网络。不像之前文档的情况，当UEattach 新的MME时，旧MME已经包含了UE上下文。UE初始附着到新MME上时就可以使用旧MME分配的UE ID。这样，UE就可以从detach 状态转换到connected状态。</p>
-<p>这篇文档组织如下：第二章和第三章讨论EMM case10和11的过程。第四章将描述在这个过程前后EPS实体信息的变化。</p>
-<h1 id="II-EMM-Case-10-Move-to-Another-City"><a href="#II-EMM-Case-10-Move-to-Another-City" class="headerlink" title="II. EMM Case 10. Move to Another City"></a>II. EMM Case 10. Move to Another City</h1><h2 id="2-1-在connected模式下移动"><a href="#2-1-在connected模式下移动" class="headerlink" title="2.1 在connected模式下移动"></a>2.1 在connected模式下移动</h2><p>在图2中，我们看到当在city1服务的UE是怎么移出LTE覆盖范围并从网络detach的。</p>
-<p><img src="http://img.blog.csdn.net/20151019092345531" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20151019092413038" alt="这里写图片描述"></p>
-<p><strong>1）【UE-&gt;eNB】测量报告</strong><br>随着UE离开city1，服务小区的信号强度变弱。随着A2事件的激活，UE给eNB发送measurement report消息通知服务小区的信号强度。</p>
-<p><strong>2）【eNB】没有邻区来切换</strong><br>enB没有找到供UE切换的邻区。</p>
-<p><strong>3）【eNB-&gt;MME】错误指示</strong><br>因为糟糕的通信质量，在无线接口上传送失败。eNB通过发送error indication(Cause=Failure in the Radio Interface)给MME通知这个失败。如果eNB发现和UE之间很难保持最低的质量，eNB将给MME发送UE context release request消息。</p>
-<p>如果UE因为糟糕的通信质量丢失了RRC连接，UE试图RRC连接重建。如果这个质量的衰减是暂时的，为了正常的无线通信允许RRC进行重建。但是服务提供会中断。如果这个质量衰减是持续的，RRC连接重建将会持续失败，最终导致连接丢失。</p>
-<p>假设i）当eNB和UE之间的RRC连接还持续有效，eNB给MME发送error indication。ii）因为UE当前服务小区位于城市边界，并且没有邻区切换，MME决定detach掉UE。所以由MME触发detach过程。</p>
-<p><strong>4）MME发起detach</strong><br>MME通过发送detach request消息执行detach过程。这里的过程和之前文档中介绍的MME发起显式detach过程是一样的。MME存储UE的GUTI和NAS安全上下文，结束EPS会话，释放S1信令，并转移到detach状态。UE存储自己的GUTI和NAS安全上下文，删除EPS会话承载上下文，并转移到detach状态。</p>
-<h2 id="2-2-在idle模式下移动"><a href="#2-2-在idle模式下移动" class="headerlink" title="2.2 在idle模式下移动"></a>2.2 在idle模式下移动</h2><p>idle模式下的UE会周期性的通过TAU报告自己的位置给网络。当UE有电话或者数据到来，MME不知道idle模式下的UE是否可达的。为了这个原因，idle状态下的UE即使处于TAI列表中的TA也需要周期性的报告自己的位置，这样网络可以知道UE是否可达的。MME有一个<strong>TAU定时器T3412, 手机可达定时器，和隐式detach定时器</strong>。TAU定时器的值是在UE初始附着到网络时通过attach accept消息转发给UE的，或者当UE做TAU request时通过TAU accept消息发给UE的。</p>
-<p>TAU定时器默认是54分钟，如果MME设置这个值为0，UE就不激活TAU 定时器，并不执行周期性TAU。当UE从connected状态到idle状态转换时UE的TAU定时器激活。当这个定时器超时，UE转移到connected状态给MME发送TAU request消息通知UE是可达的，接着转移到idle状态，并重启TAU定时器。UE在从idle状态到connected状态转移时停止这个定时器，或者从网络detach时停止定时器。<br>如果MME为了UE超时设置的TAU定时器，MME立刻接收到了TAU request消息，通过这个消息MME可以跟踪UE的位置。接着，MME分配新的TAI列表，并重启TAU定时器。也就是说网络会在每一个TAU定时器周期结束时检查UE是否可达，并设置paging proceed flag为1，标示UE是可达的。</p>
-<p>如果UE有任何问题，比如UE在T3412定时器超时时在一个阴影区域并不可达，UE在T3412超时时发起TAU request，就导致不能给MME通知自己的位置。当TAU失败时UE需要重新尝试。所以，如果UE很快从阴影区域移出，接着重选尝试TAU请求成功了。但是如果UE一直待在阴影区域，TAU 请求过程一直失败。</p>
-<p>网络使用手机可达定时器来检查UE是否可达。和T3412 TAU定时器相比，有稍微更大的值，默认是T3412+4分钟。当在ECM连接释放时这个定时器开始，当一个新的ECM连接建立时停止定时器。</p>
-<p>当手机可达定时器超时，MME知道UE在已经移除LTE服务区域，但是不知道移除覆盖状态需要持续多长时间。所以为了不立即删除UE上下文，MME清除PPF flag并开启隐式detach定时器。当PPF flag清除时，UE是本地detach的。也就是说当隐式detach定时器运行时，网络仍旧保持UE上下文没有删除，但是MME不会寻呼UE。即使当SGW有到达UE的电话或者数据包，SGW给MME发送downlink data notification时，MME拒绝这个消息。</p>
-<p>当UE发送NAS消息，建立ECM连接，隐式detach定时器停止。如果MME在隐式detach定时器超时不能定位UE，MME相信UE已经长期到了LTE覆盖范围外，并从网络把UEdetach掉。现在网络中的UE上下文删除。</p>
-<p>图3描述了UE在city1服务小区上驻留，随着移出LTE覆盖从网络detach的过程。</p>
-<p><img src="http://img.blog.csdn.net/20151019101001669" alt="这里写图片描述"></p>
-<p><strong>1）【MME】TAU定时器T3412超时</strong><br>UE设定的TAU定时器超时，MME没有收到从UE的TAU request消息，并必须检查UE是否可达</p>
-<p><strong>2）【MME】手机可达定时器超时</strong><br>UE的手机可达定时器也超时了。MME相信UE是在覆盖区外的状态，并清除PPF flag并开启隐式detach定时器。分配给UE的EPS承载安全上下文资源保持有效，但是MME不会寻呼UE。</p>
-<p><strong>3）【MME】手机隐式detach定时器超时</strong><br>UE的隐式detach定时器超时。MME相信UE已经长期在覆盖范围之外，并决定从网络隐式detach掉UE。</p>
-<p><strong>4）【eNB，MME，SGW，PGW，PCRF】UE detached</strong><br>MME发起隐式detach过程。这个过程和之前文档中的MME发起的隐式detach过程意义昂。分配给UE的而资源和上下文都被删除了。</p>
-<h1 id="III-EMM-Case-11-Initial-Attach-in-Another-City"><a href="#III-EMM-Case-11-Initial-Attach-in-Another-City" class="headerlink" title="III. EMM Case 11. Initial Attach in Another City"></a>III. EMM Case 11. Initial Attach in Another City</h1><p>这章描述UE移动到city2，进入LTE覆盖，并选择一个新的小区，执行初始attach，从detach状态转移到connected状态。我们假设UE已经通过MME发起的隐式detach过程从city1的网络中detach掉了，所以在UE和网络MME1中的old GUTI和NAS安全上下文都保持有效。</p>
-<p>图4显示了在city2UE初始附着过程的初始附着的类型和功能模块。这个初始附着类型和attach case-5中的类型是一样的。也就是说UE成功从网络detach，UE和old MME中都保留有效的old GUTI和NAS安全上下文，接着UE使用这些参数向new MME做初始attach。UE使用old GUTI作为ID发送attach request消息。这个消息是使用NAS完整性秘钥完保的。这个new MME转发这个消息给old MME，因为old MME可以做完整性检查。</p>
-<p>在这篇文档中，假设在old MME上完整性检查通过了。new MME在从old MME获得包括IMSI的上下文后，执行位置更新和EPS会话建立过程。如果在old MME上完整性保护失败，old MME将给new MME发送error消息，接着UE获得IMSI并执行用户鉴权，NAS安全建立，位置更新和EPS会话建立过程。</p>
-<p><img src="http://img.blog.csdn.net/20151019105823119" alt="这里写图片描述"></p>
-<p>图5描述了UE在city2的new MME上执行初始附着的过程。</p>
-<p><img src="http://img.blog.csdn.net/20151019105922594" alt="这里写图片描述"></p>
-<p><strong>1）【UE，eNB】建立RRC连接</strong><br>一旦进入city2，UE检测到LTE信号，选择一个新的小区，并向eNB请求RRC连接。</p>
-<p><strong>2）【UE，new MME】使用old GUTI向new MME请求初始附着</strong><br>UE向MME2发送attach request消息 (Old GUTI, Last Visited TAI, KSIASME, NAS-MAC)，使用oldMME分配的old GUTI作为UE ID。这个罅隙是使用Knasint完整性保护的，通过在无线接口上的RRC connection setup complete消息发送，并在S1接口上的initial ＵＥmessage消息发送。</p>
-<p><strong>3）【new MME】标识old MME</strong><br>MME2通过接收到的initial UE message消息检查UE的位置，并从old GUTI中知道它是由old MME1分配的。接着MME2检查在S10接口上和MME1使用old GUTI是否有效，并获得存储在MME1中的UE上下文。</p>
-<p><strong>4）~6）【old MME，new MME】从old MME中获得UE上下文</strong><br>4）new MME（MME2）把接收到的attach request消息和old GUTI包裹在identification request消息(Old GUTI, Complete {Attach Request} message from UE)中发送给old MME（MME1）。</p>
-<p>5）当接收到new MME的这个消息，oldMME知道这个GUTI是自己分配的，接着通过保留的UE安全上下文对UE发送的attach消息执行完整性检查，完整性检查通过。</p>
-<p>6）完整性保护成功后，old MME给new MME通过identification response消息(IMSI, UE-AMBR, UE Security Context (KASME, KSIASME, Unused AVs, NAS Keys, etc))发送无上下文。new MME获得UE上下文。</p>
-<p><strong>7）~10）【old MME，new MME，HSS】在new MME更新位置信息，并在old MME中删除</strong><br>7）MME2现在具有了有效的UE上下文，给HSS发送update location request消息(IMSI, MME ID=MME2)来在MME2上注册UE。通过这种方式，MME2给hss通知包含IMSI的UE已经注册上MME2了。hss更新UE新的位置。</p>
-<p>8）hss给MME1发送 cancel location request（IMSI）消息来要求MME1删除UE上下文，MME应要求删除UE上下文。</p>
-<p>9）MME1通过发送cancel location response（IMSI）消息给hss通知UE上下文已经删除了。</p>
-<p>10)HSS通过发送update location answer(IMSI, APN, Subscribed Profile (QCI, ARP, APNAMBR (UL/DL), UE-AMBR (UL/DL))给MME2提供UE的签约配置信息，包括签约QoS信息。所以MME2可以建立EPS会话了。</p>
-<p><strong>11）【new MME】建立EPS会话</strong><br>MME2通过使用从MME1接收到的UE上下文和从hss获得签约配置文件建立EPS会话。这个过程和之前文档中叙述的EPS会话建立过程一样。</p>
-<h1 id="IV-EPS-Entity-Information"><a href="#IV-EPS-Entity-Information" class="headerlink" title="IV. EPS Entity Information"></a>IV. EPS Entity Information</h1><p>在EMM case10移动到另外一个城市过程的前后EPS实体信息的变化如下所示：</p>
-<ul>
-<li>before<ul>
-<li>如果UE在connected状态，保持和初始附着过程后存储的信息一样。</li>
-<li>如果UE在idle状态，保持和S1释放过程后存储的信息一样。</li>
-</ul>
-</li>
-<li>after<ul>
-<li>UE从网络detach。EPS实体中存储的信息和detach过程后存储的信息一样。</li>
-</ul>
-</li>
-</ul>
-<p>在EMM case11在另外一个城市初始附着前后EPS实体信息的变化如下所示：</p>
-<ul>
-<li>before：UE从网络detach，和detach过程后存储的信息一样。</li>
-<li>after：UEattach到网络，存储的信息和初始附着过程后的信息一样。</li>
-</ul>
-<h1 id="V-Closing"><a href="#V-Closing" class="headerlink" title="V. Closing"></a>V. Closing</h1><p>这篇文档讨论了UE移出LTE覆盖范围之外，UE怎么和新的MME建立初始附着的。这个场景的目的是介绍使用old GUTI初始附着的过程。所以实际移动到另外一个城市的过程将根据不同运营商怎么配置网络和对网络节点的实现。韩国的LTE网络时全国的，所以LTE服务是任何地方可用的。所以LTE覆盖空洞可以在低无线质量的地方找到。实际中，LTE有邻区，LTE or 2/3G。实体网络中，UE执行切换到邻区或者小区重选而不是从网络detach。</p>
-<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p>[1] Netmanias Technical Document, “Eleven EMM Cases in an EMM Scenario”, October 2013,<br><a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6002" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6002</a><br>[2] Netmanias Technical Document, “LTE EMM Procedure 2. Detach”, January 2014,<br><a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6108" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6108</a><br>[3] Netmanias Technical Document, “LTE EMM Procedure 1. Initial Attach – Part 2. Call Flow of Initial<br>Attach”, January 2014, <a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6102" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6102</a><br>[4] 3GPP TS 36.413, “Evolved Universal Terrestrial Radio Access Network (E-UTRAN); S1 Application<br>Protocol (S1AP)”.<br>[5] Netmanias Technical Document, “LTE EMM Procedure 5. Periodic TAU”, February 2014,<br><a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6193" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6193</a><br>[6] Netmanias Technical Document, “LTE EMM Procedure 1. Initial Attach – Part 1. Cases of Initial<br>Attach”, December 2013, <a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6098" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6098</a><br>[7] Netmanias Technical Document, “LTE Identification II: NE and Location Identifiers”, August 2013,<br><a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5906" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5906</a><br>[8] 3GPP TS 23.401, “General Packet Radio Service (GPRS) enhancements for Evolved Universal<br>Terrestrial Radio Access Network (E-UTRAN) access”.<br>[9] Netmanias Technical Document, “LTE EMM Procedure 3. S1 Release”, January 2014,<br><a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6110" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6110</a><br>[10] NMC Consulting Group Confidential Internal Report, “E2E LTE Network Design”, August 2010</p>
-
-          
+          原文链接：http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6354
+I. introduction随着UE的移动当服务小区的信号强度变弱时UE试图进行切换或者小区重选。如果在UE移动的周边没有邻区，信号强度将会逐步减弱直到UE最终
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/03/21-EMM-Procedure-10-11-Move-to-Another-City-and-Attach/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1975,7 +1618,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sun-day">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -2065,41 +1708,16 @@
       
         
           
-            <p>原文链接：<a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6324" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6324</a></p>
-<h1 id="I-Introduction"><a href="#I-Introduction" class="headerlink" title="I. Introduction"></a>I. Introduction</h1><p>当UE接入网络时，MME通过TAI列表分配一组TA。UE在这些TA中移动不需要给网络报告自己的位置。网络不知道UE驻留在哪个小区，但是知道在哪个TA。所以如果idle状态的UE有电话或者数据包到达，网络在UE注册的这些TA中发起寻呼。分配给UE的TAI列表是UE已经注册的区域列表。当UE移动到不在TAI列表中的TA时，UE必须执行TAU过程来请求TA更新，网络就可以更新UE的TAI列表并分配更新过的列表。</p>
-<p>这篇文档描述的是UE移动到没有注册过的TA时的过程（EMM case-8）。在这个case-8中，在连接模式(EMM-Registered, ECM-Connected, RRC-Connected)的UE移动到另外一个TA。在这个移动过程中，从source eNB到target eNB的切换过程如EMM case-6一样。不同的地方在于，UE接着需要在target eNB的新小区上执行TAU过程。在idle模式(EMM-Registered, ECM-Idle, RRC-Idle)状态下的UE移动到另外一个TA时，服务小区重选的过程和EMM case-7一样。不同的是，在小区重选后，必须在UE新驻留的小区上进行TAU过程。</p>
-<p>这个文档组织如下：第二章解释EMM  case-8过程，第三章描述EMM case-9过程，在第四章我们学习在这些过程前后EPS实体的信息有什么不同。</p>
-<h1 id="II-EMM-case-8-handover-with-TAU"><a href="#II-EMM-case-8-handover-with-TAU" class="headerlink" title="II. EMM case 8. handover with TAU"></a>II. EMM case 8. handover with TAU</h1><p>图1展示了连接模式下的UE移动到没有注册过程的TA时执行的过程。当UE初始附着到网络，MME为UE选择TA1和TA2，并在attach accept消息中包含TAI列表={TAI1=1,TAI=2}。UE通过eNB2 cell5获得服务。现在移动到TA3 eNB5 cell13。这里我们假设eNB2和eNB5连接到同一个MME和SGW。</p>
-<p><img src="http://img.blog.csdn.net/20151010123510098" alt="这里写图片描述"></p>
-<p><strong>handover</strong><br>在上图中，随着UE移动到eNB5，handover事件触发。UE测量服务小区和邻区的信号强度，并把结果发送给eNB2，包含在measurement report消息中。首先source eNB选择切换的类型 X2 or S1.在X2切换中，是source eNB选择target eNB，而在S1切换中是MME选择target eNB。接着切换在eNB2和eNB5之间执行。</p>
-<p><strong>TAU</strong><br><strong>1）【UE-&gt;MME】TAU request</strong><br>当切换到target eNB时，UE知道eNB5不属于MME分配的TAs，接着只要切换一完成，UE就发送TAU request消息(Update Type=TA Updating, GUTI, Last Visited TAI, KSI ASME, NAS-MAC)给MME，请求TA更新。这时，这个消息包含如下信息：<br>TAU Request (Update Type=TA Updating, GUTI, Last Visited TAI, KSI ASME, NAS-MAC)</p>
-<ul>
-<li>Update Type: indicates the TAU type. Set as TA Updating unless UE is handed over to a registered TA</li>
-<li>GUTI: UE ID previously allocated by MME. Used by MME for UE identification.</li>
-<li>Last Visited TAI: TAI reported through TAU Request last time</li>
-<li>KSIASME: index for KASME, the NAS security base key</li>
-<li>NAS-MAC: message authentication code used in protecting the integrity of TAU Request with NAS integrity Key (KNASint).</li>
-</ul>
-<p>TAU消息通过UL information transfer消息从 UE发送到eNB，通过uplink NAS transfer消息(NAS-PDU (TAU Request), ECGI, TAI)从eNB发送到MME。uplink NAS transfer消息包含TAU请求消息和当前小区的ECGI和TAI发送给MME。<br>因为UE和MME之间的NAS安全上下文已经建立起来了，TAU request消息是使用NAS完成性保护秘钥完保的。如果MME对接收到的TAUrequest消息完成性保护检查失败，MME执行用户鉴权和NAS安全建立过程。在这个文档中，我们仅仅讨论MME成功完成完整性检查。</p>
-<p><strong>2）【MME】TA 更新：分配新TA</strong><br>因为UE移动到没有注册过的TA上，MME选择一组TA分配给UE，并为UE配置一个新的TAI列表。这是，也要分配一个新的GUTI。</p>
-<p><strong>3）【UE&lt;-MME】TAU accept</strong><br>MME发送新选择的TA包含在TAU accept消息中(GUTI, TAI List)。这个消息是加密和完成性保护的，通过downlink NAS transfer消息从MME到eNB传输，接着通过DL information transfer消息从eNB传输给UE。</p>
-<p><strong>4）【UE-&gt;MME】TAU complete</strong><br>如果分配了一个新的GUTI，UE给MME发送TAU complete消息来确认收到了新的GUTI。</p>
-<p>一旦TAU过程完成，UE现在具有了一个新的TAI列表，并通过eNB5获得服务。</p>
-<h1 id="III-EMM-case-9-cell-reselection-with-TAU"><a href="#III-EMM-case-9-cell-reselection-with-TAU" class="headerlink" title="III. EMM case 9. cell reselection with TAU"></a>III. EMM case 9. cell reselection with TAU</h1><p>图2显示了idle模式下的UE移动到一个没有注册的TA时需要的小区重选过程。在图中，UE驻留在eNB2的cell5,移动到eNB5的cell13。</p>
-<p><img src="http://img.blog.csdn.net/20151010123621479" alt="这里写图片描述"></p>
-<p><strong>cell reselection</strong><br><strong>1）~7）【UE】小区重选</strong><br>UE移动eNB5触发小区重选。UE测量邻区并排序，基于结果，选择满足消息重选准则的eNB5 cell13作为最合适的小区。这里的小区重选过程和之前文档介绍的一样。</p>
-<p><strong>TAU</strong><br>当选择了eNB5 cell13，UE知道这个小区不属于之前分配TA中。所以，UE一旦完成重选过程就执行TAU过程。TAU过程和之前的描述的EMM case-5一样。不同之处在于谁发起的TAU过程。对于周期性TAU过程，UE因为TAU定时器T3412的超时执行TAU给网络报告当前位置。然而，对于上面给到的TAU，则是因为UE移动到一个没有注册的TA时UE执行TAU。所以这是TAU request消息的TA更新类型是TA updating而不是periodic updating。TAU过程简要叙述如下：</p>
-<p><strong>8）【UE-&gt;MME】TAU request</strong><br>UE通过发送TAU request消息(Update Type=TA Updating, GUTI, Last Visited TAI, KSIASME, NAS-MAC)给MME来请求TA更新。这个TAU request消息和第二章包含相同的信息。这个消息也是使用NAS完整性秘钥完保的。UE和eNB建立RRC连接，并发送这个消息，接着从idle 状态转到connected状态。</p>
-<p><strong>9）【MME】TA update：分配新的TA</strong><br>一旦通过uplink NAS transfer消息接收到TAU request消息，MME从uplink NAS transfer消息中的TAI标记处UE当前驻留的哪个TA，并在TAU request消息包含的last visited TAI知道上次报告的TA。<br>因为UE当期驻留的TA不是之前MME分配的TA，MME允许新分配一个TA集合最适合UE当前位置和速度。对于快速移动的UE，分配大范围的TA来减少由TAU引起的信令负载。当时，这样，由寻呼引起的心灵负载就会增加。寻呼消息将需要更长时间。所以为了每一个UE分配不同TAI，在TAU信令和寻呼性能之间的权衡应该考虑。MME更新last visited TAI包含在和UE当前TAI的UE上下文中。</p>
-<p><strong>10）【MME，SGW，PGW，PCRF】EPS承载/会话修改</strong><br>一旦UE位置改变，MME通过发送modify bearer request消息通过SGW这个变化。是否需要MME给PCRF报告TA的变化，包含UE初始附着建立EPS会话时从PCRF接收到的change report action参数中。会话修改构成执行，报告给PCRF TA的改变。</p>
-<p><strong>11）【UE&lt;-MME】TAU accept</strong><br>MME通过tau accept消息给UE发送新的TAI列表。这是，这个消息和第二章包含相同的信息。并且也是完整性保护和加密的。</p>
-<p><strong>12）~14）【UE，eNB，MME】转移到idle状态</strong><br>在TAU过程之后，MME释放S1连接，接着释放eNB5和MME之间的S1信令连接、eNB5释放和UE之间的RRc连接。现在UE和MME之间的ECM连接都移除了。并返回到idle摸下。</p>
-<p><strong>15）【UE】驻留在cell13</strong><br>一旦返回到idle状态，UE驻留在cell13，现在，在每一个DRx周期结尾处UE醒来测量cell13的信号。</p>
-<h1 id="IV-EPS实体信息"><a href="#IV-EPS实体信息" class="headerlink" title="IV. EPS实体信息"></a>IV. EPS实体信息</h1><p>handover with TAU过程前后存储在EPS实体中的信息和handover without TAU的一样。只有TAI的信息由于TA更新发生了变化。<br>cell reselection with TAU过程前后存储在EPS实体中的信息和cell reselection without TAU一样。只有TAI的信息由于TA更新发生了变化。</p>
-<h1 id="V-closing"><a href="#V-closing" class="headerlink" title="V. closing"></a>V. closing</h1><p>我们到目前为止讨论了UE移动到一个在注册TA中的切换和小区重选过程。我们学习到通过切换或者小区重选过程，UE通过TAU过程获得了新的TAI列表。<br>下面的文档将讨论UE移动到另外一个城市，包含从城市1detach，在城市2 attach。</p>
-<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p>[1] Netmanias Technical Document, “Eleven EMM Cases in an EMM Scenario”, October 2013,<a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6002" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6002</a><br>[2] Netmanias Technical Document, “LTE EMM Procedure 6. Handover without TAU – Part 1. Overview ofHandover”, March 2014, <a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6224" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6224</a><br>[3] Netmanias Technical Document, “LTE EMM Procedure 6. Handover without TAU – Part 2. X2Handover”, March 2014, <a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6257" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6257</a><br>[4] Netmanias Technical Document, LTE EMM Procedure 6. Handover without TAU – Part 3. S1Handover”, April 2014, <a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6286" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6286</a><br>[5] Netmanias Technical Document, “LTE EMM Procedure 7. Cell Reselection without TAU”, April 2014,<a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6322" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6322</a><br>[6] Netmanias Technical Document, “LTE EMM Procedure 1. Initial Attach – Part 2. Call Flow of InitialAttach” , January 2014, <a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6102" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6102</a><br>[7] Netmanias Technical Document, “LTE EMM Procedure 5. Periodic TAU”, February 2014,<a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6193" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6193</a><br>[8] Netmanias Technical Document, “LTE EMM Procedure 3. S1 Release”, January 2014,<br><a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6110" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6110</a><br>[9] Netmanias Technical Document, “LTE EMM Procedure 10 &amp;11. Move to Another City and Attach”,May 2014, TBD<br>[10] 3GPP TS 23.401, “General Packet Radio Service (GPRS) enhancements for Evolved UniversalTerrestrial Radio Access Network (E-UTRAN) access”<br>[11] NMC Consulting Group Confidential Internal Report, “E2E LTE Network Design”, August 2010</p>
-
-          
+          原文链接：http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6324
+I. Introduction当UE接入网络时，MME通过TAI列表分配一组TA。UE在这些TA中移动不需要给网络报告自己的位置。网络不知道UE驻留在哪个小区，但
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/03/20-EMM-Procedure-8-9-Handover-Cell-Reselection-with-TAU/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2160,7 +1778,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sun-day">
       <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/images/avatar.jpg">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -2250,82 +1868,16 @@
       
         
           
-            <p>原文链接：<a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6322" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6322</a></p>
-<h1 id="I-Introduction"><a href="#I-Introduction" class="headerlink" title="I. Introduction"></a>I. Introduction</h1><p>通过前面三篇文档，我们学习了EMM case-6 handover without TAU。这篇文档我们描述在idle模式下的UE是怎么重选小区的。<br>切换控制的是连接态的UE的移动性，小区重选是控制idle状态下UE的移动性。在切换时，是网络决定要切换到哪个小区，在小区重选中，是UE决定驻留在哪个小区。</p>
-<p>小区重选过程可能是图1中的两种类型之一。在图1中UE驻留在cell-5，属于MME分配的{TA1，TA2}这个TA列表里，并处于idle状态。</p>
-<ul>
-<li><strong>cell reselection without TAU</strong>（7）：UE移动到TA列表中的一个TA时，例如图1的TA2，执行小区重选但是不执行TAU。</li>
-<li><strong>cell reselection with TAU</strong>（9）：UE移动到不属于TA列表中的一个TA时，例如图1的TA3，在小区重选后，需要执行TAU。</li>
-</ul>
-<p><img src="http://img.blog.csdn.net/20151010115241011" alt="这里写图片描述"></p>
-<p>UE可能重选到一个小区i）和当前驻留的服务小区使用相同的LTE频率，ii）和当前小区不使用相同的频率，iii）使用另外的RAI接入（inter-RAT）。在图1中小区重选的实例中，我们只讨论intra-frequency小区重选，即使用同单一LTE频率。<br>这篇文档只描述case-7的情况。case-9的情况在下面的文档中叙述。在第二章，我们将描述小区重选过程需要的准备信息。第三章描述不带TA过程的小区重选的详细过程。</p>
-<p>根据之前的LTE文档，当UE在attach完成后处于idle模式下（EMM-Registered, ECM-Idle, RRCIdle）:</p>
-<ul>
-<li>UE IP地址保持有效，在EPC中EPC承载保持有效。</li>
-<li>EPC（MME）知道UE的存在，但是E-UTRAN不知道。</li>
-<li>UE是在TA级别被MME知道的</li>
-<li>当UE移动到不在TA列表的TA时执行TAU过程，并给MME通知自己的TA位置。</li>
-<li>UE cannot send it generates？？？？？</li>
-<li>如果有发往UE的数据，MME在UE所在的整个TA区域内寻呼。</li>
-<li>UE周期性的唤醒并检查是否有寻呼消息。</li>
-</ul>
-<p>当驻留在一个小区上，UE在idle状态：</p>
-<ul>
-<li>接收eNB广播的系统消息</li>
-<li>接收寻呼信号，并对paging消息响应</li>
-<li>周期性的测量服务小区的信号强度</li>
-<li>当小区重选触发时测量邻区的信号强度并重选到一个小区</li>
-<li>如果重选到一个不在TA列表中的TA时发起TAU过程。</li>
-</ul>
-<h1 id="II-Cell-Reselection-Required-System-Information-and-Criteria"><a href="#II-Cell-Reselection-Required-System-Information-and-Criteria" class="headerlink" title="II. Cell Reselection: Required System Information and Criteria"></a>II. Cell Reselection: Required System Information and Criteria</h1><p>在我们详细学习第三章的小区重选过程之前，我们先简要介绍一下小区重选。接着我们学习这个过程需要的系统信息和小区重选的准则。</p>
-<h2 id="2-1-小区重选过程概述"><a href="#2-1-小区重选过程概述" class="headerlink" title="2.1 小区重选过程概述"></a>2.1 小区重选过程概述</h2><p>UE控制小区重选过程。UE从eNB广播的系统消息中获得小区重选相关的信息（决定是否测量邻区信号强度的门限值，计算服务小区和邻区的排行的参数）。在intra-frequency小区重选中，需要的信息包含在SIB3和SIB4中。</p>
-<p><strong>小区重选触发</strong><br><strong>服务小区测量</strong>：idle状态的UE在每一个DRX周期的结尾处醒来测量服务小区的信号（Qrxlevmeas）并计算服务小区的接收信号水平（Srxlev）来决定是否待在这个当前小区还是移动到另外的小区。这里，UE的发射和接收条件都反映在计算中，例如通过应用最小接收信号水平（Qrxlevmin）允许最大发射功率水平Pemax等等。<br><strong>小区重选触发</strong>：如果服务小区的接收信号水平（Srxlev）比指定的门限值（s-IntraSearch）搞，UE待在当前的服务小区。如果不是，UE触发小区切换过程。这个门限值通过SIB3传输作为触发判决条，在rel-8中定义为s-IntraSearch，在rel-9中定义为s-IntraSearchP和s-IntraSearchQ。</p>
-<p>当UE处于相同的位置，在idle状态的UE在每一个DRX周期结尾醒来去测量服务小区的接收信号水平，我们假设UE驻留在相同的服务小区，因为这个小区的接收信号水平比设定的门限s-IntraSearch持续的低。如果UE离开这个服务小区，这个小区的接收信号水平就会很快的降低，最终，当接收信号水平低于门限s-IntraSearch时，触发小区重选过程。接着UE开始测量邻区的信号强度。</p>
-<p><strong>小区重选准则</strong><br><strong>小区排序准则</strong>：UE基于服务小区(Qmeas,s)和邻区(Qmeas,n)测量信号强度来对每一个小区排序(Rs, Rn)。小区排序需要的参数从SIB3和SIB4接收。服务小区使用SIB3中的q-Hyst这个迟滞值来排序，而邻区使用SIB4中的q-OffsetCell这个偏移值进行排序。<br><strong>小区重选</strong>：一旦服务小区和邻区排序，UE检查小区重选准则是否满足(Rn &gt; Rs)。如果邻区满足这个准则，UE选择最好的满意小区，接着驻留在那里。小区重选仅仅在(t-ReselectionEUTRA)时间内持续满足才会执行。</p>
-<p>移动运营商会阻止太频繁的小区重选，通过这个迟滞值和小区特定偏移值可以通知UE在服务小区的驻留时间，根据这个小区状态来执行重选。另外，他们也会控制 q-Hyst and t-ReselectionEUTRA通过根据UE的移动速度来使用合适的(q-hystSF, t-ReselectionEUTRA-SF)。</p>
-<h2 id="2-2-系统信息"><a href="#2-2-系统信息" class="headerlink" title="2.2 系统信息"></a>2.2 系统信息</h2><p>系统信息是由eNB广播的信息，包括MIB和SIB。MIB，SIB1和SIB2是必须的，其他的是可选的。所有的系统信息像MIB SIB1或系统信息都是通过RRC消息传送给UE的。一个系统信息包括一组SIB（SIB2-16），除了MIB和SIB1。</p>
-<p>UE基于eNB广播的系统消息来执行小区重选的。MIB SIB1 SIB2是适用于所有的UE，不论是connected模式还是idle模式下。相反的，SIB3-8仅仅只用于idle模式下的小区重选。表1描述了不同的系统信息和他们的参数。</p>
-<p><img src="http://img.blog.csdn.net/20151010115401979" alt="这里写图片描述"></p>
-<p>我们假设两个移动运营商A和B，他们的网络工作如下：<br>A：全国的LTE-only网络<br>      LTE 频率：在1.8GHz仅仅有10MHz的一个信道(lteFA1)<br>B：有全国的3G和LTE网络<br>      3G频率：2.1GHz上的5MHz的六个信道<br>      LTE频率：1.8GHz上的10MHz的一个信道，850MHz上的10MHz的另一个信道(lteFA1, lteFA2)</p>
-<p>对于运营商A，它的eNB需要小区重选的intra-frequency相关的信息（eNB广播SIB3，SIB4，但是不广播SIB5/6/7/8）另外，对于运营商B，它需要所有的三种类型的重选信息，intra-frequency，inter-frequency，inter-RAT相关的信息（eNB广播SIB3/4/5/6）</p>
-<p>由eNB广播的系统是通常应用于所有的UE，但是每一个根据自己的能力（release9 UE还是release11UE）来接收不同类型的系统信息。</p>
-<p>图1描述了UE驻留在eNB2下的cell-5和它的邻区，图2只显示了eNB。</p>
-<p>在图1中的网络时LTE-only网络，使用但是home PLMN的单一频率(lteFA1)。这篇文档只关心intra-frequency的小区重选过程。和intra-frequency重选相关的系统信息是通过SIB3和SIB4广播的。表2描述了这两个SIB的参数，但是他们和其他频率，RAT，VPLMN无关。</p>
-<p><img src="http://img.blog.csdn.net/20151016084908158" alt="这里写图片描述"></p>
-<h2 id="2-3-小区重选准则"><a href="#2-3-小区重选准则" class="headerlink" title="2.3 小区重选准则"></a>2.3 小区重选准则</h2><p>尽管不在本篇文档范围内，下面我们将简要看下在UE开机后小区重选使用的准则。下面只适用一个准则。表3提供了这个准则中参数的详细描述。</p>
-<p><img src="http://img.blog.csdn.net/20151010115602870" alt="这里写图片描述"><br>在初始小区选择是，小区接收限号水平(Srxlev)必须比Qrxlevmin和P<br>Compensation的和要大。Srxlev要比Qrxlevmin要大，因为为了使UE正确的接收服务小区的信息，测量的信号强度必须至少大于Qrxlevmin。UE的发射功率低于UE在小区中允许的最大值Pmax将导致P-Compensation变大，使得更难选择这个小区。当选择一个小区时，UE的发射和接收条件是在考虑范围的。</p>
-<p>在release9的情况下，增加量Squal作为小区选择准则。Qrxlevmeas是小区参考信号接收功率RSRP，而Qqualmeas是小区的参数信号接收质量RSRQ。RSRP只是接收信号的强度，而RSRQ提供关于无线链路质量更准确的信息，因为它指示信号和干扰噪声比，SINR。</p>
-<p><strong>小区重选触发</strong><br>UE一旦驻留在服务小区将一直驻留在那儿，如果服务小区的接收水平满足2-1或者2-2，UE将不需要进行测量。</p>
-<p><img src="http://img.blog.csdn.net/20151010115635147" alt="这里写图片描述"><br>在上述的不等式中，SintraSearch, SintraSearchP and SintraSearchQ是通过SIB3给出的，如果服务小区不满足前面的准则，即是它满足3-1或者3-2准则，UE开始为了小区重选进行小区测量。<br><img src="http://img.blog.csdn.net/20151010115711253" alt="这里写图片描述"><br><strong>小区重选准则</strong><br><strong>小区排序准则</strong><br>如果服务小区的测量Srxlev满足3-1或者3-2，UE开始测量邻区的RSRP，基于测量的结果，UE会应用4-1或者4-2进行排序。</p>
-<p><img src="http://img.blog.csdn.net/20151010115743324" alt="这里写图片描述"><br><strong>小区重选</strong><br>如果有多个小区满足下面的准则，UE会选择最好的小区，并驻留在上面。</p>
-<p><img src="http://img.blog.csdn.net/20151010115814083" alt="这里写图片描述"><br>像在之前4=1或者4-2看到的，Rs和Rn是使用不同的准则进行计算的。Qhyst and Qoffset这两个值越大，UE停留在服务小区的时间越长。</p>
-<h1 id="III-procedure-for-cell-reselection-without-TAU"><a href="#III-procedure-for-cell-reselection-without-TAU" class="headerlink" title="III. procedure for cell reselection without TAU"></a>III. procedure for cell reselection without TAU</h1><p>图3描述了EMM case-7，在图1中，UE选择cell-5满足1-1或者1-2，在通过cell-5初始附着到网络后由MME分配了一个TA列表{TA1, TA2}。接着在cell-5被服务，转移到idle状态，并一直驻留在cell-5。<br>图3描述了驻留在cell-5上的UE怎么执行intra-frequency小区重选转移到eNB4下的cell-10的。这里UE的移动性状态为normal，所以不考虑比例因子。需要测量邻区4/6/10/13，但是图3为了描述的方便仅仅显示了cell-10和cell-13。第三章我们将详细秒后苏intra-frequency小区重选过程。必须满足一下条件。</p>
-<ul>
-<li>驻留在服务小区：UE驻留在cell-5</li>
-<li>小区重选触发：因为UE移出服务小区，小区重选触发。1、服务小区测量：服务小区的测量决定是否测量邻区，2、邻区测量：为了小区重选要测量邻区。</li>
-<li>小区重选准则：1，小区排序：小区基于服务小区和邻区的测量结果来进行排序，2，小区重选：识别出满足准则的小区，并选择最好的。</li>
-<li>驻留在新的小区，UE驻留在cell-10.</li>
-</ul>
-<p><img src="http://img.blog.csdn.net/20151010115915205" alt="这里写图片描述"></p>
-<p><strong>1）【UE】UE驻留在服务小区</strong><br>UE驻留在哎服务小区并保持idle状态</p>
-<p><strong>2）【UE】从服务小区获得系统信息</strong><br>UE从服务小区获得关于小区重选的系统信息。如果每一个邻区和服务小区由不同的偏移值，服务小区通过SIB4提供给UE邻区列表。接着UE通过SIB3和SIB4获得下面的信息：</p>
-<ul>
-<li>决定小区重选触发需要的参数：q-RxLevMin, p-Max, sIntraSearchP, s-IntraSearchQ, t-ReselectionEUTRA, q-QualMin (SIB 3)</li>
-<li>服务小区排序需要的参数：q-Hyst (SIB 3)</li>
-<li>邻区排序需要的参数：q-OffsetCell (SIB 4)</li>
-</ul>
-<p><strong>3）【UE】测量服务小区的信号强度</strong><br>在每一个DRX周期结尾处，UE醒来并测量服务小区的信号(RSRP and RSRQ)获得Qrxlevmeas and Qqualmeas。接着，基于他们，计算出小区重选接收水平Srxlev和小区重选质量水平Squal。UE通过应用3-1或者3-2，检查UE应该重选到那个小区或者继续驻留在当前小区。例如，如果Srxlev和Squal不满足准则，UE继续驻留在当前小区，否则，执行下一步。</p>
-<p><strong>4）【UE】测量邻区</strong><br>UE测量具有和当前服务小区相同频率的邻区的RSRP。</p>
-<p><strong>5）【UE】小区排序准则</strong><br>一旦测量完RSRP，UE对服务小区和邻区进行排序，服务小区的排序R5，邻区的排序R4/6/10/12分别基于4-1和4-2。</p>
-<p><strong>6）【UE】小区排序比较</strong><br>现在UE比较R5和Rn，检测准则5是否满足。如果每一个小区满足5，UE继续驻留在cell5，在途中，cell10和cell13满足准则。</p>
-<p><strong>7）【UE】选择一个新小区</strong><br>UE比较两个满足准则的小区，R10和R13，并选择最好的一个R10作为新的服务小区。</p>
-<p><strong>8）【UE】驻留在新的小区上</strong><br>UE驻留在cell10上，在接收cell10广播的SIB1后，UE知道cell10所在的TA在TAI列表中。因为这个新的服务小区主语UE注册过的TA列表，不需要执行TAU过程。接着，UE在每一个DRX周期结尾处醒来监控cell10的系统信息和寻呼信息，并测量cell10的信号。</p>
-<h1 id="IV-EPS-Entity-Information-Before-After-Cell-Reselection-without-TAU"><a href="#IV-EPS-Entity-Information-Before-After-Cell-Reselection-without-TAU" class="headerlink" title="IV. EPS Entity Information: Before/After Cell Reselection without TAU"></a>IV. EPS Entity Information: Before/After Cell Reselection without TAU</h1><p>这章描述在小区重选过程前后EPS实体信息的变化情况。在重选过程前后UE在idle状态下，MME也保持在idle状态下。UE从cell5移动到cell10，没有执行TAU过程。在小区重选后，EPS实体中的信息保持不变，和在S1释放后保持的信息相同。如图4所示。</p>
-<p><img src="http://img.blog.csdn.net/20151010120002699" alt="这里写图片描述"></p>
-<h1 id="V-Closing"><a href="#V-Closing" class="headerlink" title="V. Closing"></a>V. Closing</h1><p>我们学习了UE在idle状态下移动到UE注册过的TA中，并在不执行TAU的情况下进行小区重选过程。这个文旦仅仅描述了intra-frequency过程。多数的移动运营商有多个LTE频点。他们也可以和2/3G进行互操作，所以不仅仅有intra-frequency小区重选，而且还有inter-frenqucy和inter-RAT小区重选。在接下来的文档中，我们将讨论执行TAU的小区重选过程。</p>
-<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p>[1] Netmanias Technical Document, “LTE EMM Procedure 6. Handover without TAU – Part 1. Overview of Handover”, March 2014, <a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6224" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6224</a><br>[2] Netmanias Technical Document, “LTE EMM Procedure 6. Handover without TAU – Part 2. X2 Handover”, March 2014, <a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6257" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6257</a><br>[3] Netmanias Technical Document, “LTE EMM Procedure 6. Handover without TAU – Part 3. S1 Handover”, March 2014, <a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6286" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6286</a><br>[4] Netmanias Technical Document, “Eleven EMM Cases in an EMM Scenario”, October 2013, <a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6002" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6002</a><br>[5] 3GPP TS 36.304, “Evolved Universal Terrestrial Radio Access (E-UTRA); User Equipment (UE) Procedures in Idle Mode”<br>[6] Netmanias Technical Document, “LTE EMM Procedure 8 &amp; 9. Handover and Cell Reselection with TAU”, 2014, TBD<br>[7] Netmanias Technical Document, “LTE EMM and ECM States”, September 2013,<br><a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5909" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5909</a><br>[8] 3GPP TS 36.331, “Evolved Universal Terrestrial Radio Access (E-UTRA); Radio Resource Control (RRC); Protocol Specification”<br>[9] 3GPP TS 36.101, “Evolved Universal Terrestrial Radio Access (E-UTRA); User Equipment (UE) Radio Transmission and Reception”<br>[10] Netmanias Technical Document, “LTE EMM Procedure 3. S1 Release”, January 2014, <a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6110" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6110</a><br>[11] NMC Consulting Group Confidential Internal Report, “E2E LTE Network Design”, August 2010</p>
-
-          
+          原文链接：http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6322
+I. Introduction通过前面三篇文档，我们学习了EMM case-6 handover without TAU。这篇文档我们描述在idle模式下的UE是
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/04/03/19-EMM-Procedure-7-Cell-Reselection-without-TAU/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -2401,6 +1953,10 @@
       <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="sun-day" />
             
               <p class="site-author-name" itemprop="name">sun-day</p>
               <p class="site-description motion-element" itemprop="description"></p>
@@ -2514,6 +2070,24 @@
 
           
           
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.google.com/" title="Google" target="_blank">Google</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.baidu.com/" title="百度" target="_blank">百度</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
 
           
             
@@ -2539,11 +2113,11 @@
       <div class="footer-inner">
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+<div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2018</span>
   <span class="with-love" id="animate"> 
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">sun-day</span>
+  <span class="author" itemprop="copyrightHolder">true</span>
 
   
 
@@ -2573,7 +2147,30 @@
 
 
 
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共110.2k字</span>
+</div>
+
         
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
 
 
 
@@ -2714,6 +2311,35 @@
   
 
   
+  
+
+  
+  
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  
+
+  
+
 
   
   

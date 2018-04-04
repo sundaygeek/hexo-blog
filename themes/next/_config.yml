@@ -151,9 +151,11 @@ site_state: true
 # Key is the link label showing to end users.
 # Value before `||` delimeter is the target permalink.
 # Value after `||` delimeter is the name of FontAwesome icon. If icon (with or without delimeter) is not specified, globe icon will be loaded.
-#social:
-  #GitHub: https://github.com/yourname || github
-  #E-Mail: mailto:yourname@gmail.com || envelope
+social:
+  GitHub: https://github.com/zhanghaogithub123 || github
+  E-Mail: mailto:zhanghao163mail@163.com || envelope
+  CSDN: https://blog.csdn.net/mouse1598189
+  知乎: https://www.zhihu.com/people/zhang-hao-3-80-49/activities
   #Google: https://plus.google.com/yourname || google
   #Twitter: https://twitter.com/yourname || twitter
   #FB Page: https://www.facebook.com/yourname || facebook
@@ -948,3 +950,7 @@ images: images
 
 # Theme version
 version: 6.1.0
+
+# 文章末尾添加“本文结束”标记
+passage_end_tag:
+  enabled: true

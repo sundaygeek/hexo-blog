@@ -1,0 +1,2141 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.1.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.1.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="第4章　pandas库简介　　564.1　pandas：Python数据分析库　　564.2　安装　　574.2.1　用Anaconda安装　　574.2.2　用PyPI安装　　584.2.3　在Linux系统的安装方法　　584.2.4　用源代码安装　　584.2.5　Windows模块仓库　　594.3　测试pandas是否安装成功　　594.4　开始pandas之旅　　5912import">
+<meta name="keywords" content="pandas,数据分析,python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python数据分析实战-第4章-pandas库">
+<meta property="og:url" content="http://yoursite.com/2018/04/11/python数据分析实战-第4章-pandas库/index.html">
+<meta property="og:site_name" content="sun-day-blog">
+<meta property="og:description" content="第4章　pandas库简介　　564.1　pandas：Python数据分析库　　564.2　安装　　574.2.1　用Anaconda安装　　574.2.2　用PyPI安装　　584.2.3　在Linux系统的安装方法　　584.2.4　用源代码安装　　584.2.5　Windows模块仓库　　594.3　测试pandas是否安装成功　　594.4　开始pandas之旅　　5912import">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-04-11T12:29:07.534Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python数据分析实战-第4章-pandas库">
+<meta name="twitter:description" content="第4章　pandas库简介　　564.1　pandas：Python数据分析库　　564.2　安装　　574.2.1　用Anaconda安装　　574.2.2　用PyPI安装　　584.2.3　在Linux系统的安装方法　　584.2.4　用源代码安装　　584.2.5　Windows模块仓库　　594.3　测试pandas是否安装成功　　594.4　开始pandas之旅　　5912import">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/11/python数据分析实战-第4章-pandas库/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>python数据分析实战-第4章-pandas库 | sun-day-blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> 
+
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">sun-day-blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">牛逼的人生不需要解释</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+          
+  <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+</li>
+
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/11/python数据分析实战-第4章-pandas库/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="sun-day">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sun-day-blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python数据分析实战-第4章-pandas库</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-11T18:14:28+08:00">2018-04-11</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="第4章-pandas库简介-56"><a href="#第4章-pandas库简介-56" class="headerlink" title="第4章　pandas库简介　　56"></a>第4章　pandas库简介　　56</h1><h1 id="4-1-pandas：Python数据分析库-56"><a href="#4-1-pandas：Python数据分析库-56" class="headerlink" title="4.1　pandas：Python数据分析库　　56"></a>4.1　pandas：Python数据分析库　　56</h1><h1 id="4-2-安装-57"><a href="#4-2-安装-57" class="headerlink" title="4.2　安装　　57"></a>4.2　安装　　57</h1><h2 id="4-2-1-用Anaconda安装-57"><a href="#4-2-1-用Anaconda安装-57" class="headerlink" title="4.2.1　用Anaconda安装　　57"></a>4.2.1　用Anaconda安装　　57</h2><h2 id="4-2-2-用PyPI安装-58"><a href="#4-2-2-用PyPI安装-58" class="headerlink" title="4.2.2　用PyPI安装　　58"></a>4.2.2　用PyPI安装　　58</h2><h2 id="4-2-3-在Linux系统的安装方法-58"><a href="#4-2-3-在Linux系统的安装方法-58" class="headerlink" title="4.2.3　在Linux系统的安装方法　　58"></a>4.2.3　在Linux系统的安装方法　　58</h2><h2 id="4-2-4-用源代码安装-58"><a href="#4-2-4-用源代码安装-58" class="headerlink" title="4.2.4　用源代码安装　　58"></a>4.2.4　用源代码安装　　58</h2><h2 id="4-2-5-Windows模块仓库-59"><a href="#4-2-5-Windows模块仓库-59" class="headerlink" title="4.2.5　Windows模块仓库　　59"></a>4.2.5　Windows模块仓库　　59</h2><h1 id="4-3-测试pandas是否安装成功-59"><a href="#4-3-测试pandas是否安装成功-59" class="headerlink" title="4.3　测试pandas是否安装成功　　59"></a>4.3　测试pandas是否安装成功　　59</h1><h1 id="4-4-开始pandas之旅-59"><a href="#4-4-开始pandas之旅-59" class="headerlink" title="4.4　开始pandas之旅　　59"></a>4.4　开始pandas之旅　　59</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br></pre></td></tr></table></figure>
+<h1 id="4-5-pandas数据结构简介-60"><a href="#4-5-pandas数据结构简介-60" class="headerlink" title="4.5　pandas数据结构简介　　60"></a>4.5　pandas数据结构简介　　60</h1><h2 id="4-5-1-Series对象-60"><a href="#4-5-1-Series对象-60" class="headerlink" title="4.5.1　Series对象　　60"></a>4.5.1　Series对象　　60</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = pd.Series([<span class="number">12</span>,<span class="number">-4</span>,<span class="number">7</span>,<span class="number">9</span>])</span><br><span class="line">s</span><br></pre></td></tr></table></figure>
+<pre><code>0    12
+1    -4
+2     7
+3     9
+dtype: int64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = pd.Series([<span class="number">12</span>,<span class="number">-4</span>,<span class="number">7</span>,<span class="number">9</span>], index=[<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'d'</span>])</span><br><span class="line">s</span><br></pre></td></tr></table></figure>
+<pre><code>a    12
+b    -4
+c     7
+d     9
+dtype: int64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s.values</span><br></pre></td></tr></table></figure>
+<pre><code>array([12, -4,  7,  9])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s.index</span><br></pre></td></tr></table></figure>
+<pre><code>Index([&apos;a&apos;, &apos;b&apos;, &apos;c&apos;, &apos;d&apos;], dtype=&apos;object&apos;)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s[<span class="number">2</span>], s[<span class="string">'b'</span>]</span><br></pre></td></tr></table></figure>
+<pre><code>(7, -4)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s[<span class="number">0</span>:<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+<pre><code>a    12
+b    -4
+dtype: int64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s[[<span class="string">'b'</span>,<span class="string">'c'</span>]]</span><br></pre></td></tr></table></figure>
+<pre><code>b   -4
+c    7
+dtype: int64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s[<span class="number">1</span>] = <span class="number">0</span></span><br><span class="line">s</span><br></pre></td></tr></table></figure>
+<pre><code>a    12
+b     0
+c     7
+d     9
+dtype: int64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s[<span class="string">'b'</span>] = <span class="number">1</span></span><br><span class="line">s</span><br></pre></td></tr></table></figure>
+<pre><code>a    12
+b     1
+c     7
+d     9
+dtype: int64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">arr = np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>])</span><br><span class="line">s3 = pd.Series(arr)</span><br><span class="line">s3</span><br></pre></td></tr></table></figure>
+<pre><code>0    1
+1    2
+2    3
+3    4
+dtype: int64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s4 = pd.Series(s)</span><br><span class="line">s4</span><br></pre></td></tr></table></figure>
+<pre><code>a    12
+b     1
+c     7
+d     9
+dtype: int64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">arr[<span class="number">2</span>] = <span class="number">-2</span></span><br><span class="line">s3</span><br></pre></td></tr></table></figure>
+<pre><code>0    1
+1    2
+2   -2
+3    4
+dtype: int64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s[s &gt; <span class="number">8</span>]</span><br></pre></td></tr></table></figure>
+<pre><code>a    12
+d     9
+dtype: int64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s / <span class="number">2</span></span><br></pre></td></tr></table></figure>
+<pre><code>a    6.0
+b    0.5
+c    3.5
+d    4.5
+dtype: float64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.log(s)</span><br></pre></td></tr></table></figure>
+<pre><code>a    2.484907
+b    0.000000
+c    1.945910
+d    2.197225
+dtype: float64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">serd = pd.Series([<span class="number">1</span>,<span class="number">0</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>], index=[<span class="string">'white'</span>,<span class="string">'white'</span>,<span class="string">'blue'</span>,<span class="string">'green'</span>,<span class="string">'green'</span>,<span class="string">'yellow'</span>])</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">serd</span><br></pre></td></tr></table></figure>
+<pre><code>white     1
+white     0
+blue      2
+green     1
+green     2
+yellow    3
+dtype: int64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">serd.unique()</span><br></pre></td></tr></table></figure>
+<pre><code>array([1, 0, 2, 3])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">serd.value_counts()</span><br></pre></td></tr></table></figure>
+<pre><code>2    2
+1    2
+3    1
+0    1
+dtype: int64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">serd.isin([<span class="number">0</span>,<span class="number">3</span>])</span><br></pre></td></tr></table></figure>
+<pre><code>white     False
+white      True
+blue      False
+green     False
+green     False
+yellow     True
+dtype: bool
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">serd[serd.isin([<span class="number">0</span>,<span class="number">3</span>])]</span><br></pre></td></tr></table></figure>
+<pre><code>white     0
+yellow    3
+dtype: int64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s2 = pd.Series([<span class="number">5</span>,<span class="number">-3</span>,np.NaN,<span class="number">14</span>])</span><br><span class="line">s2</span><br></pre></td></tr></table></figure>
+<pre><code>0     5.0
+1    -3.0
+2     NaN
+3    14.0
+dtype: float64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s2.isnull()</span><br></pre></td></tr></table></figure>
+<pre><code>0    False
+1    False
+2     True
+3    False
+dtype: bool
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s2.notnull()</span><br></pre></td></tr></table></figure>
+<pre><code>0     True
+1     True
+2    False
+3     True
+dtype: bool
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s2[s2.notnull()]</span><br></pre></td></tr></table></figure>
+<pre><code>0     5.0
+1    -3.0
+3    14.0
+dtype: float64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s2[s2.isnull()]</span><br></pre></td></tr></table></figure>
+<pre><code>2   NaN
+dtype: float64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mydict = &#123;<span class="string">'red'</span>: <span class="number">2000</span>, <span class="string">'blue'</span>: <span class="number">1000</span>, <span class="string">'yellow'</span>: <span class="number">500</span>, <span class="string">'orange'</span>: <span class="number">1000</span>&#125;</span><br><span class="line">myseries = pd.Series(mydict)</span><br><span class="line">myseries</span><br></pre></td></tr></table></figure>
+<pre><code>blue      1000
+orange    1000
+red       2000
+yellow     500
+dtype: int64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">colors = [<span class="string">'red'</span>,<span class="string">'yellow'</span>,<span class="string">'orange'</span>,<span class="string">'blue'</span>,<span class="string">'green'</span>]</span><br><span class="line">myseries = pd.Series(mydict, index=colors)</span><br><span class="line">myseries</span><br></pre></td></tr></table></figure>
+<pre><code>red       2000.0
+yellow     500.0
+orange    1000.0
+blue      1000.0
+green        NaN
+dtype: float64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mydict2 = &#123;<span class="string">'red'</span>:<span class="number">400</span>,<span class="string">'yellow'</span>:<span class="number">1000</span>,<span class="string">'black'</span>:<span class="number">700</span>&#125;</span><br><span class="line">myseries2 = pd.Series(mydict2)</span><br><span class="line">myseries2</span><br></pre></td></tr></table></figure>
+<pre><code>black      700
+red        400
+yellow    1000
+dtype: int64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myseries + myseries2</span><br></pre></td></tr></table></figure>
+<pre><code>black        NaN
+blue         NaN
+green        NaN
+orange       NaN
+red       2400.0
+yellow    1500.0
+dtype: float64
+</code></pre><h2 id="4-5-2-DataFrame对象-66"><a href="#4-5-2-DataFrame对象-66" class="headerlink" title="4.5.2　DataFrame对象　　66"></a>4.5.2　DataFrame对象　　66</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">data = &#123;<span class="string">'color'</span> : [<span class="string">'blue'</span>,<span class="string">'green'</span>,<span class="string">'yellow'</span>,<span class="string">'red'</span>,<span class="string">'white'</span>],</span><br><span class="line"><span class="string">'object'</span> : [<span class="string">'ball'</span>,<span class="string">'pen'</span>,<span class="string">'pencil'</span>,<span class="string">'paper'</span>,<span class="string">'mug'</span>],</span><br><span class="line"><span class="string">'price'</span> : [<span class="number">1.2</span>,<span class="number">1.0</span>,<span class="number">0.6</span>,<span class="number">0.9</span>,<span class="number">1.7</span>]&#125;</span><br><span class="line">frame = pd.DataFrame(data)</span><br><span class="line">frame</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>….</th>
+<th>color</th>
+<th>object</th>
+<th>price</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>blue</td>
+<td>ball</td>
+<td>1.2</td>
+</tr>
+<tr>
+<td>1</td>
+<td>green</td>
+<td>pen</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>2</td>
+<td>yellow</td>
+<td>pencil</td>
+<td>0.6</td>
+</tr>
+<tr>
+<td>3</td>
+<td>red</td>
+<td>paper</td>
+<td>0.9</td>
+</tr>
+<tr>
+<td>4</td>
+<td>white</td>
+<td>mug</td>
+<td>1.7</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">frame2 = pd.DataFrame(data, columns=[<span class="string">'object'</span>,<span class="string">'price'</span>])</span><br><span class="line">frame2</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>…..</th>
+<th>object</th>
+<th>price</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>ball</td>
+<td>1.2</td>
+</tr>
+<tr>
+<td>1</td>
+<td>pen</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>2</td>
+<td>pencil</td>
+<td>0.6</td>
+</tr>
+<tr>
+<td>3</td>
+<td>paper</td>
+<td>0.9</td>
+</tr>
+<tr>
+<td>4</td>
+<td>mug</td>
+<td>1.7</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">frame2 = pd.DataFrame(data, index=[<span class="string">'one'</span>,<span class="string">'two'</span>,<span class="string">'three'</span>,<span class="string">'four'</span>,<span class="string">'five'</span>])</span><br><span class="line">frame2</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>….</th>
+<th>color</th>
+<th>object</th>
+<th>price</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>one</td>
+<td>blue</td>
+<td>ball</td>
+<td>1.2</td>
+</tr>
+<tr>
+<td>two</td>
+<td>green</td>
+<td>pen</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>three</td>
+<td>yellow</td>
+<td>pencil</td>
+<td>0.6</td>
+</tr>
+<tr>
+<td>four</td>
+<td>red</td>
+<td>paper</td>
+<td>0.9</td>
+</tr>
+<tr>
+<td>five</td>
+<td>white</td>
+<td>mug</td>
+<td>1.7</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">frame3 = pd.DataFrame(np.arange(<span class="number">16</span>).reshape((<span class="number">4</span>,<span class="number">4</span>)),</span><br><span class="line">    index=[<span class="string">'red'</span>,<span class="string">'blue'</span>,<span class="string">'yellow'</span>,<span class="string">'white'</span>],</span><br><span class="line">    columns=[<span class="string">'ball'</span>,<span class="string">'pen'</span>,<span class="string">'pencil'</span>,<span class="string">'paper'</span>])</span><br><span class="line">frame3</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>…..</th>
+<th>ball</th>
+<th>pen</th>
+<th>pencil</th>
+<th>paper</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>red</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+</tr>
+<tr>
+<td>blue</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+</tr>
+<tr>
+<td>yellow</td>
+<td>8</td>
+<td>9</td>
+<td>10</td>
+<td>11</td>
+</tr>
+<tr>
+<td>white</td>
+<td>12</td>
+<td>13</td>
+<td>14</td>
+<td>15</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.columns</span><br></pre></td></tr></table></figure>
+<pre><code>Index([&apos;color&apos;, &apos;object&apos;, &apos;price&apos;], dtype=&apos;object&apos;)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.index</span><br></pre></td></tr></table></figure>
+<pre><code>RangeIndex(start=0, stop=5, step=1)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.values</span><br></pre></td></tr></table></figure>
+<pre><code>array([[&apos;blue&apos;, &apos;ball&apos;, 1.2],
+       [&apos;green&apos;, &apos;pen&apos;, 1.0],
+       [&apos;yellow&apos;, &apos;pencil&apos;, 0.6],
+       [&apos;red&apos;, &apos;paper&apos;, 0.9],
+       [&apos;white&apos;, &apos;mug&apos;, 1.7]], dtype=object)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame[<span class="string">'price'</span>]</span><br></pre></td></tr></table></figure>
+<pre><code>0    1.2
+1    1.0
+2    0.6
+3    0.9
+4    1.7
+Name: price, dtype: float64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.price</span><br></pre></td></tr></table></figure>
+<pre><code>0    1.2
+1    1.0
+2    0.6
+3    0.9
+4    1.7
+Name: price, dtype: float64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.ix[<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
+<pre><code>color     yellow
+object    pencil
+price        0.6
+Name: 2, dtype: object
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.ix[[<span class="number">2</span>,<span class="number">4</span>]]</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame[<span class="number">0</span>:<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+<pre><code>color    object    price
+</code></pre><p>0    blue    ball    1.2</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame[<span class="number">1</span>:<span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+<pre><code>color    object    price
+</code></pre><p>1    green    pen    1.0<br>2    yellow    pencil    0.6</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame[<span class="string">'object'</span>][<span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+<pre><code>&apos;paper&apos;
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">frame.index.name = <span class="string">'id'</span>; </span><br><span class="line">frame.columns.name = <span class="string">'item'</span></span><br><span class="line">frame</span><br></pre></td></tr></table></figure>
+<p>item    color    object    price<br>id<br>0    blue    ball    1.2<br>1    green    pen    1.0<br>2    yellow    pencil    0.6<br>3    red    paper    0.9<br>4    white    mug    1.7</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">frame[<span class="string">'new'</span>] = <span class="number">12</span></span><br><span class="line">frame</span><br></pre></td></tr></table></figure>
+<p>item    color    object    price    new<br>id<br>0    blue    ball    1.2    12<br>1    green    pen    1.0    12<br>2    yellow    pencil    0.6    12<br>3    red    paper    0.9    12<br>4    white    mug    1.7    12</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">frame[<span class="string">'new'</span>] = [<span class="number">3.0</span>,<span class="number">1.3</span>,<span class="number">2.2</span>,<span class="number">0.8</span>,<span class="number">1.1</span>]</span><br><span class="line">frame</span><br></pre></td></tr></table></figure>
+<p>item    color    object    price    new<br>id<br>0    blue    ball    1.2    3.0<br>1    green    pen    1.0    1.3<br>2    yellow    pencil    0.6    2.2<br>3    red    paper    0.9    0.8<br>4    white    mug    1.7    1.1</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ser = pd.Series(np.arange(<span class="number">5</span>))</span><br><span class="line">ser</span><br></pre></td></tr></table></figure>
+<pre><code>0    0
+1    1
+2    2
+3    3
+4    4
+dtype: int64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">frame[<span class="string">'new'</span>] = ser</span><br><span class="line">frame</span><br></pre></td></tr></table></figure>
+<p>item    color    object    price    new<br>id<br>0    blue    ball    1.2    0<br>1    green    pen    1.0    1<br>2    yellow    pencil    0.6    2<br>3    red    paper    0.9    3<br>4    white    mug    1.7    4</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">frame[<span class="string">'price'</span>][<span class="number">2</span>] = <span class="number">3.3</span></span><br><span class="line">frame</span><br></pre></td></tr></table></figure>
+<pre><code>/home/vivoadmin/anaconda3/lib/python3.6/site-packages/ipykernel_launcher.py:1: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/indexing.html#indexing-view-versus-copy
+  &quot;&quot;&quot;Entry point for launching an IPython kernel.
+</code></pre><p>item    color    object    price    new<br>id<br>0    blue    ball    1.2    0<br>1    green    pen    1.0    1<br>2    yellow    pencil    3.3    2<br>3    red    paper    0.9    3<br>4    white    mug    1.7    4</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.isin([<span class="number">1.0</span>,<span class="string">'pen'</span>])</span><br></pre></td></tr></table></figure>
+<p>item    color    object    price    new<br>id<br>0    False    False    False    False<br>1    False    True    True    True<br>2    False    False    False    False<br>3    False    False    False    False<br>4    False    False    False    False</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame[frame.isin([<span class="number">1.0</span>,<span class="string">'pen'</span>])]</span><br></pre></td></tr></table></figure>
+<p>item    color    object    price    new<br>id<br>0    NaN    NaN    NaN    NaN<br>1    NaN    pen    1.0    1.0<br>2    NaN    NaN    NaN    NaN<br>3    NaN    NaN    NaN    NaN<br>4    NaN    NaN    NaN    NaN</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">del</span> frame[<span class="string">'new'</span>]</span><br><span class="line">frame</span><br></pre></td></tr></table></figure>
+<p>item    color    object    price<br>id<br>0    blue    ball    1.2<br>1    green    pen    1.0<br>2    yellow    pencil    3.3<br>3    red    paper    0.9<br>4    white    mug    1.7</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame[frame &lt; <span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+<p>item    color    object    price<br>id<br>0    blue    ball    NaN<br>1    green    pen    NaN<br>2    yellow    pencil    NaN<br>3    red    paper    0.9<br>4    white    mug    NaN</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">nestdict = &#123;<span class="string">'red'</span>:&#123;<span class="number">2012</span>: <span class="number">22</span>, <span class="number">2013</span>: <span class="number">33</span>&#125;,</span><br><span class="line">    <span class="string">'white'</span>:&#123;<span class="number">2011</span>: <span class="number">13</span>, <span class="number">2012</span>: <span class="number">22</span>, <span class="number">2013</span>: <span class="number">16</span>&#125;,</span><br><span class="line">    <span class="string">'blue'</span>: &#123;<span class="number">2011</span>: <span class="number">17</span>, <span class="number">2012</span>: <span class="number">27</span>, <span class="number">2013</span>: <span class="number">18</span>&#125;&#125;</span><br><span class="line">frame2 = pd.DataFrame(nestdict)</span><br><span class="line">frame2</span><br></pre></td></tr></table></figure>
+<pre><code>blue    red    white
+</code></pre><p>2011    17    NaN    13<br>2012    27    22.0    22<br>2013    18    33.0    16</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame2.T</span><br></pre></td></tr></table></figure>
+<pre><code>2011    2012    2013
+</code></pre><p>blue    17.0    27.0    18.0<br>red    NaN    22.0    33.0<br>white    13.0    22.0    16.0</p>
+<h2 id="4-5-3-Index对象-72"><a href="#4-5-3-Index对象-72" class="headerlink" title="4.5.3　Index对象　　72"></a>4.5.3　Index对象　　72</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ser = pd.Series([<span class="number">5</span>,<span class="number">0</span>,<span class="number">3</span>,<span class="number">8</span>,<span class="number">4</span>], index=[<span class="string">'red'</span>,<span class="string">'blue'</span>,<span class="string">'yellow'</span>,<span class="string">'white'</span>,<span class="string">'green'</span>])</span><br><span class="line">ser.index</span><br></pre></td></tr></table></figure>
+<pre><code>Index([&apos;red&apos;, &apos;blue&apos;, &apos;yellow&apos;, &apos;white&apos;, &apos;green&apos;], dtype=&apos;object&apos;)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ser.idxmin(), ser.idxmax()</span><br></pre></td></tr></table></figure>
+<pre><code>(&apos;blue&apos;, &apos;white&apos;)
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">serd = pd.Series(range(<span class="number">6</span>), index=[<span class="string">'white'</span>,<span class="string">'white'</span>,<span class="string">'blue'</span>,<span class="string">'green'</span>,<span class="string">'green'</span>,<span class="string">'yellow'</span>])</span><br><span class="line">serd</span><br></pre></td></tr></table></figure>
+<pre><code>white     0
+white     1
+blue      2
+green     3
+green     4
+yellow    5
+dtype: int64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">serd[<span class="string">'white'</span>]</span><br></pre></td></tr></table></figure>
+<pre><code>white    0
+white    1
+dtype: int64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">serd.index.is_unique</span><br></pre></td></tr></table></figure>
+<pre><code>False
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.index.is_unique</span><br></pre></td></tr></table></figure>
+<pre><code>True
+</code></pre><h1 id="4-6-索引对象的其他功能-74"><a href="#4-6-索引对象的其他功能-74" class="headerlink" title="4.6　索引对象的其他功能　　74"></a>4.6　索引对象的其他功能　　74</h1><h2 id="4-6-1-更换索引-74"><a href="#4-6-1-更换索引-74" class="headerlink" title="4.6.1　更换索引　　74"></a>4.6.1　更换索引　　74</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ser = pd.Series([<span class="number">2</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">4</span>], index=[<span class="string">'one'</span>,<span class="string">'two'</span>,<span class="string">'three'</span>,<span class="string">'four'</span>])</span><br><span class="line">ser</span><br></pre></td></tr></table></figure>
+<pre><code>one      2
+two      5
+three    7
+four     4
+dtype: int64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ser.reindex([<span class="string">'three'</span>,<span class="string">'four'</span>,<span class="string">'five'</span>,<span class="string">'one'</span>])</span><br></pre></td></tr></table></figure>
+<pre><code>three    7.0
+four     4.0
+five     NaN
+one      2.0
+dtype: float64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ser3 = pd.Series([<span class="number">1</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">3</span>],index=[<span class="number">0</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">6</span>])</span><br><span class="line">ser3</span><br></pre></td></tr></table></figure>
+<pre><code>0    1
+3    5
+5    6
+6    3
+dtype: int64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ser3.reindex(range(<span class="number">6</span>),method=<span class="string">'ffill'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>0    1
+1    1
+2    1
+3    5
+4    5
+5    6
+dtype: int64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ser3.reindex(range(<span class="number">6</span>),method=<span class="string">'bfill'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>0    1
+1    5
+2    5
+3    5
+4    6
+5    6
+dtype: int64
+</code></pre><p>item    colors    price    new    object<br>id<br>0    blue    1.2    blue    ball<br>1    green    1.0    green    pen<br>2    yellow    3.3    yellow    pencil<br>3    red    0.9    red    paper<br>4    white    1.7    white    mug</p>
+<h2 id="4-6-2-删除-75"><a href="#4-6-2-删除-75" class="headerlink" title="4.6.2　删除　　75"></a>4.6.2　删除　　75</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ser = pd.Series(np.arange(<span class="number">4.</span>), index=[<span class="string">'red'</span>,<span class="string">'blue'</span>,<span class="string">'yellow'</span>,<span class="string">'white'</span>])</span><br><span class="line">ser</span><br></pre></td></tr></table></figure>
+<pre><code>red       0.0
+blue      1.0
+yellow    2.0
+white     3.0
+dtype: float64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ser.drop(<span class="string">'yellow'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>red      0.0
+blue     1.0
+white    3.0
+dtype: float64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ser.drop([<span class="string">'blue'</span>,<span class="string">'white'</span>])</span><br></pre></td></tr></table></figure>
+<pre><code>red       0.0
+yellow    2.0
+dtype: float64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">frame = pd.DataFrame(np.arange(<span class="number">16</span>).reshape((<span class="number">4</span>,<span class="number">4</span>)),</span><br><span class="line">    index=[<span class="string">'red'</span>,<span class="string">'blue'</span>,<span class="string">'yellow'</span>,<span class="string">'white'</span>],</span><br><span class="line">    columns=[<span class="string">'ball'</span>,<span class="string">'pen'</span>,<span class="string">'pencil'</span>,<span class="string">'paper'</span>])</span><br><span class="line">frame</span><br></pre></td></tr></table></figure>
+<pre><code>ball    pen    pencil    paper
+</code></pre><p>red    0    1    2    3<br>blue    4    5    6    7<br>yellow    8    9    10    11<br>white    12    13    14    15</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.drop([<span class="string">'blue'</span>,<span class="string">'yellow'</span>])</span><br></pre></td></tr></table></figure>
+<p>ball    pen    pencil    paper<br>red    0    1    2    3<br>white    12    13    14    15</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.drop([<span class="string">'pen'</span>,<span class="string">'pencil'</span>],axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>ball    paper
+</code></pre><p>red    0    3<br>blue    4    7<br>yellow    8    11<br>white    12    15</p>
+<h2 id="4-6-3-算术和数据对齐-77"><a href="#4-6-3-算术和数据对齐-77" class="headerlink" title="4.6.3　算术和数据对齐　　77"></a>4.6.3　算术和数据对齐　　77</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s1 = pd.Series([<span class="number">3</span>,<span class="number">2</span>,<span class="number">5</span>,<span class="number">1</span>],[<span class="string">'white'</span>,<span class="string">'yellow'</span>,<span class="string">'green'</span>,<span class="string">'blue'</span>])</span><br><span class="line">s2 = pd.Series([<span class="number">1</span>,<span class="number">4</span>,<span class="number">7</span>,<span class="number">2</span>,<span class="number">1</span>],[<span class="string">'white'</span>,<span class="string">'yellow'</span>,<span class="string">'black'</span>,<span class="string">'blue'</span>,<span class="string">'brown'</span>])</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s1 + s2</span><br></pre></td></tr></table></figure>
+<pre><code>black     NaN
+blue      3.0
+brown     NaN
+green     NaN
+white     4.0
+yellow    6.0
+dtype: float64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">frame1 = pd.DataFrame(np.arange(<span class="number">16</span>).reshape((<span class="number">4</span>,<span class="number">4</span>)),</span><br><span class="line">    index=[<span class="string">'red'</span>,<span class="string">'blue'</span>,<span class="string">'yellow'</span>,<span class="string">'white'</span>],</span><br><span class="line">    columns=[<span class="string">'ball'</span>,<span class="string">'pen'</span>,<span class="string">'pencil'</span>,<span class="string">'paper'</span>])</span><br><span class="line">frame2 = pd.DataFrame(np.arange(<span class="number">12</span>).reshape((<span class="number">4</span>,<span class="number">3</span>)),</span><br><span class="line">    index=[<span class="string">'blue'</span>,<span class="string">'green'</span>,<span class="string">'white'</span>,<span class="string">'yellow'</span>],</span><br><span class="line">    columns=[<span class="string">'mug'</span>,<span class="string">'pen'</span>,<span class="string">'ball'</span>])</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame1</span><br></pre></td></tr></table></figure>
+<pre><code>ball    pen    pencil    paper
+</code></pre><p>red    0    1    2    3<br>blue    4    5    6    7<br>yellow    8    9    10    11<br>white    12    13    14    15</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame2</span><br></pre></td></tr></table></figure>
+<pre><code>mug    pen    ball
+</code></pre><p>blue    0    1    2<br>green    3    4    5<br>white    6    7    8<br>yellow    9    10    11</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame1 + frame2</span><br></pre></td></tr></table></figure>
+<pre><code>ball    mug    paper    pen    pencil
+</code></pre><p>blue    6.0    NaN    NaN    6.0    NaN<br>green    NaN    NaN    NaN    NaN    NaN<br>red    NaN    NaN    NaN    NaN    NaN<br>white    20.0    NaN    NaN    20.0    NaN<br>yellow    19.0    NaN    NaN    19.0    NaN</p>
+<h1 id="4-7-数据结构之间的运算-78"><a href="#4-7-数据结构之间的运算-78" class="headerlink" title="4.7　数据结构之间的运算　　78"></a>4.7　数据结构之间的运算　　78</h1><h2 id="4-7-1-灵活的算术运算方法-78"><a href="#4-7-1-灵活的算术运算方法-78" class="headerlink" title="4.7.1　灵活的算术运算方法　　78"></a>4.7.1　灵活的算术运算方法　　78</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame1.add(frame2)</span><br></pre></td></tr></table></figure>
+<pre><code>ball    mug    paper    pen    pencil
+</code></pre><p>blue    6.0    NaN    NaN    6.0    NaN<br>green    NaN    NaN    NaN    NaN    NaN<br>red    NaN    NaN    NaN    NaN    NaN<br>white    20.0    NaN    NaN    20.0    NaN<br>yellow    19.0    NaN    NaN    19.0    NaN</p>
+<h2 id="4-7-2-DataFrame和Series对象之间的运算-78"><a href="#4-7-2-DataFrame和Series对象之间的运算-78" class="headerlink" title="4.7.2　DataFrame和Series对象之间的运算　　78"></a>4.7.2　DataFrame和Series对象之间的运算　　78</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">frame = pd.DataFrame(np.arange(<span class="number">16</span>).reshape((<span class="number">4</span>,<span class="number">4</span>)),</span><br><span class="line">    index=[<span class="string">'red'</span>,<span class="string">'blue'</span>,<span class="string">'yellow'</span>,<span class="string">'white'</span>],</span><br><span class="line">    columns=[<span class="string">'ball'</span>,<span class="string">'pen'</span>,<span class="string">'pencil'</span>,<span class="string">'paper'</span>])</span><br><span class="line">frame</span><br></pre></td></tr></table></figure>
+<pre><code>ball    pen    pencil    paper
+</code></pre><p>red    0    1    2    3<br>blue    4    5    6    7<br>yellow    8    9    10    11<br>white    12    13    14    15</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ser = pd.Series(np.arange(<span class="number">4</span>), index=[<span class="string">'ball'</span>,<span class="string">'pen'</span>,<span class="string">'pencil'</span>,<span class="string">'paper'</span>])</span><br><span class="line">ser</span><br></pre></td></tr></table></figure>
+<pre><code>ball      0
+pen       1
+pencil    2
+paper     3
+dtype: int64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame - ser</span><br></pre></td></tr></table></figure>
+<pre><code>ball    pen    pencil    paper
+</code></pre><p>red    0    0    0    0<br>blue    4    4    4    4<br>yellow    8    8    8    8<br>white    12    12    12    12</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ser[<span class="string">'mug'</span>] = <span class="number">9</span></span><br><span class="line">ser</span><br></pre></td></tr></table></figure>
+<pre><code>ball      0
+pen       1
+pencil    2
+paper     3
+mug       9
+dtype: int64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame - ser</span><br></pre></td></tr></table></figure>
+<pre><code>ball    mug    paper    pen    pencil
+</code></pre><p>red    0    NaN    0    0    0<br>blue    4    NaN    4    4    4<br>yellow    8    NaN    8    8    8<br>white    12    NaN    12    12    12</p>
+<h1 id="4-8-函数应用和映射-79"><a href="#4-8-函数应用和映射-79" class="headerlink" title="4.8　函数应用和映射　　79"></a>4.8　函数应用和映射　　79</h1><h2 id="4-8-1-操作元素的函数-79"><a href="#4-8-1-操作元素的函数-79" class="headerlink" title="4.8.1　操作元素的函数　　79"></a>4.8.1　操作元素的函数　　79</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">frame = pd.DataFrame(np.arange(<span class="number">16</span>).reshape((<span class="number">4</span>,<span class="number">4</span>)),</span><br><span class="line">    index=[<span class="string">'red'</span>,<span class="string">'blue'</span>,<span class="string">'yellow'</span>,<span class="string">'white'</span>],</span><br><span class="line">    columns=[<span class="string">'ball'</span>,<span class="string">'pen'</span>,<span class="string">'pencil'</span>,<span class="string">'paper'</span>])</span><br><span class="line">frame</span><br></pre></td></tr></table></figure>
+<pre><code>ball    pen    pencil    paper
+</code></pre><p>red    0    1    2    3<br>blue    4    5    6    7<br>yellow    8    9    10    11<br>white    12    13    14    15</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.sqrt(frame)</span><br></pre></td></tr></table></figure>
+<pre><code>ball    pen    pencil    paper
+</code></pre><p>red    0.000000    1.000000    1.414214    1.732051<br>blue    2.000000    2.236068    2.449490    2.645751<br>yellow    2.828427    3.000000    3.162278    3.316625<br>white    3.464102    3.605551    3.741657    3.872983</p>
+<h2 id="4-8-2-按行或列执行操作的函数-80"><a href="#4-8-2-按行或列执行操作的函数-80" class="headerlink" title="4.8.2　按行或列执行操作的函数　　80"></a>4.8.2　按行或列执行操作的函数　　80</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">f = <span class="keyword">lambda</span> x: x.max() - x.min()</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> x.max() - x.min()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.apply(f)</span><br></pre></td></tr></table></figure>
+<pre><code>ball      12
+pen       12
+pencil    12
+paper     12
+dtype: int64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.apply(f, axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>red       3
+blue      3
+yellow    3
+white     3
+dtype: int64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> pd.Series([x.min(), x.max()], index=[<span class="string">'min'</span>,<span class="string">'max'</span>])</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.apply(f)</span><br></pre></td></tr></table></figure>
+<pre><code>ball    pen    pencil    paper
+</code></pre><p>min    0    1    2    3<br>max    12    13    14    15</p>
+<h2 id="4-8-3-统计函数-81"><a href="#4-8-3-统计函数-81" class="headerlink" title="4.8.3　统计函数　　81"></a>4.8.3　统计函数　　81</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.sum()</span><br></pre></td></tr></table></figure>
+<pre><code>ball      24
+pen       28
+pencil    32
+paper     36
+dtype: int64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.mean()</span><br></pre></td></tr></table></figure>
+<pre><code>ball      6.0
+pen       7.0
+pencil    8.0
+paper     9.0
+dtype: float64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.describe()</span><br></pre></td></tr></table></figure>
+<pre><code>ball    pen    pencil    paper
+</code></pre><p>count    4.000000    4.000000    4.000000    4.000000<br>mean    6.000000    7.000000    8.000000    9.000000<br>std    5.163978    5.163978    5.163978    5.163978<br>min    0.000000    1.000000    2.000000    3.000000<br>25%    3.000000    4.000000    5.000000    6.000000<br>50%    6.000000    7.000000    8.000000    9.000000<br>75%    9.000000    10.000000    11.000000    12.000000<br>max    12.000000    13.000000    14.000000    15.000000</p>
+<h1 id="4-9-排序和排位次-81"><a href="#4-9-排序和排位次-81" class="headerlink" title="4.9　排序和排位次　　81"></a>4.9　排序和排位次　　81</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ser = pd.Series([<span class="number">5</span>,<span class="number">0</span>,<span class="number">3</span>,<span class="number">8</span>,<span class="number">4</span>], index=[<span class="string">'red'</span>,<span class="string">'blue'</span>,<span class="string">'yellow'</span>,<span class="string">'white'</span>,<span class="string">'green'</span>])</span><br><span class="line">ser</span><br></pre></td></tr></table></figure>
+<pre><code>red       5
+blue      0
+yellow    3
+white     8
+green     4
+dtype: int64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ser.sort_index()</span><br></pre></td></tr></table></figure>
+<pre><code>blue      0
+green     4
+red       5
+white     8
+yellow    3
+dtype: int64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ser.sort_index(ascending=<span class="keyword">False</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>yellow    3
+white     8
+red       5
+green     4
+blue      0
+dtype: int64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">frame = pd.DataFrame(np.arange(<span class="number">16</span>).reshape((<span class="number">4</span>,<span class="number">4</span>)),</span><br><span class="line">    index=[<span class="string">'red'</span>,<span class="string">'blue'</span>,<span class="string">'yellow'</span>,<span class="string">'white'</span>],</span><br><span class="line">    columns=[<span class="string">'ball'</span>,<span class="string">'pen'</span>,<span class="string">'pencil'</span>,<span class="string">'paper'</span>])</span><br><span class="line">frame</span><br></pre></td></tr></table></figure>
+<pre><code>ball    pen    pencil    paper
+</code></pre><p>red    0    1    2    3<br>blue    4    5    6    7<br>yellow    8    9    10    11<br>white    12    13    14    15</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.sort_index()</span><br></pre></td></tr></table></figure>
+<pre><code>ball    pen    pencil    paper
+</code></pre><p>blue    4    5    6    7<br>red    0    1    2    3<br>white    12    13    14    15<br>yellow    8    9    10    11</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.sort_index(axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>ball    paper    pen    pencil
+</code></pre><p>red    0    3    1    2<br>blue    4    7    5    6<br>yellow    8    11    9    10<br>white    12    15    13    14</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ser.order()</span><br></pre></td></tr></table></figure>
+<pre><code>---------------------------------------------------------------------------
+
+AttributeError                            Traceback (most recent call last)
+
+&lt;ipython-input-131-bb828ac4164f&gt; in &lt;module&gt;()
+----&gt; 1 ser.order()
+
+
+~/anaconda3/lib/python3.6/site-packages/pandas/core/generic.py in __getattr__(self, name)
+   3612             if name in self._info_axis:
+   3613                 return self[name]
+-&gt; 3614             return object.__getattribute__(self, name)
+   3615 
+   3616     def __setattr__(self, name, value):
+
+
+AttributeError: &apos;Series&apos; object has no attribute &apos;order&apos;
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.sort_index(by=<span class="string">'pen'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>/home/vivoadmin/anaconda3/lib/python3.6/site-packages/ipykernel_launcher.py:1: FutureWarning: by argument to sort_index is deprecated, please use .sort_values(by=...)
+  &quot;&quot;&quot;Entry point for launching an IPython kernel.
+
+
+
+ball    pen    pencil    paper
+</code></pre><p>red    0    1    2    3<br>blue    4    5    6    7<br>yellow    8    9    10    11<br>white    12    13    14    15</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.sort_index(by=[<span class="string">'pen'</span>,<span class="string">'pencil'</span>])</span><br></pre></td></tr></table></figure>
+<pre><code>/home/vivoadmin/anaconda3/lib/python3.6/site-packages/ipykernel_launcher.py:1: FutureWarning: by argument to sort_index is deprecated, please use .sort_values(by=...)
+  &quot;&quot;&quot;Entry point for launching an IPython kernel.
+</code></pre><p>ball    pen    pencil    paper<br>red    0    1    2    3<br>blue    4    5    6    7<br>yellow    8    9    10    11<br>white    12    13    14    15</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ser.rank()</span><br></pre></td></tr></table></figure>
+<pre><code>red       4.0
+blue      1.0
+yellow    2.0
+white     5.0
+green     3.0
+dtype: float64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ser.rank(method=<span class="string">'first'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>red       4.0
+blue      1.0
+yellow    2.0
+white     5.0
+green     3.0
+dtype: float64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ser.rank(ascending=<span class="keyword">False</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>red       2.0
+blue      5.0
+yellow    4.0
+white     1.0
+green     3.0
+dtype: float64
+</code></pre><h1 id="4-10-相关性和协方差-84"><a href="#4-10-相关性和协方差-84" class="headerlink" title="4.10　相关性和协方差　　84"></a>4.10　相关性和协方差　　84</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">seq2 = pd.Series([<span class="number">3</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>],[<span class="string">'2006'</span>,<span class="string">'2007'</span>,<span class="string">'2008'</span>,<span class="string">'2009'</span>,<span class="string">'2010'</span>,<span class="string">'2011'</span>,<span class="string">'2012'</span>,<span class="string">'2013'</span>])</span><br><span class="line">seq = pd.Series([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>],[<span class="string">'2006'</span>,<span class="string">'2007'</span>,<span class="string">'2008'</span>,<span class="string">'2009'</span>,<span class="string">'2010'</span>,<span class="string">'2011'</span>,<span class="string">'2012'</span>,<span class="string">'2013'</span>])</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">seq.corr(seq2)</span><br></pre></td></tr></table></figure>
+<pre><code>0.7745966692414835
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">seq.cov(seq2)</span><br></pre></td></tr></table></figure>
+<pre><code>0.8571428571428571
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">frame2 = pd.DataFrame([[<span class="number">1</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">6</span>],[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">1</span>],[<span class="number">3</span>,<span class="number">3</span>,<span class="number">1</span>,<span class="number">5</span>],[<span class="number">4</span>,<span class="number">1</span>,<span class="number">6</span>,<span class="number">4</span>]],</span><br><span class="line">    index=[<span class="string">'red'</span>,<span class="string">'blue'</span>,<span class="string">'yellow'</span>,<span class="string">'white'</span>],</span><br><span class="line">    columns=[<span class="string">'ball'</span>,<span class="string">'pen'</span>,<span class="string">'pencil'</span>,<span class="string">'paper'</span>])</span><br><span class="line">frame2</span><br></pre></td></tr></table></figure>
+<pre><code>ball    pen    pencil    paper
+</code></pre><p>red    1    4    3    6<br>blue    4    5    6    1<br>yellow    3    3    1    5<br>white    4    1    6    4</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame2.corr()</span><br></pre></td></tr></table></figure>
+<pre><code>ball    pen    pencil    paper
+</code></pre><p>ball    1.000000    -0.276026    0.577350    -0.763763<br>pen    -0.276026    1.000000    -0.079682    -0.361403<br>pencil    0.577350    -0.079682    1.000000    -0.692935<br>paper    -0.763763    -0.361403    -0.692935    1.000000</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame2.cov()</span><br></pre></td></tr></table></figure>
+<pre><code>ball    pen    pencil    paper
+</code></pre><p>ball    2.000000    -0.666667    2.000000    -2.333333<br>pen    -0.666667    2.916667    -0.333333    -1.333333<br>pencil    2.000000    -0.333333    6.000000    -3.666667<br>paper    -2.333333    -1.333333    -3.666667    4.666667</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ser</span><br></pre></td></tr></table></figure>
+<pre><code>red       5
+blue      0
+yellow    3
+white     8
+green     4
+dtype: int64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame2.corrwith(ser)</span><br></pre></td></tr></table></figure>
+<pre><code>ball     -0.140028
+pen      -0.869657
+pencil    0.080845
+paper     0.595854
+dtype: float64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame2.corrwith(frame)</span><br></pre></td></tr></table></figure>
+<pre><code>ball      0.730297
+pen      -0.831522
+pencil    0.210819
+paper    -0.119523
+dtype: float64
+</code></pre><h1 id="4-11-NaN数据-85"><a href="#4-11-NaN数据-85" class="headerlink" title="4.11　NaN数据　　85"></a>4.11　NaN数据　　85</h1><h2 id="4-11-1-为元素赋NaN值-85"><a href="#4-11-1-为元素赋NaN值-85" class="headerlink" title="4.11.1　为元素赋NaN值　　85"></a>4.11.1　为元素赋NaN值　　85</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ser = pd.Series([<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,np.NaN,<span class="number">9</span>], index=[<span class="string">'red'</span>,<span class="string">'blue'</span>,<span class="string">'yellow'</span>,<span class="string">'white'</span>,<span class="string">'green'</span>])</span><br><span class="line">ser</span><br></pre></td></tr></table></figure>
+<pre><code>red       0.0
+blue      1.0
+yellow    2.0
+white     NaN
+green     9.0
+dtype: float64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ser[<span class="string">'white'</span>] = <span class="keyword">None</span></span><br><span class="line">ser</span><br></pre></td></tr></table></figure>
+<pre><code>red       0.0
+blue      1.0
+yellow    2.0
+white     NaN
+green     9.0
+dtype: float64
+</code></pre><h2 id="4-11-2-过滤NaN-86"><a href="#4-11-2-过滤NaN-86" class="headerlink" title="4.11.2　过滤NaN　　86"></a>4.11.2　过滤NaN　　86</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ser.dropna()</span><br></pre></td></tr></table></figure>
+<pre><code>red       0.0
+blue      1.0
+yellow    2.0
+green     9.0
+dtype: float64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ser[ser.notnull()]</span><br></pre></td></tr></table></figure>
+<pre><code>red       0.0
+blue      1.0
+yellow    2.0
+green     9.0
+dtype: float64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">frame3 = pd.DataFrame([[<span class="number">6</span>,np.nan,<span class="number">6</span>],[np.nan,np.nan,np.nan],[<span class="number">2</span>,np.nan,<span class="number">5</span>]],</span><br><span class="line">    index = [<span class="string">'blue'</span>,<span class="string">'green'</span>,<span class="string">'red'</span>],</span><br><span class="line">    columns = [<span class="string">'ball'</span>,<span class="string">'mug'</span>,<span class="string">'pen'</span>])</span><br><span class="line">frame3</span><br></pre></td></tr></table></figure>
+<pre><code>ball    mug    pen
+</code></pre><p>blue    6.0    NaN    6.0<br>green    NaN    NaN    NaN<br>red    2.0    NaN    5.0</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame3.dropna()</span><br></pre></td></tr></table></figure>
+<p>ball    mug    pen</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame3.dropna(how=<span class="string">'all'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>ball    mug    pen
+</code></pre><p>blue    6.0    NaN    6.0<br>red    2.0    NaN    5.0</p>
+<h2 id="4-11-3-为NaN元素填充其他值-86"><a href="#4-11-3-为NaN元素填充其他值-86" class="headerlink" title="4.11.3　为NaN元素填充其他值　　86"></a>4.11.3　为NaN元素填充其他值　　86</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame3.fillna(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>ball    mug    pen
+</code></pre><p>blue    6.0    0.0    6.0<br>green    0.0    0.0    0.0<br>red    2.0    0.0    5.0</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame3.fillna(&#123;<span class="string">'ball'</span>:<span class="number">1</span>,<span class="string">'mug'</span>:<span class="number">0</span>,<span class="string">'pen'</span>:<span class="number">99</span>&#125;)</span><br></pre></td></tr></table></figure>
+<pre><code>ball    mug    pen
+</code></pre><p>blue    6.0    0.0    6.0<br>green    1.0    0.0    99.0<br>red    2.0    0.0    5.0</p>
+<h1 id="4-12-等级索引和分级-87"><a href="#4-12-等级索引和分级-87" class="headerlink" title="4.12　等级索引和分级　　87"></a>4.12　等级索引和分级　　87</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mser = pd.Series(np.random.rand(<span class="number">8</span>),</span><br><span class="line">    index=[[<span class="string">'white'</span>,<span class="string">'white'</span>,<span class="string">'white'</span>,<span class="string">'blue'</span>,<span class="string">'blue'</span>,<span class="string">'red'</span>,<span class="string">'red'</span>,<span class="string">'red'</span>],</span><br><span class="line">    [<span class="string">'up'</span>,<span class="string">'down'</span>,<span class="string">'right'</span>,<span class="string">'up'</span>,<span class="string">'down'</span>,<span class="string">'up'</span>,<span class="string">'down'</span>,<span class="string">'left'</span>]])</span><br><span class="line">mser</span><br></pre></td></tr></table></figure>
+<pre><code>white  up       0.941438
+       down     0.165728
+       right    0.492898
+blue   up       0.902410
+       down     0.879385
+red    up       0.646074
+       down     0.210103
+       left     0.476333
+dtype: float64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mser.index</span><br></pre></td></tr></table></figure>
+<pre><code>MultiIndex(levels=[[&apos;blue&apos;, &apos;red&apos;, &apos;white&apos;], [&apos;down&apos;, &apos;left&apos;, &apos;right&apos;, &apos;up&apos;]],
+           labels=[[2, 2, 2, 0, 0, 1, 1, 1], [3, 0, 2, 3, 0, 3, 0, 1]])
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mser[<span class="string">'white'</span>]</span><br></pre></td></tr></table></figure>
+<pre><code>up       0.941438
+down     0.165728
+right    0.492898
+dtype: float64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mser[:,<span class="string">'up'</span>]</span><br></pre></td></tr></table></figure>
+<pre><code>white    0.941438
+blue     0.902410
+red      0.646074
+dtype: float64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mser[<span class="string">'white'</span>,<span class="string">'up'</span>]</span><br></pre></td></tr></table></figure>
+<pre><code>0.9414384939430696
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mser.unstack()</span><br></pre></td></tr></table></figure>
+<pre><code>down    left    right    up
+</code></pre><p>blue    0.879385    NaN    NaN    0.902410<br>red    0.210103    0.476333    NaN    0.646074<br>white    0.165728    NaN    0.492898    0.941438</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame</span><br></pre></td></tr></table></figure>
+<pre><code>ball    pen    pencil    paper
+</code></pre><p>red    0    1    2    3<br>blue    4    5    6    7<br>yellow    8    9    10    11<br>white    12    13    14    15</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.stack()</span><br></pre></td></tr></table></figure>
+<pre><code>red     ball       0
+        pen        1
+        pencil     2
+        paper      3
+blue    ball       4
+        pen        5
+        pencil     6
+        paper      7
+yellow  ball       8
+        pen        9
+        pencil    10
+        paper     11
+white   ball      12
+        pen       13
+        pencil    14
+        paper     15
+dtype: int64
+</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mframe = pd.DataFrame(np.random.randn(<span class="number">16</span>).reshape(<span class="number">4</span>,<span class="number">4</span>),</span><br><span class="line">    index=[[<span class="string">'white'</span>,<span class="string">'white'</span>,<span class="string">'red'</span>,<span class="string">'red'</span>], [<span class="string">'up'</span>,<span class="string">'down'</span>,<span class="string">'up'</span>,<span class="string">'down'</span>]],</span><br><span class="line">    columns=[[<span class="string">'pen'</span>,<span class="string">'pen'</span>,<span class="string">'paper'</span>,<span class="string">'paper'</span>],[<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">2</span>]])</span><br><span class="line">mframe</span><br></pre></td></tr></table></figure>
+<pre><code>pen    paper
+</code></pre><p>1    2    1    2<br>white    up    0.992202    -1.037634    -0.083882    -0.028204<br>down    -1.758579    1.832742    -0.167739    0.174567<br>red    up    0.983876    2.306897    -1.003258    -0.591767<br>down    1.398166    0.054964    -1.705692    -0.375007</p>
+<h2 id="4-12-1-重新调整顺序和为层级排序-89"><a href="#4-12-1-重新调整顺序和为层级排序-89" class="headerlink" title="4.12.1　重新调整顺序和为层级排序　　89"></a>4.12.1　重新调整顺序和为层级排序　　89</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mframe.columns.names = [<span class="string">'objects'</span>,<span class="string">'id'</span>]</span><br><span class="line">mframe.index.names = [<span class="string">'colors'</span>,<span class="string">'status'</span>]</span><br><span class="line">mframe</span><br></pre></td></tr></table></figure>
+<pre><code>objects    pen    paper
+</code></pre><p>id    1    2    1    2<br>colors    status<br>white    up    0.992202    -1.037634    -0.083882    -0.028204<br>down    -1.758579    1.832742    -0.167739    0.174567<br>red    up    0.983876    2.306897    -1.003258    -0.591767<br>down    1.398166    0.054964    -1.705692    -0.375007</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mframe.swaplevel(<span class="string">'colors'</span>,<span class="string">'status'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>objects    pen    paper
+</code></pre><p>id    1    2    1    2<br>status    colors<br>up    white    0.992202    -1.037634    -0.083882    -0.028204<br>down    white    -1.758579    1.832742    -0.167739    0.174567<br>up    red    0.983876    2.306897    -1.003258    -0.591767<br>down    red    1.398166    0.054964    -1.705692    -0.375007</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mframe.sortlevel(<span class="string">'colors'</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>/home/vivoadmin/anaconda3/lib/python3.6/site-packages/ipykernel_launcher.py:1: FutureWarning: sortlevel is deprecated, use sort_index(level= ...)
+  &quot;&quot;&quot;Entry point for launching an IPython kernel.
+
+
+
+objects    pen    paper
+</code></pre><p>id    1    2    1    2<br>colors    status<br>red    down    1.398166    0.054964    -1.705692    -0.375007<br>up    0.983876    2.306897    -1.003258    -0.591767<br>white    down    -1.758579    1.832742    -0.167739    0.174567<br>up    0.992202    -1.037634    -0.083882    -0.028204</p>
+<h2 id="4-12-2-按层级统计数据-89"><a href="#4-12-2-按层级统计数据-89" class="headerlink" title="4.12.2　按层级统计数据　　89"></a>4.12.2　按层级统计数据　　89</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mframe.sum(level=<span class="string">'colors'</span>)</span><br></pre></td></tr></table></figure>
+<p>objects    pen    paper<br>id    1    2    1    2<br>colors<br>white    -0.766377    0.795107    -0.251622    0.146363<br>red    2.382042    2.361861    -2.708950    -0.966774</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mframe.sum(level=<span class="string">'id'</span>, axis=<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<pre><code>id    1    2
+</code></pre><p>colors    status<br>white    up    0.908320    -1.065838<br>down    -1.926319    2.007309<br>red    up    -0.019382    1.715131<br>down    -0.307526    -0.320044</p>
+<h1 id="4-13-小结-90"><a href="#4-13-小结-90" class="headerlink" title="4.13　小结　　90"></a>4.13　小结　　90</h1>
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="sun-day 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="sun-day 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/pandas/" rel="tag"><i class="fa fa-tag"></i> pandas</a>
+          
+            <a href="/tags/数据分析/" rel="tag"><i class="fa fa-tag"></i> 数据分析</a>
+          
+            <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/11/python数据分析实战-第3章-numpy库/" rel="next" title="python数据分析实战-第3章-numpy库">
+                <i class="fa fa-chevron-left"></i> python数据分析实战-第3章-numpy库
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2160523" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="sun-day" />
+            
+              <p class="site-author-name" itemprop="name">sun-day</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">58</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">21</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/zhanghaogithub123" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:zhanghao163mail@163.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://blog.csdn.net/mouse1598189" target="_blank" title="CSDN"><i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/zhang-hao-3-80-49/activities" target="_blank" title="知乎"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.google.com/" title="Google" target="_blank">Google</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.baidu.com/" title="百度" target="_blank">百度</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第4章-pandas库简介-56"><span class="nav-number">1.</span> <span class="nav-text">第4章　pandas库简介　　56</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-1-pandas：Python数据分析库-56"><span class="nav-number">2.</span> <span class="nav-text">4.1　pandas：Python数据分析库　　56</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-2-安装-57"><span class="nav-number">3.</span> <span class="nav-text">4.2　安装　　57</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-1-用Anaconda安装-57"><span class="nav-number">3.1.</span> <span class="nav-text">4.2.1　用Anaconda安装　　57</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-2-用PyPI安装-58"><span class="nav-number">3.2.</span> <span class="nav-text">4.2.2　用PyPI安装　　58</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-3-在Linux系统的安装方法-58"><span class="nav-number">3.3.</span> <span class="nav-text">4.2.3　在Linux系统的安装方法　　58</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-4-用源代码安装-58"><span class="nav-number">3.4.</span> <span class="nav-text">4.2.4　用源代码安装　　58</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-5-Windows模块仓库-59"><span class="nav-number">3.5.</span> <span class="nav-text">4.2.5　Windows模块仓库　　59</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-3-测试pandas是否安装成功-59"><span class="nav-number">4.</span> <span class="nav-text">4.3　测试pandas是否安装成功　　59</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-4-开始pandas之旅-59"><span class="nav-number">5.</span> <span class="nav-text">4.4　开始pandas之旅　　59</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-5-pandas数据结构简介-60"><span class="nav-number">6.</span> <span class="nav-text">4.5　pandas数据结构简介　　60</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-5-1-Series对象-60"><span class="nav-number">6.1.</span> <span class="nav-text">4.5.1　Series对象　　60</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-5-2-DataFrame对象-66"><span class="nav-number">6.2.</span> <span class="nav-text">4.5.2　DataFrame对象　　66</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-5-3-Index对象-72"><span class="nav-number">6.3.</span> <span class="nav-text">4.5.3　Index对象　　72</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-6-索引对象的其他功能-74"><span class="nav-number">7.</span> <span class="nav-text">4.6　索引对象的其他功能　　74</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-6-1-更换索引-74"><span class="nav-number">7.1.</span> <span class="nav-text">4.6.1　更换索引　　74</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-6-2-删除-75"><span class="nav-number">7.2.</span> <span class="nav-text">4.6.2　删除　　75</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-6-3-算术和数据对齐-77"><span class="nav-number">7.3.</span> <span class="nav-text">4.6.3　算术和数据对齐　　77</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-7-数据结构之间的运算-78"><span class="nav-number">8.</span> <span class="nav-text">4.7　数据结构之间的运算　　78</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-7-1-灵活的算术运算方法-78"><span class="nav-number">8.1.</span> <span class="nav-text">4.7.1　灵活的算术运算方法　　78</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-7-2-DataFrame和Series对象之间的运算-78"><span class="nav-number">8.2.</span> <span class="nav-text">4.7.2　DataFrame和Series对象之间的运算　　78</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-8-函数应用和映射-79"><span class="nav-number">9.</span> <span class="nav-text">4.8　函数应用和映射　　79</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-8-1-操作元素的函数-79"><span class="nav-number">9.1.</span> <span class="nav-text">4.8.1　操作元素的函数　　79</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-8-2-按行或列执行操作的函数-80"><span class="nav-number">9.2.</span> <span class="nav-text">4.8.2　按行或列执行操作的函数　　80</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-8-3-统计函数-81"><span class="nav-number">9.3.</span> <span class="nav-text">4.8.3　统计函数　　81</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-9-排序和排位次-81"><span class="nav-number">10.</span> <span class="nav-text">4.9　排序和排位次　　81</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-10-相关性和协方差-84"><span class="nav-number">11.</span> <span class="nav-text">4.10　相关性和协方差　　84</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-11-NaN数据-85"><span class="nav-number">12.</span> <span class="nav-text">4.11　NaN数据　　85</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-11-1-为元素赋NaN值-85"><span class="nav-number">12.1.</span> <span class="nav-text">4.11.1　为元素赋NaN值　　85</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-11-2-过滤NaN-86"><span class="nav-number">12.2.</span> <span class="nav-text">4.11.2　过滤NaN　　86</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-11-3-为NaN元素填充其他值-86"><span class="nav-number">12.3.</span> <span class="nav-text">4.11.3　为NaN元素填充其他值　　86</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-12-等级索引和分级-87"><span class="nav-number">13.</span> <span class="nav-text">4.12　等级索引和分级　　87</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-12-1-重新调整顺序和为层级排序-89"><span class="nav-number">13.1.</span> <span class="nav-text">4.12.1　重新调整顺序和为层级排序　　89</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-12-2-按层级统计数据-89"><span class="nav-number">13.2.</span> <span class="nav-text">4.12.2　按层级统计数据　　89</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#4-13-小结-90"><span class="nav-number">14.</span> <span class="nav-text">4.13　小结　　90</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate"> 
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">true</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+  <div class="powered-by">
+  <i class="fa fa-user-md"></i><span id="busuanzi_container_site_pv">
+    本站访客数:<span id="busuanzi_container_site_pv"></span>
+  </span>
+  </div>
+  
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.1.0</div>
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共119.6k字</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.1.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

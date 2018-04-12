@@ -369,6 +369,9 @@ html_file.write(html)
 html_file.close()
 ```
 
+打开html
+![图片](python数据分析实战-第5章-pandas数据读写/CAPTURE_2018412_101727.jpg)
+
 ## 5.4.2　从HTML文件读取数据　　100
 
 
@@ -629,6 +632,9 @@ print(frame)
 ```python
 frame.to_excel('data2.xlsx')
 ```
+
+![data2_xlsx](python数据分析实战-第5章-pandas数据读写/CAPTURE_2018412_103216.jpg)
+
 
 # 5.7　JSON数据　　105
 
@@ -913,6 +919,8 @@ frame.to_sql('dataframe',engine)
 ```
 postgres=# SELECT * FROM DATAFRAME;
 
+![数据](python数据分析实战-第5章-pandas数据读写/CAPTURE_2018412_115702.jpg)
+
 ```python
 temp = pd.read_sql_table('dataframe',engine)
 print(temp)
@@ -934,6 +942,7 @@ print(temp)
       index       apr       may
     0  exp3  0.616504  0.681356
     1  exp4  0.998748  0.127283
+
 
 
 # 5.11　NoSQL数据库MongoDB数据读写　　114

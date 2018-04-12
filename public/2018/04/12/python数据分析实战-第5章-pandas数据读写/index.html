@@ -140,10 +140,14 @@
 <meta property="og:site_name" content="sun-day-blog">
 <meta property="og:description" content="第5章　pandas：数据读写　　915.1　I/O API 工具　　915.2　CSV和文本文件　　925.3　读取CSV或文本文件中的数据　　921from pandas import * myCSV_01.csvwhite,red,blue,green,animal1,5,2,3,cat2,7,8,5,dog3,3,6,7,horse2,2,8,3,duck4,4,2,1,mouse 12c">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-12T04:10:22.967Z">
+<meta property="og:image" content="http://yoursite.com/2018/04/12/python数据分析实战-第5章-pandas数据读写/CAPTURE_2018412_101727.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/04/12/python数据分析实战-第5章-pandas数据读写/CAPTURE_2018412_103216.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/04/12/python数据分析实战-第5章-pandas数据读写/CAPTURE_2018412_115702.jpg">
+<meta property="og:updated_time" content="2018-04-12T06:14:53.213Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python数据分析实战-第5章-pandas数据读写">
 <meta name="twitter:description" content="第5章　pandas：数据读写　　915.1　I/O API 工具　　915.2　CSV和文本文件　　925.3　读取CSV或文本文件中的数据　　921from pandas import * myCSV_01.csvwhite,red,blue,green,animal1,5,2,3,cat2,7,8,5,dog3,3,6,7,horse2,2,8,3,duck4,4,2,1,mouse 12c">
+<meta name="twitter:image" content="http://yoursite.com/2018/04/12/python数据分析实战-第5章-pandas数据读写/CAPTURE_2018412_101727.jpg">
 
 
 
@@ -581,6 +585,7 @@ black  0.723164  0.409424  0.554343  0.361086
 red    0.671485  0.993762  0.316291  0.999724
 blue   0.834104  0.565786  0.922212  0.166467
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">s = [<span class="string">'&lt;HTML&gt;'</span>]</span><br><span class="line">s.append(<span class="string">'&lt;HEAD&gt;&lt;TITLE&gt;My DataFrame&lt;/TITLE&gt;&lt;/HEAD&gt;'</span>)</span><br><span class="line">s.append(<span class="string">'&lt;BODY&gt;'</span>)</span><br><span class="line">s.append(frame.to_html())</span><br><span class="line">s.append(<span class="string">'&lt;/BODY&gt;&lt;/HTML&gt;'</span>)</span><br><span class="line">html = <span class="string">''</span>.join(s)</span><br><span class="line"></span><br><span class="line">html_file = open(<span class="string">'myFrame.html'</span>,<span class="string">'w'</span>)</span><br><span class="line">html_file.write(html)</span><br><span class="line">html_file.close()</span><br></pre></td></tr></table></figure>
+<p>打开html<br><img src="/2018/04/12/python数据分析实战-第5章-pandas数据读写/CAPTURE_2018412_101727.jpg" alt="图片"></p>
 <h2 id="5-4-2-从HTML文件读取数据-100"><a href="#5-4-2-从HTML文件读取数据-100" class="headerlink" title="5.4.2　从HTML文件读取数据　　100"></a>5.4.2　从HTML文件读取数据　　100</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">web_frames = pd.read_html(<span class="string">'myFrame.html'</span>)</span><br><span class="line">print(web_frames[<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
 <pre><code>  Unnamed: 0        up      down     right      left
 0      white  0.821537  0.070376  0.131624  0.718632
@@ -694,6 +699,7 @@ exp2  0.306480  0.961355  0.073820  0.742758
 exp3  0.232366  0.197025  0.312307  0.697120
 exp4  0.374647  0.123761  0.521675  0.641097
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.to_excel(<span class="string">'data2.xlsx'</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="/2018/04/12/python数据分析实战-第5章-pandas数据读写/CAPTURE_2018412_103216.jpg" alt="data2_xlsx"></p>
 <h1 id="5-7-JSON数据-105"><a href="#5-7-JSON数据-105" class="headerlink" title="5.7　JSON数据　　105"></a>5.7　JSON数据　　105</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">frame = pd.DataFrame(np.arange(<span class="number">16</span>).reshape(<span class="number">4</span>,<span class="number">4</span>),</span><br><span class="line">    index=[<span class="string">'white'</span>,<span class="string">'black'</span>,<span class="string">'red'</span>,<span class="string">'blue'</span>],</span><br><span class="line">    columns=[<span class="string">'up'</span>,<span class="string">'down'</span>,<span class="string">'right'</span>,<span class="string">'left'</span>])</span><br><span class="line">print(frame)</span><br><span class="line">frame.to_json(<span class="string">'frame.json'</span>)</span><br></pre></td></tr></table></figure>
 <pre><code>       up  down  right  left
 white   0     1      2     3
@@ -788,6 +794,7 @@ right  12  13  14  15
 </code></pre><h2 id="5-10-2-PostgreSQL数据读写-112"><a href="#5-10-2-PostgreSQL数据读写-112" class="headerlink" title="5.10.2　PostgreSQL数据读写　　112"></a>5.10.2　PostgreSQL数据读写　　112</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">engine = create_engine(<span class="string">'postgresql://scott:tiger@localhost:5432/mydatabase'</span>)</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">frame = pd.DataFrame(np.random.random((<span class="number">4</span>,<span class="number">4</span>)),</span><br><span class="line">    index=[<span class="string">'exp1'</span>,<span class="string">'exp2'</span>,<span class="string">'exp3'</span>,<span class="string">'exp4'</span>],</span><br><span class="line">    columns=[<span class="string">'feb'</span>,<span class="string">'mar'</span>,<span class="string">'apr'</span>,<span class="string">'may'</span>]);</span><br><span class="line">frame.to_sql(<span class="string">'dataframe'</span>,engine)</span><br></pre></td></tr></table></figure>
 <p>postgres=# SELECT * FROM DATAFRAME;</p>
+<p><img src="/2018/04/12/python数据分析实战-第5章-pandas数据读写/CAPTURE_2018412_115702.jpg" alt="数据"></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">temp = pd.read_sql_table(<span class="string">'dataframe'</span>,engine)</span><br><span class="line">print(temp)</span><br></pre></td></tr></table></figure>
 <pre><code>  index       feb       mar       apr       may
 0  exp1  0.406820  0.964683  0.181662  0.660217
@@ -1020,7 +1027,7 @@ var jiathis_config={
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">63</span>
+                    <span class="site-state-item-count">69</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1053,7 +1060,11 @@ var jiathis_config={
                     
                       
                     
-                    <span class="site-state-item-count">10</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -1118,7 +1129,31 @@ var jiathis_config={
                     
                       
                     
-                    <span class="site-state-item-count">26</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">38</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1254,7 +1289,7 @@ var jiathis_config={
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共124.6k字</span>
+  <span class="post-count">博客全站共142.0k字</span>
 </div>
 
         

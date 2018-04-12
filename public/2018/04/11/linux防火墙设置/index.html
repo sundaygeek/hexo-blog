@@ -132,14 +132,18 @@
 
 
 
-  <meta property="og:type" content="article">
+  <meta name="description" content="UFW防火墙UFW防火墙是一个主机端的iptables类防火墙配置工具。这个工具的目的是提供给用户一个可以轻松驾驭的界面，就像包集成和动态检测开放的端口一样。 自2.4版本以后的Linux内核中， 提供了一个非常优秀的防火墙工具。这个工具可以对出入服务的网络数据进行分割、过滤、转发等等细微的控制，进而实现诸如防火墙、NAT等功能。一般来说， 我们会使用名气比较的大iptables等程序对这个防火墙">
+<meta name="keywords" content="linux">
+<meta property="og:type" content="article">
 <meta property="og:title" content="linux防火墙设置">
 <meta property="og:url" content="http://yoursite.com/2018/04/11/linux防火墙设置/index.html">
 <meta property="og:site_name" content="sun-day-blog">
+<meta property="og:description" content="UFW防火墙UFW防火墙是一个主机端的iptables类防火墙配置工具。这个工具的目的是提供给用户一个可以轻松驾驭的界面，就像包集成和动态检测开放的端口一样。 自2.4版本以后的Linux内核中， 提供了一个非常优秀的防火墙工具。这个工具可以对出入服务的网络数据进行分割、过滤、转发等等细微的控制，进而实现诸如防火墙、NAT等功能。一般来说， 我们会使用名气比较的大iptables等程序对这个防火墙">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-11T15:40:12.928Z">
+<meta property="og:updated_time" content="2018-04-12T01:13:18.193Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux防火墙设置">
+<meta name="twitter:description" content="UFW防火墙UFW防火墙是一个主机端的iptables类防火墙配置工具。这个工具的目的是提供给用户一个可以轻松驾驭的界面，就像包集成和动态检测开放的端口一样。 自2.4版本以后的Linux内核中， 提供了一个非常优秀的防火墙工具。这个工具可以对出入服务的网络数据进行分割、过滤、转发等等细微的控制，进而实现诸如防火墙、NAT等功能。一般来说， 我们会使用名气比较的大iptables等程序对这个防火墙">
 
 
 
@@ -437,7 +441,50 @@
       
 
       
-        
+        <h1 id="UFW防火墙"><a href="#UFW防火墙" class="headerlink" title="UFW防火墙"></a>UFW防火墙</h1><p>UFW防火墙是一个主机端的iptables类防火墙配置工具。这个工具的目的是提供给用户一个可以轻松驾驭的界面，就像包集成和动态检测开放的端口一样。</p>
+<p>自2.4版本以后的Linux内核中， 提供了一个非常优秀的防火墙工具。这个工具可以对出入服务的网络数据进行分割、过滤、转发等等细微的控制，进而实现诸如防火墙、NAT等功能。<br>一般来说， 我们会使用名气比较的大iptables等程序对这个防火墙的规则进行管理。iptables可以灵活的定义防火墙规则，功能非常强大。但是由此产生的副作用便是配置过于复杂。一向以简单易用著称Ubuntu在它的发行版中，附带了一个相对iptables简单很多的防火墙配置工具：ufw。<br>ufw默认是没有启用的。也就是说， ubuntu中的端口默认都是开放的。使用如下命令启动ufw：</p>
+<h1 id="UFW安装与使用"><a href="#UFW安装与使用" class="headerlink" title="UFW安装与使用"></a>UFW安装与使用</h1><ol>
+<li><p>安装<br>sudo apt-get install ufw</p>
+</li>
+<li><p>启用<br>sudo ufw enable<br>sudo ufw default deny<br>运行以上两条命令后，开启了防火墙，并在系统启动时自动开启。关闭所有外部对本机的访问，但本机访问外部正常。</p>
+</li>
+<li><p>开启/禁用<br>sudo ufw allow|deny [service]<br>打开或关闭某个端口，例如：<br>sudo ufw allow smtp　允许所有的外部IP访问本机的25/tcp (smtp)端口<br>sudo ufw allow 22/tcp 允许所有的外部IP访问本机的22/tcp (ssh)端口<br>sudo ufw allow 53 允许外部访问53端口(tcp/udp)<br>sudo ufw allow from 192.168.1.100 允许此IP访问所有的本机端口<br>sudo ufw allow proto udp 192.168.0.1 port 53 to 192.168.0.2 port 53<br>sudo ufw deny smtp 禁止外部访问smtp服务<br>sudo ufw delete allow smtp 删除上面建立的某条规则</p>
+</li>
+<li><p>查看防火墙状态<br>sudo ufw status<br>一般用户，只需如下设置：<br>sudo apt-get install ufw<br>sudo ufw enable<br>sudo ufw default deny<br>以上三条命令已经足够安全了，如果你需要开放某些服务，再使用sudo ufw allow开启。<br>开启/关闭防火墙 (默认设置是’disable’)<br>sudo ufw enable|disable<br>转换日志状态<br>sudo ufw logging on|off<br>设置默认策略 (比如 “mostly open” vs “mostly closed”)<br>sudo ufw default allow|deny<br>许可或者屏蔽端口 (可以在“status” 中查看到服务列表)。可以用“协议：端口”的方式指定一个存在于/etc/services中的服务名称，也可以通过包的meta-data。 ‘allow’ 参数将把条目加入 /etc/ufw/maps ，而 ‘deny’ 则相反。基本语法如下：<br>sudo ufw allow|deny [service]<br>显示防火墙和端口的侦听状态，参见 /var/lib/ufw/maps。括号中的数字将不会被显示出来。<br>sudo ufw status<br>UFW 使用范例：<br>允许 53 端口<br>$ sudo ufw allow 53<br>禁用 53 端口<br>$ sudo ufw delete allow 53<br>允许 80 端口<br>$ sudo ufw allow 80/tcp<br>禁用 80 端口<br>$ sudo ufw delete allow 80/tcp<br>允许 smtp 端口<br>$ sudo ufw allow smtp<br>删除 smtp 端口的许可<br>$ sudo ufw delete allow smtp<br>允许某特定 IP<br>$ sudo ufw allow from 192.168.254.254<br>删除上面的规则<br>$ sudo ufw delete allow from 192.168.254.254</p>
+</li>
+<li><p>加载<br>sudo ufw reload</p>
+</li>
+</ol>
+<h1 id="ubuntu-iptables设置"><a href="#ubuntu-iptables设置" class="headerlink" title="ubuntu iptables设置"></a>ubuntu iptables设置</h1><p>删除原来 iptables 里面已经有的规则<br>iptables -F<br>iptables -X</p>
+<p>抛弃所有不符合三种链规则的数据包<br>iptables -P INPUT DROP<br>iptables -P OUTPUT DROP<br>iptables -P FORWARD DROP</p>
+<p>设置：本地进程 lo 的 INPUT 和 OUTPUT 链接 ； eth1的 INPUT链<br>iptables -A INPUT -i lo -j ACCEPT<br>iptables -A INPUT -i eth1 -m state –state ESTABLISHED,RELATED -j ACCEPT<br>iptables -A INPUT -i eth1 -m state –state NEW,INVALID -j LOG<br>iptables -A OUTPUT -o lo -j ACCEPT</p>
+<p>对其他主要允许的端口的 OUTPUT设置：</p>
+<ul>
+<li><p>DNS<br>iptables -A OUTPUT -o eth1 -p TCP –sport 1024:65535 –dport 53 -j ACCEPT<br>iptables -A OUTPUT -o eth1 -p UDP –sport 1024:65535 –dport 53 -j ACCEPT</p>
+</li>
+<li><p>HTTP<br>iptables -A OUTPUT -o eth1 -p TCP –sport 1024:65535 –dport 80 -j ACCEPT</p>
+</li>
+<li><p>HTTPS<br>iptables -A OUTPUT -o eth1 -p TCP –sport 1024:65535 –dport 443 -j ACCEPT</p>
+</li>
+<li><p>Email 接受 和发送<br>iptables -A OUTPUT -o eth1 -p TCP –sport 1024:65535 –dport 110 -j ACCEPT<br>iptables -A OUTPUT -o eth1 -p TCP –sport 1024:65535 –dport 25 -j ACCEPT</p>
+</li>
+<li><p>FTP 数据和控制<br>iptables -A OUTPUT -o eth1 -p TCP –sport 1024:65535 –dport 20 -j ACCEPT<br>iptables -A OUTPUT -o eth1 -p TCP –sport 1024:65535 –dport 21 -j ACCEPT</p>
+</li>
+<li><p>DHCP<br>iptables -A OUTPUT -o eth1 -p TCP –sport 1024:65535 –dport 68 -j ACCEPT<br>iptables -A OUTPUT -o eth1 -p UDP –sport 1024:65535 –dport 68 -j ACCEPT</p>
+</li>
+<li><p>POP3S Email安全接收<br>iptables -A OUTPUT -o eth1 -p TCP –sport 1024:65535 –dport 995 -j ACCEPT</p>
+</li>
+<li><p>时间同步服务器 NTP<br>iptables -A OUTPUT -o eth1 -p TCP –sport 1024:65535 –dport 123 -j ACCEPT</p>
+</li>
+<li><p>拒绝 eth1 其他剩下的<br>iptables -A OUTPUT -o eth1 –match state –state NEW,INVALID -j LOG</p>
+</li>
+</ul>
+<p>最后是有关于iptables存储的命令：<br>代码:<br>iptables-save &gt; /etc/iptables.up.rule -  存在你想存的地方</p>
+<p>代码:<br>iptables-restore &lt; /etc/iptables.up.rules - 调用</p>
+<p>因为iptables 在每次机器重新启动以后，需要再次输入或者调用，为了方便操作，使用<br>代码:<br>sudo gedit /etc/network/interfaces</p>
+<p>在<br>代码:<br>auto ath0<br>iface ath0 inet dhcp<br>后面加上<br>代码:<br>pre-up iptables-restore &lt; /etc/iptables.up.rules - 启动自动调用已存储的iptables</p>
+<p>代码:<br>post-down iptables-save &gt; /etc/iptables.up.rule #关机时，把当前iptables 储存</p>
+
       
     </div>
 
@@ -495,6 +542,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"><i class="fa fa-tag"></i> linux</a>
+          
+        </div>
+      
 
       
       
@@ -513,6 +566,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/12/python数据分析实战-第5章-pandas数据读写/" rel="prev" title="python数据分析实战-第5章-pandas数据读写">
+                python数据分析实战-第5章-pandas数据读写 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -592,8 +649,17 @@ var jiathis_config={
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -612,7 +678,7 @@ var jiathis_config={
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">59</span>
+                    <span class="site-state-item-count">63</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -700,7 +766,17 @@ var jiathis_config={
                     
                       
                     
-                    <span class="site-state-item-count">21</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">26</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -769,6 +845,22 @@ var jiathis_config={
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#UFW防火墙"><span class="nav-number">1.</span> <span class="nav-text">UFW防火墙</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UFW安装与使用"><span class="nav-number">2.</span> <span class="nav-text">UFW安装与使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ubuntu-iptables设置"><span class="nav-number">3.</span> <span class="nav-text">ubuntu iptables设置</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -820,7 +912,7 @@ var jiathis_config={
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共119.6k字</span>
+  <span class="post-count">博客全站共124.6k字</span>
 </div>
 
         

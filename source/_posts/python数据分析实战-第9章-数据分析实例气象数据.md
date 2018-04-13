@@ -6,6 +6,8 @@ tags:
 - 数据分析
 categories:
 - 数据分析
+- python
+- ipython
 ---
 
 第9章　数据分析实例——气象数据　　230

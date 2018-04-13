@@ -5,6 +5,10 @@ tags:
   - python
   - numpy
   - 数据分析
+categories:
+  - python
+  - numpy
+  - 数据分析
 ---
 
 

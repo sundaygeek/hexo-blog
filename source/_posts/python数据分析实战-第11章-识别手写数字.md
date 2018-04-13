@@ -8,6 +8,10 @@ tags:
 - SVC
 - SVM
 - sklearn
+categories:
+- python
+- 机器学习
+- sklearn
 ---
 
 第11章　识别手写体数字　　271

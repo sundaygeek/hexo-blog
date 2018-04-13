@@ -3,7 +3,10 @@ title: PostgreSQL数据库基本操作
 date: 2018-04-12 11:41:25
 tags:
   - PostgreSQL
-   - 数据库
+  - 数据库
+categories:
+  - 数据库
+  - PostgreSQL
 ---
 
 [postgresql学习站点](https://www.tutorialspoint.com/postgresql/index.htm)

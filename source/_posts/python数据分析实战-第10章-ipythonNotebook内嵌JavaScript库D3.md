@@ -3,10 +3,12 @@ title: 'python数据分析实战-第10章-ipythonNotebook内嵌JavaScript库D3 '
 date: 2018-04-12 18:33:58
 tags:
 - pyhton
-- javascript
-- D3
+- javascript-D3
 - jinja2
 - 数据分析
+categories:
+ - 数据分析
+ - python
 ---
 
 

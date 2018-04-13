@@ -2,6 +2,11 @@
 title: MySQL必知应会-第2章-MySQL简介
 date: 2018-04-13 09:22:28
 tags:
+ - mysql
+ - 数据库
+categories:
+ - mysql
+ - 数据库
 ---
 
 

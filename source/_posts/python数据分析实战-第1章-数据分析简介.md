@@ -3,8 +3,10 @@ title: python数据分析实战-第1章-数据分析简介
 date: 2018-04-11 15:33:17
 tags:
   - 数据分析
+  - python
 categories:
   - 数据分析
+  - python
 ---
 
 # 1.1数据分析

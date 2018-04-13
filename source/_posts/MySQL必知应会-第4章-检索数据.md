@@ -2,6 +2,11 @@
 title: MySQL必知应会-第4章-检索数据
 date: 2018-04-13 10:34:39
 tags:
+ - mysql
+ - 数据库
+categories:
+ - mysql
+ - 数据库
 ---
 
 # 第四章 检索数据

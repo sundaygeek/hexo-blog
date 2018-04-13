@@ -2,8 +2,11 @@
 title: MySQL必知应会-第1章-了解SQL
 date: 2018-04-13 08:58:35
 tags:
-- mysql
-- 数据库
+ - mysql
+ - 数据库
+categories:
+ - mysql
+ - 数据库
 ---
 
 # 第一章 了解SQL

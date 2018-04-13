@@ -5,6 +5,10 @@ tags:
   - python
   - 数据分析
   - pandas
+categories:
+  - python
+  - 数据分析
+  - pandas
 ---
 
 

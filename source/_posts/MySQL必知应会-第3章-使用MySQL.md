@@ -2,6 +2,11 @@
 title: MySQL必知应会-第3章-使用MySQL
 date: 2018-04-13 10:10:11
 tags:
+ - mysql
+ - 数据库
+categories:
+ - mysql
+ - 数据库
 ---
 
 # 第三章 使用MySQL

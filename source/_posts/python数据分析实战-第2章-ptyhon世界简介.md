@@ -6,6 +6,7 @@ tags:
   - python
 categories:
   - 数据分析
+  - python
 ---
 
 这一章主要是回顾一些python的知识点。

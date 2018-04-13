@@ -1,0 +1,12 @@
+---
+title: MySQL必知应会-第29章-数据库维护
+date: 2018-04-13 18:08:17
+tags:
+ - mysql
+ - 数据库
+categories:
+ - mysql
+ - 数据库
+---
+
+数据库维护本章学习如何进行常见的数据库维护。29.1 备份数据像所有数据一样， MySQL的数据也必须经常备份。由于MySQL数据库是基于磁盘的文件，普通的备份系统和例程就能备份MySQL的数据。但是，由于这些文件总是处于打开和使用状态，普通的文件副本备份不一定总是有效。下面列出这个问题的可能解决方案。? 使用命令行实用程序mysqldump转储所有数据库内容到某个外部文件。在进行常规备份前这个实用程序应该正常运行，以便能正确地备份转储文件。? 可用命令行实用程序mysqlhotcopy从一个数据库复制所有数据（并非所有数据库引擎都支持这个实用程序）。? 可以使用MySQL的BACKUP TABLE或SELECT INTO OUTFILE转储所有数据到某个外部文件。这两条语句都接受将要创建的系统文件名，此系统文件必须不存在，否则会出错。数据可以用RESTORETABLE来复原。首先刷新未写数据 为了保证所有数据被写到磁盘（包括索引数据），可能需要在进行备份前使用FLUSH TABLES语句。第 29 章273欢迎点击这里的链接进入精彩的Linux公社 网站Linux公社（www.Linuxidc.com）于2006年9月25日注册并开通网站， Linux现在已经成为一种广受关注和支持的一种操作系统， IDC是互联网数据中心，LinuxIDC就是关于Linux的数据中心。Linux公社是专业的Linux系统门户网站，实时发布最新Linux资讯，包括Linux、 Ubuntu、 Fedora、RedHat、红旗Linux、 Linux教程、 Linux认证、 SUSELinux、 Android、 Oracle、 Hadoop、 CentOS、MySQL、 Apache、 Nginx、 Tomcat、 Python、 Java、C语言、 OpenStack、集群等技术。Linux公社（LinuxIDC.com）设置了有一定影响力的Linux专题栏目。Linux公社 主站网址： www.linuxidc.com 旗下网站： www.linuxidc.net包括： Ubuntu 专题 Fedora 专题 Android 专题Oracle 专题 Hadoop 专题 RedHat 专题 SUSE专题 红旗 Linux 专题 CentOS 专题Linux 公社微信公众号： linuxidc_com206 第 29 章 数据库维护输出29.2 进行数据库维护MySQL提供了一系列的语句，可以（应该）用来保证数据库正确和正常运行。以下是你应该知道的一些语句。? ANALYZE TABLE，用来检查表键是否正确。 ANALYZE TABLE返回如下所示的状态信息：? CHECK TABLE用来针对许多问题对表进行检查。在MyISAM表上还对索引进行检查。 CHECK TABLE支持一系列的用于MyISAM表的方式。CHANGED检查自最后一次检查以来改动过的表。 EXTENDED执行最彻底的检查， FAST只检查未正常关闭的表， MEDIUM检查所有被删除的链接并进行键检验， QUICK只进行快速扫描。如下所示， CHECKTABLE发现和修复问题：? 如果MyISAM表访问产生不正确和不一致的结果，可能需要用REPAIR TABLE来修复相应的表。这条语句不应该经常使用，如果需要经常使用，可能会有更大的问题要解决。? 如果从一个表中删除大量数据，应该使用OPTIMIZE TABLE来收回输入输出输入27429.4 查看日志文件 207所用的空间，从而优化表的性能。29.3 诊断启动问题服务器启动问题通常在对MySQL配置或服务器本身进行更改时出现。 MySQL在这个问题发生时报告错误，但由于多数MySQL服务器是作为系统进程或服务自动启动的，这些消息可能看不到。在排除系统启动问题时，首先应该尽量用手动启动服务器。 MySQL服务器自身通过在命令行上执行mysqld启动。下面是几个重要的mysqld命令行选项：? --help显示帮助——一个选项列表；? --safe-mode装载减去某些最佳配置的服务器；? --verbose显示全文本消息（为获得更详细的帮助消息与--help联合使用）；? --version显示版本信息然后退出。几个另外的命令行选项（与日志文件的使用有关）在下一节列出。29.4 查看日志文件MySQL维护管理员依赖的一系列日志文件。主要的日志文件有以下几种。? 错误日志。它包含启动和关闭问题以及任意关键错误的细节。此日志通常名为hostname.err，位于data目录中。此日志名可用--log-error命令行选项更改。? 查询日志。它记录所有MySQL活动，在诊断问题时非常有用。此日志文件可能会很快地变得非常大，因此不应该长期使用它。此日志通常名为hostname.log，位于data目录中。此名字可以用--log命令行选项更改。? 二进制日志。它记录更新过数据（或者可能更新过数据）的所有语句。此日志通常名为hostname-bin，位于data目录内。此名字可以用--log-bin命令行选项更改。注意， 这个日志文件是MySQL275208 第 29 章 数据库维护5中添加的，以前的MySQL版本中使用的是更新日志。? 缓慢查询日志。顾名思义，此日志记录执行缓慢的任何查询。这个日志在确定数据库何处需要优化很有用。此日志通常名为hostname-slow.log ， 位 于 data 目 录 中 。 此 名 字 可 以 用--log-slow-queries命令行选项更改。在使用日志时，可用FLUSH LOGS语句来刷新和重新开始所有日志文件。29.5 小结276 本章介绍了MySQL数据库的某些维护工具和技术。

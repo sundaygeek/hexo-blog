@@ -1,6 +1,6 @@
 ---
 title: 12-EMM Procedure 2. Detach
-date: 2018-04-03 22:19:31
+date: 2016-04-03 22:19:31
 tags:
     - LTE
     - 通信

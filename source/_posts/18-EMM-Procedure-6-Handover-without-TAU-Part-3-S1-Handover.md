@@ -1,6 +1,6 @@
 ---
 title: 18-EMM Procedure 6. Handover without TAU - Part 3. S1 Handover
-date: 2018-04-03 22:35:13
+date: 2016-04-03 22:35:13
 tags:
     - LTE
     - 通信

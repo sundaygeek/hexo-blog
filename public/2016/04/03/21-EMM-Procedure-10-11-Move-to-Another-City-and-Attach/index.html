@@ -1,0 +1,1524 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.1.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.1.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="原文链接：http://www.netmanias.com/en/?m=view&amp;amp;id=techdocs&amp;amp;no=6354 I. introduction随着UE的移动当服务小区的信号强度变弱时UE试图进行切换或者小区重选。如果在UE移动的周边没有邻区，信号强度将会逐步减弱直到UE最终从网络detach。接着一旦达到LTE覆盖区域，UE重选通过小区选择初始注册到网络。 这篇文档讨论当">
+<meta name="keywords" content="LTE,通信">
+<meta property="og:type" content="article">
+<meta property="og:title" content="21-EMM Procedure - 10 &amp; 11. Move to Another City and Attach">
+<meta property="og:url" content="http://yoursite.com/2016/04/03/21-EMM-Procedure-10-11-Move-to-Another-City-and-Attach/index.html">
+<meta property="og:site_name" content="sun-day-blog">
+<meta property="og:description" content="原文链接：http://www.netmanias.com/en/?m=view&amp;amp;id=techdocs&amp;amp;no=6354 I. introduction随着UE的移动当服务小区的信号强度变弱时UE试图进行切换或者小区重选。如果在UE移动的周边没有邻区，信号强度将会逐步减弱直到UE最终从网络detach。接着一旦达到LTE覆盖区域，UE重选通过小区选择初始注册到网络。 这篇文档讨论当">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://img.blog.csdn.net/20151019090844653">
+<meta property="og:image" content="http://img.blog.csdn.net/20151019092345531">
+<meta property="og:image" content="http://img.blog.csdn.net/20151019092413038">
+<meta property="og:image" content="http://img.blog.csdn.net/20151019101001669">
+<meta property="og:image" content="http://img.blog.csdn.net/20151019105823119">
+<meta property="og:image" content="http://img.blog.csdn.net/20151019105922594">
+<meta property="og:updated_time" content="2018-04-13T03:22:27.899Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="21-EMM Procedure - 10 &amp; 11. Move to Another City and Attach">
+<meta name="twitter:description" content="原文链接：http://www.netmanias.com/en/?m=view&amp;amp;id=techdocs&amp;amp;no=6354 I. introduction随着UE的移动当服务小区的信号强度变弱时UE试图进行切换或者小区重选。如果在UE移动的周边没有邻区，信号强度将会逐步减弱直到UE最终从网络detach。接着一旦达到LTE覆盖区域，UE重选通过小区选择初始注册到网络。 这篇文档讨论当">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20151019090844653">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/04/03/21-EMM-Procedure-10-11-Move-to-Another-City-and-Attach/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>21-EMM Procedure - 10 & 11. Move to Another City and Attach | sun-day-blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> 
+
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">sun-day-blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">牛逼的人生不需要解释</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+          
+  <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+</li>
+
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/04/03/21-EMM-Procedure-10-11-Move-to-Another-City-and-Attach/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="sun-day">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sun-day-blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">21-EMM Procedure - 10 & 11. Move to Another City and Attach</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-03T22:35:50+08:00">2016-04-03</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/通信/" itemprop="url" rel="index"><span itemprop="name">通信</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/通信/LTE/" itemprop="url" rel="index"><span itemprop="name">LTE</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>原文链接：<a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6354" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6354</a></p>
+<h1 id="I-introduction"><a href="#I-introduction" class="headerlink" title="I. introduction"></a>I. introduction</h1><p>随着UE的移动当服务小区的信号强度变弱时UE试图进行切换或者小区重选。如果在UE移动的周边没有邻区，信号强度将会逐步减弱直到UE最终从网络detach。接着一旦达到LTE覆盖区域，UE重选通过小区选择初始注册到网络。</p>
+<p>这篇文档讨论当UE移动到一个LTE覆盖范围之外从网络detach，并移动到另外一个LTE网络重新attach到网络。</p>
+<p><img src="http://img.blog.csdn.net/20151019090844653" alt="这里写图片描述"></p>
+<p>EMM  case-10 move to another city<br>EMM case-11 initial attach in another city<br>这两个EMM case，本文档假设移动运营商：</p>
+<ul>
+<li>在不同城市服务</li>
+<li>只有LTE-only网络，没有2/3G</li>
+<li>每一个城市有MME SGW PGW</li>
+<li>HSS PCRF SPR仅仅安装在一个城市</li>
+<li>所有的MME通过S10接口</li>
+</ul>
+<p>图1显示了city1和city2，车里的用户从city1移动到city2.<br>在EMM case10中，随着UE离开city1，UE从网络detach，移动出LTE覆盖范围。不论是connected 模式下使用服务还是在idle模式下驻留在服务小区，随着UE离开city1，UE被MME网络detach掉。</p>
+<p>在EMM case11中，随着在city2 UE移动进入LTE覆盖范围，UE再次attach到网络。不像之前文档的情况，当UEattach 新的MME时，旧MME已经包含了UE上下文。UE初始附着到新MME上时就可以使用旧MME分配的UE ID。这样，UE就可以从detach 状态转换到connected状态。</p>
+<p>这篇文档组织如下：第二章和第三章讨论EMM case10和11的过程。第四章将描述在这个过程前后EPS实体信息的变化。</p>
+<h1 id="II-EMM-Case-10-Move-to-Another-City"><a href="#II-EMM-Case-10-Move-to-Another-City" class="headerlink" title="II. EMM Case 10. Move to Another City"></a>II. EMM Case 10. Move to Another City</h1><h2 id="2-1-在connected模式下移动"><a href="#2-1-在connected模式下移动" class="headerlink" title="2.1 在connected模式下移动"></a>2.1 在connected模式下移动</h2><p>在图2中，我们看到当在city1服务的UE是怎么移出LTE覆盖范围并从网络detach的。</p>
+<p><img src="http://img.blog.csdn.net/20151019092345531" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20151019092413038" alt="这里写图片描述"></p>
+<p><strong>1）【UE-&gt;eNB】测量报告</strong><br>随着UE离开city1，服务小区的信号强度变弱。随着A2事件的激活，UE给eNB发送measurement report消息通知服务小区的信号强度。</p>
+<p><strong>2）【eNB】没有邻区来切换</strong><br>enB没有找到供UE切换的邻区。</p>
+<p><strong>3）【eNB-&gt;MME】错误指示</strong><br>因为糟糕的通信质量，在无线接口上传送失败。eNB通过发送error indication(Cause=Failure in the Radio Interface)给MME通知这个失败。如果eNB发现和UE之间很难保持最低的质量，eNB将给MME发送UE context release request消息。</p>
+<p>如果UE因为糟糕的通信质量丢失了RRC连接，UE试图RRC连接重建。如果这个质量的衰减是暂时的，为了正常的无线通信允许RRC进行重建。但是服务提供会中断。如果这个质量衰减是持续的，RRC连接重建将会持续失败，最终导致连接丢失。</p>
+<p>假设i）当eNB和UE之间的RRC连接还持续有效，eNB给MME发送error indication。ii）因为UE当前服务小区位于城市边界，并且没有邻区切换，MME决定detach掉UE。所以由MME触发detach过程。</p>
+<p><strong>4）MME发起detach</strong><br>MME通过发送detach request消息执行detach过程。这里的过程和之前文档中介绍的MME发起显式detach过程是一样的。MME存储UE的GUTI和NAS安全上下文，结束EPS会话，释放S1信令，并转移到detach状态。UE存储自己的GUTI和NAS安全上下文，删除EPS会话承载上下文，并转移到detach状态。</p>
+<h2 id="2-2-在idle模式下移动"><a href="#2-2-在idle模式下移动" class="headerlink" title="2.2 在idle模式下移动"></a>2.2 在idle模式下移动</h2><p>idle模式下的UE会周期性的通过TAU报告自己的位置给网络。当UE有电话或者数据到来，MME不知道idle模式下的UE是否可达的。为了这个原因，idle状态下的UE即使处于TAI列表中的TA也需要周期性的报告自己的位置，这样网络可以知道UE是否可达的。MME有一个<strong>TAU定时器T3412, 手机可达定时器，和隐式detach定时器</strong>。TAU定时器的值是在UE初始附着到网络时通过attach accept消息转发给UE的，或者当UE做TAU request时通过TAU accept消息发给UE的。</p>
+<p>TAU定时器默认是54分钟，如果MME设置这个值为0，UE就不激活TAU 定时器，并不执行周期性TAU。当UE从connected状态到idle状态转换时UE的TAU定时器激活。当这个定时器超时，UE转移到connected状态给MME发送TAU request消息通知UE是可达的，接着转移到idle状态，并重启TAU定时器。UE在从idle状态到connected状态转移时停止这个定时器，或者从网络detach时停止定时器。<br>如果MME为了UE超时设置的TAU定时器，MME立刻接收到了TAU request消息，通过这个消息MME可以跟踪UE的位置。接着，MME分配新的TAI列表，并重启TAU定时器。也就是说网络会在每一个TAU定时器周期结束时检查UE是否可达，并设置paging proceed flag为1，标示UE是可达的。</p>
+<p>如果UE有任何问题，比如UE在T3412定时器超时时在一个阴影区域并不可达，UE在T3412超时时发起TAU request，就导致不能给MME通知自己的位置。当TAU失败时UE需要重新尝试。所以，如果UE很快从阴影区域移出，接着重选尝试TAU请求成功了。但是如果UE一直待在阴影区域，TAU 请求过程一直失败。</p>
+<p>网络使用手机可达定时器来检查UE是否可达。和T3412 TAU定时器相比，有稍微更大的值，默认是T3412+4分钟。当在ECM连接释放时这个定时器开始，当一个新的ECM连接建立时停止定时器。</p>
+<p>当手机可达定时器超时，MME知道UE在已经移除LTE服务区域，但是不知道移除覆盖状态需要持续多长时间。所以为了不立即删除UE上下文，MME清除PPF flag并开启隐式detach定时器。当PPF flag清除时，UE是本地detach的。也就是说当隐式detach定时器运行时，网络仍旧保持UE上下文没有删除，但是MME不会寻呼UE。即使当SGW有到达UE的电话或者数据包，SGW给MME发送downlink data notification时，MME拒绝这个消息。</p>
+<p>当UE发送NAS消息，建立ECM连接，隐式detach定时器停止。如果MME在隐式detach定时器超时不能定位UE，MME相信UE已经长期到了LTE覆盖范围外，并从网络把UEdetach掉。现在网络中的UE上下文删除。</p>
+<p>图3描述了UE在city1服务小区上驻留，随着移出LTE覆盖从网络detach的过程。</p>
+<p><img src="http://img.blog.csdn.net/20151019101001669" alt="这里写图片描述"></p>
+<p><strong>1）【MME】TAU定时器T3412超时</strong><br>UE设定的TAU定时器超时，MME没有收到从UE的TAU request消息，并必须检查UE是否可达</p>
+<p><strong>2）【MME】手机可达定时器超时</strong><br>UE的手机可达定时器也超时了。MME相信UE是在覆盖区外的状态，并清除PPF flag并开启隐式detach定时器。分配给UE的EPS承载安全上下文资源保持有效，但是MME不会寻呼UE。</p>
+<p><strong>3）【MME】手机隐式detach定时器超时</strong><br>UE的隐式detach定时器超时。MME相信UE已经长期在覆盖范围之外，并决定从网络隐式detach掉UE。</p>
+<p><strong>4）【eNB，MME，SGW，PGW，PCRF】UE detached</strong><br>MME发起隐式detach过程。这个过程和之前文档中的MME发起的隐式detach过程意义昂。分配给UE的而资源和上下文都被删除了。</p>
+<h1 id="III-EMM-Case-11-Initial-Attach-in-Another-City"><a href="#III-EMM-Case-11-Initial-Attach-in-Another-City" class="headerlink" title="III. EMM Case 11. Initial Attach in Another City"></a>III. EMM Case 11. Initial Attach in Another City</h1><p>这章描述UE移动到city2，进入LTE覆盖，并选择一个新的小区，执行初始attach，从detach状态转移到connected状态。我们假设UE已经通过MME发起的隐式detach过程从city1的网络中detach掉了，所以在UE和网络MME1中的old GUTI和NAS安全上下文都保持有效。</p>
+<p>图4显示了在city2UE初始附着过程的初始附着的类型和功能模块。这个初始附着类型和attach case-5中的类型是一样的。也就是说UE成功从网络detach，UE和old MME中都保留有效的old GUTI和NAS安全上下文，接着UE使用这些参数向new MME做初始attach。UE使用old GUTI作为ID发送attach request消息。这个消息是使用NAS完整性秘钥完保的。这个new MME转发这个消息给old MME，因为old MME可以做完整性检查。</p>
+<p>在这篇文档中，假设在old MME上完整性检查通过了。new MME在从old MME获得包括IMSI的上下文后，执行位置更新和EPS会话建立过程。如果在old MME上完整性保护失败，old MME将给new MME发送error消息，接着UE获得IMSI并执行用户鉴权，NAS安全建立，位置更新和EPS会话建立过程。</p>
+<p><img src="http://img.blog.csdn.net/20151019105823119" alt="这里写图片描述"></p>
+<p>图5描述了UE在city2的new MME上执行初始附着的过程。</p>
+<p><img src="http://img.blog.csdn.net/20151019105922594" alt="这里写图片描述"></p>
+<p><strong>1）【UE，eNB】建立RRC连接</strong><br>一旦进入city2，UE检测到LTE信号，选择一个新的小区，并向eNB请求RRC连接。</p>
+<p><strong>2）【UE，new MME】使用old GUTI向new MME请求初始附着</strong><br>UE向MME2发送attach request消息 (Old GUTI, Last Visited TAI, KSIASME, NAS-MAC)，使用oldMME分配的old GUTI作为UE ID。这个罅隙是使用Knasint完整性保护的，通过在无线接口上的RRC connection setup complete消息发送，并在S1接口上的initial ＵＥmessage消息发送。</p>
+<p><strong>3）【new MME】标识old MME</strong><br>MME2通过接收到的initial UE message消息检查UE的位置，并从old GUTI中知道它是由old MME1分配的。接着MME2检查在S10接口上和MME1使用old GUTI是否有效，并获得存储在MME1中的UE上下文。</p>
+<p><strong>4）~6）【old MME，new MME】从old MME中获得UE上下文</strong><br>4）new MME（MME2）把接收到的attach request消息和old GUTI包裹在identification request消息(Old GUTI, Complete {Attach Request} message from UE)中发送给old MME（MME1）。</p>
+<p>5）当接收到new MME的这个消息，oldMME知道这个GUTI是自己分配的，接着通过保留的UE安全上下文对UE发送的attach消息执行完整性检查，完整性检查通过。</p>
+<p>6）完整性保护成功后，old MME给new MME通过identification response消息(IMSI, UE-AMBR, UE Security Context (KASME, KSIASME, Unused AVs, NAS Keys, etc))发送无上下文。new MME获得UE上下文。</p>
+<p><strong>7）~10）【old MME，new MME，HSS】在new MME更新位置信息，并在old MME中删除</strong><br>7）MME2现在具有了有效的UE上下文，给HSS发送update location request消息(IMSI, MME ID=MME2)来在MME2上注册UE。通过这种方式，MME2给hss通知包含IMSI的UE已经注册上MME2了。hss更新UE新的位置。</p>
+<p>8）hss给MME1发送 cancel location request（IMSI）消息来要求MME1删除UE上下文，MME应要求删除UE上下文。</p>
+<p>9）MME1通过发送cancel location response（IMSI）消息给hss通知UE上下文已经删除了。</p>
+<p>10)HSS通过发送update location answer(IMSI, APN, Subscribed Profile (QCI, ARP, APNAMBR (UL/DL), UE-AMBR (UL/DL))给MME2提供UE的签约配置信息，包括签约QoS信息。所以MME2可以建立EPS会话了。</p>
+<p><strong>11）【new MME】建立EPS会话</strong><br>MME2通过使用从MME1接收到的UE上下文和从hss获得签约配置文件建立EPS会话。这个过程和之前文档中叙述的EPS会话建立过程一样。</p>
+<h1 id="IV-EPS-Entity-Information"><a href="#IV-EPS-Entity-Information" class="headerlink" title="IV. EPS Entity Information"></a>IV. EPS Entity Information</h1><p>在EMM case10移动到另外一个城市过程的前后EPS实体信息的变化如下所示：</p>
+<ul>
+<li>before<ul>
+<li>如果UE在connected状态，保持和初始附着过程后存储的信息一样。</li>
+<li>如果UE在idle状态，保持和S1释放过程后存储的信息一样。</li>
+</ul>
+</li>
+<li>after<ul>
+<li>UE从网络detach。EPS实体中存储的信息和detach过程后存储的信息一样。</li>
+</ul>
+</li>
+</ul>
+<p>在EMM case11在另外一个城市初始附着前后EPS实体信息的变化如下所示：</p>
+<ul>
+<li>before：UE从网络detach，和detach过程后存储的信息一样。</li>
+<li>after：UEattach到网络，存储的信息和初始附着过程后的信息一样。</li>
+</ul>
+<h1 id="V-Closing"><a href="#V-Closing" class="headerlink" title="V. Closing"></a>V. Closing</h1><p>这篇文档讨论了UE移出LTE覆盖范围之外，UE怎么和新的MME建立初始附着的。这个场景的目的是介绍使用old GUTI初始附着的过程。所以实际移动到另外一个城市的过程将根据不同运营商怎么配置网络和对网络节点的实现。韩国的LTE网络时全国的，所以LTE服务是任何地方可用的。所以LTE覆盖空洞可以在低无线质量的地方找到。实际中，LTE有邻区，LTE or 2/3G。实体网络中，UE执行切换到邻区或者小区重选而不是从网络detach。</p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p>[1] Netmanias Technical Document, “Eleven EMM Cases in an EMM Scenario”, October 2013,<br><a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6002" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6002</a><br>[2] Netmanias Technical Document, “LTE EMM Procedure 2. Detach”, January 2014,<br><a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6108" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6108</a><br>[3] Netmanias Technical Document, “LTE EMM Procedure 1. Initial Attach – Part 2. Call Flow of Initial<br>Attach”, January 2014, <a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6102" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6102</a><br>[4] 3GPP TS 36.413, “Evolved Universal Terrestrial Radio Access Network (E-UTRAN); S1 Application<br>Protocol (S1AP)”.<br>[5] Netmanias Technical Document, “LTE EMM Procedure 5. Periodic TAU”, February 2014,<br><a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6193" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6193</a><br>[6] Netmanias Technical Document, “LTE EMM Procedure 1. Initial Attach – Part 1. Cases of Initial<br>Attach”, December 2013, <a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6098" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6098</a><br>[7] Netmanias Technical Document, “LTE Identification II: NE and Location Identifiers”, August 2013,<br><a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5906" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5906</a><br>[8] 3GPP TS 23.401, “General Packet Radio Service (GPRS) enhancements for Evolved Universal<br>Terrestrial Radio Access Network (E-UTRAN) access”.<br>[9] Netmanias Technical Document, “LTE EMM Procedure 3. S1 Release”, January 2014,<br><a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6110" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6110</a><br>[10] NMC Consulting Group Confidential Internal Report, “E2E LTE Network Design”, August 2010</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="sun-day 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="sun-day 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/LTE/" rel="tag"><i class="fa fa-tag"></i> LTE</a>
+          
+            <a href="/tags/通信/" rel="tag"><i class="fa fa-tag"></i> 通信</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/03/20-EMM-Procedure-8-9-Handover-Cell-Reselection-with-TAU/" rel="next" title="20-EMM Procedure 8&9. Handover & Cell Reselection with TAU">
+                <i class="fa fa-chevron-left"></i> 20-EMM Procedure 8&9. Handover & Cell Reselection with TAU
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/03/22-LTE-Policy-and-Charging-Control-PCC/" rel="prev" title="22-LTE Policy and Charging Control (PCC)">
+                22-LTE Policy and Charging Control (PCC) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2160523" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTY1MC8xMjE4Ng=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="sun-day" />
+            
+              <p class="site-author-name" itemprop="name">sun-day</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">75</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">39</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/zhanghaogithub123" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:zhanghao163mail@163.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://blog.csdn.net/mouse1598189" target="_blank" title="CSDN"><i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/zhang-hao-3-80-49/activities" target="_blank" title="知乎"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.google.com/" title="Google" target="_blank">Google</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.baidu.com/" title="百度" target="_blank">百度</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#I-introduction"><span class="nav-number">1.</span> <span class="nav-text">I. introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#II-EMM-Case-10-Move-to-Another-City"><span class="nav-number">2.</span> <span class="nav-text">II. EMM Case 10. Move to Another City</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-在connected模式下移动"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 在connected模式下移动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-在idle模式下移动"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 在idle模式下移动</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#III-EMM-Case-11-Initial-Attach-in-Another-City"><span class="nav-number">3.</span> <span class="nav-text">III. EMM Case 11. Initial Attach in Another City</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IV-EPS-Entity-Information"><span class="nav-number">4.</span> <span class="nav-text">IV. EPS Entity Information</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#V-Closing"><span class="nav-number">5.</span> <span class="nav-text">V. Closing</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number">6.</span> <span class="nav-text">References</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate"> 
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">true</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+  <div class="powered-by">
+  <i class="fa fa-user-md"></i><span id="busuanzi_container_site_pv">
+    本站访客数:<span id="busuanzi_container_site_pv"></span>
+  </span>
+  </div>
+  
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.1.0</div>
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共151.9k字</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.1.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

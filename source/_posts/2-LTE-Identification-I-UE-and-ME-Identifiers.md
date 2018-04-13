@@ -1,6 +1,6 @@
 ---
 title: '2-LTE Identification I: UE and ME Identifiers'
-date: 2018-04-03 21:16:55
+date: 2016-04-03 21:16:55
 tags:
     - LTE
     - 通信

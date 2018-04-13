@@ -1,6 +1,6 @@
 ---
 title: 15-EMM Procedure 5. Periodic TAU
-date: 2018-04-03 22:34:32
+date: 2016-04-03 22:34:32
 tags:
     - LTE
     - 通信

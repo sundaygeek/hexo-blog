@@ -1,0 +1,1542 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.1.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.1.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="原文链接：http://www.netmanias.com/en/?m=view&amp;amp;id=techdocs&amp;amp;no=6108  I. Introduction这篇文档讨论EMM case-2。在这个过程中，用户从附着的网络上去附着。用户在EMM case-1通过初始附着附着到网络上在emm-registered状态使用LTE服务，在使用服务后，当在ECM/RRC-connected状态">
+<meta name="keywords" content="LTE,通信">
+<meta property="og:type" content="article">
+<meta property="og:title" content="12-EMM Procedure 2. Detach">
+<meta property="og:url" content="http://yoursite.com/2016/04/03/12-EMM-Procedure-2-Detach/index.html">
+<meta property="og:site_name" content="sun-day-blog">
+<meta property="og:description" content="原文链接：http://www.netmanias.com/en/?m=view&amp;amp;id=techdocs&amp;amp;no=6108  I. Introduction这篇文档讨论EMM case-2。在这个过程中，用户从附着的网络上去附着。用户在EMM case-1通过初始附着附着到网络上在emm-registered状态使用LTE服务，在使用服务后，当在ECM/RRC-connected状态">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://img.blog.csdn.net/20150922121632123">
+<meta property="og:image" content="http://img.blog.csdn.net/20150922121934689">
+<meta property="og:image" content="http://img.blog.csdn.net/20150922122055404">
+<meta property="og:image" content="http://img.blog.csdn.net/20150922122158199">
+<meta property="og:image" content="http://img.blog.csdn.net/20150922122259375">
+<meta property="og:image" content="http://img.blog.csdn.net/20150922122350816">
+<meta property="og:updated_time" content="2018-04-13T03:23:19.380Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="12-EMM Procedure 2. Detach">
+<meta name="twitter:description" content="原文链接：http://www.netmanias.com/en/?m=view&amp;amp;id=techdocs&amp;amp;no=6108  I. Introduction这篇文档讨论EMM case-2。在这个过程中，用户从附着的网络上去附着。用户在EMM case-1通过初始附着附着到网络上在emm-registered状态使用LTE服务，在使用服务后，当在ECM/RRC-connected状态">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20150922121632123">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/04/03/12-EMM-Procedure-2-Detach/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>12-EMM Procedure 2. Detach | sun-day-blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> 
+
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">sun-day-blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">牛逼的人生不需要解释</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+          
+  <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+</li>
+
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/04/03/12-EMM-Procedure-2-Detach/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="sun-day">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sun-day-blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">12-EMM Procedure 2. Detach</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-03T22:19:31+08:00">2016-04-03</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/通信/" itemprop="url" rel="index"><span itemprop="name">通信</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/通信/LTE/" itemprop="url" rel="index"><span itemprop="name">LTE</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>原文链接：<a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6108" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6108</a></p>
+<hr>
+<h1 id="I-Introduction"><a href="#I-Introduction" class="headerlink" title="I. Introduction"></a>I. Introduction</h1><p>这篇文档讨论EMM case-2。在这个过程中，用户从附着的网络上去附着。用户在EMM case-1通过初始附着附着到网络上在emm-registered状态使用LTE服务，在使用服务后，当在ECM/RRC-connected状态或者ECM/RRC-idle状态下用户可能被网络或者UE去附着。无论任何一种情况，一旦去附着过程完毕，用户的EPS承载释放并且状态信息清除。</p>
+<p>这篇文档介绍LTE网络的detach过程，组织如下：第二章根据detach是谁发起的来定义不同的类型，第三章描述每一个detach类型的具体过程，第四章深入了解在detach后每一个EPS实体的信息有如何变化。</p>
+<h1 id="II-Cases-of-Detach"><a href="#II-Cases-of-Detach" class="headerlink" title="II. Cases of Detach"></a>II. Cases of Detach</h1><p>通过初始附着生成EPS会话和默认EPS承载之后用户可以使用LTE服务。在一些情况下，用户一旦使用完了服务可以may从网络detach。在另外一些情况下，用户一直在使用网络服务时被网络detach，然后不能和网络保持连接了。</p>
+<p>一旦用户从网络detach，所有分配给这个用户的EPS会话和承载都将被释放。释放过程将删除用户的MM上下文和给EPS实体设置的EPS承载。这时，EMM状态从registered转到de-registered。如果用户正确的detach了，GUTI，NAS层的用户ID和安全上下文，用户接入网络所需要的这些信息都将在UE和MME中保持有效，所以用户可以在下一次接入网络时使用这些信息。</p>
+<p>detach可以由UE和网络来触发。网络触发的detach是由MME或者HSS引起的。<br>detach根据在哪里触发可以分为以下几类：<br><strong>1) Detach Case 1: UE发起的Detach</strong><br>UE可以发起detach:</p>
+<ul>
+<li>如果UE关机</li>
+<li>USIM从UE中移除</li>
+<li>UE试图使用non-EPS服务（比如，CSFB，SMS等等）</li>
+</ul>
+<p><strong>2) Detach Case 2: MME发起的Detach</strong><br>MME发起detach可以更信息分为显式detach和隐式detach。<br>对于显式detach，MME通过发送detach request消息提前通知UE它要detach，并通知UE在detach之后是否要重新attach。<br>对于隐式detach，MME不通知UE就发起detach过程，因为UE没有能力和MME通信。<br>MME可以发起<br> i)显式detach</p>
+<ul>
+<li>运营商O&amp;M（操作或者维护）的目的</li>
+<li>重新鉴权失败</li>
+<li>如果MME不能为用户提供分配资源</li>
+</ul>
+<p>ii）隐式detach</p>
+<ul>
+<li>由于无线链路质量比较差导致不能和用户通信（比如RLF）</li>
+</ul>
+<p><strong>3) Detach Case 3: HSS发起的Detach</strong><br>HSS可以发起detach:</p>
+<ul>
+<li>如果HSS提供的用户配置文件发生变化，保存在MME中的配置文件也不得不改变时</li>
+<li>如果运营商试图限制一个非法的UE接入网络</li>
+</ul>
+<p>在下面几章中，我们将描述下面三种类型的详细过程。在这个三个类型中，假设用户在detach之前处于emm-registered ecm-connected rrc-connected状态，并且仅仅通过默认EPS承载提供服务。图1描述了建立了哪些连接，在detach前后用户和控制面的UE和MME都处于什么状态。在detach之前，已经建立默认EPS承载和相关的控制连接，用户处于emm-registered ecm-connected rrc-connected状态。在detach之后，默认EPS承载和所有的信令连接都被释放，用户进入EMM-Deregistered, ECM-Idle and RRC-Idle状态。</p>
+<p><img src="http://img.blog.csdn.net/20150922121632123" alt="这里写图片描述"></p>
+<h1 id="III-UE-initiated-Detach"><a href="#III-UE-initiated-Detach" class="headerlink" title="III. UE-initiated Detach"></a>III. UE-initiated Detach</h1><p>图2展示了用户发起的detach是怎么执行的。用户发起的detach是由UE触发的，由UE发送detach request消息。当UE接收到MME的detach accept消息（除非用户关机情况下）这个过程结束。</p>
+<p><img src="http://img.blog.csdn.net/20150922121934689" alt="这里写图片描述"></p>
+<p><strong>❶ UE触发detach</strong><br>当检测到UE触发detach，UE和MME都能感知到，这两个实体开始以下的过程：<br>1）【UE-&gt;MME】detach request<br>UE通过发送detach request消息给MME，请求MME detach。detach request消息参数根据这个消息传送的方向有不同的解释。如果是从UE到MME，这个消息参数如下所示：<br>Detach Request (GUTI, KSIASME, Detach Type(Switch Off))</p>
+<ul>
+<li>GUTI：MME在网络attach时分配的用户ID</li>
+<li>KSI-ASME：UE使用的KSI值</li>
+<li>detach type：只是detach的类型<ul>
+<li>switch off：只是detach是normal detach（0）还是switch off（1）</li>
+<li>type of detach：EPS detach</li>
+</ul>
+</li>
+</ul>
+<p>2）【UE】处理安全和承载上下文<br>在发送完detach request消息后，UE存储它当前NAS安全上下文，GUTI和TA信息，并删除EPS承载上下文。</p>
+<p>3）【MME】通知detach意图和处理安全上下文<br>在接收到detach request消息后，MME可以知道UE detach的意图。并存储用户当前NAS安全上下文，检查detach的类型，例如，是否是normal detach或者关机。通过上述步骤，MME可以知道是否需要发送detach accept消息。</p>
+<p><strong>❷ EPS会话终止</strong><br>一旦MME感知到UE发起的detach并存储用户当前NAS安全上下文，请求对已经激活EPS会话的终止。这个请求触发PCEF（PGW）发起EPS终止，释放所有分配给用户的网络/无线资源。</p>
+<p><strong>1）EPS承载释放和PCC策略移除</strong><br>4）【MME-&gt;SGW】请求EPS会话释放<br>MME和SGW在S11接口上通过GTP-C协议通信。MME通过发送给SGW一个delete session request消息来请求删除用户的会话和默认EPS承载。这时，在消息中传递 默认EPS承载ID和UE位置信息 (ECGI, TAI)。</p>
+<p>5）【MME】删除EPS承载上下文<br>MME在发送delete session request消息后删除用户EPS承载上下文。</p>
+<p>6）【SGW-&gt;PGW】请求EPS会话释放<br>SGW和PGW在S5接口上通过GTP协议相互通信。SGW转发从MME接收到的delete session request消息给PGW。</p>
+<p>7）【SGW】删除EPS承载上下文<br>SGW在发送delete session request消息后删除用户EPS承载上下文。</p>
+<p>8）【PGW-&gt;PCRF】通知EPS会话终止<br>PGW和PCRF在Gx接口上通过Diameter协议通信。PGW发送给PCRF一个CCR（CC-request）消息来通知PCRF用户已经结束了使用服务。这样，它就可以发起EPS会话终止过程。</p>
+<p>9）【PCRF】删除PCC策略<br>一旦PCRF从PGW收到CCR消息，PCRF删除用户的PCC策略。</p>
+<p>10）【PGW&lt;-PCEF】确认EPS会话终止<br>PCRF通过发送给PGW CCA（CC-answer）消息来确认用户的PCC策略已经删除了。</p>
+<p>11）【SGW&lt;-PGW】响应EPS delete session request<br>当PGW从PCRF接收到CCA消息，PGW发送给SGW一个Delete Session Response消息作为对delete session request消息的响应。</p>
+<p>12）【PGW】删除EPS承载上下文<br>在发送delete session response消息后，PGW删除用户的EPS承载上下文。</p>
+<p>13）【MME&lt;-SGW】响应EPS Session Release Request<br>当SGW从PGW接收到delete session response消息后，SGW发送给MME delete session response消息作为对delete session request消息的响应。</p>
+<p>14）【MME&lt;-UE】确认detach<br>一旦接受到delete session response消息，MME确认用户资源释放已经由PCRF同意了。接着MME发送给UE detach accept接收到作为detach request消息的响应。detach accept消息仅仅当UE的detach请求原因除关机之外的情况下才发送。如果detach 请求原因是因为设备关机，么么不会发送detach accept消息。</p>
+<p><strong>(2) S1信令连接释放</strong><br>一旦发送完detach accept 消息给UE之后，么么和eNB释放分配给用户的所有资源（S1信令连接，RRC连接和eNB中的UE上下文），以为UE不要他们的服务了。</p>
+<p>15）【eNB&lt;-MME】确认S1信令连接释放<br>MME发送UE Context Release Command给eNB来释放S1信令连接。</p>
+<p>16）【UE&lt;-】RRC连接释放<br>eNB发送RRC Connection Release消息给UE来释放任何没有释放的RRC连接。</p>
+<p>17）【eNB】删除UE上下文<br>eNB删除所有和UE相关的信息。</p>
+<p>18）【eNB-&gt;MME】RRC Connection Release Complete<br>最后eNB发送给MME UE Context Release Complete消息作为对15）请求消息的响应。</p>
+<h1 id="IV-MME-initiated-Detach"><a href="#IV-MME-initiated-Detach" class="headerlink" title="IV. MME-initiated Detach"></a>IV. MME-initiated Detach</h1><p>图3显示了MME发起的detach是怎么执行的。MME发起的detach是由MME触发，接着MME发送detach request消息给UE，当分配UE的EPS会话资源都被释放后这个过程结束。</p>
+<p><img src="http://img.blog.csdn.net/20150922122055404" alt="这里写图片描述"></p>
+<p><strong>❶ MME触发的detach</strong><br>下面描述了MME检测到detach触发之后，在EPS会话终止过程执行之前的步骤。如果用户这时处于idle状态，MME执行寻呼来建立S1信令连接。<br>1）【UE-&gt;MME】detach request<br>因为这是一个显式detach，MME发送detach request消息来请求UE detach。消息参数包含如下：<br>Detach Request (Detach Type(Re-attach required or not), Cause)</p>
+<ul>
+<li>detach type：指示UE在detach之后是否需要重新attach（001-需要重新attach，010-不需要重新attach）</li>
+<li>cause：指示detach的原因</li>
+<li>对于隐式detach，MME不发送detach request消息给UE。</li>
+</ul>
+<p>2）【MME】处理安全上下文<br>在发送detach request消息给UE之后，MME在删除EPS会话之前存储当前NAS安全上下文。下次重新attach时，MME可以使用这些存储的上下文，并跳过鉴权和ＮＡＳ安全建立过程。</p>
+<p>3）【UE】通知detach意图和处理安全承载上下文<br>在接收到MME发送的detach request后，UE获知MME detach的意图。UE检查detach的类型是否需要在detach之后重新attach。然后存储当前NAS安全上下文，并删除EPS承载上下文。</p>
+<p><strong>❷ EPS会话终止</strong><br>一旦MME存储NAS安全上下文，MME请求PGW终止用户的EPS会话。这个请求触发PCEF（PGW）发起EPS终止过程，释放分配给用户的所有网络无线资源。<br><strong>（1）EPS承载释放和PCC规则移除</strong><br>通过4）~13），MME请求终止用户EPS会话，PCEF一旦接收到请求删除PCC规则，删除S5承载资源。在MME发起的detach中需要重新attach时，MME可以保存当前的UE-AMBR，在下次重新attach时UE可以更快的建立EPS承载。</p>
+<p>14）【UE-&gt;MME】确认detach<br>一旦接收到detach request消息，在存储NAS安全上下文和删除EPS承载上下文之后，UE发送detach accept消息作为detach request像爱惜的响应。对于隐式detach的情况，1）14）16）步骤是跳过的。</p>
+<p>（2）S1信令连接释放<br>在这节中，MME在接收到UE发送的detach accept消息和从SGW发送的delete session response消息后，释放所有未释放的资源。这节的过程和第三章的15-18步相同，除了detach 类型是允许重新attach，UE是在RRC连接释放完成后重新attach到网络的。</p>
+<h1 id="V-HSS-initiated-Detach"><a href="#V-HSS-initiated-Detach" class="headerlink" title="V. HSS-initiated Detach"></a>V. HSS-initiated Detach</h1><p>图4描述了HSS发起detach的过程</p>
+<p><img src="http://img.blog.csdn.net/20150922122158199" alt="这里写图片描述"></p>
+<p><strong>❶ HSS触发的detach</strong><br>当因为签约信息退回由HSS触发detach，HSS试图立即删除用户的MM上下文和EPS承载。<br>1) 【MME&lt;-HSS】 Detach Request<br>HSS和MME在S6a接口上通过Diameter协议相互通信。HSS通过发送请求给MME Cancel Location Request (CLR)消息来detach用户。使用以下参数：<br>Cancel Location Request (IMSI, Cancellation Type)</p>
+<ul>
+<li>IMSI：要detach的用户ID</li>
+<li>cancellation type = Subscription Withdrawn：指示detach的原因</li>
+</ul>
+<p><strong>❷ EPS会话终止</strong><br>一旦从HSS接收到Cancel Location Request (CLR) 消息，MME释放之前分配给UE的所有资源。这个步骤和MME发起detach的过程是一样的，除了在2）中描述的额外的步骤。MME需要发送给HSS Cancel Location Answer消息作为Cancel Location Request消息的响应。</p>
+<p>2) [MME -&gt; HSS] 响应Detach Request<br>一旦从UE接收到detach accept消息，和从SGW接收到delete session response消息，MME会发送给HSS Cancel Location Answer消息作为Cancel Location Request消息的响应。</p>
+<h1 id="VI-EPS-Entity-Information-Before-After-Detach"><a href="#VI-EPS-Entity-Information-Before-After-Detach" class="headerlink" title="VI. EPS Entity Information: Before/After Detach"></a>VI. EPS Entity Information: Before/After Detach</h1><p>这章描述了在执行“EMM Case 2: Detach”步骤之后EPS实体中的信息是如何变化的。每一个实体中的所有信息被分类为UE ID，UE Location，安全和EPS会话/承载信息。</p>
+<h2 id="6-1-Before-Detach"><a href="#6-1-Before-Detach" class="headerlink" title="6.1 Before Detach"></a>6.1 Before Detach</h2><p>在detach之前用户处于ECM/RRC-Connected状态。所以在detach之前，所有的EPS实体都有和初始附着完成后他们具有的信息相同。图5列出了在detach之前每一个实体中所有的信息。</p>
+<p><img src="http://img.blog.csdn.net/20150922122259375" alt="这里写图片描述"></p>
+<h2 id="6-2-After-Detach"><a href="#6-2-After-Detach" class="headerlink" title="6.2 After Detach"></a>6.2 After Detach</h2><p>在detach之后，用于用户下次更快和安全attach的信息存储在UE和MME中。所有和用户相关的其他上下文信息，例如NAS安全上下文，GUTI，MME分配的TAI信息都将会释放。图6列出了在detach之后每一个EPS实体中的信息。在detach之后需要删除的信息标示为灰色，不要保留的信息标示为黑色，在下次attach时需要使用的信息被表示为蓝色。</p>
+<p><img src="http://img.blog.csdn.net/20150922122350816" alt="这里写图片描述"></p>
+<h1 id="VII-Closing"><a href="#VII-Closing" class="headerlink" title="VII. Closing"></a>VII. Closing</h1><p>我们已经学习了连接到LTE网络的用户从网络detach的过程。我们根据触发的位置分类detach类型，并对每一种类型进行详细的讲解。我们对比了detach前后每一个实体存储信息的变化。接下来的文档将讨论在用户不活动时删除S1资源的情况。</p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p>[1] Netmanias Technical Document, “Eleven EMM Cases in an EMM Scenario”, October 2013,<br><a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6002" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6002</a><br>[2] Netmanias Technical Document, “LTE EMM Procedure 1. Initial Attach – Part 2. Call Flow of Initial<br>Attach” , January 2014, <a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6102" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6102</a><br>[3] NMC Consulting Group Confidential Internal Report, “E2E LTE Network Design”, August 2010</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="sun-day 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="sun-day 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/LTE/" rel="tag"><i class="fa fa-tag"></i> LTE</a>
+          
+            <a href="/tags/通信/" rel="tag"><i class="fa fa-tag"></i> 通信</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/03/11-EMM-Procedure-1-Initial-Attach-Part2/" rel="next" title="11-EMM Procedure 1. Initial Attach Part2">
+                <i class="fa fa-chevron-left"></i> 11-EMM Procedure 1. Initial Attach Part2
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/03/13-EMM-Procedure-3-S1-Release/" rel="prev" title="13-EMM Procedure 3. S1 Release">
+                13-EMM Procedure 3. S1 Release <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2160523" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTY1MC8xMjE4Ng=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="sun-day" />
+            
+              <p class="site-author-name" itemprop="name">sun-day</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">75</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">39</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/zhanghaogithub123" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:zhanghao163mail@163.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://blog.csdn.net/mouse1598189" target="_blank" title="CSDN"><i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/zhang-hao-3-80-49/activities" target="_blank" title="知乎"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.google.com/" title="Google" target="_blank">Google</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.baidu.com/" title="百度" target="_blank">百度</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#I-Introduction"><span class="nav-number">1.</span> <span class="nav-text">I. Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#II-Cases-of-Detach"><span class="nav-number">2.</span> <span class="nav-text">II. Cases of Detach</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#III-UE-initiated-Detach"><span class="nav-number">3.</span> <span class="nav-text">III. UE-initiated Detach</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IV-MME-initiated-Detach"><span class="nav-number">4.</span> <span class="nav-text">IV. MME-initiated Detach</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#V-HSS-initiated-Detach"><span class="nav-number">5.</span> <span class="nav-text">V. HSS-initiated Detach</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VI-EPS-Entity-Information-Before-After-Detach"><span class="nav-number">6.</span> <span class="nav-text">VI. EPS Entity Information: Before/After Detach</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#6-1-Before-Detach"><span class="nav-number">6.1.</span> <span class="nav-text">6.1 Before Detach</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-2-After-Detach"><span class="nav-number">6.2.</span> <span class="nav-text">6.2 After Detach</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#VII-Closing"><span class="nav-number">7.</span> <span class="nav-text">VII. Closing</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number">8.</span> <span class="nav-text">References</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate"> 
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">true</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+  <div class="powered-by">
+  <i class="fa fa-user-md"></i><span id="busuanzi_container_site_pv">
+    本站访客数:<span id="busuanzi_container_site_pv"></span>
+  </span>
+  </div>
+  
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.1.0</div>
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共151.9k字</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.1.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,6 +1,6 @@
 ---
 title: '5-LTE Security I: LTE Security Concept and LTE Authentication'
-date: 2018-04-03 22:06:16
+date: 2016-04-03 22:06:16
 tags:
     - LTE
     - 通信

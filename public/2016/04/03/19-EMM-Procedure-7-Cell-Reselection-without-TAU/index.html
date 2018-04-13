@@ -1,0 +1,1531 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.1.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.1.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="原文链接：http://www.netmanias.com/en/?m=view&amp;amp;id=techdocs&amp;amp;no=6322 I. Introduction通过前面三篇文档，我们学习了EMM case-6 handover without TAU。这篇文档我们描述在idle模式下的UE是怎么重选小区的。切换控制的是连接态的UE的移动性，小区重选是控制idle状态下UE的移动性。在切换时">
+<meta name="keywords" content="LTE,通信">
+<meta property="og:type" content="article">
+<meta property="og:title" content="19-EMM Procedure 7. Cell Reselection without TAU">
+<meta property="og:url" content="http://yoursite.com/2016/04/03/19-EMM-Procedure-7-Cell-Reselection-without-TAU/index.html">
+<meta property="og:site_name" content="sun-day-blog">
+<meta property="og:description" content="原文链接：http://www.netmanias.com/en/?m=view&amp;amp;id=techdocs&amp;amp;no=6322 I. Introduction通过前面三篇文档，我们学习了EMM case-6 handover without TAU。这篇文档我们描述在idle模式下的UE是怎么重选小区的。切换控制的是连接态的UE的移动性，小区重选是控制idle状态下UE的移动性。在切换时">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://img.blog.csdn.net/20151010115241011">
+<meta property="og:image" content="http://img.blog.csdn.net/20151010115401979">
+<meta property="og:image" content="http://img.blog.csdn.net/20151016084908158">
+<meta property="og:image" content="http://img.blog.csdn.net/20151010115602870">
+<meta property="og:image" content="http://img.blog.csdn.net/20151010115635147">
+<meta property="og:image" content="http://img.blog.csdn.net/20151010115711253">
+<meta property="og:image" content="http://img.blog.csdn.net/20151010115743324">
+<meta property="og:image" content="http://img.blog.csdn.net/20151010115814083">
+<meta property="og:image" content="http://img.blog.csdn.net/20151010115915205">
+<meta property="og:image" content="http://img.blog.csdn.net/20151010120002699">
+<meta property="og:updated_time" content="2018-04-13T03:22:32.912Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="19-EMM Procedure 7. Cell Reselection without TAU">
+<meta name="twitter:description" content="原文链接：http://www.netmanias.com/en/?m=view&amp;amp;id=techdocs&amp;amp;no=6322 I. Introduction通过前面三篇文档，我们学习了EMM case-6 handover without TAU。这篇文档我们描述在idle模式下的UE是怎么重选小区的。切换控制的是连接态的UE的移动性，小区重选是控制idle状态下UE的移动性。在切换时">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20151010115241011">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/04/03/19-EMM-Procedure-7-Cell-Reselection-without-TAU/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>19-EMM Procedure 7. Cell Reselection without TAU | sun-day-blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> 
+
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">sun-day-blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">牛逼的人生不需要解释</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+          
+  <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+</li>
+
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/04/03/19-EMM-Procedure-7-Cell-Reselection-without-TAU/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="sun-day">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sun-day-blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">19-EMM Procedure 7. Cell Reselection without TAU</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-03T22:35:25+08:00">2016-04-03</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/通信/" itemprop="url" rel="index"><span itemprop="name">通信</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/通信/LTE/" itemprop="url" rel="index"><span itemprop="name">LTE</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>原文链接：<a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6322" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6322</a></p>
+<h1 id="I-Introduction"><a href="#I-Introduction" class="headerlink" title="I. Introduction"></a>I. Introduction</h1><p>通过前面三篇文档，我们学习了EMM case-6 handover without TAU。这篇文档我们描述在idle模式下的UE是怎么重选小区的。<br>切换控制的是连接态的UE的移动性，小区重选是控制idle状态下UE的移动性。在切换时，是网络决定要切换到哪个小区，在小区重选中，是UE决定驻留在哪个小区。</p>
+<p>小区重选过程可能是图1中的两种类型之一。在图1中UE驻留在cell-5，属于MME分配的{TA1，TA2}这个TA列表里，并处于idle状态。</p>
+<ul>
+<li><strong>cell reselection without TAU</strong>（7）：UE移动到TA列表中的一个TA时，例如图1的TA2，执行小区重选但是不执行TAU。</li>
+<li><strong>cell reselection with TAU</strong>（9）：UE移动到不属于TA列表中的一个TA时，例如图1的TA3，在小区重选后，需要执行TAU。</li>
+</ul>
+<p><img src="http://img.blog.csdn.net/20151010115241011" alt="这里写图片描述"></p>
+<p>UE可能重选到一个小区i）和当前驻留的服务小区使用相同的LTE频率，ii）和当前小区不使用相同的频率，iii）使用另外的RAI接入（inter-RAT）。在图1中小区重选的实例中，我们只讨论intra-frequency小区重选，即使用同单一LTE频率。<br>这篇文档只描述case-7的情况。case-9的情况在下面的文档中叙述。在第二章，我们将描述小区重选过程需要的准备信息。第三章描述不带TA过程的小区重选的详细过程。</p>
+<p>根据之前的LTE文档，当UE在attach完成后处于idle模式下（EMM-Registered, ECM-Idle, RRCIdle）:</p>
+<ul>
+<li>UE IP地址保持有效，在EPC中EPC承载保持有效。</li>
+<li>EPC（MME）知道UE的存在，但是E-UTRAN不知道。</li>
+<li>UE是在TA级别被MME知道的</li>
+<li>当UE移动到不在TA列表的TA时执行TAU过程，并给MME通知自己的TA位置。</li>
+<li>UE cannot send it generates？？？？？</li>
+<li>如果有发往UE的数据，MME在UE所在的整个TA区域内寻呼。</li>
+<li>UE周期性的唤醒并检查是否有寻呼消息。</li>
+</ul>
+<p>当驻留在一个小区上，UE在idle状态：</p>
+<ul>
+<li>接收eNB广播的系统消息</li>
+<li>接收寻呼信号，并对paging消息响应</li>
+<li>周期性的测量服务小区的信号强度</li>
+<li>当小区重选触发时测量邻区的信号强度并重选到一个小区</li>
+<li>如果重选到一个不在TA列表中的TA时发起TAU过程。</li>
+</ul>
+<h1 id="II-Cell-Reselection-Required-System-Information-and-Criteria"><a href="#II-Cell-Reselection-Required-System-Information-and-Criteria" class="headerlink" title="II. Cell Reselection: Required System Information and Criteria"></a>II. Cell Reselection: Required System Information and Criteria</h1><p>在我们详细学习第三章的小区重选过程之前，我们先简要介绍一下小区重选。接着我们学习这个过程需要的系统信息和小区重选的准则。</p>
+<h2 id="2-1-小区重选过程概述"><a href="#2-1-小区重选过程概述" class="headerlink" title="2.1 小区重选过程概述"></a>2.1 小区重选过程概述</h2><p>UE控制小区重选过程。UE从eNB广播的系统消息中获得小区重选相关的信息（决定是否测量邻区信号强度的门限值，计算服务小区和邻区的排行的参数）。在intra-frequency小区重选中，需要的信息包含在SIB3和SIB4中。</p>
+<p><strong>小区重选触发</strong><br><strong>服务小区测量</strong>：idle状态的UE在每一个DRX周期的结尾处醒来测量服务小区的信号（Qrxlevmeas）并计算服务小区的接收信号水平（Srxlev）来决定是否待在这个当前小区还是移动到另外的小区。这里，UE的发射和接收条件都反映在计算中，例如通过应用最小接收信号水平（Qrxlevmin）允许最大发射功率水平Pemax等等。<br><strong>小区重选触发</strong>：如果服务小区的接收信号水平（Srxlev）比指定的门限值（s-IntraSearch）搞，UE待在当前的服务小区。如果不是，UE触发小区切换过程。这个门限值通过SIB3传输作为触发判决条，在rel-8中定义为s-IntraSearch，在rel-9中定义为s-IntraSearchP和s-IntraSearchQ。</p>
+<p>当UE处于相同的位置，在idle状态的UE在每一个DRX周期结尾醒来去测量服务小区的接收信号水平，我们假设UE驻留在相同的服务小区，因为这个小区的接收信号水平比设定的门限s-IntraSearch持续的低。如果UE离开这个服务小区，这个小区的接收信号水平就会很快的降低，最终，当接收信号水平低于门限s-IntraSearch时，触发小区重选过程。接着UE开始测量邻区的信号强度。</p>
+<p><strong>小区重选准则</strong><br><strong>小区排序准则</strong>：UE基于服务小区(Qmeas,s)和邻区(Qmeas,n)测量信号强度来对每一个小区排序(Rs, Rn)。小区排序需要的参数从SIB3和SIB4接收。服务小区使用SIB3中的q-Hyst这个迟滞值来排序，而邻区使用SIB4中的q-OffsetCell这个偏移值进行排序。<br><strong>小区重选</strong>：一旦服务小区和邻区排序，UE检查小区重选准则是否满足(Rn &gt; Rs)。如果邻区满足这个准则，UE选择最好的满意小区，接着驻留在那里。小区重选仅仅在(t-ReselectionEUTRA)时间内持续满足才会执行。</p>
+<p>移动运营商会阻止太频繁的小区重选，通过这个迟滞值和小区特定偏移值可以通知UE在服务小区的驻留时间，根据这个小区状态来执行重选。另外，他们也会控制 q-Hyst and t-ReselectionEUTRA通过根据UE的移动速度来使用合适的(q-hystSF, t-ReselectionEUTRA-SF)。</p>
+<h2 id="2-2-系统信息"><a href="#2-2-系统信息" class="headerlink" title="2.2 系统信息"></a>2.2 系统信息</h2><p>系统信息是由eNB广播的信息，包括MIB和SIB。MIB，SIB1和SIB2是必须的，其他的是可选的。所有的系统信息像MIB SIB1或系统信息都是通过RRC消息传送给UE的。一个系统信息包括一组SIB（SIB2-16），除了MIB和SIB1。</p>
+<p>UE基于eNB广播的系统消息来执行小区重选的。MIB SIB1 SIB2是适用于所有的UE，不论是connected模式还是idle模式下。相反的，SIB3-8仅仅只用于idle模式下的小区重选。表1描述了不同的系统信息和他们的参数。</p>
+<p><img src="http://img.blog.csdn.net/20151010115401979" alt="这里写图片描述"></p>
+<p>我们假设两个移动运营商A和B，他们的网络工作如下：<br>A：全国的LTE-only网络<br>      LTE 频率：在1.8GHz仅仅有10MHz的一个信道(lteFA1)<br>B：有全国的3G和LTE网络<br>      3G频率：2.1GHz上的5MHz的六个信道<br>      LTE频率：1.8GHz上的10MHz的一个信道，850MHz上的10MHz的另一个信道(lteFA1, lteFA2)</p>
+<p>对于运营商A，它的eNB需要小区重选的intra-frequency相关的信息（eNB广播SIB3，SIB4，但是不广播SIB5/6/7/8）另外，对于运营商B，它需要所有的三种类型的重选信息，intra-frequency，inter-frequency，inter-RAT相关的信息（eNB广播SIB3/4/5/6）</p>
+<p>由eNB广播的系统是通常应用于所有的UE，但是每一个根据自己的能力（release9 UE还是release11UE）来接收不同类型的系统信息。</p>
+<p>图1描述了UE驻留在eNB2下的cell-5和它的邻区，图2只显示了eNB。</p>
+<p>在图1中的网络时LTE-only网络，使用但是home PLMN的单一频率(lteFA1)。这篇文档只关心intra-frequency的小区重选过程。和intra-frequency重选相关的系统信息是通过SIB3和SIB4广播的。表2描述了这两个SIB的参数，但是他们和其他频率，RAT，VPLMN无关。</p>
+<p><img src="http://img.blog.csdn.net/20151016084908158" alt="这里写图片描述"></p>
+<h2 id="2-3-小区重选准则"><a href="#2-3-小区重选准则" class="headerlink" title="2.3 小区重选准则"></a>2.3 小区重选准则</h2><p>尽管不在本篇文档范围内，下面我们将简要看下在UE开机后小区重选使用的准则。下面只适用一个准则。表3提供了这个准则中参数的详细描述。</p>
+<p><img src="http://img.blog.csdn.net/20151010115602870" alt="这里写图片描述"><br>在初始小区选择是，小区接收限号水平(Srxlev)必须比Qrxlevmin和P<br>Compensation的和要大。Srxlev要比Qrxlevmin要大，因为为了使UE正确的接收服务小区的信息，测量的信号强度必须至少大于Qrxlevmin。UE的发射功率低于UE在小区中允许的最大值Pmax将导致P-Compensation变大，使得更难选择这个小区。当选择一个小区时，UE的发射和接收条件是在考虑范围的。</p>
+<p>在release9的情况下，增加量Squal作为小区选择准则。Qrxlevmeas是小区参考信号接收功率RSRP，而Qqualmeas是小区的参数信号接收质量RSRQ。RSRP只是接收信号的强度，而RSRQ提供关于无线链路质量更准确的信息，因为它指示信号和干扰噪声比，SINR。</p>
+<p><strong>小区重选触发</strong><br>UE一旦驻留在服务小区将一直驻留在那儿，如果服务小区的接收水平满足2-1或者2-2，UE将不需要进行测量。</p>
+<p><img src="http://img.blog.csdn.net/20151010115635147" alt="这里写图片描述"><br>在上述的不等式中，SintraSearch, SintraSearchP and SintraSearchQ是通过SIB3给出的，如果服务小区不满足前面的准则，即是它满足3-1或者3-2准则，UE开始为了小区重选进行小区测量。<br><img src="http://img.blog.csdn.net/20151010115711253" alt="这里写图片描述"><br><strong>小区重选准则</strong><br><strong>小区排序准则</strong><br>如果服务小区的测量Srxlev满足3-1或者3-2，UE开始测量邻区的RSRP，基于测量的结果，UE会应用4-1或者4-2进行排序。</p>
+<p><img src="http://img.blog.csdn.net/20151010115743324" alt="这里写图片描述"><br><strong>小区重选</strong><br>如果有多个小区满足下面的准则，UE会选择最好的小区，并驻留在上面。</p>
+<p><img src="http://img.blog.csdn.net/20151010115814083" alt="这里写图片描述"><br>像在之前4=1或者4-2看到的，Rs和Rn是使用不同的准则进行计算的。Qhyst and Qoffset这两个值越大，UE停留在服务小区的时间越长。</p>
+<h1 id="III-procedure-for-cell-reselection-without-TAU"><a href="#III-procedure-for-cell-reselection-without-TAU" class="headerlink" title="III. procedure for cell reselection without TAU"></a>III. procedure for cell reselection without TAU</h1><p>图3描述了EMM case-7，在图1中，UE选择cell-5满足1-1或者1-2，在通过cell-5初始附着到网络后由MME分配了一个TA列表{TA1, TA2}。接着在cell-5被服务，转移到idle状态，并一直驻留在cell-5。<br>图3描述了驻留在cell-5上的UE怎么执行intra-frequency小区重选转移到eNB4下的cell-10的。这里UE的移动性状态为normal，所以不考虑比例因子。需要测量邻区4/6/10/13，但是图3为了描述的方便仅仅显示了cell-10和cell-13。第三章我们将详细秒后苏intra-frequency小区重选过程。必须满足一下条件。</p>
+<ul>
+<li>驻留在服务小区：UE驻留在cell-5</li>
+<li>小区重选触发：因为UE移出服务小区，小区重选触发。1、服务小区测量：服务小区的测量决定是否测量邻区，2、邻区测量：为了小区重选要测量邻区。</li>
+<li>小区重选准则：1，小区排序：小区基于服务小区和邻区的测量结果来进行排序，2，小区重选：识别出满足准则的小区，并选择最好的。</li>
+<li>驻留在新的小区，UE驻留在cell-10.</li>
+</ul>
+<p><img src="http://img.blog.csdn.net/20151010115915205" alt="这里写图片描述"></p>
+<p><strong>1）【UE】UE驻留在服务小区</strong><br>UE驻留在哎服务小区并保持idle状态</p>
+<p><strong>2）【UE】从服务小区获得系统信息</strong><br>UE从服务小区获得关于小区重选的系统信息。如果每一个邻区和服务小区由不同的偏移值，服务小区通过SIB4提供给UE邻区列表。接着UE通过SIB3和SIB4获得下面的信息：</p>
+<ul>
+<li>决定小区重选触发需要的参数：q-RxLevMin, p-Max, sIntraSearchP, s-IntraSearchQ, t-ReselectionEUTRA, q-QualMin (SIB 3)</li>
+<li>服务小区排序需要的参数：q-Hyst (SIB 3)</li>
+<li>邻区排序需要的参数：q-OffsetCell (SIB 4)</li>
+</ul>
+<p><strong>3）【UE】测量服务小区的信号强度</strong><br>在每一个DRX周期结尾处，UE醒来并测量服务小区的信号(RSRP and RSRQ)获得Qrxlevmeas and Qqualmeas。接着，基于他们，计算出小区重选接收水平Srxlev和小区重选质量水平Squal。UE通过应用3-1或者3-2，检查UE应该重选到那个小区或者继续驻留在当前小区。例如，如果Srxlev和Squal不满足准则，UE继续驻留在当前小区，否则，执行下一步。</p>
+<p><strong>4）【UE】测量邻区</strong><br>UE测量具有和当前服务小区相同频率的邻区的RSRP。</p>
+<p><strong>5）【UE】小区排序准则</strong><br>一旦测量完RSRP，UE对服务小区和邻区进行排序，服务小区的排序R5，邻区的排序R4/6/10/12分别基于4-1和4-2。</p>
+<p><strong>6）【UE】小区排序比较</strong><br>现在UE比较R5和Rn，检测准则5是否满足。如果每一个小区满足5，UE继续驻留在cell5，在途中，cell10和cell13满足准则。</p>
+<p><strong>7）【UE】选择一个新小区</strong><br>UE比较两个满足准则的小区，R10和R13，并选择最好的一个R10作为新的服务小区。</p>
+<p><strong>8）【UE】驻留在新的小区上</strong><br>UE驻留在cell10上，在接收cell10广播的SIB1后，UE知道cell10所在的TA在TAI列表中。因为这个新的服务小区主语UE注册过的TA列表，不需要执行TAU过程。接着，UE在每一个DRX周期结尾处醒来监控cell10的系统信息和寻呼信息，并测量cell10的信号。</p>
+<h1 id="IV-EPS-Entity-Information-Before-After-Cell-Reselection-without-TAU"><a href="#IV-EPS-Entity-Information-Before-After-Cell-Reselection-without-TAU" class="headerlink" title="IV. EPS Entity Information: Before/After Cell Reselection without TAU"></a>IV. EPS Entity Information: Before/After Cell Reselection without TAU</h1><p>这章描述在小区重选过程前后EPS实体信息的变化情况。在重选过程前后UE在idle状态下，MME也保持在idle状态下。UE从cell5移动到cell10，没有执行TAU过程。在小区重选后，EPS实体中的信息保持不变，和在S1释放后保持的信息相同。如图4所示。</p>
+<p><img src="http://img.blog.csdn.net/20151010120002699" alt="这里写图片描述"></p>
+<h1 id="V-Closing"><a href="#V-Closing" class="headerlink" title="V. Closing"></a>V. Closing</h1><p>我们学习了UE在idle状态下移动到UE注册过的TA中，并在不执行TAU的情况下进行小区重选过程。这个文旦仅仅描述了intra-frequency过程。多数的移动运营商有多个LTE频点。他们也可以和2/3G进行互操作，所以不仅仅有intra-frequency小区重选，而且还有inter-frenqucy和inter-RAT小区重选。在接下来的文档中，我们将讨论执行TAU的小区重选过程。</p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p>[1] Netmanias Technical Document, “LTE EMM Procedure 6. Handover without TAU – Part 1. Overview of Handover”, March 2014, <a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6224" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6224</a><br>[2] Netmanias Technical Document, “LTE EMM Procedure 6. Handover without TAU – Part 2. X2 Handover”, March 2014, <a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6257" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6257</a><br>[3] Netmanias Technical Document, “LTE EMM Procedure 6. Handover without TAU – Part 3. S1 Handover”, March 2014, <a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6286" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6286</a><br>[4] Netmanias Technical Document, “Eleven EMM Cases in an EMM Scenario”, October 2013, <a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6002" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6002</a><br>[5] 3GPP TS 36.304, “Evolved Universal Terrestrial Radio Access (E-UTRA); User Equipment (UE) Procedures in Idle Mode”<br>[6] Netmanias Technical Document, “LTE EMM Procedure 8 &amp; 9. Handover and Cell Reselection with TAU”, 2014, TBD<br>[7] Netmanias Technical Document, “LTE EMM and ECM States”, September 2013,<br><a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5909" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5909</a><br>[8] 3GPP TS 36.331, “Evolved Universal Terrestrial Radio Access (E-UTRA); Radio Resource Control (RRC); Protocol Specification”<br>[9] 3GPP TS 36.101, “Evolved Universal Terrestrial Radio Access (E-UTRA); User Equipment (UE) Radio Transmission and Reception”<br>[10] Netmanias Technical Document, “LTE EMM Procedure 3. S1 Release”, January 2014, <a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6110" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6110</a><br>[11] NMC Consulting Group Confidential Internal Report, “E2E LTE Network Design”, August 2010</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="sun-day 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="sun-day 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/LTE/" rel="tag"><i class="fa fa-tag"></i> LTE</a>
+          
+            <a href="/tags/通信/" rel="tag"><i class="fa fa-tag"></i> 通信</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/03/18-EMM-Procedure-6-Handover-without-TAU-Part-3-S1-Handover/" rel="next" title="18-EMM Procedure 6. Handover without TAU - Part 3. S1 Handover">
+                <i class="fa fa-chevron-left"></i> 18-EMM Procedure 6. Handover without TAU - Part 3. S1 Handover
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/03/20-EMM-Procedure-8-9-Handover-Cell-Reselection-with-TAU/" rel="prev" title="20-EMM Procedure 8&9. Handover & Cell Reselection with TAU">
+                20-EMM Procedure 8&9. Handover & Cell Reselection with TAU <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2160523" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTY1MC8xMjE4Ng=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="sun-day" />
+            
+              <p class="site-author-name" itemprop="name">sun-day</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">75</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">39</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/zhanghaogithub123" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:zhanghao163mail@163.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://blog.csdn.net/mouse1598189" target="_blank" title="CSDN"><i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/zhang-hao-3-80-49/activities" target="_blank" title="知乎"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.google.com/" title="Google" target="_blank">Google</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.baidu.com/" title="百度" target="_blank">百度</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#I-Introduction"><span class="nav-number">1.</span> <span class="nav-text">I. Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#II-Cell-Reselection-Required-System-Information-and-Criteria"><span class="nav-number">2.</span> <span class="nav-text">II. Cell Reselection: Required System Information and Criteria</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-小区重选过程概述"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 小区重选过程概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-系统信息"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 系统信息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-小区重选准则"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 小区重选准则</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#III-procedure-for-cell-reselection-without-TAU"><span class="nav-number">3.</span> <span class="nav-text">III. procedure for cell reselection without TAU</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IV-EPS-Entity-Information-Before-After-Cell-Reselection-without-TAU"><span class="nav-number">4.</span> <span class="nav-text">IV. EPS Entity Information: Before/After Cell Reselection without TAU</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#V-Closing"><span class="nav-number">5.</span> <span class="nav-text">V. Closing</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number">6.</span> <span class="nav-text">References</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate"> 
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">true</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+  <div class="powered-by">
+  <i class="fa fa-user-md"></i><span id="busuanzi_container_site_pv">
+    本站访客数:<span id="busuanzi_container_site_pv"></span>
+  </span>
+  </div>
+  
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.1.0</div>
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共151.9k字</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.1.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

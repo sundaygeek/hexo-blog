@@ -1,6 +1,6 @@
 ---
 title: 13-EMM Procedure 3. S1 Release
-date: 2018-04-03 22:19:40
+date: 2016-04-03 22:19:40
 tags:
     - LTE
     - 通信

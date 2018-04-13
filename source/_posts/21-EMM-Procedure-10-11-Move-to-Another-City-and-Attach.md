@@ -1,6 +1,6 @@
 ---
 title: 21-EMM Procedure - 10 & 11. Move to Another City and Attach
-date: 2018-04-03 22:35:50
+date: 2016-04-03 22:35:50
 tags:
     - LTE
     - 通信

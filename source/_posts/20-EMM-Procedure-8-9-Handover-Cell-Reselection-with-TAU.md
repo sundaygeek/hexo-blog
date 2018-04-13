@@ -1,6 +1,6 @@
 ---
 title: 20-EMM Procedure 8&9. Handover & Cell Reselection with TAU
-date: 2018-04-03 22:35:38
+date: 2016-04-03 22:35:38
 tags:
     - LTE
     - 通信

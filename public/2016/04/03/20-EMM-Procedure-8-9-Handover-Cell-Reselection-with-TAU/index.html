@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.1.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.1.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="原文链接：http://www.netmanias.com/en/?m=view&amp;amp;id=techdocs&amp;amp;no=6324 I. Introduction当UE接入网络时，MME通过TAI列表分配一组TA。UE在这些TA中移动不需要给网络报告自己的位置。网络不知道UE驻留在哪个小区，但是知道在哪个TA。所以如果idle状态的UE有电话或者数据包到达，网络在UE注册的这些TA中发起寻呼">
+<meta name="keywords" content="LTE,通信">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20-EMM Procedure 8&amp;9. Handover &amp; Cell Reselection with TAU">
+<meta property="og:url" content="http://yoursite.com/2016/04/03/20-EMM-Procedure-8-9-Handover-Cell-Reselection-with-TAU/index.html">
+<meta property="og:site_name" content="sun-day-blog">
+<meta property="og:description" content="原文链接：http://www.netmanias.com/en/?m=view&amp;amp;id=techdocs&amp;amp;no=6324 I. Introduction当UE接入网络时，MME通过TAI列表分配一组TA。UE在这些TA中移动不需要给网络报告自己的位置。网络不知道UE驻留在哪个小区，但是知道在哪个TA。所以如果idle状态的UE有电话或者数据包到达，网络在UE注册的这些TA中发起寻呼">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://img.blog.csdn.net/20151010123510098">
+<meta property="og:image" content="http://img.blog.csdn.net/20151010123621479">
+<meta property="og:updated_time" content="2018-04-13T03:22:30.453Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="20-EMM Procedure 8&amp;9. Handover &amp; Cell Reselection with TAU">
+<meta name="twitter:description" content="原文链接：http://www.netmanias.com/en/?m=view&amp;amp;id=techdocs&amp;amp;no=6324 I. Introduction当UE接入网络时，MME通过TAI列表分配一组TA。UE在这些TA中移动不需要给网络报告自己的位置。网络不知道UE驻留在哪个小区，但是知道在哪个TA。所以如果idle状态的UE有电话或者数据包到达，网络在UE注册的这些TA中发起寻呼">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20151010123510098">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/04/03/20-EMM-Procedure-8-9-Handover-Cell-Reselection-with-TAU/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>20-EMM Procedure 8&9. Handover & Cell Reselection with TAU | sun-day-blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> 
+
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">sun-day-blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">牛逼的人生不需要解释</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+          
+  <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+</li>
+
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/04/03/20-EMM-Procedure-8-9-Handover-Cell-Reselection-with-TAU/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="sun-day">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sun-day-blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">20-EMM Procedure 8&9. Handover & Cell Reselection with TAU</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-03T22:35:38+08:00">2016-04-03</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/通信/" itemprop="url" rel="index"><span itemprop="name">通信</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/通信/LTE/" itemprop="url" rel="index"><span itemprop="name">LTE</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>原文链接：<a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6324" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6324</a></p>
+<h1 id="I-Introduction"><a href="#I-Introduction" class="headerlink" title="I. Introduction"></a>I. Introduction</h1><p>当UE接入网络时，MME通过TAI列表分配一组TA。UE在这些TA中移动不需要给网络报告自己的位置。网络不知道UE驻留在哪个小区，但是知道在哪个TA。所以如果idle状态的UE有电话或者数据包到达，网络在UE注册的这些TA中发起寻呼。分配给UE的TAI列表是UE已经注册的区域列表。当UE移动到不在TAI列表中的TA时，UE必须执行TAU过程来请求TA更新，网络就可以更新UE的TAI列表并分配更新过的列表。</p>
+<p>这篇文档描述的是UE移动到没有注册过的TA时的过程（EMM case-8）。在这个case-8中，在连接模式(EMM-Registered, ECM-Connected, RRC-Connected)的UE移动到另外一个TA。在这个移动过程中，从source eNB到target eNB的切换过程如EMM case-6一样。不同的地方在于，UE接着需要在target eNB的新小区上执行TAU过程。在idle模式(EMM-Registered, ECM-Idle, RRC-Idle)状态下的UE移动到另外一个TA时，服务小区重选的过程和EMM case-7一样。不同的是，在小区重选后，必须在UE新驻留的小区上进行TAU过程。</p>
+<p>这个文档组织如下：第二章解释EMM  case-8过程，第三章描述EMM case-9过程，在第四章我们学习在这些过程前后EPS实体的信息有什么不同。</p>
+<h1 id="II-EMM-case-8-handover-with-TAU"><a href="#II-EMM-case-8-handover-with-TAU" class="headerlink" title="II. EMM case 8. handover with TAU"></a>II. EMM case 8. handover with TAU</h1><p>图1展示了连接模式下的UE移动到没有注册过程的TA时执行的过程。当UE初始附着到网络，MME为UE选择TA1和TA2，并在attach accept消息中包含TAI列表={TAI1=1,TAI=2}。UE通过eNB2 cell5获得服务。现在移动到TA3 eNB5 cell13。这里我们假设eNB2和eNB5连接到同一个MME和SGW。</p>
+<p><img src="http://img.blog.csdn.net/20151010123510098" alt="这里写图片描述"></p>
+<p><strong>handover</strong><br>在上图中，随着UE移动到eNB5，handover事件触发。UE测量服务小区和邻区的信号强度，并把结果发送给eNB2，包含在measurement report消息中。首先source eNB选择切换的类型 X2 or S1.在X2切换中，是source eNB选择target eNB，而在S1切换中是MME选择target eNB。接着切换在eNB2和eNB5之间执行。</p>
+<p><strong>TAU</strong><br><strong>1）【UE-&gt;MME】TAU request</strong><br>当切换到target eNB时，UE知道eNB5不属于MME分配的TAs，接着只要切换一完成，UE就发送TAU request消息(Update Type=TA Updating, GUTI, Last Visited TAI, KSI ASME, NAS-MAC)给MME，请求TA更新。这时，这个消息包含如下信息：<br>TAU Request (Update Type=TA Updating, GUTI, Last Visited TAI, KSI ASME, NAS-MAC)</p>
+<ul>
+<li>Update Type: indicates the TAU type. Set as TA Updating unless UE is handed over to a registered TA</li>
+<li>GUTI: UE ID previously allocated by MME. Used by MME for UE identification.</li>
+<li>Last Visited TAI: TAI reported through TAU Request last time</li>
+<li>KSIASME: index for KASME, the NAS security base key</li>
+<li>NAS-MAC: message authentication code used in protecting the integrity of TAU Request with NAS integrity Key (KNASint).</li>
+</ul>
+<p>TAU消息通过UL information transfer消息从 UE发送到eNB，通过uplink NAS transfer消息(NAS-PDU (TAU Request), ECGI, TAI)从eNB发送到MME。uplink NAS transfer消息包含TAU请求消息和当前小区的ECGI和TAI发送给MME。<br>因为UE和MME之间的NAS安全上下文已经建立起来了，TAU request消息是使用NAS完成性保护秘钥完保的。如果MME对接收到的TAUrequest消息完成性保护检查失败，MME执行用户鉴权和NAS安全建立过程。在这个文档中，我们仅仅讨论MME成功完成完整性检查。</p>
+<p><strong>2）【MME】TA 更新：分配新TA</strong><br>因为UE移动到没有注册过的TA上，MME选择一组TA分配给UE，并为UE配置一个新的TAI列表。这是，也要分配一个新的GUTI。</p>
+<p><strong>3）【UE&lt;-MME】TAU accept</strong><br>MME发送新选择的TA包含在TAU accept消息中(GUTI, TAI List)。这个消息是加密和完成性保护的，通过downlink NAS transfer消息从MME到eNB传输，接着通过DL information transfer消息从eNB传输给UE。</p>
+<p><strong>4）【UE-&gt;MME】TAU complete</strong><br>如果分配了一个新的GUTI，UE给MME发送TAU complete消息来确认收到了新的GUTI。</p>
+<p>一旦TAU过程完成，UE现在具有了一个新的TAI列表，并通过eNB5获得服务。</p>
+<h1 id="III-EMM-case-9-cell-reselection-with-TAU"><a href="#III-EMM-case-9-cell-reselection-with-TAU" class="headerlink" title="III. EMM case 9. cell reselection with TAU"></a>III. EMM case 9. cell reselection with TAU</h1><p>图2显示了idle模式下的UE移动到一个没有注册的TA时需要的小区重选过程。在图中，UE驻留在eNB2的cell5,移动到eNB5的cell13。</p>
+<p><img src="http://img.blog.csdn.net/20151010123621479" alt="这里写图片描述"></p>
+<p><strong>cell reselection</strong><br><strong>1）~7）【UE】小区重选</strong><br>UE移动eNB5触发小区重选。UE测量邻区并排序，基于结果，选择满足消息重选准则的eNB5 cell13作为最合适的小区。这里的小区重选过程和之前文档介绍的一样。</p>
+<p><strong>TAU</strong><br>当选择了eNB5 cell13，UE知道这个小区不属于之前分配TA中。所以，UE一旦完成重选过程就执行TAU过程。TAU过程和之前的描述的EMM case-5一样。不同之处在于谁发起的TAU过程。对于周期性TAU过程，UE因为TAU定时器T3412的超时执行TAU给网络报告当前位置。然而，对于上面给到的TAU，则是因为UE移动到一个没有注册的TA时UE执行TAU。所以这是TAU request消息的TA更新类型是TA updating而不是periodic updating。TAU过程简要叙述如下：</p>
+<p><strong>8）【UE-&gt;MME】TAU request</strong><br>UE通过发送TAU request消息(Update Type=TA Updating, GUTI, Last Visited TAI, KSIASME, NAS-MAC)给MME来请求TA更新。这个TAU request消息和第二章包含相同的信息。这个消息也是使用NAS完整性秘钥完保的。UE和eNB建立RRC连接，并发送这个消息，接着从idle 状态转到connected状态。</p>
+<p><strong>9）【MME】TA update：分配新的TA</strong><br>一旦通过uplink NAS transfer消息接收到TAU request消息，MME从uplink NAS transfer消息中的TAI标记处UE当前驻留的哪个TA，并在TAU request消息包含的last visited TAI知道上次报告的TA。<br>因为UE当期驻留的TA不是之前MME分配的TA，MME允许新分配一个TA集合最适合UE当前位置和速度。对于快速移动的UE，分配大范围的TA来减少由TAU引起的信令负载。当时，这样，由寻呼引起的心灵负载就会增加。寻呼消息将需要更长时间。所以为了每一个UE分配不同TAI，在TAU信令和寻呼性能之间的权衡应该考虑。MME更新last visited TAI包含在和UE当前TAI的UE上下文中。</p>
+<p><strong>10）【MME，SGW，PGW，PCRF】EPS承载/会话修改</strong><br>一旦UE位置改变，MME通过发送modify bearer request消息通过SGW这个变化。是否需要MME给PCRF报告TA的变化，包含UE初始附着建立EPS会话时从PCRF接收到的change report action参数中。会话修改构成执行，报告给PCRF TA的改变。</p>
+<p><strong>11）【UE&lt;-MME】TAU accept</strong><br>MME通过tau accept消息给UE发送新的TAI列表。这是，这个消息和第二章包含相同的信息。并且也是完整性保护和加密的。</p>
+<p><strong>12）~14）【UE，eNB，MME】转移到idle状态</strong><br>在TAU过程之后，MME释放S1连接，接着释放eNB5和MME之间的S1信令连接、eNB5释放和UE之间的RRc连接。现在UE和MME之间的ECM连接都移除了。并返回到idle摸下。</p>
+<p><strong>15）【UE】驻留在cell13</strong><br>一旦返回到idle状态，UE驻留在cell13，现在，在每一个DRx周期结尾处UE醒来测量cell13的信号。</p>
+<h1 id="IV-EPS实体信息"><a href="#IV-EPS实体信息" class="headerlink" title="IV. EPS实体信息"></a>IV. EPS实体信息</h1><p>handover with TAU过程前后存储在EPS实体中的信息和handover without TAU的一样。只有TAI的信息由于TA更新发生了变化。<br>cell reselection with TAU过程前后存储在EPS实体中的信息和cell reselection without TAU一样。只有TAI的信息由于TA更新发生了变化。</p>
+<h1 id="V-closing"><a href="#V-closing" class="headerlink" title="V. closing"></a>V. closing</h1><p>我们到目前为止讨论了UE移动到一个在注册TA中的切换和小区重选过程。我们学习到通过切换或者小区重选过程，UE通过TAU过程获得了新的TAI列表。<br>下面的文档将讨论UE移动到另外一个城市，包含从城市1detach，在城市2 attach。</p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p>[1] Netmanias Technical Document, “Eleven EMM Cases in an EMM Scenario”, October 2013,<a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6002" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6002</a><br>[2] Netmanias Technical Document, “LTE EMM Procedure 6. Handover without TAU – Part 1. Overview ofHandover”, March 2014, <a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6224" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6224</a><br>[3] Netmanias Technical Document, “LTE EMM Procedure 6. Handover without TAU – Part 2. X2Handover”, March 2014, <a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6257" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6257</a><br>[4] Netmanias Technical Document, LTE EMM Procedure 6. Handover without TAU – Part 3. S1Handover”, April 2014, <a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6286" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6286</a><br>[5] Netmanias Technical Document, “LTE EMM Procedure 7. Cell Reselection without TAU”, April 2014,<a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6322" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6322</a><br>[6] Netmanias Technical Document, “LTE EMM Procedure 1. Initial Attach – Part 2. Call Flow of InitialAttach” , January 2014, <a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6102" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6102</a><br>[7] Netmanias Technical Document, “LTE EMM Procedure 5. Periodic TAU”, February 2014,<a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6193" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6193</a><br>[8] Netmanias Technical Document, “LTE EMM Procedure 3. S1 Release”, January 2014,<br><a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6110" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6110</a><br>[9] Netmanias Technical Document, “LTE EMM Procedure 10 &amp;11. Move to Another City and Attach”,May 2014, TBD<br>[10] 3GPP TS 23.401, “General Packet Radio Service (GPRS) enhancements for Evolved UniversalTerrestrial Radio Access Network (E-UTRAN) access”<br>[11] NMC Consulting Group Confidential Internal Report, “E2E LTE Network Design”, August 2010</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="sun-day 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="sun-day 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/LTE/" rel="tag"><i class="fa fa-tag"></i> LTE</a>
+          
+            <a href="/tags/通信/" rel="tag"><i class="fa fa-tag"></i> 通信</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/03/19-EMM-Procedure-7-Cell-Reselection-without-TAU/" rel="next" title="19-EMM Procedure 7. Cell Reselection without TAU">
+                <i class="fa fa-chevron-left"></i> 19-EMM Procedure 7. Cell Reselection without TAU
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/03/21-EMM-Procedure-10-11-Move-to-Another-City-and-Attach/" rel="prev" title="21-EMM Procedure - 10 & 11. Move to Another City and Attach">
+                21-EMM Procedure - 10 & 11. Move to Another City and Attach <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2160523" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTY1MC8xMjE4Ng=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="sun-day" />
+            
+              <p class="site-author-name" itemprop="name">sun-day</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">75</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">39</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/zhanghaogithub123" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:zhanghao163mail@163.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://blog.csdn.net/mouse1598189" target="_blank" title="CSDN"><i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/zhang-hao-3-80-49/activities" target="_blank" title="知乎"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.google.com/" title="Google" target="_blank">Google</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.baidu.com/" title="百度" target="_blank">百度</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#I-Introduction"><span class="nav-number">1.</span> <span class="nav-text">I. Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#II-EMM-case-8-handover-with-TAU"><span class="nav-number">2.</span> <span class="nav-text">II. EMM case 8. handover with TAU</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#III-EMM-case-9-cell-reselection-with-TAU"><span class="nav-number">3.</span> <span class="nav-text">III. EMM case 9. cell reselection with TAU</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IV-EPS实体信息"><span class="nav-number">4.</span> <span class="nav-text">IV. EPS实体信息</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#V-closing"><span class="nav-number">5.</span> <span class="nav-text">V. closing</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number">6.</span> <span class="nav-text">References</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate"> 
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">true</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+  <div class="powered-by">
+  <i class="fa fa-user-md"></i><span id="busuanzi_container_site_pv">
+    本站访客数:<span id="busuanzi_container_site_pv"></span>
+  </span>
+  </div>
+  
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.1.0</div>
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共151.9k字</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.1.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

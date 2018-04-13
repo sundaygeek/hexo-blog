@@ -1,6 +1,6 @@
 ---
 title: 19-EMM Procedure 7. Cell Reselection without TAU
-date: 2018-04-03 22:35:25
+date: 2016-04-03 22:35:25
 tags:
     - LTE
     - 通信

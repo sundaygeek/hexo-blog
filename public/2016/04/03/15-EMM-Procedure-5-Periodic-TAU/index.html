@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.1.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.1.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="原文链接：http://www.netmanias.com/en/?m=view&amp;amp;id=techdocs&amp;amp;no=6193 I. Introduction这篇文档描述EMM case-5 周期性TAU过程。这个过程是在ecm-idle rrc-idle状态下的UE因为没有数据传输而需要周期性的更新MME的位置信息。当UE进入一个不在TAI列表中的TA时发起TAU，或者当TAU定时器超">
+<meta name="keywords" content="LTE,通信">
+<meta property="og:type" content="article">
+<meta property="og:title" content="15-EMM Procedure 5. Periodic TAU">
+<meta property="og:url" content="http://yoursite.com/2016/04/03/15-EMM-Procedure-5-Periodic-TAU/index.html">
+<meta property="og:site_name" content="sun-day-blog">
+<meta property="og:description" content="原文链接：http://www.netmanias.com/en/?m=view&amp;amp;id=techdocs&amp;amp;no=6193 I. Introduction这篇文档描述EMM case-5 周期性TAU过程。这个过程是在ecm-idle rrc-idle状态下的UE因为没有数据传输而需要周期性的更新MME的位置信息。当UE进入一个不在TAI列表中的TA时发起TAU，或者当TAU定时器超">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://img.blog.csdn.net/20150924131840678">
+<meta property="og:image" content="http://img.blog.csdn.net/20150924131923513">
+<meta property="og:image" content="http://img.blog.csdn.net/20150924132015001">
+<meta property="og:image" content="http://img.blog.csdn.net/20150924132102044">
+<meta property="og:image" content="http://img.blog.csdn.net/20150924132148383">
+<meta property="og:image" content="http://img.blog.csdn.net/20150924132239649">
+<meta property="og:updated_time" content="2018-04-13T03:23:14.272Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="15-EMM Procedure 5. Periodic TAU">
+<meta name="twitter:description" content="原文链接：http://www.netmanias.com/en/?m=view&amp;amp;id=techdocs&amp;amp;no=6193 I. Introduction这篇文档描述EMM case-5 周期性TAU过程。这个过程是在ecm-idle rrc-idle状态下的UE因为没有数据传输而需要周期性的更新MME的位置信息。当UE进入一个不在TAI列表中的TA时发起TAU，或者当TAU定时器超">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20150924131840678">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/04/03/15-EMM-Procedure-5-Periodic-TAU/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>15-EMM Procedure 5. Periodic TAU | sun-day-blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> 
+
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">sun-day-blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">牛逼的人生不需要解释</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+          
+  <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+</li>
+
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/04/03/15-EMM-Procedure-5-Periodic-TAU/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="sun-day">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sun-day-blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">15-EMM Procedure 5. Periodic TAU</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-03T22:34:32+08:00">2016-04-03</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/通信/" itemprop="url" rel="index"><span itemprop="name">通信</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/通信/LTE/" itemprop="url" rel="index"><span itemprop="name">LTE</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>原文链接：<a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6193" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6193</a></p>
+<h1 id="I-Introduction"><a href="#I-Introduction" class="headerlink" title="I. Introduction"></a>I. Introduction</h1><p>这篇文档描述EMM case-5 周期性TAU过程。这个过程是在ecm-idle rrc-idle状态下的UE因为没有数据传输而需要周期性的更新MME的位置信息。<br>当UE进入一个不在TAI列表中的TA时发起TAU，或者当TAU定时器超时。这篇文档介绍的是周期性TAU。当TAU定时器超时时，idle状态的UE发送TAU request消息报告自己的位置信息。在转移到ecm-connected rrc-connected状态后，执行周期性TAU过程，然后UE返回到idle状态。<br>这篇文档介绍idle状态的UE执行周期性TAU过程，第二章介绍周期性TAU的概念，第三章描述具体的过程，最后第四章总结在这个过程前后EPS实体信息的变化。</p>
+<h1 id="II-Concept-of-Periodic-TAU"><a href="#II-Concept-of-Periodic-TAU" class="headerlink" title="II. Concept of Periodic TAU"></a>II. Concept of Periodic TAU</h1><p>在connected状态的UE已经建立UE到PGW的端到端的EPS承载。MME保持UE位置的跟踪。所以如果有到达UE的数据，网络可以立即传送。<br>但是如果UE在idle状态，UE和MME之间的信令连接和承载已经被释放，MME丢失了UE位置的跟踪。网络应该时刻知道UE的位置信息，无论是idle还是active，这是为了能够传送给UE数据。所以在idle状态的UE即使没有数据传输时，应该给MME周期性的报告自己的位置信息（比如UE所在的TA）。TA是一些小区的组合，由MME管理。idle状态的UE位置信息的识别是在TA级别。当UE初始附着网络时，MME会在attach accept消息中包含TAI列表和TAU定时器（T3412）给UE。使用这些信息，UE可以在TAU定时器超时时执行TAU过程。<br>当MME接收到UE的位置信息，MME会更新UE的最新位置信息。如果UE在idle状态下有数据到达UE，MME可以通过发送给这个TA下的所有小区寻呼信息来通知UE有数据到达，这个TA是idle状态的UE报告给MME的TA。图1描述了TAU执行的实例。UE1在初始附着时attach上了eNB1的cell2，并且通过attach accept由MME分配了TAI列表(e.g. TAI={TAI1, TAI2})和TAU timer (e.g.T3412=60 mins)，接着在转移到idle状态，❶ -&gt; ❷ -&gt; ❸ -&gt; ❹。我们假设i)UE只在TAI列表中的TAs中移动，ii）UE报告TA信息的MME是存储着UE的上下文信息，iii）MME和UE都包含有效的NAS安全上下文。</p>
+<p><img src="http://img.blog.csdn.net/20150924131840678" alt="这里写图片描述"></p>
+<p>在cell2 attach和转移到idle状态后，在t1时刻当TAU超时时UE1醒来并建立ECM信令连接。接着UE1发送给MME TAUrequest消息 (TAI=TAI1, Last Visited TAI=TAI1) 包含当前小区的TAI和上次访问的TAI(❶)。接着UE1接收到TAU accept消息后返回到idle状态。在接收到TAU request消息后，MME检查UE的上次TAI是否改变，如果变化了更新最新的TAI信息。如果有到达UE1的数据，SGW通知MME有下行数据，MME根据上次TAU报告的最新的TAI查找UE在哪个TA，并在这个TA下的所有小区发送寻呼消息。接下来，如果UE1移动到cell4，并且TAU定时器超时，UE给MME发送TAU request消息(TAI=TAI1, Last Visited TAI=TAI1)，因为UE一直在TA1中。如果UE1移动到cell11中，并且定时器超时，UE给MME发送TAU Request 消息(TAI=TAI2, Last Visited TAI=TAI1)，用TAI2代替TAI1，因为这个小区属于TAI2。接着MME更新UE1的上次TAI为TAI2。图2描述了连接建立，TAU前后用户面和控制面UE、MME的状态。</p>
+<p><img src="http://img.blog.csdn.net/20150924131923513" alt="这里写图片描述"></p>
+<p><strong>UE状态如下</strong>：<br>（i）在TAU之前，UE在EMM-Registered, ECM-Idle and RRC-Idle状态，E-UTRAN分配的资源，ECM信令连接都释放了。</p>
+<p>（ii）在TAU过程中，UE处于EMM-Registered, ECM-Connected and RRC-Connected状态。周期性TAU过程不同于初始附着和service request过程，周期性TAU过程没有e-rab建立，只有ecm信令连接用于传输周期性TAU相关的NAS消息。</p>
+<p>（iii）在TAU过程之后，ECM连接释放，释放E-UTRAN资源。接着UE返回到EMM-Registered, ECM-Idle and RRC-Idle状态。</p>
+<p>图3描述了在TAU前后状态转换的过程。一旦T3412超时，idle状态的UE给MME发送TAU request报告当前TA和上次TA。MME在更新完最新UE位置信息后发送TAU accept消息。最后释放信令连接返回到idle状态。</p>
+<p><img src="http://img.blog.csdn.net/20150924132015001" alt="这里写图片描述"></p>
+<h1 id="III-Procedure-of-Periodic-TAU"><a href="#III-Procedure-of-Periodic-TAU" class="headerlink" title="III. Procedure of Periodic TAU"></a>III. Procedure of Periodic TAU</h1><p>图4和图5描述了周期性TAU的详细过程。图4中，UE的NAS通过发送TAU request消息给MME报告新的TA，更新类型标记为“Periodic Updating”。“Periodic Updating”类型的TAU不需要承载的建立，只需要建立ECM信令连接后就可以发送TAU request消息。当UE接收到TAU accept消息，释放ECM信令连接。TAU request消息是完整性保护。所以MME通过对这个消息完整性检查来决定是否执行鉴权过程。</p>
+<p><img src="http://img.blog.csdn.net/20150924132102044" alt="这里写图片描述"></p>
+<p><strong>❶  Periodic TAU Triggering</strong></p>
+<p>1) [UE] TAU Timer Expiry<br>idle状态UE在T3412TAU定时器超时后出发TAU过程给MME报告自己的位置信息。</p>
+<p><strong>❷  ECM Connection Establishment and TA Report</strong></p>
+<p>UE的NAS层 i）配置TAU消息，ii）发送RRC参数给RRC层。</p>
+<p>2), 3) [UE – eNB] RRC Connection Establishment<br>一旦接收到TAU request消息，UE的RRC层给eNB发送RRC connection request消息，请求专用信令资源。eNB通过分配SRB信道和给UE发送RRC connection setup消息来建立RRC连接。</p>
+<p>4), 5), 6) [UE -&gt; MME] ECM Connection Establishment Request and TA Report<br>TAU request消息在UE到eNB之间包含在RRC Connection Setup Complete消息中，在eNB和MME之间包含在Initial UE Message消息中，TAU request消息是完整性保护和加密的。</p>
+<p>The TAU Request消息如下信息:<br>TAU Request (Update Type=Periodic Updating, Active Flag=0, GUTI, Last Visited TAI, KSI ASME, NASMAC)</p>
+<ul>
+<li>Update Type: 标识TAU类型，当TAU定时器超时设置为Periodic Updating</li>
+<li>Active Flag: 标识是否有上行用户数据或者信令要传送，如果有这个参数设置为1，会在TAU之后建立承载和维持ECM连接。</li>
+<li>GUTI: UE ID, 之前由MME分配，用来标识UE的。</li>
+<li>Last Visited TAI: UE上次注册的TAI</li>
+<li>KSIASME: index for KASME, the NAS security base key</li>
+<li>NAS-MAC: TAU request的消息完整性保护时使用MAC</li>
+</ul>
+<p>为了从NAS层接收TAU request消息，UE的RRC层在RRC Connection Setup Complete消息中包裹这个消息发送给eNB。这时，RRC Connection Setup Complete消息包含GUMMEI。这个ID是从NAS层接收的，标识UE注册在哪一个MME上。通常eNB可以连接不止一个运营商网络和MME，所以一旦接收到RRC Connection Setup Complete消息，eNB检查自己是否连接着这个标记的MME。接着，eNB把TAU request消息包裹在Initial UE Message消息中发送给MME。这时，eNB分配给initial UE message消息一个eNB S1AP UE ID标识。MME一旦接收到Initial UE Message消息，分配MME S1AP UE ID，并建立S1信令承载。这时候就完成了UE和MME之间的ECM信令连接，允许UE转移到connected状态。</p>
+<p><strong>❸ UE Authentication and NAS Security Setup (Optional)</strong></p>
+<p>7) [UE – MME – HSS] UE Authentication<br>MME一旦接收到TAU request消息，对这个消息进行完整性保护检查，如果检查通过，MME跳过UE鉴权过程，并继续使用自己保存的NAS安全上下文来传递NAS消息。如果检查失败了，需要执行UE鉴权。</p>
+<p>8) [UE – MME] NAS Security Setup<br>一旦UE鉴权完成，NAS安全秘钥用于NAS消息传输。</p>
+<p><img src="http://img.blog.csdn.net/20150924132148383" alt="这里写图片描述"></p>
+<p><strong>❹  TA Update</strong></p>
+<p>9) [MME -&gt; S-GW] TA Update<br>当MME接收到了TAU request消息后，重置TAU定时器，并给SGW发送Modify Bearer Request消息，转发UE的位置信息(ECGI, TAI)。</p>
+<p>10) EPS Session Modification (Optional)<br>SGW接收到UE位置信息后，检查UE的小区是否发生变化。如果变化，SGW发送Modify Bearer Request消息给PGW通知这个变化。接着PGW通过EPS session modification过程发送同样的信息给PCRF。</p>
+<p>11) [MME &lt;- S-GW] Responding to TA Update Request<br>SGW给MME发送Modify Bearer Response消息作为对Modify Bearer Request 消息的响应。</p>
+<p>12) [MME] Preparing TAU Accept Message<br>MME配置新的TAI列表来反映UE当前位置，或者分配一个新的GUTI（根据实现来决定）。</p>
+<p>13) [UE &lt;- MME] Sending TAU Accept Message<br>MME给UE发送TAU Accept 消息，完整性保护而且加密的。这个消息使用Downlink NAS Transport消息（从MME到eNB）和DL Information Transfer message消息（从eNB到UE）发送给UE。</p>
+<p>14) [UE] Updating TIN and TAI List<br>当UE从MME接收到TAU Accept消息，检查GUTI和TAI列表值。如果这些值发生变化，UE会用新值来更新TIN (Temporary Identifier used in Next update)和TAI列表。这里的TIN是在下次UE发送TAU request消息时使用的用户ID，并且更新包含在TAU accept消息中的GUTI。</p>
+<p>15) [UE] Acknowledging New GUTI<br>如果MME分配了一个新的GUTI，UE发送TAU complete消息给MME作为对新GUTI的响应。</p>
+<p><strong>❺  ECM Connection Release</strong></p>
+<p>16) [eNB &lt;- MME] Requiring E-UTRAN to Release UE Context<br>在更新UE的位置信息后，MME给eNB发送UE Context Release Command消息来释放用于周期TAU的ECM连接，并释放存储在E-UTRAN中的UE上下文。</p>
+<p>17) [UE &lt;- eNB] Releasing RRC Connection<br>一旦接收到UE Context Release Command 消息，eNB释放UE上下文，并释放分配给UE的E-UTRAN资源。接着给UE发送RRC Connection Release消息来释放RRC连接，然后释放分配给UE的SRB。</p>
+<p>18) [eNB -&gt; MME] Announcing Release of UE Context from E-UTRAN<br>eNB给MME发送UE Context Release Complete消息指示S1信令连接已经释放了。现在，为TAU request建立的ECM连接释放了，UE重新回到idle状态。(ECM/RRC-Idle)</p>
+<h1 id="IV-EPS-Entity-Information-Before-After-Periodic-TAU"><a href="#IV-EPS-Entity-Information-Before-After-Periodic-TAU" class="headerlink" title="IV. EPS Entity Information: Before/After Periodic TAU"></a>IV. EPS Entity Information: Before/After Periodic TAU</h1><p>这章描述周期性TAU过程前后EPS实体的信息。所有的信息被分类为UE ID，UE Location，安全，EPS会话/承载信息。</p>
+<h2 id="4-1-Before-Periodic-TAU"><a href="#4-1-Before-Periodic-TAU" class="headerlink" title="4.1 Before Periodic TAU"></a>4.1 Before Periodic TAU</h2><p>在TAU过程触发之前，UE在EMM-Registered, ECM-Idle and RRC-Idle状态，和service request发起之前存储的信息相同。即，E-utran分配的无线资源和相关的EPS承载和信令都被释放了。在图6中描述了在周期性TAU之前EPS实体中存储的信息。</p>
+<p><img src="http://img.blog.csdn.net/20150924132239649" alt="这里写图片描述"></p>
+<h2 id="4-2-After-Periodic-TAU"><a href="#4-2-After-Periodic-TAU" class="headerlink" title="4.2 After Periodic TAU"></a>4.2 After Periodic TAU</h2><p>在周期性TAU止呕，ECM连接释放，UE重新返回到idle状态。存储的EPS实体中的信息和TAU request之前的信息相同，如图6所示。</p>
+<h1 id="V-Closing"><a href="#V-Closing" class="headerlink" title="V. Closing"></a>V. Closing</h1><p>我们学习了周期性TAU过程。不像service request过程，这个过程不建立e-rab承载，但是需要建立ECM连接。在TAU完成后，ECM连接释放，UE重新返回到idle状态。如果有上行数据要发送，首先建立e-rab承载，然后在TAU之后发送数据，像service request过程一样。接下来将介绍connected UE移动到另外的TA引起handover，但是没有TAU的情况。</p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p>[1] Netmanias Technical Document, “Eleven EMM Cases in an EMM Scenario”, October 2013,<br><a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6002" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6002</a><br>[2] Netmanias Technical Document, “LTE EMM Procedure 4. Service Request”, February 2014,<br><a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6134" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6134</a><br>[3] Netmanias Technical Document, “LTE Identification II: NE and Location Identifiers”, August 2013,<br><a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5906" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5906</a><br>[4] Netmanias Technical Document, “LTE EMM Procedure 1. Initial Attach – Part 2. Call Flow of Initial<br>Attach”, January 2014, <a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6102" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=6102</a><br>[5] Netmanias Technical Document, “LTE Security I: LTE Security Concept and LTE Authentication”, July<br>2013, <a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5902" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=5902</a><br>[6] NMC Consulting Group Confidential Internal Report, “E2E LTE Network Design”, August 2010</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="sun-day 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="sun-day 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/LTE/" rel="tag"><i class="fa fa-tag"></i> LTE</a>
+          
+            <a href="/tags/通信/" rel="tag"><i class="fa fa-tag"></i> 通信</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/03/14-EMM-Procedure-4-Service-Request/" rel="next" title="14-EMM Procedure 4. Service Request">
+                <i class="fa fa-chevron-left"></i> 14-EMM Procedure 4. Service Request
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/04/03/16-EMM-Procedure-6-Handover-without-TAU-Part-1-Overview-of-LTE-Handover/" rel="prev" title="16-EMM Procedure 6. Handover without TAU - Part 1. Overview of LTE Handover">
+                16-EMM Procedure 6. Handover without TAU - Part 1. Overview of LTE Handover <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2160523" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTY1MC8xMjE4Ng=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="sun-day" />
+            
+              <p class="site-author-name" itemprop="name">sun-day</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">75</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">39</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/zhanghaogithub123" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:zhanghao163mail@163.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://blog.csdn.net/mouse1598189" target="_blank" title="CSDN"><i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/zhang-hao-3-80-49/activities" target="_blank" title="知乎"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.google.com/" title="Google" target="_blank">Google</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.baidu.com/" title="百度" target="_blank">百度</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#I-Introduction"><span class="nav-number">1.</span> <span class="nav-text">I. Introduction</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#II-Concept-of-Periodic-TAU"><span class="nav-number">2.</span> <span class="nav-text">II. Concept of Periodic TAU</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#III-Procedure-of-Periodic-TAU"><span class="nav-number">3.</span> <span class="nav-text">III. Procedure of Periodic TAU</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IV-EPS-Entity-Information-Before-After-Periodic-TAU"><span class="nav-number">4.</span> <span class="nav-text">IV. EPS Entity Information: Before/After Periodic TAU</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-Before-Periodic-TAU"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 Before Periodic TAU</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-After-Periodic-TAU"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 After Periodic TAU</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#V-Closing"><span class="nav-number">5.</span> <span class="nav-text">V. Closing</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number">6.</span> <span class="nav-text">References</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate"> 
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">true</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+  <div class="powered-by">
+  <i class="fa fa-user-md"></i><span id="busuanzi_container_site_pv">
+    本站访客数:<span id="busuanzi_container_site_pv"></span>
+  </span>
+  </div>
+  
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.1.0</div>
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共151.9k字</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.1.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

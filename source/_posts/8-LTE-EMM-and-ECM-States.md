@@ -1,6 +1,6 @@
 ---
 title: 8-LTE EMM and ECM States
-date: 2018-04-03 22:18:43
+date: 2016-04-03 22:18:43
 tags:
     - LTE
     - 通信

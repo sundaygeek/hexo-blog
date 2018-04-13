@@ -1,6 +1,6 @@
 ---
 title: '3-LTE Identification II: NE and Location Identifiers'
-date: 2018-04-03 21:37:33
+date: 2016-04-03 21:37:33
 tags:
     - LTE
     - 通信

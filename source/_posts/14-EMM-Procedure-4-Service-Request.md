@@ -1,6 +1,6 @@
 ---
 title: 14-EMM Procedure 4. Service Request
-date: 2018-04-03 22:34:11
+date: 2016-04-03 22:34:11
 tags:
     - LTE
     - 通信

@@ -1,6 +1,6 @@
 ---
 title: 16-EMM Procedure 6. Handover without TAU - Part 1. Overview of LTE Handover
-date: 2018-04-03 22:34:45
+date: 2016-04-03 22:34:45
 tags:
     - LTE
     - 通信

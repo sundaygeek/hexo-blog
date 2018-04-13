@@ -1,6 +1,6 @@
 ---
 title: 17-EMM Procedure 6. Handover without TAU - Part 2. X2 Handover
-date: 2018-04-03 22:34:57
+date: 2016-04-03 22:34:57
 tags:
     - LTE
     - 通信

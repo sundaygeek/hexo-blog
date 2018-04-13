@@ -1,6 +1,6 @@
 ---
 title: '4-LTE Identification III: EPS Session/Bearer Identifiers'
-date: 2018-04-03 21:40:55
+date: 2016-04-03 21:40:55
 tags:
     - LTE
     - 通信

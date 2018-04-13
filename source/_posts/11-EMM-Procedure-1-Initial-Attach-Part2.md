@@ -1,6 +1,6 @@
 ---
 title: 11-EMM Procedure 1. Initial Attach Part2
-date: 2018-04-03 22:19:18
+date: 2016-04-03 22:19:18
 tags:
     - LTE
     - 通信

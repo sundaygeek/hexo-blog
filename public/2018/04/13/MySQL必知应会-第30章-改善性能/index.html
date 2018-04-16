@@ -132,18 +132,18 @@
 
 
 
-  <meta name="description" content="改 善 性 能本章将复习与MySQL性能有关的某些要点。30.1 改善性能数据库管理员把他们生命中的相当一部份时间花在了调整、试验以改善DBMS性能之上。在诊断应用的滞缓现象和性能问题时，性能不良的数据库（以及数据库查询）通常是最常见的祸因。可以看出，下面的内容并不能完全决定MySQL的性能。我们只是想回顾一下前面各章的重点，提供进行性能优化探讨和分析的一个出发点。? 首先， MySQL（与所有D">
+  <meta name="description" content="第30章-改善性能本章将复习与MySQL性能有关的某些要点。 30.1 改善性能数据库管理员把他们生命中的相当一部份时间花在了调整、试验以改善DBMS性能之上。在诊断应用的滞缓现象和性能问题时，性能不良的数据库（以及数据库查询）通常是最常见的祸因。可以看出，下面的内容并不能完全决定MySQL的性能。我们只是想回顾一下前面各章的重点，提供进行性能优化探讨和分析的一个出发点。  首先， MySQL（与">
 <meta name="keywords" content="mysql,数据库">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MySQL必知应会-第30章-改善性能">
 <meta property="og:url" content="http://yoursite.com/2018/04/13/MySQL必知应会-第30章-改善性能/index.html">
 <meta property="og:site_name" content="sun-day-blog">
-<meta property="og:description" content="改 善 性 能本章将复习与MySQL性能有关的某些要点。30.1 改善性能数据库管理员把他们生命中的相当一部份时间花在了调整、试验以改善DBMS性能之上。在诊断应用的滞缓现象和性能问题时，性能不良的数据库（以及数据库查询）通常是最常见的祸因。可以看出，下面的内容并不能完全决定MySQL的性能。我们只是想回顾一下前面各章的重点，提供进行性能优化探讨和分析的一个出发点。? 首先， MySQL（与所有D">
+<meta property="og:description" content="第30章-改善性能本章将复习与MySQL性能有关的某些要点。 30.1 改善性能数据库管理员把他们生命中的相当一部份时间花在了调整、试验以改善DBMS性能之上。在诊断应用的滞缓现象和性能问题时，性能不良的数据库（以及数据库查询）通常是最常见的祸因。可以看出，下面的内容并不能完全决定MySQL的性能。我们只是想回顾一下前面各章的重点，提供进行性能优化探讨和分析的一个出发点。  首先， MySQL（与">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-13T10:26:13.722Z">
+<meta property="og:updated_time" content="2018-04-16T04:05:39.245Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL必知应会-第30章-改善性能">
-<meta name="twitter:description" content="改 善 性 能本章将复习与MySQL性能有关的某些要点。30.1 改善性能数据库管理员把他们生命中的相当一部份时间花在了调整、试验以改善DBMS性能之上。在诊断应用的滞缓现象和性能问题时，性能不良的数据库（以及数据库查询）通常是最常见的祸因。可以看出，下面的内容并不能完全决定MySQL的性能。我们只是想回顾一下前面各章的重点，提供进行性能优化探讨和分析的一个出发点。? 首先， MySQL（与所有D">
+<meta name="twitter:description" content="第30章-改善性能本章将复习与MySQL性能有关的某些要点。 30.1 改善性能数据库管理员把他们生命中的相当一部份时间花在了调整、试验以改善DBMS性能之上。在诊断应用的滞缓现象和性能问题时，性能不良的数据库（以及数据库查询）通常是最常见的祸因。可以看出，下面的内容并不能完全决定MySQL的性能。我们只是想回顾一下前面各章的重点，提供进行性能优化探讨和分析的一个出发点。  首先， MySQL（与">
 
 
 
@@ -466,7 +466,28 @@
       
 
       
-        <p>改 善 性 能本章将复习与MySQL性能有关的某些要点。30.1 改善性能数据库管理员把他们生命中的相当一部份时间花在了调整、试验以改善DBMS性能之上。在诊断应用的滞缓现象和性能问题时，性能不良的数据库（以及数据库查询）通常是最常见的祸因。可以看出，下面的内容并不能完全决定MySQL的性能。我们只是想回顾一下前面各章的重点，提供进行性能优化探讨和分析的一个出发点。? 首先， MySQL（与所有DBMS一样）具有特定的硬件建议。在学习和研究MySQL时，使用任何旧的计算机作为服务器都可以。但对用于生产的服务器来说，应该坚持遵循这些硬件建议。? 一般来说，关键的生产DBMS应该运行在自己的专用服务器上。? MySQL是用一系列的默认设置预先配置的，从这些设置开始通常是很好的。但过一段时间后你可能需要调整内存分配、缓冲区大小等。（为查看当前设置，可使用 SHOW VARIABLES;和 SHOWSTATUS;。）? MySQL一个多用户多线程的DBMS，换言之，它经常同时执行多个任务。如果这些任务中的某一个执行缓慢，则所有请求都会执行缓慢。如果你遇到显著的性能不良，可使用SHOW PROCESSLIST显示所有活动进程（以及它们的线程ID和执行时间）。你还可以用第 30 章277210 第 30 章 改 善 性 能KILL命令终结某个特定的进程（使用这个命令需要作为管理员登录）。? 总是有不止一种方法编写同一条SELECT语句。 应该试验联结、并、子查询等，找出最佳的方法。? 使用EXPLAIN语句让MySQL解释它将如何执行一条SELECT语句。? 一般来说，存储过程执行得比一条一条地执行其中的各条MySQL语句快。? 应该总是使用正确的数据类型。? 决不要检索比需求还要多的数据。换言之，不要用SELECT *（除非你真正需要每个列）。? 有的操作（包括INSERT）支持一个可选的DELAYED关键字，如果使用它，将把控制立即返回给调用程序，并且一旦有可能就实际执行该操作。? 在导入数据时，应该关闭自动提交。你可能还想删除索引（包括FULLTEXT索引），然后在导入完成后再重建它们。? 必须索引数据库表以改善数据检索的性能。确定索引什么不是一件微不足道的任务，需要分析使用的SELECT语句以找出重复的WHERE和ORDER BY子句。如果一个简单的WHERE子句返回结果所花的时间太长，则可以断定其中使用的列（或几个列）就是需要索引的对象。? 你的SELECT语句中有一系列复杂的OR条件吗？通过使用多条SELECT语句和连接它们的UNION语句，你能看到极大的性能改进。? 索引改善数据检索的性能，但损害数据插入、删除和更新的性能。如果你有一些表，它们收集数据且不经常被搜索，则在有必要之前不要索引它们。（索引可根据需要添加和删除。）? LIKE很慢。一般来说，最好是使用FULLTEXT而不是LIKE。? 数据库是不断变化的实体。一组优化良好的表一会儿后可能就面目全非了。由于表的使用和内容的更改，理想的优化和配置也会改变。? 最重要的规则就是，每条规则在某些条件下都会被打破。27830.2 小结 211浏览文档 位于<a href="http://dev.mysql.com/doc/的MySQL文档有许多提示和技巧（甚至有用户提供的评论和反馈）。一定要查看这些非常有价值的资料。30.2" target="_blank" rel="noopener">http://dev.mysql.com/doc/的MySQL文档有许多提示和技巧（甚至有用户提供的评论和反馈）。一定要查看这些非常有价值的资料。30.2</a> 小结本章回顾了与MySQL性能有关的某些提示和说明。当然，这只是一小部分，不过，既然你已经完成了本书的学习，你应该能试验和掌握自己觉得最适合的内容。 279</p>
+        <h1 id="第30章-改善性能"><a href="#第30章-改善性能" class="headerlink" title="第30章-改善性能"></a>第30章-改善性能</h1><p>本章将复习与MySQL性能有关的某些要点。</p>
+<h2 id="30-1-改善性能"><a href="#30-1-改善性能" class="headerlink" title="30.1 改善性能"></a>30.1 改善性能</h2><p>数据库管理员把他们生命中的相当一部份时间花在了调整、试验以改善DBMS性能之上。在诊断应用的滞缓现象和性能问题时，性能不良的数据库（以及数据库查询）通常是最常见的祸因。可以看出，下面的内容并不能完全决定MySQL的性能。我们只是想回顾一下前面各章的重点，提供进行性能优化探讨和分析的一个出发点。</p>
+<ul>
+<li>首先， MySQL（与所有DBMS一样）具有特定的硬件建议。在学习和研究MySQL时，使用任何旧的计算机作为服务器都可以。但对用于生产的服务器来说，应该坚持遵循这些硬件建议。</li>
+<li>一般来说，关键的生产DBMS应该运行在自己的专用服务器上。</li>
+<li>MySQL是用一系列的默认设置预先配置的，从这些设置开始通常是很好的。但过一段时间后你可能需要调整内存分配、缓冲区大小等。（为查看当前设置，可使用 SHOW VARIABLES;和 SHOWSTATUS;。）</li>
+<li>MySQL一个多用户多线程的DBMS，换言之，它经常同时执行多个任务。如果这些任务中的某一个执行缓慢，则所有请求都会执行缓慢。如果你遇到显著的性能不良，可使用SHOW PROCESSLIST显示所有活动进程（以及它们的线程ID和执行时间）。你还可以用KILL命令终结某个特定的进程（使用这个命令需要作为管理员登录）。<br>Snipaste_2018-04-16_12-02-45.png</li>
+<li>总是有不止一种方法编写同一条SELECT语句。 应该试验联结、并、子查询等，找出最佳的方法。</li>
+<li>使用EXPLAIN语句让MySQL解释它将如何执行一条SELECT语句。<br>Snipaste_2018-04-16_12-03-54.png</li>
+<li>一般来说，存储过程执行得比一条一条地执行其中的各条MySQL语句快。</li>
+<li>应该总是使用正确的数据类型。</li>
+<li>决不要检索比需求还要多的数据。换言之，不要用SELECT *（除非你真正需要每个列）。</li>
+<li>有的操作（包括INSERT）支持一个可选的DELAYED关键字，如果使用它，将把控制立即返回给调用程序，并且一旦有可能就实际执行该操作。</li>
+<li>在导入数据时，应该关闭自动提交。你可能还想删除索引（包括FULLTEXT索引），然后在导入完成后再重建它们。</li>
+<li>必须索引数据库表以改善数据检索的性能。确定索引什么不是一件微不足道的任务，需要分析使用的SELECT语句以找出重复的WHERE和ORDER BY子句。如果一个简单的WHERE子句返回结果所花的时间太长，则可以断定其中使用的列（或几个列）就是需要索引的对象。</li>
+<li>你的SELECT语句中有一系列复杂的OR条件吗？通过使用多条SELECT语句和连接它们的UNION语句，你能看到极大的性能改进。</li>
+<li>索引改善数据检索的性能，但损害数据插入、删除和更新的性能。如果你有一些表，它们收集数据且不经常被搜索，则在有必要之前不要索引它们。（索引可根据需要添加和删除。）</li>
+<li>LIKE很慢。一般来说，最好是使用FULLTEXT而不是LIKE。</li>
+<li>数据库是不断变化的实体。一组优化良好的表一会儿后可能就面目全非了。由于表的使用和内容的更改，理想的优化和配置也会改变。</li>
+<li>最重要的规则就是，每条规则在某些条件下都会被打破。27830.2 小结 211浏览文档 位于<a href="http://dev.mysql.com/doc/" target="_blank" rel="noopener">MySQL文档</a>有许多提示和技巧（甚至有用户提供的评论和反馈）。一定要查看这些非常有价值的资料。</li>
+</ul>
+<h2 id="30-2-小结"><a href="#30-2-小结" class="headerlink" title="30.2 小结"></a>30.2 小结</h2><p>本章回顾了与MySQL性能有关的某些提示和说明。当然，这只是一小部分，不过，既然你已经完成了本书的学习，你应该能试验和掌握自己觉得最适合的内容。 </p>
 
       
     </div>
@@ -630,8 +651,17 @@ var jiathis_config={
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -883,6 +913,22 @@ var jiathis_config={
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第30章-改善性能"><span class="nav-number">1.</span> <span class="nav-text">第30章-改善性能</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#30-1-改善性能"><span class="nav-number">1.1.</span> <span class="nav-text">30.1 改善性能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#30-2-小结"><span class="nav-number">1.2.</span> <span class="nav-text">30.2 小结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -934,7 +980,7 @@ var jiathis_config={
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共205.6k字</span>
+  <span class="post-count">博客全站共205.0k字</span>
 </div>
 
         

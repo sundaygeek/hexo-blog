@@ -140,10 +140,13 @@
 <meta property="og:site_name" content="sun-day-blog">
 <meta property="og:description" content="第30章-改善性能本章将复习与MySQL性能有关的某些要点。 30.1 改善性能数据库管理员把他们生命中的相当一部份时间花在了调整、试验以改善DBMS性能之上。在诊断应用的滞缓现象和性能问题时，性能不良的数据库（以及数据库查询）通常是最常见的祸因。可以看出，下面的内容并不能完全决定MySQL的性能。我们只是想回顾一下前面各章的重点，提供进行性能优化探讨和分析的一个出发点。  首先， MySQL（与">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-04-16T04:05:39.245Z">
+<meta property="og:image" content="http://yoursite.com/2018/04/13/MySQL必知应会-第30章-改善性能/Snipaste_2018-04-16_12-02-45.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/13/MySQL必知应会-第30章-改善性能/Snipaste_2018-04-16_12-03-54.png">
+<meta property="og:updated_time" content="2018-04-16T06:16:40.893Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL必知应会-第30章-改善性能">
 <meta name="twitter:description" content="第30章-改善性能本章将复习与MySQL性能有关的某些要点。 30.1 改善性能数据库管理员把他们生命中的相当一部份时间花在了调整、试验以改善DBMS性能之上。在诊断应用的滞缓现象和性能问题时，性能不良的数据库（以及数据库查询）通常是最常见的祸因。可以看出，下面的内容并不能完全决定MySQL的性能。我们只是想回顾一下前面各章的重点，提供进行性能优化探讨和分析的一个出发点。  首先， MySQL（与">
+<meta name="twitter:image" content="http://yoursite.com/2018/04/13/MySQL必知应会-第30章-改善性能/Snipaste_2018-04-16_12-02-45.png">
 
 
 
@@ -472,9 +475,9 @@
 <li>首先， MySQL（与所有DBMS一样）具有特定的硬件建议。在学习和研究MySQL时，使用任何旧的计算机作为服务器都可以。但对用于生产的服务器来说，应该坚持遵循这些硬件建议。</li>
 <li>一般来说，关键的生产DBMS应该运行在自己的专用服务器上。</li>
 <li>MySQL是用一系列的默认设置预先配置的，从这些设置开始通常是很好的。但过一段时间后你可能需要调整内存分配、缓冲区大小等。（为查看当前设置，可使用 SHOW VARIABLES;和 SHOWSTATUS;。）</li>
-<li>MySQL一个多用户多线程的DBMS，换言之，它经常同时执行多个任务。如果这些任务中的某一个执行缓慢，则所有请求都会执行缓慢。如果你遇到显著的性能不良，可使用SHOW PROCESSLIST显示所有活动进程（以及它们的线程ID和执行时间）。你还可以用KILL命令终结某个特定的进程（使用这个命令需要作为管理员登录）。<br>Snipaste_2018-04-16_12-02-45.png</li>
+<li>MySQL一个多用户多线程的DBMS，换言之，它经常同时执行多个任务。如果这些任务中的某一个执行缓慢，则所有请求都会执行缓慢。如果你遇到显著的性能不良，可使用SHOW PROCESSLIST显示所有活动进程（以及它们的线程ID和执行时间）。你还可以用KILL命令终结某个特定的进程（使用这个命令需要作为管理员登录）。<br><img src="/2018/04/13/MySQL必知应会-第30章-改善性能/Snipaste_2018-04-16_12-02-45.png" alt="pic"></li>
 <li>总是有不止一种方法编写同一条SELECT语句。 应该试验联结、并、子查询等，找出最佳的方法。</li>
-<li>使用EXPLAIN语句让MySQL解释它将如何执行一条SELECT语句。<br>Snipaste_2018-04-16_12-03-54.png</li>
+<li>使用EXPLAIN语句让MySQL解释它将如何执行一条SELECT语句。<br><img src="/2018/04/13/MySQL必知应会-第30章-改善性能/Snipaste_2018-04-16_12-03-54.png" alt="pic"></li>
 <li>一般来说，存储过程执行得比一条一条地执行其中的各条MySQL语句快。</li>
 <li>应该总是使用正确的数据类型。</li>
 <li>决不要检索比需求还要多的数据。换言之，不要用SELECT *（除非你真正需要每个列）。</li>
@@ -572,6 +575,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/16/mysql导入导出/" rel="prev" title="mysql导入导出">
+                mysql导入导出 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -680,7 +687,7 @@ var jiathis_config={
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">99</span>
+                    <span class="site-state-item-count">100</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -751,7 +758,9 @@ var jiathis_config={
                     
                       
                     
-                    <span class="site-state-item-count">29</span>
+                      
+                    
+                    <span class="site-state-item-count">30</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -980,7 +989,7 @@ var jiathis_config={
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共205.0k字</span>
+  <span class="post-count">博客全站共205.3k字</span>
 </div>
 
         

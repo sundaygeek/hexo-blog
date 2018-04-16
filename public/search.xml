@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[mysql导入导出]]></title>
+    <url>%2F2018%2F04%2F16%2Fmysql%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA%2F</url>
+    <content type="text"><![CDATA[导入导出 1.导入用文本形式插入数据 LOAD DATA LOCAL INFILE ‘d:/mysql.txt’ INTO TABLE mytable;导入.sql use database;source d:/mysql.sql从另外一张表往这张表插入 INSERT INTO tab1(f1,f2)SELECT a.f1, a.f2FROM a WHERE a.f1=’a’ 2.备份导出要用到MySQL的mysqldump工具，基本用法是： mysqldump [OPTIONS] database [tables]备份MySQL数据库的命令 mysqldump -hhostname -uusername -ppassword databasename backupfile.sql备份MySQL数据库为带删除表的格式，能够让该备份覆盖已有数据库而不需要手动删除原有数据库。 mysqldump -–add-drop-table -uusername -ppassword databasename backupfile.sql直接将MySQL数据库压缩备份 mysqldump -hhostname -uusername -ppassword databasename | gzip backupfile.sql.gz备份MySQL数据库某个(些)表 mysqldump -hhostname -uusername -ppassword databasename specific_table1 specific_table2 backupfile.sql同时备份多个MySQL数据库 mysqldump -hhostname -uusername -ppassword –databases databasename1 databasename2 databasename3 multibackupfile.sql仅仅备份数据库结构 mysqldump –no-data –databases databasename1 databasename2 databasename3 structurebackupfile.sql备份服务器上所有数据库 mysqldump –all-databases allbackupfile.sql还原 3.还原MySQL数据库的命令mysql -hhostname -uusername -ppassword databasename &lt; backupfile.sqlmysql -hhostname -ppassword databasename tablename &lt; backuptablefile.sql还原压缩的MySQL数据库 gunzip &lt; backupfile.sql.gz | mysql -uusername -ppassword databasename将数据库转移到新服务器 mysqldump -uusername -ppassword databasename | mysql –host=... -C databasename将查询结果导入外部文件 SELECT a,b,a+bFROM test_tableINTO OUTFILE ‘/tmp/result.txt’FIELDS TERMINATED BY ‘,’ OPTIONALLY ENCLOSED BY ‘“‘LINES TERMINATED BY ‘\n’ 或者 mysql -u you -p -e “SELECT …” file_name]]></content>
+      <categories>
+        <category>数据库</category>
+        <category>mysql</category>
+      </categories>
+      <tags>
+        <tag>mysql</tag>
+        <tag>数据库</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[MySQL必知应会-第30章-改善性能]]></title>
     <url>%2F2018%2F04%2F13%2FMySQL%E5%BF%85%E7%9F%A5%E5%BA%94%E4%BC%9A-%E7%AC%AC30%E7%AB%A0-%E6%94%B9%E5%96%84%E6%80%A7%E8%83%BD%2F</url>
-    <content type="text"><![CDATA[第30章-改善性能本章将复习与MySQL性能有关的某些要点。 30.1 改善性能数据库管理员把他们生命中的相当一部份时间花在了调整、试验以改善DBMS性能之上。在诊断应用的滞缓现象和性能问题时，性能不良的数据库（以及数据库查询）通常是最常见的祸因。可以看出，下面的内容并不能完全决定MySQL的性能。我们只是想回顾一下前面各章的重点，提供进行性能优化探讨和分析的一个出发点。 首先， MySQL（与所有DBMS一样）具有特定的硬件建议。在学习和研究MySQL时，使用任何旧的计算机作为服务器都可以。但对用于生产的服务器来说，应该坚持遵循这些硬件建议。 一般来说，关键的生产DBMS应该运行在自己的专用服务器上。 MySQL是用一系列的默认设置预先配置的，从这些设置开始通常是很好的。但过一段时间后你可能需要调整内存分配、缓冲区大小等。（为查看当前设置，可使用 SHOW VARIABLES;和 SHOWSTATUS;。） MySQL一个多用户多线程的DBMS，换言之，它经常同时执行多个任务。如果这些任务中的某一个执行缓慢，则所有请求都会执行缓慢。如果你遇到显著的性能不良，可使用SHOW PROCESSLIST显示所有活动进程（以及它们的线程ID和执行时间）。你还可以用KILL命令终结某个特定的进程（使用这个命令需要作为管理员登录）。Snipaste_2018-04-16_12-02-45.png 总是有不止一种方法编写同一条SELECT语句。 应该试验联结、并、子查询等，找出最佳的方法。 使用EXPLAIN语句让MySQL解释它将如何执行一条SELECT语句。Snipaste_2018-04-16_12-03-54.png 一般来说，存储过程执行得比一条一条地执行其中的各条MySQL语句快。 应该总是使用正确的数据类型。 决不要检索比需求还要多的数据。换言之，不要用SELECT *（除非你真正需要每个列）。 有的操作（包括INSERT）支持一个可选的DELAYED关键字，如果使用它，将把控制立即返回给调用程序，并且一旦有可能就实际执行该操作。 在导入数据时，应该关闭自动提交。你可能还想删除索引（包括FULLTEXT索引），然后在导入完成后再重建它们。 必须索引数据库表以改善数据检索的性能。确定索引什么不是一件微不足道的任务，需要分析使用的SELECT语句以找出重复的WHERE和ORDER BY子句。如果一个简单的WHERE子句返回结果所花的时间太长，则可以断定其中使用的列（或几个列）就是需要索引的对象。 你的SELECT语句中有一系列复杂的OR条件吗？通过使用多条SELECT语句和连接它们的UNION语句，你能看到极大的性能改进。 索引改善数据检索的性能，但损害数据插入、删除和更新的性能。如果你有一些表，它们收集数据且不经常被搜索，则在有必要之前不要索引它们。（索引可根据需要添加和删除。） LIKE很慢。一般来说，最好是使用FULLTEXT而不是LIKE。 数据库是不断变化的实体。一组优化良好的表一会儿后可能就面目全非了。由于表的使用和内容的更改，理想的优化和配置也会改变。 最重要的规则就是，每条规则在某些条件下都会被打破。27830.2 小结 211浏览文档 位于MySQL文档有许多提示和技巧（甚至有用户提供的评论和反馈）。一定要查看这些非常有价值的资料。 30.2 小结本章回顾了与MySQL性能有关的某些提示和说明。当然，这只是一小部分，不过，既然你已经完成了本书的学习，你应该能试验和掌握自己觉得最适合的内容。]]></content>
+    <content type="text"><![CDATA[第30章-改善性能本章将复习与MySQL性能有关的某些要点。 30.1 改善性能数据库管理员把他们生命中的相当一部份时间花在了调整、试验以改善DBMS性能之上。在诊断应用的滞缓现象和性能问题时，性能不良的数据库（以及数据库查询）通常是最常见的祸因。可以看出，下面的内容并不能完全决定MySQL的性能。我们只是想回顾一下前面各章的重点，提供进行性能优化探讨和分析的一个出发点。 首先， MySQL（与所有DBMS一样）具有特定的硬件建议。在学习和研究MySQL时，使用任何旧的计算机作为服务器都可以。但对用于生产的服务器来说，应该坚持遵循这些硬件建议。 一般来说，关键的生产DBMS应该运行在自己的专用服务器上。 MySQL是用一系列的默认设置预先配置的，从这些设置开始通常是很好的。但过一段时间后你可能需要调整内存分配、缓冲区大小等。（为查看当前设置，可使用 SHOW VARIABLES;和 SHOWSTATUS;。） MySQL一个多用户多线程的DBMS，换言之，它经常同时执行多个任务。如果这些任务中的某一个执行缓慢，则所有请求都会执行缓慢。如果你遇到显著的性能不良，可使用SHOW PROCESSLIST显示所有活动进程（以及它们的线程ID和执行时间）。你还可以用KILL命令终结某个特定的进程（使用这个命令需要作为管理员登录）。 总是有不止一种方法编写同一条SELECT语句。 应该试验联结、并、子查询等，找出最佳的方法。 使用EXPLAIN语句让MySQL解释它将如何执行一条SELECT语句。 一般来说，存储过程执行得比一条一条地执行其中的各条MySQL语句快。 应该总是使用正确的数据类型。 决不要检索比需求还要多的数据。换言之，不要用SELECT *（除非你真正需要每个列）。 有的操作（包括INSERT）支持一个可选的DELAYED关键字，如果使用它，将把控制立即返回给调用程序，并且一旦有可能就实际执行该操作。 在导入数据时，应该关闭自动提交。你可能还想删除索引（包括FULLTEXT索引），然后在导入完成后再重建它们。 必须索引数据库表以改善数据检索的性能。确定索引什么不是一件微不足道的任务，需要分析使用的SELECT语句以找出重复的WHERE和ORDER BY子句。如果一个简单的WHERE子句返回结果所花的时间太长，则可以断定其中使用的列（或几个列）就是需要索引的对象。 你的SELECT语句中有一系列复杂的OR条件吗？通过使用多条SELECT语句和连接它们的UNION语句，你能看到极大的性能改进。 索引改善数据检索的性能，但损害数据插入、删除和更新的性能。如果你有一些表，它们收集数据且不经常被搜索，则在有必要之前不要索引它们。（索引可根据需要添加和删除。） LIKE很慢。一般来说，最好是使用FULLTEXT而不是LIKE。 数据库是不断变化的实体。一组优化良好的表一会儿后可能就面目全非了。由于表的使用和内容的更改，理想的优化和配置也会改变。 最重要的规则就是，每条规则在某些条件下都会被打破。27830.2 小结 211浏览文档 位于MySQL文档有许多提示和技巧（甚至有用户提供的评论和反馈）。一定要查看这些非常有价值的资料。 30.2 小结本章回顾了与MySQL性能有关的某些提示和说明。当然，这只是一小部分，不过，既然你已经完成了本书的学习，你应该能试验和掌握自己觉得最适合的内容。]]></content>
       <categories>
         <category>mysql</category>
         <category>数据库</category>
@@ -418,10 +431,10 @@
         <category>python</category>
       </categories>
       <tags>
-        <tag>数据分析</tag>
         <tag>pyhton</tag>
         <tag>javascript-D3</tag>
         <tag>jinja2</tag>
+        <tag>数据分析</tag>
       </tags>
   </entry>
   <entry>

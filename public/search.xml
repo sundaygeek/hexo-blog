@@ -1,6 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[TensorFlow实战-第3章-TensorFlow第一步]]></title>
+    <url>%2F2018%2F04%2F17%2FTensorFlow%E5%AE%9E%E6%88%98-%E7%AC%AC3%E7%AB%A0-TensorFlow%E7%AC%AC%E4%B8%80%E6%AD%A5%2F</url>
+    <content type="text"><![CDATA[3 TensorFlow第一步 393.1 TensorFlow的编译及安装 39 install ancondalink CPU versionconda install tensorflow GPU versionconda install tensorflow-gpu 3.2 TensorFlow实现SoftmaxRegression识别手写数字 46导入数据MNIST是一个非常简单的机器视觉数据集，由几万张28x28像素的手写数字组成，这些图片只包含灰度信息。 123456from tensorflow.examples.tutorials.mnist import input_datamnist = input_data.read_data_sets("MNIST_data/", one_hot=True)print(mnist.train.images.shape, mnist.train.labels.shape)print(mnist.test.images.shape, mnist.test.labels.shape)print(mnist.validation.images.shape, mnist.validation.labels.shape) Extracting MNIST_data/train-images-idx3-ubyte.gz Extracting MNIST_data/train-labels-idx1-ubyte.gz Extracting MNIST_data/t10k-images-idx3-ubyte.gz Extracting MNIST_data/t10k-labels-idx1-ubyte.gz (55000, 784) (55000, 10) (10000, 784) (10000, 10) (5000, 784) (5000, 10) 可以看到数据集中，训练集有55000个样本，测试集有10000个样本，验证集有5000个样本。这里的数据全部丢弃了图片的二维结构信息，只是把一张图片变成了一个很长的一维向量。我们可以使用matplotlib把一维数据还原为原来的图像。如下所示。 1234567from matplotlib import pyplot as plt% matplotlib inlinedata = mnist.train.images[0].reshape((28,28))plt.imshow(data)print(mnist.train.labels[0]) [0. 0. 0. 0. 0. 0. 0. 1. 0. 0.] 训练数据(55000, 784)，第一维是图片的编号，第二维是图片中像素点的编号。对10个种类的标签进行了onehot编码，如上所示，[0. 0. 0. 0. 0. 0. 0. 1. 0. 0.] 代表为7 准备好数据以后，接下来就要设计算法了这里使用了一个叫做softmax regression的算法来训练分类模型。 当我们处理分类任务时，通常需要使用softmax regression模型。即使后面章节中的CNN或者RNN，如果是分类模型，最后一层同样也是softmax regression。它的工作原理很简单，将可以判定为某类的特征想加，然后将这些特征转化为判定为这一类的概率。这些特征可以通过一些简单的方法得到，比如对所有像素求一个加权和，而权重是根据数据自动学习、训练出来的。比如某一个像素的灰度值大代表可能是数字n的概率越大。 如下公式： $$feature_i = \sum_j W_i,j x_j + b_i$$ 123import tensorflow as tfsess = tf.InteractiveSession()x = tf.placeholder(tf.float32, [None, 784]) 12W = tf.Variable(tf.zeros([784, 10]))b = tf.Variable(tf.zeros([10])) 1y = tf.nn.softmax(tf.matmul(x, W) + b) 12y_ = tf.placeholder(tf.float32, [None, 10])cross_entropy = tf.reduce_mean(-tf.reduce_sum(y_ * tf.log(y), reduction_indices=[1])) 12train_step = tf.train.GradientDescentOptimizer(0.5).minimize(cross_entropy)tf.global_variables_initializer().run() 123for i in range(1000): batch_xs, batch_ys = mnist.train.next_batch(100) train_step.run(&#123;x: batch_xs, y_: batch_ys&#125;) 12correct_prediction = tf.equal(tf.argmax(y, 1), tf.argmax(y_, 1))accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32)) 1print(accuracy.eval(&#123;x: mnist.test.images, y_: mnist.test.labels&#125;)) 0.9194]]></content>
+      <categories>
+        <category>机器学习</category>
+        <category>TensorFlow</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>TensorFlow</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[TensorFlow实战-第2章-TensorFlow和其他深度学习框架的对比]]></title>
+    <url>%2F2018%2F04%2F17%2FTensorFlow%E5%AE%9E%E6%88%98-%E7%AC%AC2%E7%AB%A0-TensorFlow%E5%92%8C%E5%85%B6%E4%BB%96%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%A1%86%E6%9E%B6%E7%9A%84%E5%AF%B9%E6%AF%94%2F</url>
+    <content type="text"><![CDATA[2 TensorFlow和其他深度学习框架的对比 182.1 主流深度学习框架对比 18 2.2 各深度学习框架简介 20TensorFlowTensorFlow是相对高阶的机器学习库，用户㐓方便地用它设计神经网络结构，而不必为了追求高效率的实现亲自写C++或者CUDA代码。 TensorFlow另外一个特点是灵活的移植性。TensorFlow还提供了TensorBoard，TensorBoard是TensorFlow的一组web应用，用来监控TensorFlow的运行过程，或可视化计算图。 caffe官方网址 链接github网址 链接 caffe的主要优势有以下几点： 容易上手，网络结构都是以配置文件形式定义，不需要用代码设计网络 训练速度快，能够训练state-of-the-art的模型与大规模的数据。 组件模块化，可以方便的拓展到新的模型和学习任务上。 caffe的一大优势是拥有大量的训练好的经典模型（AlexNet/VGG/Inception）乃至其他state-of-the-art(ResNet等)的模型。收藏在它的model zoo里。 Theano官方网址 链接github网址 链接 Theano的主要优势如下： 集成numpy，可以直接使用numpy的ndarray，API接口学习成本低。 计算稳定性好 动态的生成C或者cuda代码，用以编译成高效率的机器代码。 Theano是一个完全基于python的符号计算库。 Torch官方网址 链接github网址 链接 Torch是LuaJIT上的一个高效的科学计算库，支持大量的机器学习算法，同事以GPU上的计算优先。 Lasagne官方网址 链接github网址 链接 Lasagne是一个基于Theano的轻量级的神经网络库。 Keras官方网址 链接github网址 链接 Keras是崇尚极简、高度模块化的神经网络库，使用python实现，并可以同事运行在TensorFlow和Theano上。 MXNet官方网址 链接github网址 链接 MXNet是DMLC开发的一款开源的、轻量级、可移植的、灵活的深度学习库，它让用户可以混合使用符号编程模式和指令式编程模式来最大化效率和灵活性。 DIGITS官方网址 链接github网址 链接 DIGITS不是一个标准的深度学习库，它可以算是caffe的高级封装。 CNTK官方网址 链接github网址 链接 CNTK是微软研究院开源的深度学习框架。CNTK设计是性能导向的。 Deepelearning4J官方网址 链接github网址 链接 Deepelearning4J是一个基于java和scala的开源的分布式深度学习库，其核心目标是创建一个即插即用的解决方案原型。 chainer官方网址 链接github网址 链接 chainer特性描述： powerfull 支持cuda计算 flexible 支持多种前馈神经网络 intuitive 前馈计算可以引入python的各种控制流 leaf官方网址 链接github网址 链接 leaf是一个基于Rust语言的直观的跨平台的深度学习乃至机器智能框架。 DSSTNEgithub网址 链接 DSSTNE是亚马逊开源的稀疏神经网络框架，在训练稀疏的数据时具有很大优势。]]></content>
+      <categories>
+        <category>机器学习</category>
+        <category>TensorFlow</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>TensorFlow</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[TensorFlow实战-第1章-TensorFlow基础]]></title>
+    <url>%2F2018%2F04%2F17%2FTensorFlow%E5%AE%9E%E6%88%98-%E7%AC%AC1%E7%AB%A0-TensorFlow%E5%9F%BA%E7%A1%80%2F</url>
+    <content type="text"><![CDATA[第1章-TensorFlow基础1.1 TensorFlow概要TensorFlow官方网站 链接TensorFlow github网站 链接TensorFlow模型仓库网站 链接 TensorFlow既是一个实现机器学习算法的接口，同时也是执行机器学习算法的框架。 TensorFlow使用数据流式图来规划计算流程的，它可以将计算映射到不同硬件和操作系统平台。 1.2 TensorFlow编程模型简介1.2.1 核心概念TensorFlow中的计算可以表示为一个有向图，或者称为计算图，其中的每一个计算操作将作为一个节点，节点和节点之间的连接称为边。计算图的每一个节点可以有任意个输入和任意个输出，每一个节点描述了一种运算操作，节点可以算是运算操作的实例化。在计算图边中流动的数据被称为张量(tensor)。 session是用户使用TensorFlow时的交互式接口。 1.2.2 实现原理TensorFlow有一个重要的组件是client即客户端，它通过session的接口和master以及多个work相连。其中每一个work可以与多个硬件设备相连，并负责管理这些硬件。而master则负责指导所有的work按照流程执行计算图。TensorFlow分为单机好分布式两种。 TensorFlow为CPU和GPU提供了管理设备的对象接口，每一个对象负责分配、释放设备的内存，以及执行节点的运算核。 在只有一个硬件设备的情况下，计算图会按照依赖关系被顺序执行。当有多个设备时，情况变得复杂，难点有二： 每一个节点该让什么硬件设备来执行 如何管理节点之间的数据通信。第一个问题，TensorFlow设计了一套为节点分配资源的策略。第二个问题，在多个设备上，计算图会被划分为许多子图，子图通过发送节点和接收节点通信。 1.2.3 拓展功能 TensorFlow原生支持自动求导，但是也会给TensorFlow的优化带来麻烦。 TensorFlow还支持单独执行子图。 TensorFlow支持计算图的控制流。（if/while etc.) input node可以让用户直接输入文件系统路径 队列是TensorFlow任务调度的一个重要特性 容器是TensorFlow中一种特殊的管理长期变量的机制 1.2.4 性能优化 TensorFlow能自动识别重复计算，并改写计算图 可以巧妙的安排计算的顺序来改善数据传输和内存占用的问题 支持异步计算 第三方高度优化库，eg. cuDNN,cuda-convenet 支持对数据精度进行压缩 TensorFlow提供了三种不同的加速神经网络训练的并行计算模式 数据并行 模型并行 流水线并行]]></content>
+      <categories>
+        <category>机器学习</category>
+        <category>TensorFlow</category>
+      </categories>
+      <tags>
+        <tag>机器学习</tag>
+        <tag>TensorFlow</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[mysql导入导出]]></title>
     <url>%2F2018%2F04%2F16%2Fmysql%E5%AF%BC%E5%85%A5%E5%AF%BC%E5%87%BA%2F</url>
     <content type="text"><![CDATA[导入导出 1.导入用文本形式插入数据 LOAD DATA LOCAL INFILE ‘d:/mysql.txt’ INTO TABLE mytable;导入.sql use database;source d:/mysql.sql从另外一张表往这张表插入 INSERT INTO tab1(f1,f2)SELECT a.f1, a.f2FROM a WHERE a.f1=’a’ 2.备份导出要用到MySQL的mysqldump工具，基本用法是： mysqldump [OPTIONS] database [tables]备份MySQL数据库的命令 mysqldump -hhostname -uusername -ppassword databasename backupfile.sql备份MySQL数据库为带删除表的格式，能够让该备份覆盖已有数据库而不需要手动删除原有数据库。 mysqldump -–add-drop-table -uusername -ppassword databasename backupfile.sql直接将MySQL数据库压缩备份 mysqldump -hhostname -uusername -ppassword databasename | gzip backupfile.sql.gz备份MySQL数据库某个(些)表 mysqldump -hhostname -uusername -ppassword databasename specific_table1 specific_table2 backupfile.sql同时备份多个MySQL数据库 mysqldump -hhostname -uusername -ppassword –databases databasename1 databasename2 databasename3 multibackupfile.sql仅仅备份数据库结构 mysqldump –no-data –databases databasename1 databasename2 databasename3 structurebackupfile.sql备份服务器上所有数据库 mysqldump –all-databases allbackupfile.sql还原 3.还原MySQL数据库的命令mysql -hhostname -uusername -ppassword databasename &lt; backupfile.sqlmysql -hhostname -ppassword databasename tablename &lt; backuptablefile.sql还原压缩的MySQL数据库 gunzip &lt; backupfile.sql.gz | mysql -uusername -ppassword databasename将数据库转移到新服务器 mysqldump -uusername -ppassword databasename | mysql –host=... -C databasename将查询结果导入外部文件 SELECT a,b,a+bFROM test_tableINTO OUTFILE ‘/tmp/result.txt’FIELDS TERMINATED BY ‘,’ OPTIONALLY ENCLOSED BY ‘“‘LINES TERMINATED BY ‘\n’ 或者 mysql -u you -p -e “SELECT …” file_name]]></content>
@@ -414,9 +453,9 @@
         <category>sklearn</category>
       </categories>
       <tags>
+        <tag>机器学习</tag>
         <tag>python</tag>
         <tag>手写字体</tag>
-        <tag>机器学习</tag>
         <tag>SVC</tag>
         <tag>SVM</tag>
         <tag>sklearn</tag>
@@ -431,10 +470,10 @@
         <category>python</category>
       </categories>
       <tags>
+        <tag>数据分析</tag>
         <tag>pyhton</tag>
         <tag>javascript-D3</tag>
         <tag>jinja2</tag>
-        <tag>数据分析</tag>
       </tags>
   </entry>
   <entry>

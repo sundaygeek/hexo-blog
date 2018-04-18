@@ -478,13 +478,13 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a</span><br></pre></td></tr></table></figure>
 <pre><code>array([1, 2, 3])
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type(a), a.dtype, a.ndim, a.size, a.shape, a.itemsize</span><br></pre></td></tr></table></figure>
-<pre><code>(numpy.ndarray, dtype(&apos;int64&apos;), 1, 3, (3,), 8)
+<pre><code>(numpy.ndarray, dtype(&#39;int64&#39;), 1, 3, (3,), 8)
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">b = np.array([[<span class="number">1.3</span>, <span class="number">2.4</span>],[<span class="number">0.3</span>, <span class="number">4.1</span>]])</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">b</span><br></pre></td></tr></table></figure>
 <pre><code>array([[1.3, 2.4],
        [0.3, 4.1]])
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type(b), b.dtype, b.ndim, b.size, b.shape, b.itemsize</span><br></pre></td></tr></table></figure>
-<pre><code>(numpy.ndarray, dtype(&apos;float64&apos;), 2, 4, (2, 2), 8)
+<pre><code>(numpy.ndarray, dtype(&#39;float64&#39;), 2, 4, (2, 2), 8)
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">b.data, type(b.data)</span><br></pre></td></tr></table></figure>
 <pre><code>(&lt;memory at 0x7f3df8064558&gt;, memoryview)
 </code></pre><h1 id="3-3-1-创建数组-34"><a href="#3-3-1-创建数组-34" class="headerlink" title="3.3.1　创建数组　　34"></a>3.3.1　创建数组　　34</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">c = np.array([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],[<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]])</span><br></pre></td></tr></table></figure>
@@ -502,10 +502,10 @@
        [7, 8, 9]])
 </code></pre><h1 id="3-3-2-数据类型-34"><a href="#3-3-2-数据类型-34" class="headerlink" title="3.3.2　数据类型　　34"></a>3.3.2　数据类型　　34</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g = np.array([[<span class="string">'a'</span>, <span class="string">'b'</span>],[<span class="string">'c'</span>, <span class="string">'d'</span>]])</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g</span><br></pre></td></tr></table></figure>
-<pre><code>array([[&apos;a&apos;, &apos;b&apos;],
-       [&apos;c&apos;, &apos;d&apos;]], dtype=&apos;&lt;U1&apos;)
+<pre><code>array([[&#39;a&#39;, &#39;b&#39;],
+       [&#39;c&#39;, &#39;d&#39;]], dtype=&#39;&lt;U1&#39;)
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">g.dtype, g.dtype.name</span><br></pre></td></tr></table></figure>
-<pre><code>(dtype(&apos;&lt;U1&apos;), &apos;str32&apos;)
+<pre><code>(dtype(&#39;&lt;U1&#39;), &#39;str32&#39;)
 </code></pre><h1 id="3-3-3-dtype选项-35"><a href="#3-3-3-dtype选项-35" class="headerlink" title="3.3.3　dtype选项　　35"></a>3.3.3　dtype选项　　35</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f = np.array([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>],[<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]], dtype=complex)</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f</span><br></pre></td></tr></table></figure>
 <pre><code>array([[1.+0.j, 2.+0.j, 3.+0.j],
@@ -870,26 +870,26 @@
         [ 9, 10]]])
 </code></pre><h1 id="3-10-结构化数组-52"><a href="#3-10-结构化数组-52" class="headerlink" title="3.10　结构化数组　　52"></a>3.10　结构化数组　　52</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">structured = np.array([(<span class="number">1</span>, <span class="string">'First'</span>, <span class="number">0.5</span>, <span class="number">1</span>+<span class="number">2j</span>),(<span class="number">2</span>, <span class="string">'Second'</span>, <span class="number">1.3</span>, <span class="number">2</span><span class="number">-2j</span>), (<span class="number">3</span>, <span class="string">'Third'</span>, <span class="number">0.8</span>, <span class="number">1</span>+<span class="number">3j</span>)],dtype=(<span class="string">'i2, a6, f4, c8'</span>))</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">structured</span><br></pre></td></tr></table></figure>
-<pre><code>array([(1, b&apos;First&apos;, 0.5, 1.+2.j), (2, b&apos;Second&apos;, 1.3, 2.-2.j),
-       (3, b&apos;Third&apos;, 0.8, 1.+3.j)],
-      dtype=[(&apos;f0&apos;, &apos;&lt;i2&apos;), (&apos;f1&apos;, &apos;S6&apos;), (&apos;f2&apos;, &apos;&lt;f4&apos;), (&apos;f3&apos;, &apos;&lt;c8&apos;)])
+<pre><code>array([(1, b&#39;First&#39;, 0.5, 1.+2.j), (2, b&#39;Second&#39;, 1.3, 2.-2.j),
+       (3, b&#39;Third&#39;, 0.8, 1.+3.j)],
+      dtype=[(&#39;f0&#39;, &#39;&lt;i2&#39;), (&#39;f1&#39;, &#39;S6&#39;), (&#39;f2&#39;, &#39;&lt;f4&#39;), (&#39;f3&#39;, &#39;&lt;c8&#39;)])
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">structured = np.array([(<span class="number">1</span>, <span class="string">'First'</span>, <span class="number">0.5</span>, <span class="number">1</span>+<span class="number">2j</span>),(<span class="number">2</span>, <span class="string">'Second'</span>, <span class="number">1.3</span>,<span class="number">2</span><span class="number">-2j</span>),(<span class="number">3</span>, <span class="string">'Third'</span>, <span class="number">0.8</span>, <span class="number">1</span>+<span class="number">3j</span>)],dtype=(<span class="string">'int16, a6, float32, complex64'</span>))</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">structured</span><br></pre></td></tr></table></figure>
-<pre><code>array([(1, b&apos;First&apos;, 0.5, 1.+2.j), (2, b&apos;Second&apos;, 1.3, 2.-2.j),
-       (3, b&apos;Third&apos;, 0.8, 1.+3.j)],
-      dtype=[(&apos;f0&apos;, &apos;&lt;i2&apos;), (&apos;f1&apos;, &apos;S6&apos;), (&apos;f2&apos;, &apos;&lt;f4&apos;), (&apos;f3&apos;, &apos;&lt;c8&apos;)])
+<pre><code>array([(1, b&#39;First&#39;, 0.5, 1.+2.j), (2, b&#39;Second&#39;, 1.3, 2.-2.j),
+       (3, b&#39;Third&#39;, 0.8, 1.+3.j)],
+      dtype=[(&#39;f0&#39;, &#39;&lt;i2&#39;), (&#39;f1&#39;, &#39;S6&#39;), (&#39;f2&#39;, &#39;&lt;f4&#39;), (&#39;f3&#39;, &#39;&lt;c8&#39;)])
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">structured[<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
-<pre><code>(2, b&apos;Second&apos;, 1.3, 2.-2.j)
+<pre><code>(2, b&#39;Second&#39;, 1.3, 2.-2.j)
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">structured[<span class="string">'f1'</span>]</span><br></pre></td></tr></table></figure>
-<pre><code>array([b&apos;First&apos;, b&apos;Second&apos;, b&apos;Third&apos;], dtype=&apos;|S6&apos;)
+<pre><code>array([b&#39;First&#39;, b&#39;Second&#39;, b&#39;Third&#39;], dtype=&#39;|S6&#39;)
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">structured = np.array([(<span class="number">1</span>,<span class="string">'First'</span>,<span class="number">0.5</span>,<span class="number">1</span>+<span class="number">2j</span>),(<span class="number">2</span>,<span class="string">'Second'</span>,<span class="number">1.3</span>,<span class="number">2</span><span class="number">-2j</span>),(<span class="number">3</span>,<span class="string">'Third'</span>,<span class="number">0.8</span>,<span class="number">1</span>+<span class="number">3j</span>)],dtype=[(<span class="string">'id'</span>,<span class="string">'i2'</span>),(<span class="string">'position'</span>,<span class="string">'a6'</span>),(<span class="string">'value'</span>,<span class="string">'f4'</span>),(<span class="string">'complex'</span>,<span class="string">'c8'</span>)])</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">structured</span><br></pre></td></tr></table></figure>
-<pre><code>array([(1, b&apos;First&apos;, 0.5, 1.+2.j), (2, b&apos;Second&apos;, 1.3, 2.-2.j),
-       (3, b&apos;Third&apos;, 0.8, 1.+3.j)],
-      dtype=[(&apos;id&apos;, &apos;&lt;i2&apos;), (&apos;position&apos;, &apos;S6&apos;), (&apos;value&apos;, &apos;&lt;f4&apos;), (&apos;complex&apos;, &apos;&lt;c8&apos;)])
+<pre><code>array([(1, b&#39;First&#39;, 0.5, 1.+2.j), (2, b&#39;Second&#39;, 1.3, 2.-2.j),
+       (3, b&#39;Third&#39;, 0.8, 1.+3.j)],
+      dtype=[(&#39;id&#39;, &#39;&lt;i2&#39;), (&#39;position&#39;, &#39;S6&#39;), (&#39;value&#39;, &#39;&lt;f4&#39;), (&#39;complex&#39;, &#39;&lt;c8&#39;)])
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">structured.dtype.names = (<span class="string">'id'</span>,<span class="string">'order'</span>,<span class="string">'value'</span>,<span class="string">'complex'</span>)</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">structured[<span class="string">'order'</span>]</span><br></pre></td></tr></table></figure>
-<pre><code>array([b&apos;First&apos;, b&apos;Second&apos;, b&apos;Third&apos;], dtype=&apos;|S6&apos;)
+<pre><code>array([b&#39;First&#39;, b&#39;Second&#39;, b&#39;Third&#39;], dtype=&#39;|S6&#39;)
 </code></pre><h1 id="3-11-数组数据文件的读写-53"><a href="#3-11-数组数据文件的读写-53" class="headerlink" title="3.11　数组数据文件的读写　　53"></a>3.11　数组数据文件的读写　　53</h1><h1 id="3-11-1-二进制文件的读写-54"><a href="#3-11-1-二进制文件的读写-54" class="headerlink" title="3.11.1　二进制文件的读写　　54"></a>3.11.1　二进制文件的读写　　54</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data = np.random.random(<span class="number">16</span>).reshape(<span class="number">4</span>,<span class="number">4</span>)</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data</span><br></pre></td></tr></table></figure>
 <pre><code>array([[0.87899377, 0.11342252, 0.6682891 , 0.90832539],
@@ -906,11 +906,11 @@
 </code></pre><h1 id="3-11-2-读取文件中的列表形式数据-54"><a href="#3-11-2-读取文件中的列表形式数据-54" class="headerlink" title="3.11.2　读取文件中的列表形式数据　　54"></a>3.11.2　读取文件中的列表形式数据　　54</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data = np.genfromtxt(<span class="string">'data.csv'</span>, delimiter=<span class="string">','</span>, names=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data</span><br></pre></td></tr></table></figure>
 <pre><code>array([(1., 123., 1.4, 23.), (2., 110., 0.5, 18.), (3., 164., 2.1, 19.)],
-      dtype=[(&apos;id&apos;, &apos;&lt;f8&apos;), (&apos;value1&apos;, &apos;&lt;f8&apos;), (&apos;value2&apos;, &apos;&lt;f8&apos;), (&apos;value3&apos;, &apos;&lt;f8&apos;)])
+      dtype=[(&#39;id&#39;, &#39;&lt;f8&#39;), (&#39;value1&#39;, &#39;&lt;f8&#39;), (&#39;value2&#39;, &#39;&lt;f8&#39;), (&#39;value3&#39;, &#39;&lt;f8&#39;)])
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data2 = np.genfromtxt(<span class="string">'data2.csv'</span>, delimiter=<span class="string">','</span>, names=<span class="keyword">True</span>)</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">data2</span><br></pre></td></tr></table></figure>
 <pre><code>array([(1., 123., 1.4, 23.), (2., 110., nan, 18.), (3.,  nan, 2.1, 19.)],
-      dtype=[(&apos;id&apos;, &apos;&lt;f8&apos;), (&apos;value1&apos;, &apos;&lt;f8&apos;), (&apos;value2&apos;, &apos;&lt;f8&apos;), (&apos;value3&apos;, &apos;&lt;f8&apos;)])
+      dtype=[(&#39;id&#39;, &#39;&lt;f8&#39;), (&#39;value1&#39;, &#39;&lt;f8&#39;), (&#39;value2&#39;, &#39;&lt;f8&#39;), (&#39;value3&#39;, &#39;&lt;f8&#39;)])
 </code></pre><h1 id="3-12-小结-55"><a href="#3-12-小结-55" class="headerlink" title="3.12　小结　　55"></a>3.12　小结　　55</h1>
       
     </div>
@@ -1109,7 +1109,7 @@ var jiathis_config={
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">103</span>
+                    <span class="site-state-item-count">104</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1279,7 +1279,11 @@ var jiathis_config={
                     
                       
                     
-                    <span class="site-state-item-count">41</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1415,7 +1419,7 @@ var jiathis_config={
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共207.6k字</span>
+  <span class="post-count">博客全站共211.7k字</span>
 </div>
 
         
@@ -1917,6 +1921,29 @@ var jiathis_config={
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+    
   
 
 

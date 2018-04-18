@@ -477,7 +477,7 @@
         <p>原文链接：<a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=7257" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=7257</a></p>
 <h1 id="I-Introduction"><a href="#I-Introduction" class="headerlink" title="I. Introduction"></a>I. Introduction</h1><p>在之前的文档我们已经覆盖了基本IP地址分配过程，解释了在用户同一个地点不同时间接入网络时LTE网络是怎么分配IP地址的。这个文档有一点不同，学习用户在不同物理位置上接入网络时的分配IP过程。和之前的文档意一样，要讨论两种分配方式：静态和动态的。另外我们要学习UE和PDN之间的连接PGW是怎么选择的，默认承载路径是怎么设置的。</p>
 <p>对于动态分配方式，不管UE接入到哪个城市，LTE网络都分配一个动态的IP地址给UE，并且UE可以使用这个IP地址通过PGW连接到PDN。这个IP地址不管用户的接入位置和之前文档介绍的分配方式一样。但是对于静态分配方式，网络分配一个固定的IP地址，允许UE通过一个指定的PGW接入到PDN，不管UE接入到哪里。这个过程和之前文档根据用户的签约配置文件分配固定IP地址的方式一样。但是不同点在于默认承载路径要在城市内或者两个物理城市之间设置，现在有一个指定的PGW。</p>
-<p>这个文档组织如下：第二章，讨论不同IP地址分配类型–静态和动态的以及他们的特点。第三章和第四章将提供动态和静态分配的详细过程。</p>
+<p>这个文档组织如下：第二章，讨论不同IP地址分配类型—静态和动态的以及他们的特点。第三章和第四章将提供动态和静态分配的详细过程。</p>
 <h1 id="II-Types-of-IP-Address-Allocation"><a href="#II-Types-of-IP-Address-Allocation" class="headerlink" title="II. Types of IP Address Allocation"></a>II. Types of IP Address Allocation</h1><p>下面，我们将使用两个城市的模型来描述分配过程。在这个场景中，我们假设在每一个城市（city1和city2）都包含MME和SGW和PGW。每一个PGW有自己的IP地址池，只有city1有HSS。UE仅仅使用一个PDN服务（Internet）。当请求PDN连接时，UE请求dns服务器地址和PDN地址。详细的场景如下：</p>
 <ol>
 <li>在city1，用户打开UE，接入LTE网络，使用PDN服务</li>
@@ -485,7 +485,7 @@
 <li>一旦到达city2，用户打开UE，接入LTE网络，使用PDN服务。</li>
 </ol>
 <p>在city1或者city2初始附着时，UE向MME请求PDN连接。一旦请求，MME通过UE接入的PDN选择一个PGW，这个PGW决定IP地址。当默认承载建立之后PGW转发IP地址给UE，UE可以使用这个IP地址来使用PDN服务。</p>
-<p>在这个两个城市的模型中，IP地址以两种类型分配–动态和静态。动态分配在第三章讨论，静态在第四章讨论。每一种方式的IP地址是谁选择和PGW选择的方式是不同的，如下表所示：</p>
+<p>在这个两个城市的模型中，IP地址以两种类型分配—动态和静态。动态分配在第三章讨论，静态在第四章讨论。每一种方式的IP地址是谁选择和PGW选择的方式是不同的，如下表所示：</p>
 <p><img src="http://img.blog.csdn.net/20151021164240472" alt="这里写图片描述"></p>
 <h1 id="III-Dynamic-IP-Address-Allocation"><a href="#III-Dynamic-IP-Address-Allocation" class="headerlink" title="III. Dynamic IP Address Allocation"></a>III. Dynamic IP Address Allocation</h1><p>对于动态分配方式，IP地址不论用户什么时候执行初始附着到网络都是动态分配的。MME通过用户接入的PDN选择一个PGW，并要求建立一个EPS会话。PGW动态选择一个IP地址供UE使用来接入PDN。图1描述了在两个城市模型中动态IP地址分配的情况。<br><img src="http://img.blog.csdn.net/20151021164533729" alt="这里写图片描述"></p>
 <p><strong>PGW中IP地址提供</strong><br>在PGW1和PGW2中，IP地址池包含待分配的IP地址，dns服务器地址已经由网络运营商提供了。<br><img src="http://img.blog.csdn.net/20151021164819551" alt="这里写图片描述"><br><strong>IP地址获取和PDN连接</strong><br>用户打开UE，向当地的MME请求PDN连接。从hss下载的签约配置文件中，MME知道UE不是使用静态IP地址。所以MME选择一个本地的PGW（PGW1 PGW2），接着从这个PGW IP地址池中选择一个可用的IP地址分配给UE。当默认承载建立时，UE从本地PGW中获得dns服务器地址和UE IP地址，接着，通过本地PGW连接PDN使用Internet服务。</p>
@@ -712,7 +712,7 @@ var jiathis_config={
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">103</span>
+                    <span class="site-state-item-count">104</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -882,7 +882,11 @@ var jiathis_config={
                     
                       
                     
-                    <span class="site-state-item-count">41</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1018,7 +1022,7 @@ var jiathis_config={
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共207.6k字</span>
+  <span class="post-count">博客全站共211.7k字</span>
 </div>
 
         
@@ -1520,6 +1524,29 @@ var jiathis_config={
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+    
   
 
 

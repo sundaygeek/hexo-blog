@@ -501,6 +501,7 @@
 <li>在此图中所示的采样数是基于采样率是30.072 M个samples/s和2048 bins/ IFFT（N_ifft）的假设。因为实际情况下的采样率和N_ifft取决于系统带宽，则需要根据特定的BW缩放这个数字。</li>
 <li>每个系统带宽下的典型N_ifft如下</li>
 </ul>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -542,6 +543,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>下面显示了“LTE资源网格”的总体子帧结构（<a href="http://dhagle.in/LTE）" target="_blank" rel="noopener">http://dhagle.in/LTE）</a></p>
 <p><img src="http://img.blog.csdn.net/20151120175907830" alt="这里写图片描述"></p>
 <p>现在，让我们进一步放大帧结构，但这次扩大在频域，而不是在时域。你会得到下面的全部细节图。<br><img src="http://img.blog.csdn.net/20151120175952596" alt="这里写图片描述"></p>
@@ -854,7 +856,7 @@ var jiathis_config={
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">103</span>
+                    <span class="site-state-item-count">104</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1024,7 +1026,11 @@ var jiathis_config={
                     
                       
                     
-                    <span class="site-state-item-count">41</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1160,7 +1166,7 @@ var jiathis_config={
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共207.6k字</span>
+  <span class="post-count">博客全站共211.7k字</span>
 </div>
 
         
@@ -1662,6 +1668,29 @@ var jiathis_config={
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+    
   
 
 

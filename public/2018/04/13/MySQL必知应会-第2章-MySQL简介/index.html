@@ -500,7 +500,7 @@
 <p><strong>安装mysql-linux</strong><br><img src="/2018/04/13/MySQL必知应会-第2章-MySQL简介/CAPTURE_2018413_94113.jpg" alt="pic"></p>
 <h3 id="2-1-2-MySQL版本"><a href="#2-1-2-MySQL版本" class="headerlink" title="2.1.2 MySQL版本"></a>2.1.2 MySQL版本</h3><p>MySQL的当前版本为版本5<br>版本要求说明，如果某章针对具体某个MySQL版本，则将在该章开始处明确说明。<br><img src="/2018/04/13/MySQL必知应会-第2章-MySQL简介/CAPTURE_2018413_93416.jpg" alt="pic"></p>
 <h2 id="2-2-MySQL工具"><a href="#2-2-MySQL工具" class="headerlink" title="2.2 MySQL工具"></a>2.2 MySQL工具</h2><p>MySQL是一个客户机—服务器DBMS，因此，为了使用MySQL，需要有一个客户机，即你需要用来与MySQL打交道(给MySQL提供要执行的命令)的一个应用。有许多客户机应用可供选择，但在学习MySQL(确切地说，在编写和测试MySQL脚本时)，最好是使用专门用途的实用程序。特别是有3个工具需要提及。</p>
-<h3 id="2-2-1-mysql命令行实用程序"><a href="#2-2-1-mysql命令行实用程序" class="headerlink" title="2.2.1 mysql命令行实用程序"></a>2.2.1 mysql命令行实用程序</h3><p>每个MySQL安装都有一个名为mysql的简单命令行实用程序。<br>MySQL选项和参数 如果仅输入mysql， 可能会出现一个错误消息。因为可能需要安全证书，或者是因为MySQL没有运行在本地或默认端口上。 mysql接受你可以(和可能需要)使用的一组命令行参数。例如，为了指定用户登录名ben，应该使用mysql -u ben。为了给出用户名、主机名、端口和口令，应该使用mysql -u ben -p -h myserver -P 9999。完整的命令行选项和参数列表可用mysql –help获得。</p>
+<h3 id="2-2-1-mysql命令行实用程序"><a href="#2-2-1-mysql命令行实用程序" class="headerlink" title="2.2.1 mysql命令行实用程序"></a>2.2.1 mysql命令行实用程序</h3><p>每个MySQL安装都有一个名为mysql的简单命令行实用程序。<br>MySQL选项和参数 如果仅输入mysql， 可能会出现一个错误消息。因为可能需要安全证书，或者是因为MySQL没有运行在本地或默认端口上。 mysql接受你可以(和可能需要)使用的一组命令行参数。例如，为了指定用户登录名ben，应该使用mysql -u ben。为了给出用户名、主机名、端口和口令，应该使用mysql -u ben -p -h myserver -P 9999。完整的命令行选项和参数列表可用mysql —help获得。</p>
 <p>在操作系统命令提示符下输入mysql将出现一个如下的简单提示：<br><img src="/2018/04/13/MySQL必知应会-第2章-MySQL简介/CAPTURE_2018413_94433.jpg" alt="pic"></p>
 <p>当然，具体的版本和连接信息可能不同，但都可以使用这个实用程序。请注意： </p>
 <ul>
@@ -730,7 +730,7 @@ var jiathis_config={
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">103</span>
+                    <span class="site-state-item-count">104</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -900,7 +900,11 @@ var jiathis_config={
                     
                       
                     
-                    <span class="site-state-item-count">41</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1036,7 +1040,7 @@ var jiathis_config={
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共207.6k字</span>
+  <span class="post-count">博客全站共211.7k字</span>
 </div>
 
         
@@ -1538,6 +1542,29 @@ var jiathis_config={
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+    
   
 
 

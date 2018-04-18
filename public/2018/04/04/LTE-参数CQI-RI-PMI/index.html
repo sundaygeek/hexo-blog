@@ -468,9 +468,9 @@
       
         <p>原文链接：<br><a href="http://lteuniversity.com/get_trained/expert_opinion1/b/hongyanlei/archive/2009/08/06/cqi-reporting-in-lte.aspx" target="_blank" rel="noopener">http://lteuniversity.com/get_trained/expert_opinion1/b/hongyanlei/archive/2009/08/06/cqi-reporting-in-lte.aspx</a></p>
 <p>CQI = Channel Quality Indicator;信道质量指示;<br>RI = rank indication;秩指示;<br>PMI = Precoding Matrix Indicator;预编码矩阵指示;</p>
-<p>CQI用来反映下行PDSCH的信道质量。用0~15来表示PDSCH的信道质量。0表示信道质量最差，15表示信道质量最好。<br>–&gt;UE在PUCCH/PUSCH上发送CQI给eNB。eNB得到了这个CQI值，就质量当前PDSCH无线信道条件好不好。 这样就可以有根据的来调度PDSCH。<br>–&gt;换句话说，LTE中下行的自适应编码调制（AMC）的依据是什么？其中一个依据就是CQI。<br>–&gt;再通俗一点的说法：信道质量好，那eNB就多发送点数据；信道质量不好，那就保险点，少发送点数据。</p>
+<p>CQI用来反映下行PDSCH的信道质量。用0~15来表示PDSCH的信道质量。0表示信道质量最差，15表示信道质量最好。<br>—&gt;UE在PUCCH/PUSCH上发送CQI给eNB。eNB得到了这个CQI值，就质量当前PDSCH无线信道条件好不好。 这样就可以有根据的来调度PDSCH。<br>—&gt;换句话说，LTE中下行的自适应编码调制（AMC）的依据是什么？其中一个依据就是CQI。<br>—&gt;再通俗一点的说法：信道质量好，那eNB就多发送点数据；信道质量不好，那就保险点，少发送点数据。</p>
 <p>RI用来指示PDSCH的有效的数据层数。用来告诉eNB，UE现在可以支持的CW数。也就是说RI=1，1CW，RI&gt;1，2 CW. CW-Code Word码字</p>
-<p>PMI用来指示码本集合的index。由于LTE应用了多天线的MIMO技术。在PDSCH物理层的基带处理中，有一个预编码技术。<br>–&gt;这里的预编码简单的说，就是乘以各种不同的precoding矩阵。而这个矩阵，可以采用TM3这样没有反馈的方式。<br>–&gt;也可以采用TM4这样通过UE上报PMI来决定这个预编码矩阵。从原理上说，这样使得PDSCH信号是最优的。</p>
+<p>PMI用来指示码本集合的index。由于LTE应用了多天线的MIMO技术。在PDSCH物理层的基带处理中，有一个预编码技术。<br>—&gt;这里的预编码简单的说，就是乘以各种不同的precoding矩阵。而这个矩阵，可以采用TM3这样没有反馈的方式。<br>—&gt;也可以采用TM4这样通过UE上报PMI来决定这个预编码矩阵。从原理上说，这样使得PDSCH信号是最优的。</p>
 <p>下行的传输模式(TM)很多，在R9版本下行定义了TM1~TM8；其中TM4,6,8的情况下，才需要有PMI的反馈。</p>
 <p>更多详细的内容参见36.211、213。</p>
 <p>CQI（信道质量指示）报告是LTE的一个重要因素，并具有对系统性能显著影响。有两种类型的CQI报告在LTE中：周期性和非周期性。周期性CQI报告是由PUCCH携带。但是，如果UE需要在同一子帧发送的UL数据，周期性CQI报告将使用的PUSCH，连同UL数据传输。这是因为UE不能PUCCH和PUSCH的同时发送。在此情况下，周期性PUCCH资源将是空闲的。由于定期CQI报告带来了“永远在线”的信令开销，报告粒度相对粗糙。为了获得更详细的CQI报告，则eNB可以在需要时触发不定期CQI报告。非周期性CQI报告被发送PUSCH上，连同UL数据或独自发送。</p>
@@ -664,7 +664,7 @@ var jiathis_config={
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">103</span>
+                    <span class="site-state-item-count">104</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -834,7 +834,11 @@ var jiathis_config={
                     
                       
                     
-                    <span class="site-state-item-count">41</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -954,7 +958,7 @@ var jiathis_config={
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共207.6k字</span>
+  <span class="post-count">博客全站共211.7k字</span>
 </div>
 
         
@@ -1456,6 +1460,29 @@ var jiathis_config={
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+    
   
 
 

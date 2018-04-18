@@ -543,7 +543,7 @@
 </li>
 <li>UE History Info: information about the cells that UE has accessed while staying Active, including each cell’s ECGI, type and the duration of UE’s stay in the cell.</li>
 </ul>
-<p>5) [Target eNB] 准备X2切换<br>一旦接收到handover request消息，target eNB开始切换准备为UE提供无缝的服务。<br>(i) 首先，target eNB从source eNB接收的KeNB*生成AS安全秘钥(KRRCint, KRRCenc, KUPenc)。使用这些秘钥，target eNB可以和UE安全的通信。<br>(ii) 接着，target eNB基于要建立的E-RAB信息检查source eNB提供的相同的QoS是否在target eNB中可用。如果可用，target eNB通过存储在source eNB的上行S1承载信息(S1 S-GW TEID)建立上行S1承载连接SGW。<br>(iii) 接着，基于E-RAB QoS信息，target eNB在无线链路上为UE保留RRc资源，并分配C-RNTI。<br>(iv) 当UE执行切换时，到达source eNB的下行数据包需要转发给target eNB。为了实现这个，target eNB分配X2 Target eNB TEID (DL TEID of X2 GTP tunnel) ，source eNB可以建立X2传输承载（GTP隧道）。<br>6) [Source eNB &lt;- Target eNB] 给source eNB通知切换准备完成<br>target eNB发送handover request ack消息包含在step-5准备的所有资源。这些信息如下：<br><strong>Handover Request Ack</strong> (E-RAB Admitted (E-RAB ID, Target eNB TEID), Handover Command (Target CRNTI, Target DRB ID, AS Security Algorithm of Target eNB))</p>
+<p>5) [Target eNB] 准备X2切换<br>一旦接收到handover request消息，target eNB开始切换准备为UE提供无缝的服务。<br>(i) 首先，target eNB从source eNB接收的KeNB<em>生成AS安全秘钥(KRRCint, KRRCenc, KUPenc)。使用这些秘钥，target eNB可以和UE安全的通信。<br>(ii) 接着，target eNB基于要建立的E-RAB信息检查source eNB提供的相同的QoS是否在target eNB中可用。如果可用，target eNB通过存储在source eNB的上行S1承载信息(S1 S-GW TEID)建立上行S1承载连接SGW。<br>(iii) 接着，基于E-RAB QoS信息，target eNB在无线链路上为UE保留RRc资源，并分配C-RNTI。<br>(iv) 当UE执行切换时，到达source eNB的下行数据包需要转发给target eNB。为了实现这个，target eNB分配X2 Target eNB TEID (DL TEID of X2 GTP tunnel) ，source eNB可以建立X2传输承载（GTP隧道）。<br>6) [Source eNB &lt;- Target eNB] 给source eNB通知切换准备完成<br>target eNB发送handover request ack消息包含在step-5准备的所有资源。这些信息如下：<br><em>*Handover Request Ack</em></em> (E-RAB Admitted (E-RAB ID, Target eNB TEID), Handover Command (Target CRNTI, Target DRB ID, AS Security Algorithm of Target eNB))</p>
 <ul>
 <li>E-RAB Admitted 12: includes i) E-RAB ID allocated by the target eNB, and ii) TEID information of X2 transport bearer through which E-RAB packets are to be forwarded to the target eNB.</li>
 <li>Handover Command: Transparent Container, delivered by the target eNB to the source eNB, that contains information that UE needs to access the target eNB<ul>
@@ -558,7 +558,7 @@
 <p><img src="http://img.blog.csdn.net/20151009085052813" alt="这里写图片描述"></p>
 <p>8) [UE &lt;- Source eNB] 命令切换<br>一旦source eNB和target eNB完成切换准备，source eNB发送handover command消息命令UE执行切换。</p>
 <p>9) [UE] 执行切换<br>UE从handover command消息中获得C-RNTI和DRB ID用于target cell，并从source eNB上detach。现在UE和source eNB之间的所有数据包都中断了，切换中断时间周期开始。</p>
-<p>10) [UE] AS安全建立<br>UE产生AS安全秘钥用于target eNB的无线链路。首先从source eNB的KeNB/target cell的PCI和频点信息中生成KeNB*，接着通过target eNB选择的AS安全算法来生成target eNB的AS安全秘钥(KRRCint, KRRCenc, KUPenc) 。<br>11) [Source eNB -&gt; Target eNB] 通知发送或者接收的数据包序号<br>source eNB给target eNB发送SN Status Transfer 消息通知从哪个数据包开始发送或者接收，在这个消息中包含下行计数和上行计数，这个计数值是PDCP PDU的计数，每一个计数32bit，是由Hyper Frame Number (HFN) and PDCP Sequence Number (SN)组成。这个信息如下所示：<br><strong>SN Status Transfer</strong> (DL Count, UL Count)</p>
+<p>10) [UE] AS安全建立<br>UE产生AS安全秘钥用于target eNB的无线链路。首先从source eNB的KeNB/target cell的PCI和频点信息中生成KeNB<em>，接着通过target eNB选择的AS安全算法来生成target eNB的AS安全秘钥(KRRCint, KRRCenc, KUPenc) 。<br>11) [Source eNB -&gt; Target eNB] 通知发送或者接收的数据包序号<br>source eNB给target eNB发送SN Status Transfer 消息通知从哪个数据包开始发送或者接收，在这个消息中包含下行计数和上行计数，这个计数值是PDCP PDU的计数，每一个计数32bit，是由Hyper Frame Number (HFN) and PDCP Sequence Number (SN)组成。这个信息如下所示：<br><em>*SN Status Transfer</em></em> (DL Count, UL Count)</p>
 <ul>
 <li>DL Count: Count of the first packet to send to the UE</li>
 <li>UL Count: Count of the first packet to receive from the UE</li>
@@ -781,7 +781,7 @@ var jiathis_config={
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">103</span>
+                    <span class="site-state-item-count">104</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -951,7 +951,11 @@ var jiathis_config={
                     
                       
                     
-                    <span class="site-state-item-count">41</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1087,7 +1091,7 @@ var jiathis_config={
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共207.6k字</span>
+  <span class="post-count">博客全站共211.7k字</span>
 </div>
 
         
@@ -1589,6 +1593,29 @@ var jiathis_config={
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+    
   
 
 

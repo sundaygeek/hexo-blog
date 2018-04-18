@@ -497,7 +497,7 @@
 </code></pre><p><img src="/2018/04/12/python数据分析实战-第11章-识别手写数字/output_5_1.png" alt="png"></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">svc.fit(digits.data[<span class="number">1</span>:<span class="number">1790</span>], digits.target[<span class="number">1</span>:<span class="number">1790</span>])</span><br></pre></td></tr></table></figure>
 <pre><code>SVC(C=100.0, cache_size=200, class_weight=None, coef0=0.0, degree=3,
-  gamma=0.001, kernel=&apos;rbf&apos;, max_iter=-1, probability=False,
+  gamma=0.001, kernel=&#39;rbf&#39;, max_iter=-1, probability=False,
   random_state=None, shrinking=True, tol=0.001, verbose=False)
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">321</span>)</span><br><span class="line">plt.imshow(digits.images[<span class="number">1791</span>], cmap=plt.cm.gray_r, interpolation=<span class="string">'nearest'</span>)</span><br><span class="line">plt.subplot(<span class="number">322</span>)</span><br><span class="line">plt.imshow(digits.images[<span class="number">1792</span>], cmap=plt.cm.gray_r, interpolation=<span class="string">'nearest'</span>)</span><br><span class="line">plt.subplot(<span class="number">323</span>)</span><br><span class="line">plt.imshow(digits.images[<span class="number">1793</span>], cmap=plt.cm.gray_r, interpolation=<span class="string">'nearest'</span>)</span><br><span class="line">plt.subplot(<span class="number">324</span>)</span><br><span class="line">plt.imshow(digits.images[<span class="number">1794</span>], cmap=plt.cm.gray_r, interpolation=<span class="string">'nearest'</span>)</span><br><span class="line">plt.subplot(<span class="number">325</span>)</span><br><span class="line">plt.imshow(digits.images[<span class="number">1795</span>], cmap=plt.cm.gray_r, interpolation=<span class="string">'nearest'</span>)</span><br><span class="line">plt.subplot(<span class="number">326</span>)</span><br><span class="line">plt.imshow(digits.images[<span class="number">1796</span>], cmap=plt.cm.gray_r, interpolation=<span class="string">'nearest'</span>)</span><br></pre></td></tr></table></figure>
 <pre><code>&lt;matplotlib.image.AxesImage at 0x175e6b00&gt;
@@ -701,7 +701,7 @@ var jiathis_config={
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">103</span>
+                    <span class="site-state-item-count">104</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -871,7 +871,11 @@ var jiathis_config={
                     
                       
                     
-                    <span class="site-state-item-count">41</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -991,7 +995,7 @@ var jiathis_config={
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共207.6k字</span>
+  <span class="post-count">博客全站共211.7k字</span>
 </div>
 
         
@@ -1493,6 +1497,29 @@ var jiathis_config={
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+    
   
 
 

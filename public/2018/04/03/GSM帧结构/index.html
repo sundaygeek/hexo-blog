@@ -508,7 +508,7 @@
 <li>Flag bit是用来只是这个信道是携带的用户负载（flag=0）,或者是控制消息bit（flag=1）,也就是说，在TCH中，flag=0。在其他信道中，Flag=1。</li>
 </ul>
 <h2 id="lt-Dummy-Burst-gt-哑脉冲序列"><a href="#lt-Dummy-Burst-gt-哑脉冲序列" class="headerlink" title="&lt; Dummy Burst &gt;哑脉冲序列"></a>&lt; Dummy Burst &gt;哑脉冲序列</h2><p>这个burst像正常脉冲学列，但是没有任何有意义的bit传输。</p>
-<h1 id="多帧的帧结构"><a href="#多帧的帧结构" class="headerlink" title="多帧的帧结构"></a>多帧的帧结构</h1><p>GSM中有两种类型的多帧。一种叫控制多帧，另外一种叫负载多帧。<br>（slot–frame–multiframe(control or traffic)–super frame–hyperfame）</p>
+<h1 id="多帧的帧结构"><a href="#多帧的帧结构" class="headerlink" title="多帧的帧结构"></a>多帧的帧结构</h1><p>GSM中有两种类型的多帧。一种叫控制多帧，另外一种叫负载多帧。<br>（slot—frame—multiframe(control or traffic)—super frame—hyperfame）</p>
 <p>下面一个示例描述<strong>控制多帧</strong>。每一个multi-frame有51x8个时隙，值得注意的是在每一帧的第一个时隙都用于控制信道。在这个图中，每一帧的第二个时隙用于控制信道，但是不总是这样。</p>
 <p><img src="http://img.blog.csdn.net/20151114135727168" alt="这里写图片描述"></p>
 <h1 id="通信中时隙分配"><a href="#通信中时隙分配" class="headerlink" title="通信中时隙分配"></a>通信中时隙分配</h1><p>这个实例中的部分参考下面的文档。<br><a href="http://www6.conestogac.on.ca/~mkabir/TCOM1010_ConEd_Cellular/GSM%20Phy%20Part-1.pdf" target="_blank" rel="noopener">http://www6.conestogac.on.ca/~mkabir/TCOM1010_ConEd_Cellular/GSM%20Phy%20Part-1.pdf</a><br><a href="http://www.teletopix.org/gsm/how-26-and-51-multiframes-in-gsm/" target="_blank" rel="noopener">http://www.teletopix.org/gsm/how-26-and-51-multiframes-in-gsm/</a></p>
@@ -519,7 +519,7 @@
 <p>下面的这个是用于半速率语音信道HR的26多帧结构，两个用户使用HR语音。在这个实例中，两个用户交替共享每一帧中的时隙2。你可以注意到有两个SACCH。帧12用于用户1的SACCH，帧25用于用户2的SACCH。<br><img src="http://img.blog.csdn.net/20151114141701444" alt="这里写图片描述"></p>
 <hr>
 <p>控制信道的多帧结构更加复杂，结构会根据控制信道类型而变化。但是一个公共的地方是所有的控制信道帧结构都是基于51多帧的。</p>
-<p>下面是Beacon信道（base信道）的控制系电脑多帧结构，它是由FCCH，SCH，BCCH，CCCH组成。图中描述的是下行多帧结构。对于上行base信道中，每一帧都是用于单一信道–RACH。下行base控制信道的主要特点有：</p>
+<p>下面是Beacon信道（base信道）的控制系电脑多帧结构，它是由FCCH，SCH，BCCH，CCCH组成。图中描述的是下行多帧结构。对于上行base信道中，每一帧都是用于单一信道—RACH。下行base控制信道的主要特点有：</p>
 <ul>
 <li>在51多帧结构中有5个等空间的FCCH</li>
 <li>每一个FCCH后面跟随者SCH，意味着同样有5个SCH</li>
@@ -732,7 +732,7 @@ var jiathis_config={
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">103</span>
+                    <span class="site-state-item-count">104</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -902,7 +902,11 @@ var jiathis_config={
                     
                       
                     
-                    <span class="site-state-item-count">41</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1038,7 +1042,7 @@ var jiathis_config={
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共207.6k字</span>
+  <span class="post-count">博客全站共211.7k字</span>
 </div>
 
         
@@ -1540,6 +1544,29 @@ var jiathis_config={
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+    
   
 
 

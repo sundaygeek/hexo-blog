@@ -511,7 +511,7 @@
 <p>通过步骤（1）（2），在UE和MME的NAS层之前的ECM连接建立起来了。接着UE转移到EMM-registered ECM-connected RRC-connected状态。</p>
 <p><strong>（4）IMSI获取</strong></p>
 <p>MME的NAS层从UE的NAS发送的attach request消息中获取的UE的IMSI，通过UE的网络能力信息可以知道UE使用的安全算法和安全能力。</p>
-<p>在从attach request消息中获取UE的IMSI和安全能力信息之后，MME执行鉴权和NAS安全建立过程用于NAS消息的安全传输（根据EPS AKA过程使用收集到的信息）。这两个过程–鉴权和NAS安全建立–是在2.2和2.3节描述。我们已经在LTE安全文档中详细介绍了，在这里我们将简单介绍一下。</p>
+<p>在从attach request消息中获取UE的IMSI和安全能力信息之后，MME执行鉴权和NAS安全建立过程用于NAS消息的安全传输（根据EPS AKA过程使用收集到的信息）。这两个过程—鉴权和NAS安全建立—是在2.2和2.3节描述。我们已经在LTE安全文档中详细介绍了，在这里我们将简单介绍一下。</p>
 <h2 id="2-2-鉴权"><a href="#2-2-鉴权" class="headerlink" title="2.2 鉴权"></a>2.2 鉴权</h2><p>图3描述了UE和MME之间的鉴权过程。这个过程包含两部分，1）鉴权向量获取，MME从HSS获取鉴权向量，2）相互鉴权。在第一步中是在MME和HSS之间S6a接口使用Diameter协议来执行。第二步在UE和MME之间使用NAS协议执行。</p>
 <p><img src="http://img.blog.csdn.net/20150918103141047" alt="这里写图片描述"></p>
 <p><strong>（1）鉴权向量的获取</strong><br>1）【MME-&gt;HSS】authentication information Request<br>MME向HSS发送authentication information Request消息，请求鉴权向量AV。这时候，在这个消息中包含UE的SN ID（服务网络ID）和IMSI，确保HSS返回的是UE当前服务网络信息。authentication information Request消息的主要参数包括：</p>
@@ -884,7 +884,7 @@ var jiathis_config={
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">103</span>
+                    <span class="site-state-item-count">104</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1054,7 +1054,11 @@ var jiathis_config={
                     
                       
                     
-                    <span class="site-state-item-count">41</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1190,7 +1194,7 @@ var jiathis_config={
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共207.6k字</span>
+  <span class="post-count">博客全站共211.7k字</span>
 </div>
 
         
@@ -1692,6 +1696,29 @@ var jiathis_config={
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+    
   
 
 

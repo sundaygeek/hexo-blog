@@ -484,7 +484,7 @@
 <li>确定要更新行的过滤条件。</li>
 </ul>
 <p>举一个简单例子。客户10005现在有了电子邮件地址，因此他的记录需要更新，语句如下<br><img src="/2018/04/13/MySQL必知应会-第20章-更新和删除数据/Snipaste_2018-04-14_15-27-22.png" alt="pic"></p>
-<p>UPDATE语句总是以要更新的表的名字开始。在此例子中，要更新的表的名字为customers。 SET命令用来将新值赋给被更新的列。如这里所示， SET子句设置cust_email列为指定的值<br>: set cust_email=‘elmer@fudd@com’</p>
+<p>UPDATE语句总是以要更新的表的名字开始。在此例子中，要更新的表的名字为customers。 SET命令用来将新值赋给被更新的列。如这里所示， SET子句设置cust_email列为指定的值<br>: set cust_email=’elmer@fudd@com’</p>
 <p>UPDATE语句以WHERE子句结束，它告诉MySQL更新哪一行。没有WHERE子句， MySQL将会用这个电子邮件地址更新customers表中所有行，这不是我们所希望的。<br>更新多个列的语法稍有不同;<br><img src="/2018/04/13/MySQL必知应会-第20章-更新和删除数据/Snipaste_2018-04-14_15-29-44.png" alt="pic"></p>
 <p>在更新多个列时，只需要使用单个SET命令，每个“列=值”对之间用逗号分隔（最后一列之后不用逗号）。在此例子中，更新客户10005的cust_name和cust_email列。</p>
 <p>在UPDATE语句中使用子查询 UPDATE语句中可以使用子查询，使得能用SELECT语句检索出的数据更新列数据。关于子查询及使用的更多内容，请参阅第14章。</p>
@@ -702,7 +702,7 @@ var jiathis_config={
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">103</span>
+                    <span class="site-state-item-count">104</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -872,7 +872,11 @@ var jiathis_config={
                     
                       
                     
-                    <span class="site-state-item-count">41</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1008,7 +1012,7 @@ var jiathis_config={
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共207.6k字</span>
+  <span class="post-count">博客全站共211.7k字</span>
 </div>
 
         
@@ -1510,6 +1514,29 @@ var jiathis_config={
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+    
   
 
 

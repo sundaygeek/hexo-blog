@@ -489,7 +489,7 @@ dtype: int64
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s.values</span><br></pre></td></tr></table></figure>
 <pre><code>array([12, -4,  7,  9])
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s.index</span><br></pre></td></tr></table></figure>
-<pre><code>Index([&apos;a&apos;, &apos;b&apos;, &apos;c&apos;, &apos;d&apos;], dtype=&apos;object&apos;)
+<pre><code>Index([&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;], dtype=&#39;object&#39;)
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s[<span class="number">2</span>], s[<span class="string">'b'</span>]</span><br></pre></td></tr></table></figure>
 <pre><code>(7, -4)
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">s[<span class="number">0</span>:<span class="number">2</span>]</span><br></pre></td></tr></table></figure>
@@ -628,6 +628,7 @@ red       2400.0
 yellow    1500.0
 dtype: float64
 </code></pre><h2 id="4-5-2-DataFrame对象-66"><a href="#4-5-2-DataFrame对象-66" class="headerlink" title="4.5.2　DataFrame对象　　66"></a>4.5.2　DataFrame对象　　66</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">data = &#123;<span class="string">'color'</span> : [<span class="string">'blue'</span>,<span class="string">'green'</span>,<span class="string">'yellow'</span>,<span class="string">'red'</span>,<span class="string">'white'</span>],</span><br><span class="line"><span class="string">'object'</span> : [<span class="string">'ball'</span>,<span class="string">'pen'</span>,<span class="string">'pencil'</span>,<span class="string">'paper'</span>,<span class="string">'mug'</span>],</span><br><span class="line"><span class="string">'price'</span> : [<span class="number">1.2</span>,<span class="number">1.0</span>,<span class="number">0.6</span>,<span class="number">0.9</span>,<span class="number">1.7</span>]&#125;</span><br><span class="line">frame = pd.DataFrame(data)</span><br><span class="line">frame</span><br></pre></td></tr></table></figure>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -670,7 +671,9 @@ dtype: float64
 </tr>
 </tbody>
 </table>
+</div>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">frame2 = pd.DataFrame(data, columns=[<span class="string">'object'</span>,<span class="string">'price'</span>])</span><br><span class="line">frame2</span><br></pre></td></tr></table></figure>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -707,7 +710,9 @@ dtype: float64
 </tr>
 </tbody>
 </table>
+</div>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">frame2 = pd.DataFrame(data, index=[<span class="string">'one'</span>,<span class="string">'two'</span>,<span class="string">'three'</span>,<span class="string">'four'</span>,<span class="string">'five'</span>])</span><br><span class="line">frame2</span><br></pre></td></tr></table></figure>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -750,7 +755,9 @@ dtype: float64
 </tr>
 </tbody>
 </table>
+</div>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">frame3 = pd.DataFrame(np.arange(<span class="number">16</span>).reshape((<span class="number">4</span>,<span class="number">4</span>)),</span><br><span class="line">    index=[<span class="string">'red'</span>,<span class="string">'blue'</span>,<span class="string">'yellow'</span>,<span class="string">'white'</span>],</span><br><span class="line">    columns=[<span class="string">'ball'</span>,<span class="string">'pen'</span>,<span class="string">'pencil'</span>,<span class="string">'paper'</span>])</span><br><span class="line">frame3</span><br></pre></td></tr></table></figure>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -792,16 +799,17 @@ dtype: float64
 </tr>
 </tbody>
 </table>
+</div>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.columns</span><br></pre></td></tr></table></figure>
-<pre><code>Index([&apos;color&apos;, &apos;object&apos;, &apos;price&apos;], dtype=&apos;object&apos;)
+<pre><code>Index([&#39;color&#39;, &#39;object&#39;, &#39;price&#39;], dtype=&#39;object&#39;)
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.index</span><br></pre></td></tr></table></figure>
 <pre><code>RangeIndex(start=0, stop=5, step=1)
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.values</span><br></pre></td></tr></table></figure>
-<pre><code>array([[&apos;blue&apos;, &apos;ball&apos;, 1.2],
-       [&apos;green&apos;, &apos;pen&apos;, 1.0],
-       [&apos;yellow&apos;, &apos;pencil&apos;, 0.6],
-       [&apos;red&apos;, &apos;paper&apos;, 0.9],
-       [&apos;white&apos;, &apos;mug&apos;, 1.7]], dtype=object)
+<pre><code>array([[&#39;blue&#39;, &#39;ball&#39;, 1.2],
+       [&#39;green&#39;, &#39;pen&#39;, 1.0],
+       [&#39;yellow&#39;, &#39;pencil&#39;, 0.6],
+       [&#39;red&#39;, &#39;paper&#39;, 0.9],
+       [&#39;white&#39;, &#39;mug&#39;, 1.7]], dtype=object)
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame[<span class="string">'price'</span>]</span><br></pre></td></tr></table></figure>
 <pre><code>0    1.2
 1    1.0
@@ -829,7 +837,7 @@ Name: 2, dtype: object
 <pre><code>color    object    price
 </code></pre><p>1    green    pen    1.0<br>2    yellow    pencil    0.6</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame[<span class="string">'object'</span>][<span class="number">3</span>]</span><br></pre></td></tr></table></figure>
-<pre><code>&apos;paper&apos;
+<pre><code>&#39;paper&#39;
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">frame.index.name = <span class="string">'id'</span>; </span><br><span class="line">frame.columns.name = <span class="string">'item'</span></span><br><span class="line">frame</span><br></pre></td></tr></table></figure>
 <p>item    color    object    price<br>id<br>0    blue    ball    1.2<br>1    green    pen    1.0<br>2    yellow    pencil    0.6<br>3    red    paper    0.9<br>4    white    mug    1.7</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">frame[<span class="string">'new'</span>] = <span class="number">12</span></span><br><span class="line">frame</span><br></pre></td></tr></table></figure>
@@ -867,9 +875,9 @@ See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stabl
 <pre><code>2011    2012    2013
 </code></pre><p>blue    17.0    27.0    18.0<br>red    NaN    22.0    33.0<br>white    13.0    22.0    16.0</p>
 <h2 id="4-5-3-Index对象-72"><a href="#4-5-3-Index对象-72" class="headerlink" title="4.5.3　Index对象　　72"></a>4.5.3　Index对象　　72</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ser = pd.Series([<span class="number">5</span>,<span class="number">0</span>,<span class="number">3</span>,<span class="number">8</span>,<span class="number">4</span>], index=[<span class="string">'red'</span>,<span class="string">'blue'</span>,<span class="string">'yellow'</span>,<span class="string">'white'</span>,<span class="string">'green'</span>])</span><br><span class="line">ser.index</span><br></pre></td></tr></table></figure>
-<pre><code>Index([&apos;red&apos;, &apos;blue&apos;, &apos;yellow&apos;, &apos;white&apos;, &apos;green&apos;], dtype=&apos;object&apos;)
+<pre><code>Index([&#39;red&#39;, &#39;blue&#39;, &#39;yellow&#39;, &#39;white&#39;, &#39;green&#39;], dtype=&#39;object&#39;)
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ser.idxmin(), ser.idxmax()</span><br></pre></td></tr></table></figure>
-<pre><code>(&apos;blue&apos;, &apos;white&apos;)
+<pre><code>(&#39;blue&#39;, &#39;white&#39;)
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">serd = pd.Series(range(<span class="number">6</span>), index=[<span class="string">'white'</span>,<span class="string">'white'</span>,<span class="string">'blue'</span>,<span class="string">'green'</span>,<span class="string">'green'</span>,<span class="string">'yellow'</span>])</span><br><span class="line">serd</span><br></pre></td></tr></table></figure>
 <pre><code>white     0
 white     1
@@ -1073,7 +1081,7 @@ AttributeError                            Traceback (most recent call last)
    3616     def __setattr__(self, name, value):
 
 
-AttributeError: &apos;Series&apos; object has no attribute &apos;order&apos;
+AttributeError: &#39;Series&#39; object has no attribute &#39;order&#39;
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frame.sort_index(by=<span class="string">'pen'</span>)</span><br></pre></td></tr></table></figure>
 <pre><code>/home/vivoadmin/anaconda3/lib/python3.6/site-packages/ipykernel_launcher.py:1: FutureWarning: by argument to sort_index is deprecated, please use .sort_values(by=...)
   &quot;&quot;&quot;Entry point for launching an IPython kernel.
@@ -1191,7 +1199,7 @@ red    up       0.646074
        left     0.476333
 dtype: float64
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mser.index</span><br></pre></td></tr></table></figure>
-<pre><code>MultiIndex(levels=[[&apos;blue&apos;, &apos;red&apos;, &apos;white&apos;], [&apos;down&apos;, &apos;left&apos;, &apos;right&apos;, &apos;up&apos;]],
+<pre><code>MultiIndex(levels=[[&#39;blue&#39;, &#39;red&#39;, &#39;white&#39;], [&#39;down&#39;, &#39;left&#39;, &#39;right&#39;, &#39;up&#39;]],
            labels=[[2, 2, 2, 0, 0, 1, 1, 1], [3, 0, 2, 3, 0, 3, 0, 1]])
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mser[<span class="string">'white'</span>]</span><br></pre></td></tr></table></figure>
 <pre><code>up       0.941438
@@ -1230,7 +1238,7 @@ white   ball      12
         paper     15
 dtype: int64
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mframe = pd.DataFrame(np.random.randn(<span class="number">16</span>).reshape(<span class="number">4</span>,<span class="number">4</span>),</span><br><span class="line">    index=[[<span class="string">'white'</span>,<span class="string">'white'</span>,<span class="string">'red'</span>,<span class="string">'red'</span>], [<span class="string">'up'</span>,<span class="string">'down'</span>,<span class="string">'up'</span>,<span class="string">'down'</span>]],</span><br><span class="line">    columns=[[<span class="string">'pen'</span>,<span class="string">'pen'</span>,<span class="string">'paper'</span>,<span class="string">'paper'</span>],[<span class="number">1</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">2</span>]])</span><br><span class="line">mframe</span><br></pre></td></tr></table></figure>
-<pre><code>pen    paper
+<pre><code>    pen    paper
 </code></pre><p>1    2    1    2<br>white    up    0.992202    -1.037634    -0.083882    -0.028204<br>down    -1.758579    1.832742    -0.167739    0.174567<br>red    up    0.983876    2.306897    -1.003258    -0.591767<br>down    1.398166    0.054964    -1.705692    -0.375007</p>
 <h2 id="4-12-1-重新调整顺序和为层级排序-89"><a href="#4-12-1-重新调整顺序和为层级排序-89" class="headerlink" title="4.12.1　重新调整顺序和为层级排序　　89"></a>4.12.1　重新调整顺序和为层级排序　　89</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mframe.columns.names = [<span class="string">'objects'</span>,<span class="string">'id'</span>]</span><br><span class="line">mframe.index.names = [<span class="string">'colors'</span>,<span class="string">'status'</span>]</span><br><span class="line">mframe</span><br></pre></td></tr></table></figure>
 <pre><code>objects    pen    paper
@@ -1449,7 +1457,7 @@ var jiathis_config={
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">103</span>
+                    <span class="site-state-item-count">104</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1619,7 +1627,11 @@ var jiathis_config={
                     
                       
                     
-                    <span class="site-state-item-count">41</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1755,7 +1767,7 @@ var jiathis_config={
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共207.6k字</span>
+  <span class="post-count">博客全站共211.7k字</span>
 </div>
 
         
@@ -2257,6 +2269,29 @@ var jiathis_config={
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+    
   
 
 

@@ -499,7 +499,7 @@
 <p>语句中使用了正则表达式1000|2000。 |为正则表达式的OR操作符。它表示匹配其中之一，因此1000和2000都匹配并返回。使用|从功能上类似于在SELECT语句中使用OR语句， 多个OR条件可并入单个正则表达式。两个以上的OR条件 可以给出两个以上的OR条件。例如，’1000 | 2000 | 3000’将匹配1000或2000或3000。</p>
 <h3 id="9-2-3-匹配几个字符之一"><a href="#9-2-3-匹配几个字符之一" class="headerlink" title="9.2.3 匹配几个字符之一"></a>9.2.3 匹配几个字符之一</h3><p>匹配任何单一字符。但是，如果你只想匹配特定的字符，怎么办？可通过指定一组用[和]括起来的字符来完成，如下所示：<br><img src="/2018/04/13/MySQL必知应会-第9章-用正则表达式进行搜索/Snipaste_2018-04-13_15-00-50.png" alt="pic"></p>
 <p>这里，使用了正则表达式[123] Ton。 [123]定义一组字符，它的意思是匹配1或2或3，因此， 1 ton和2 ton都匹配且返回(没有3 ton)。正如所见， []是另一种形式的OR语句。 事实上，正则表达式[123]Ton为[1|2|3]Ton的缩写，也可以使用后者。但是，需要用[]来定义OR语句查找什么。为更好地理解这一点，请看下面的例子：<br><img src="/2018/04/13/MySQL必知应会-第9章-用正则表达式进行搜索/Snipaste_2018-04-13_15-02-07.png" alt="pic"></p>
-<p>这并不是期望的输出。两个要求的行被检索出来，但还检索出了另外3行。之所以这样是由于MySQL假定你的意思是’1’或’2’或’3 ton’。除非把字符|括在一个集合中，否则它将应用于整个串。字符集合也可以被否定，即，它们将匹配除指定字符外的任何东西。为否定一个字符集，在集合的开始处放置一个^即可。因此，尽管[123]匹配字符1、 2或3，但[^123]却匹配除这些字符外的任何东西。</p>
+<p>这并不是期望的输出。两个要求的行被检索出来，但还检索出了另外3行。之所以这样是由于MySQL假定你的意思是’1’或’2’或’3 ton’。除非把字符|括在一个集合中，否则它将应用于整个串。字符集合也可以被否定，即，它们将匹配除指定字符外的任何东西。为否定一个字符集，在集合的开始处放置一个^即可。因此，尽管[123]匹配字符1、 2或3，但<sup><a href="#fn_123" id="reffn_123">123</a></sup>却匹配除这些字符外的任何东西。</p>
 <h3 id="9-2-4-匹配范围"><a href="#9-2-4-匹配范围" class="headerlink" title="9.2.4 匹配范围"></a>9.2.4 匹配范围</h3><p>集合可用来定义要匹配的一个或多个字符。例如，下面的集合将匹配数字0到9：[0123456789]<br>为简化这种类型的集合，可使用-来定义一个范围。下面的式子功能上等同于上述数字列表：[0-9]<br>范围不限于完整的集合， [1-3]和[6-9]也是合法的范围。此外，范围不一定只是数值的， [a-z]匹配任意字母字符。举一个例子：<br><img src="/2018/04/13/MySQL必知应会-第9章-用正则表达式进行搜索/Snipaste_2018-04-13_15-04-39.png" alt="pic"></p>
 <p>这里使用正则表达式[1-5] Ton。 [1-5]定义了一个范围，这个表达式意思是匹配1到5，因此返回3个匹配行。由于5 ton匹配，所以返回.5 ton。</p>
 <h3 id="9-2-5-匹配特殊字符"><a href="#9-2-5-匹配特殊字符" class="headerlink" title="9.2.5 匹配特殊字符"></a>9.2.5 匹配特殊字符</h3><p>正则表达式语言由具有特定含义的特殊字符构成。我们已经看到.、[]、|和-等，还有其他一些字符。请问，如果你需要匹配这些字符，应该怎么办呢？例如，如果要找出包含.字符的值，怎样搜索？请看下面的例子：<br><img src="/2018/04/13/MySQL必知应会-第9章-用正则表达式进行搜索/Snipaste_2018-04-13_15-07-03.png" alt="pic"></p>
@@ -717,7 +717,7 @@ var jiathis_config={
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">103</span>
+                    <span class="site-state-item-count">104</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -887,7 +887,11 @@ var jiathis_config={
                     
                       
                     
-                    <span class="site-state-item-count">41</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1023,7 +1027,7 @@ var jiathis_config={
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共207.6k字</span>
+  <span class="post-count">博客全站共211.7k字</span>
 </div>
 
         
@@ -1525,6 +1529,29 @@ var jiathis_config={
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+    
   
 
 

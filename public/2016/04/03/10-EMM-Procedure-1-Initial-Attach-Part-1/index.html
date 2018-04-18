@@ -476,7 +476,7 @@
 <hr>
 <h1 id="I-Introduction"><a href="#I-Introduction" class="headerlink" title="I. Introduction"></a>I. Introduction</h1><p>这个文档讨论初始附着，也就是第九篇文档所讨论的case1。在这个阶段，用户在签约到一个LTE网络服务之后，用户开机，试图附着到网络上，发送IMSI给网络。<br>初始附着过程随着环境发生变化。可以是下面将要讨论的case1也可以是EMM case11（在另外一个城市初始附着，将在后面的文档中讨论）。或者可以使其他类型，取决于用户是否保存着上次附着到网络时使用的信息，（这里是指最后附着信息，或者MME是否有用户的信息，包括UE ID，接下来都是指最后一次UE上下文）。所以这个文档描述了不同初始附着类型，发现他们的特征和不同。接下来的文档part2将描述EMM case1，详细介绍相关的过程。</p>
 <p>这个文档组织如下：第二章描述不同的初始附着类型，第三章通过列出MME执行的功能来简要讨论每一种情况的不同初始附着过程。</p>
-<h1 id="II-Cases-of-Initial-Attach"><a href="#II-Cases-of-Initial-Attach" class="headerlink" title="II. Cases of Initial Attach"></a>II. Cases of Initial Attach</h1><p>当UE初始附着到网络，MME根据附着的类型来发起不同的过程。这个过程以attach request消息开始，以attach accept消息结束。当UE发送给MME attach request消息，在这个消息包含UE ID（IMSI or old GUTI）来识别UE。当MME发送attach accept（GUTI和TAI列表）消息，在消息中包含用来代替IMSI的ID –GUTI，和包含TAI列表（在这个区域，UE不需要TAU过程可以进入的区域）。</p>
+<h1 id="II-Cases-of-Initial-Attach"><a href="#II-Cases-of-Initial-Attach" class="headerlink" title="II. Cases of Initial Attach"></a>II. Cases of Initial Attach</h1><p>当UE初始附着到网络，MME根据附着的类型来发起不同的过程。这个过程以attach request消息开始，以attach accept消息结束。当UE发送给MME attach request消息，在这个消息包含UE ID（IMSI or old GUTI）来识别UE。当MME发送attach accept（GUTI和TAI列表）消息，在消息中包含用来代替IMSI的ID —GUTI，和包含TAI列表（在这个区域，UE不需要TAU过程可以进入的区域）。</p>
 <p>在接收到attach request消息之后，发送attach accept消息之前，MME可能执行以下过程的全部或部分：</p>
 <ul>
 <li>UE ID 获取</li>
@@ -527,7 +527,7 @@
 <p>剩下来的过程和case-1相同。也就是，MME执行鉴权，NAS安全建立，位置更新和建立EPS会话/默认EPS承载。</p>
 <p><strong>attach case-3：unknown UE，MME changed</strong></p>
 <p>UE使用old GUTI请求初始附着。所以，new MME向old MME请求上次UE上下文，但是没有接收到任何有效的。所以MME向UE请求UE ID，获取IMSI。</p>
-<p>【UE-&gt;new MME】 attach request（old GUTI）<br>【new MME-&gt;old MME】identification request(old GUTI)<br>【old MME】no IMSI<br>【new MME&lt;-old MME】identification response（error cause）<br>【UE<-new mme】identity="" request="" （ue="" id="IMSI）" 【ue-="">new MME】identify response（IMSI）</-new></p>
+<p>【UE-&gt;new MME】 attach request（old GUTI）<br>【new MME-&gt;old MME】identification request(old GUTI)<br>【old MME】no IMSI<br>【new MME&lt;-old MME】identification response（error cause）<br>【UE&lt;-new MME】identity request （UE ID=IMSI）<br>【UE-&gt;new MME】identify response（IMSI）</p>
 <p>剩下的过程和case-1相同。也就是，MME执行鉴权，NAS安全建立，位置更新和建立EPS会话/默认EPS承载。</p>
 <p><strong>attach case-4： known UE， MME unchanged</strong></p>
 <p>UE使用old GUTI请求初始附着，MME有和old GUTI相关的上次UE上下文。所以不需要获取IMSI的步骤。</p>
@@ -735,7 +735,7 @@ var jiathis_config={
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">103</span>
+                    <span class="site-state-item-count">104</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -905,7 +905,11 @@ var jiathis_config={
                     
                       
                     
-                    <span class="site-state-item-count">41</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1041,7 +1045,7 @@ var jiathis_config={
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共207.6k字</span>
+  <span class="post-count">博客全站共211.7k字</span>
 </div>
 
         
@@ -1543,6 +1547,29 @@ var jiathis_config={
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+    
   
 
 

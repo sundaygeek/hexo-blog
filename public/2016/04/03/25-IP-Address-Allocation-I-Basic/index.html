@@ -476,7 +476,7 @@
         <p>原文链接：<a href="http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=7246" target="_blank" rel="noopener">http://www.netmanias.com/en/?m=view&amp;id=techdocs&amp;no=7246</a></p>
 <h1 id="I-Introduction"><a href="#I-Introduction" class="headerlink" title="I. Introduction"></a>I. Introduction</h1><p>lte是全IP网络。这就意味着交付所有用户流量时都是以IP数据包的形式，提供给用户always on IP connectivity的服务。当UE加入LTE网络，会给UE分配一个PDN地址让UE连接这个PDN，并建立默认承载。默认承载保持连接知道UE从LTE网络中detach掉。<br>默认承载对用户拥有的没有APN建立，为每一个APN分配独立的IP地址，一个IP地址可以为ipv4，ipv6，ipv4/ipv6三种类型。</p>
 <p>这篇文件主要解释当用户初始接入网络时LTE网络怎么给用户分配IP地址的，并通过实例来解释。</p>
-<p>在接下来的文档中我们将会涉及到两种类型的IP地址，这篇文档涉及到基本IP地址分配机制和过程，描述熊地址是怎样分配给用户的（用户处于一个位置，对网络执行多次初始attach）。接下来文档我们将学习不同类型的IP地址分配（用户在两个物理分割区域cityA和cityB执行初始附着）。<br>这篇文档组织如下：第二章，不同类型的IP地址分配–动态的和静态的，并讨论他们的特点。第三章和第四章将详细讨论动态和静态IP地址的分配过程。</p>
+<p>在接下来的文档中我们将会涉及到两种类型的IP地址，这篇文档涉及到基本IP地址分配机制和过程，描述熊地址是怎样分配给用户的（用户处于一个位置，对网络执行多次初始attach）。接下来文档我们将学习不同类型的IP地址分配（用户在两个物理分割区域cityA和cityB执行初始附着）。<br>这篇文档组织如下：第二章，不同类型的IP地址分配—动态的和静态的，并讨论他们的特点。第三章和第四章将详细讨论动态和静态IP地址的分配过程。</p>
 <h1 id="II-Types-of-IP-Address-Allocation"><a href="#II-Types-of-IP-Address-Allocation" class="headerlink" title="II. Types of IP Address Allocation"></a>II. Types of IP Address Allocation</h1><p>当UE初始附着到LTE网络，UE请求PDN连接。PGW分配一个IP地址供UE连接PDN，并在U默认承载建立时连接UE和PDN，转发给UE。使用这个IP地址，UE可以获得PDN提供的服务。<br>PGW分配IP地址有两种方式：动态的和静态的分配。对于动态分配，当UE每次接入网络时自动分配一个IP地址。对于静态分配，一旦用户签约后指定给UE一个固定的IP地址，并在每次UE接入网络时都分配这个指定的IP地址。图1比较两种方式的不同。<br><img src="http://img.blog.csdn.net/20151021121418827" alt="这里写图片描述"></p>
 <p>对于动态分配，网络PGW自动为UE选择IP地址。在PGW中网络运营商有一个IP地址池。的那个UE初始附着到LTE网络时，PGW动态为UE分配一个IP地址。所以每次UE初始附着到网络时分配的一个新的动态IP地址。<br>但是，对于静态分配，一旦UE签约网络之后网络运营商就分配了一个固定的IP地址。运营商在hss中和其他签约信息一起为UE分配了静态的IP地址。接着当UE初始附着到LTE网络时，PGW从hss中获得这个静态IP地址并转发给UE。所以在每次UE初始附着网络时给UE分配的都是特定的IP地址。</p>
 <p>当在初始附着请求PDN连接时，UE通过使用协议配置选项PCO可以请求和外部协议/应用相关的协议数据（eg请求dns服务器地址，P-CSCF地址）。这篇文档将详细解释dns服务器地址和IP地址的请求。</p>
@@ -696,7 +696,7 @@ var jiathis_config={
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">103</span>
+                    <span class="site-state-item-count">104</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -866,7 +866,11 @@ var jiathis_config={
                     
                       
                     
-                    <span class="site-state-item-count">41</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1002,7 +1006,7 @@ var jiathis_config={
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共207.6k字</span>
+  <span class="post-count">博客全站共211.7k字</span>
 </div>
 
         
@@ -1504,6 +1508,29 @@ var jiathis_config={
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+    
   
 
 

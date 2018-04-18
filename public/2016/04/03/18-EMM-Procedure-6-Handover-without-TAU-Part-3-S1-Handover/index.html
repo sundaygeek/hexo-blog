@@ -583,7 +583,7 @@
 <p><strong> 6) [Target eNB] 准备S1 handover</strong><br>一旦接收到handover request消息，target eNB开始准备切换为UE提供无缝服务<br><strong> i)新的S1承载资源分配</strong> ：target eNB基于要建立的E-RAB信息，检查source eNB提供的QoS是否在target eNB中可用。如果可用，target eNB使用存储在source eNB中的上行S1承载信息（S1 SGW TEID）建立上行S1承载连接SGW。接着分配S1 target eNB TEID准备下行S1承载。</p>
 <p><strong> ii）indirect tunnel资源分配</strong> ：在UE执行S1切换时，应该有一个从source eNB到target eNB的indirect tunnel。所以，target eNB分配S1 target eNB TEID，SGW可以建立indirect tunnel连接target eNB。</p>
 <p><strong> iii）为UE在无线链路上分配资源</strong> ：基于E-RAB的QoS信息，target eNB为UE在无线链路上保留RRC资源，并分配C-RNTI。</p>
-<p><strong> iv）Kenb*产生</strong> ：使用从MME中接收到的安全上下文信息（NCC1，NH1）来产生Kenb<em>，接着获得AS安全秘钥(KRRCint, KRRCenc, KUpenc)。接着，当UE连接到target eNB是，UE和target eNB可以使用这些秘钥来安全的通信。图5显示了Kenb </em>是怎么产生的。我们可以看到Kenb *从NH1，PCI，频点生成。<br><img src="http://img.blog.csdn.net/20151010104536396" alt="tunnel connecting to the target eNB."><br><strong> 7）【target eNB-&gt;MME】通知MME准备完毕</strong><br>target eNB给MME发送handover request ack消息，消息中包含了step-6中的所有资源。这些消息如下所示：<br>Handover Request Ack (E-RAB Admitted(E-RAB ID, S1 Target eNB TEID, DL S1 Target eNB TEID), Handover Command (Target C-RNTI, Target DRB ID, AS Security Algorithm of Target eNB))</p>
+<p><strong> iv）Kenb*产生</strong> ：使用从MME中接收到的安全上下文信息（NCC1，NH1）来产生Kenb<em>，接着获得AS安全秘钥(KRRCint, KRRCenc, KUpenc)。接着，当UE连接到target eNB是，UE和target eNB可以使用这些秘钥来安全的通信。图5显示了Kenb </em>是怎么产生的。我们可以看到Kenb <em>从NH1，PCI，频点生成。<br><img src="http://img.blog.csdn.net/20151010104536396" alt="tunnel connecting to the target eNB."><br><em>* 7）【target eNB-&gt;MME】通知MME准备完毕</em></em><br>target eNB给MME发送handover request ack消息，消息中包含了step-6中的所有资源。这些消息如下所示：<br>Handover Request Ack (E-RAB Admitted(E-RAB ID, S1 Target eNB TEID, DL S1 Target eNB TEID), Handover Command (Target C-RNTI, Target DRB ID, AS Security Algorithm of Target eNB))</p>
 <ul>
 <li><p>E-RAB Admitted</p>
 <ul>
@@ -606,7 +606,7 @@
 <p><strong> handover execution</strong><br>图6描述了S1切换的执行阶段。<br><img src="http://img.blog.csdn.net/20151010104638181" alt="这里写图片描述"></p>
 <p><strong> 11）【UE&lt;-source eNB】命令UE执行切换</strong><br>一旦source eNB准备好切换，source eNB发送handover command消息命令UE执行切换。这个消息是包含在RRC connection reconfiguration消息中的。</p>
 <p><strong> 12）【UE】执行切换</strong><br>一旦UE从handover command消息中获得C-RNTI和DRB ID，并从source eNB detach。现在UE和source eNB之间的所有的数据包交换都停止了，切换中断时间开始了。</p>
-<p><strong> 13）【UE】AS安全建立</strong><br>UE产生AS安全秘钥用于target eNB的无线链路。首先产生Kenb*，接着使用target eNB选择的AS安全算法产生AS安全秘钥 (KRRCint, KRRCenc, KUPenc)。<br><strong> 14）~15）【source eNB-&gt;MME.MME-&gt;target eNB】通知从哪个数据包开始发送/接收</strong><br>source eNB发送eNB status transfer 消息，包含DL count和UL count给MME。接着MME通过MME status transfer消息包含相同的信息给target eNB。这是为了让target eNB知道从哪个数据包开始发送/接收数据包。这里这个count值是PDCP PDU计数，每一个count是32bit值，包含HFN超帧号和PDCP序列号SN。这个消息如下：<br>eNB Status Transfer (DL Count, UL Count)<br> DL Count: Count of the first packet to send to the UE<br> UL Count: Count of the first packet to receive from the UE<br>在发送eNB status transfer消息之后，source eNB开始通过indirect tunnel转发从SGW到达的下行数据包给target eNB。target eNB缓存这些数据包，知道UE成功接入到target eNB。<br><strong> 16）-18）【UE，target eNB】UE接入到target eNB</strong><br>16）UE检测到target eNB的同步信号并执行同步到target eNB。一旦同步完成，UE发起非竞争的随即接入。17）target eNB给UE发送时间偏移信息和上行授权。18）UE给target eNB发送handover confirm消息包含在RRC connection reconfiguration complete消息中。<br>现在UE可以从target eNb接收或发送数据包了。切换中断时间结束。<br><strong> 19）【UE~target eNB】无线链路上的安全通信</strong><br>UE和target eNB之间的所有的RRC信令消息和用户数据包都是使用AS安全秘钥安全传输的。rrc信令消息是完整性保护和加密的，用户数据是加密的。<br><strong> 20）【target eNB】恢复下行数据包交付给UE</strong><br>随着UE成功连接到target eNB，target eNB通过下面的路径恢复发送缓冲的下行数据包给UE。<br>S5承载( PGW到SGW)—-S1承载（SGW到source eNB）—–S1承载（source eNB到SGW）—-S1承载（SGW到target eNB）—DRB（target eNB到UE）<br>对于UE发送的数据包，target eNB检查是否以正确的顺序接收到上行数据包，接着通过下面的路径转发给SGW。<br>DRB（UE到target eNB）—S1承载（target eNB到SGW）—S5承载（SGW到PGW）<br><strong> handover completion</strong><br>图7描述了S1切换结束阶段的过程。<br><img src="http://img.blog.csdn.net/20151010104733471" alt="这里写图片描述"><br><strong> 21）【target eNB-&gt;MME】请求EPS承载路径转换</strong><br>一旦UE成功接入，target eNB通过发送handover notify消息给MME通知UE已经成功完成了S1切换，这个消息中包含ECGI和TAI。<br><strong> 22）~27）修改EPS承载</strong><br>MME转发由target eNB分配的S1 target eNB TEID给SGW（通过发送modify bearer request消息）。通过这种方式请求SGW修改承载路径。接着SGW建立下行S1承载连接target eNB。一些SGW，根据UE初始附着时的选项设置，需要报告UE的服务小区是否发生变化。就需要SGW发送modify bearer request消息给PGW（PGW报告给PCRF），根据EPS会话修改过程，表示UE服务小区发生变化了。<br><strong> 28）~29）【SGW】修改S1承载路径</strong><br>SGW转换下行数据包转发路径为连接target eNB的下行S1承载。首先SGW发送end marker（EM）来指示发送给source eNB的最后一个数据包。接着它通过连接target eNB的S1承载来发送下行数据包。<br><strong> 30）【target eNB】数据包重新排序</strong><br>现在，target eNB接收到从source eNB转发过来的下行数据包，和通过新修改的路径的下行数据包。所以应该以正确的顺序交付给UE。首先target eNB转发从indirect tunnel接收到的数据包，接着当EM到达时，就是知道从indirect tunnel的最后一个数据包，接着发送从新修改的路径上接收到的下行数据包给UE。<br><strong> 31）~32）【source eNB<->MME】释放存储在source eNB中的UE上下文和S1资源</-></strong><br>MME通知source eNB，source eNB可以释放indirect tunnel和S1资源，以及UE上下文了（通过发送UE context release command消息）。<br><strong> 33）~34）【MME<->SGW】MME给SGW发送delete indirect data forwarding tunnel</-></strong><br>request消息请求释放indirect tunnel。一旦接收到这个请求，SGW释放indirect tunnel，并发送delete indirect data forwarding tunnel response消息通知MME释放完成。</p>
+<p><strong> 13）【UE】AS安全建立</strong><br>UE产生AS安全秘钥用于target eNB的无线链路。首先产生Kenb<em>，接着使用target eNB选择的AS安全算法产生AS安全秘钥 (KRRCint, KRRCenc, KUPenc)。<br><strong> 14）~15）【source eNB-&gt;MME.MME-&gt;target eNB】通知从哪个数据包开始发送/接收</strong><br>source eNB发送eNB status transfer 消息，包含DL count和UL count给MME。接着MME通过MME status transfer消息包含相同的信息给target eNB。这是为了让target eNB知道从哪个数据包开始发送/接收数据包。这里这个count值是PDCP PDU计数，每一个count是32bit值，包含HFN超帧号和PDCP序列号SN。这个消息如下：<br>eNB Status Transfer (DL Count, UL Count)<br> DL Count: Count of the first packet to send to the UE<br> UL Count: Count of the first packet to receive from the UE<br>在发送eNB status transfer消息之后，source eNB开始通过indirect tunnel转发从SGW到达的下行数据包给target eNB。target eNB缓存这些数据包，知道UE成功接入到target eNB。<br><strong> 16）-18）【UE，target eNB】UE接入到target eNB</strong><br>16）UE检测到target eNB的同步信号并执行同步到target eNB。一旦同步完成，UE发起非竞争的随即接入。17）target eNB给UE发送时间偏移信息和上行授权。18）UE给target eNB发送handover confirm消息包含在RRC connection reconfiguration complete消息中。<br>现在UE可以从target eNb接收或发送数据包了。切换中断时间结束。<br><strong> 19）【UE~target eNB】无线链路上的安全通信</strong><br>UE和target eNB之间的所有的RRC信令消息和用户数据包都是使用AS安全秘钥安全传输的。rrc信令消息是完整性保护和加密的，用户数据是加密的。<br><strong> 20）【target eNB】恢复下行数据包交付给UE</strong><br>随着UE成功连接到target eNB，target eNB通过下面的路径恢复发送缓冲的下行数据包给UE。<br>S5承载( PGW到SGW)——S1承载（SGW到source eNB）——-S1承载（source eNB到SGW）——S1承载（SGW到target eNB）—-DRB（target eNB到UE）<br>对于UE发送的数据包，target eNB检查是否以正确的顺序接收到上行数据包，接着通过下面的路径转发给SGW。<br>DRB（UE到target eNB）—-S1承载（target eNB到SGW）—-S5承载（SGW到PGW）<br><strong> handover completion</strong><br>图7描述了S1切换结束阶段的过程。<br><img src="http://img.blog.csdn.net/20151010104733471" alt="这里写图片描述"><br><strong> 21）【target eNB-&gt;MME】请求EPS承载路径转换</strong><br>一旦UE成功接入，target eNB通过发送handover notify消息给MME通知UE已经成功完成了S1切换，这个消息中包含ECGI和TAI。<br><strong> 22）~27）修改EPS承载</strong><br>MME转发由target eNB分配的S1 target eNB TEID给SGW（通过发送modify bearer request消息）。通过这种方式请求SGW修改承载路径。接着SGW建立下行S1承载连接target eNB。一些SGW，根据UE初始附着时的选项设置，需要报告UE的服务小区是否发生变化。就需要SGW发送modify bearer request消息给PGW（PGW报告给PCRF），根据EPS会话修改过程，表示UE服务小区发生变化了。<br><strong> 28）~29）【SGW】修改S1承载路径</strong><br>SGW转换下行数据包转发路径为连接target eNB的下行S1承载。首先SGW发送end marker（EM）来指示发送给source eNB的最后一个数据包。接着它通过连接target eNB的S1承载来发送下行数据包。<br><strong> 30）【target eNB】数据包重新排序</strong><br>现在，target eNB接收到从source eNB转发过来的下行数据包，和通过新修改的路径的下行数据包。所以应该以正确的顺序交付给UE。首先target eNB转发从indirect tunnel接收到的数据包，接着当EM到达时，就是知道从indirect tunnel的最后一个数据包，接着发送从新修改的路径上接收到的下行数据包给UE。<br><strong> 31）~32）【source eNB&lt;-&gt;MME】释放存储在source eNB中的UE上下文和S1资源</strong><br>MME通知source eNB，source eNB可以释放indirect tunnel和S1资源，以及UE上下文了（通过发送UE context release command消息）。<br><em>* 33）~34）【MME&lt;-&gt;SGW】MME给SGW发送delete indirect data forwarding tunnel</em></em><br>request消息请求释放indirect tunnel。一旦接收到这个请求，SGW释放indirect tunnel，并发送delete indirect data forwarding tunnel response消息通知MME释放完成。</p>
 <h1 id="IV-EPS-entity-information：before-after-S1-handover"><a href="#IV-EPS-entity-information：before-after-S1-handover" class="headerlink" title="IV. EPS entity information：before/after S1 handover"></a>IV. EPS entity information：before/after S1 handover</h1><p>在intra-LTE环境中，在S1切换前后存储在EPS实体中的信息和X2相同、</p>
 <ul>
 <li>切换相关的As安全上下文会根据切换的类型不同俄日变化（S1 or X2）。切换安全在本篇文档范围之外。</li>
@@ -810,7 +810,7 @@ var jiathis_config={
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">103</span>
+                    <span class="site-state-item-count">104</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -980,7 +980,11 @@ var jiathis_config={
                     
                       
                     
-                    <span class="site-state-item-count">41</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1116,7 +1120,7 @@ var jiathis_config={
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共207.6k字</span>
+  <span class="post-count">博客全站共211.7k字</span>
 </div>
 
         
@@ -1618,6 +1622,29 @@ var jiathis_config={
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+    
   
 
 

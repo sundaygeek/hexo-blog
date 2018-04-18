@@ -497,6 +497,7 @@
 <p><strong>Event A3</strong><br>当邻区的信号强度（信号强度和偏移，MNbr = Mn + Ofn + Ocn）比UE服务小区的信号强度（信号强度和偏移，MSer = Ms + Ofs + Ocs）高时，并且这个差额比A3偏移 (Off)还要大时，事件A3触发，UE给eNB报告测量结果。迟滞(Hys)是服务小区和目标小区越区切换界限的值。在A3触发的时候并且A3触发判决持续指定的TTT周期，eNB决定触发切换。</p>
 <p><img src="http://img.blog.csdn.net/20150925134044972" alt="这里写图片描述"></p>
 <p>Table 2. Definition of the Symbols Represented in E-UTRA Measurement</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -539,8 +540,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <h2 id="2-2-Handover-Decision"><a href="#2-2-Handover-Decision" class="headerlink" title="2.2 Handover Decision"></a>2.2 Handover Decision</h2><p>当事件A3报告时，eNB决定执行什么类型的切换到哪一个目标小区，接着发起切换过程。切换可以分类为不同的类型，但是他们的分类遵循以下的目的：</p>
-<p><strong>(1) Handover分类1: EPC实体是否发生变化</strong><br>切换可以分类为不同的类型–同频LTE，异频LTE，inter-RAT切换，这些根据UE连接的EPC实体在切换前后是否发生变化。</p>
+<p><strong>(1) Handover分类1: EPC实体是否发生变化</strong><br>切换可以分类为不同的类型—同频LTE，异频LTE，inter-RAT切换，这些根据UE连接的EPC实体在切换前后是否发生变化。</p>
 <p><strong>同频LTE切换</strong><br>▪ Intra-MME/S-GW Handover: 在切换前后UE服务的MME和SGW是否发生变化</p>
 <p><strong>异频LTE切换:</strong> 在切换前后UE服务的MME和/或SGW发生了变化<br>▪ Inter-MME Handover: 在切换后，UE服务MME发生变化，而服务的SGW保持不变<br>▪ Inter-S-GW Handover: 在切换后，UE服务SGW发生变化，而服务的MME保持不变<br>▪ Inter-MME/S-GW Handover: 在切换后，UE服务MME和SGW都发生了变化</p>
 <p><strong>Inter-RAT Handover:</strong> 在不同无线接入技术之间的切换<br>▪ UTRAN to E-UTRAN<br>▪ E-UTRAN to UTRAN, etc.</p>
@@ -548,7 +550,7 @@
 <p><strong>X2 Handover</strong><br>X2接口连接两个eNB。如果在两个服务小区的eNB和目标小区的eNB之间存在X2连接，并且X2连接可用于切换，则发起X2切换。一旦切换完成，两个eNB相互通信来控制切换，并没有MME的介入。</p>
 <p><strong>S1 Handover</strong><br>S1接口连接eNB和EPC。如果i）在源eNB和目标eNB之间没有X2连接，ii）有X2连接，但是这个连接不允许用于切换，iii）在源小区和目标小区之间切换准备失败，则发起S1切换。一旦切换完成，源eNB通过MME和目标eNB通信控制切换。</p>
 <p><img src="http://img.blog.csdn.net/20150925134242995" alt="这里写图片描述"><br><img src="http://img.blog.csdn.net/20150925134252671" alt="这里写图片描述"></p>
-<h2 id="2-3-Handover-Procedure"><a href="#2-3-Handover-Procedure" class="headerlink" title="2.3 Handover Procedure"></a>2.3 Handover Procedure</h2><p>根据接收到的测量配置，UE把测量结果报告给eNB。一旦eNB决定，切换则发起。切换过程包含三个阶段–准备，执行，完成阶段。</p>
+<h2 id="2-3-Handover-Procedure"><a href="#2-3-Handover-Procedure" class="headerlink" title="2.3 Handover Procedure"></a>2.3 Handover Procedure</h2><p>根据接收到的测量配置，UE把测量结果报告给eNB。一旦eNB决定，切换则发起。切换过程包含三个阶段—准备，执行，完成阶段。</p>
 <p><strong>(1) Handover Preparation Phase</strong><br>在这个阶段，源eNB和目标eNB准备切换。对X2切换，通过X2信令两个eNB直接进行通信，并且不需要MME介入情况下执行。对S1切换，通过S1信令，需要MME介入。<br>源eNB发送用户UE上下文给目标eNB来检查目标eNB是否有能力提供满意的服务质量。如果可以，目标eNB建立传输承载（下行数据包转发承载）用于数据转发。接着分配C-RNTI（用于UE接入这个eNB），并把这个值转发给源eNB。这就完成了准备阶段。这时候对X2切换，下行数据包转发承载是一个连接两个eNB的直传隧道，对S1切换，则是连接三个实体的非直传隧道。图5标书了这个阶段的数据包转发路径，UL/DL承载数据交付路径，控制信息交付路径，和下行数据包转发路径。</p>
 <p><img src="http://img.blog.csdn.net/20150925134325580" alt="这里写图片描述"></p>
 <p><strong>(2) Handover Execution Phase</strong><br>在这个阶段，执行切换。UE从源eNB上释放无线连接，并连接到目标eNB，接入到新小区。一旦用于两个eNB之间数据包转发的资源(i.e. a DL packet forwarding bearer)分配完成，并且在准备阶段目标eNB为UE分配了新资源(i.e. a DRB, DL S1 bearer, C-RNTI, etc.)，则这两个eNB准备好切换了。接着源eNB通过发送handover command消息命令UE执行切换。在切换执行阶段，UE使用在切换准备阶段目标eNB分配的C-RNTI。这样可以使UE更快的接入目标eNB。一旦到达目标eNB，下行数据包通过转发承载转发给目标eNB，并缓存直到UE完成到目标eNB的接入。这确保了没有数据包丢失。从UE的上行数据包不转发直到UE成功的接入目标eNB。一旦UE完成对目标eNB的无线接入，上行数据立即通过目标eNB转发至SGW。图6描述了在切换执行阶段下行数据交付路径，和通过目标eNB上行数据交付路径。</p>
@@ -756,7 +758,7 @@ var jiathis_config={
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">103</span>
+                    <span class="site-state-item-count">104</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -926,7 +928,11 @@ var jiathis_config={
                     
                       
                     
-                    <span class="site-state-item-count">41</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1062,7 +1068,7 @@ var jiathis_config={
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共207.6k字</span>
+  <span class="post-count">博客全站共211.7k字</span>
 </div>
 
         
@@ -1564,6 +1570,29 @@ var jiathis_config={
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+    
   
 
 

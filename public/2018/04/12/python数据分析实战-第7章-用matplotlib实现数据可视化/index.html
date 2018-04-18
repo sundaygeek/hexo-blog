@@ -729,7 +729,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> mpl_toolkits.mplot3d <span class="keyword">import</span> Axes3D</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">fig = plt.figure()</span><br><span class="line">ax = Axes3D(fig)</span><br><span class="line">X = np.arange(<span class="number">-2</span>,<span class="number">2</span>,<span class="number">0.1</span>)</span><br><span class="line">Y = np.arange(<span class="number">-2</span>,<span class="number">2</span>,<span class="number">0.1</span>)</span><br><span class="line">X,Y = np.meshgrid(X,Y)</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">f</span><span class="params">(x,y)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> (<span class="number">1</span> - y**<span class="number">5</span> + x**<span class="number">5</span>)*np.exp(-x**<span class="number">2</span>-y**<span class="number">2</span>)</span><br><span class="line">ax.plot_surface(X,Y,f(X,Y), rstride=<span class="number">1</span>, cstride=<span class="number">1</span>, cmap=plt.cm.hot)</span><br><span class="line">ax.view_init(elev=<span class="number">30</span>,azim=<span class="number">125</span>)</span><br></pre></td></tr></table></figure>
 <p><img src="/2018/04/12/python数据分析实战-第7章-用matplotlib实现数据可视化/output_74_0.png" alt="png"></p>
 <h2 id="7-16-2-3D散点图-198"><a href="#7-16-2-3D散点图-198" class="headerlink" title="7.16.2　3D散点图　　198"></a>7.16.2　3D散点图　　198</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> mpl_toolkits.mplot3d <span class="keyword">import</span> Axes3D</span><br><span class="line">xs = np.random.randint(<span class="number">30</span>,<span class="number">40</span>,<span class="number">100</span>)</span><br><span class="line">ys = np.random.randint(<span class="number">20</span>,<span class="number">30</span>,<span class="number">100</span>)</span><br><span class="line">zs = np.random.randint(<span class="number">10</span>,<span class="number">20</span>,<span class="number">100</span>)</span><br><span class="line">xs2 = np.random.randint(<span class="number">50</span>,<span class="number">60</span>,<span class="number">100</span>)</span><br><span class="line">ys2 = np.random.randint(<span class="number">30</span>,<span class="number">40</span>,<span class="number">100</span>)</span><br><span class="line">zs2 = np.random.randint(<span class="number">50</span>,<span class="number">70</span>,<span class="number">100</span>)</span><br><span class="line">xs3 = np.random.randint(<span class="number">10</span>,<span class="number">30</span>,<span class="number">100</span>)</span><br><span class="line">ys3 = np.random.randint(<span class="number">40</span>,<span class="number">50</span>,<span class="number">100</span>)</span><br><span class="line">zs3 = np.random.randint(<span class="number">40</span>,<span class="number">50</span>,<span class="number">100</span>)</span><br><span class="line">fig = plt.figure()</span><br><span class="line">ax = Axes3D(fig)</span><br><span class="line">ax.scatter(xs,ys,zs)</span><br><span class="line">ax.scatter(xs2,ys2,zs2,c=<span class="string">'r'</span>,marker=<span class="string">'^'</span>)</span><br><span class="line">ax.scatter(xs3,ys3,zs3,c=<span class="string">'g'</span>,marker=<span class="string">'*'</span>)</span><br><span class="line">ax.set_xlabel(<span class="string">'X Label'</span>)</span><br><span class="line">ax.set_ylabel(<span class="string">'Y Label'</span>)</span><br><span class="line">ax.set_zlabel(<span class="string">'Z Label'</span>)</span><br></pre></td></tr></table></figure>
-<pre><code>Text(0.5,0,&apos;Z Label&apos;)
+<pre><code>Text(0.5,0,&#39;Z Label&#39;)
 </code></pre><p><img src="/2018/04/12/python数据分析实战-第7章-用matplotlib实现数据可视化/output_76_1.png" alt="png"></p>
 <h2 id="7-16-3-3D条状图-199"><a href="#7-16-3-3D条状图-199" class="headerlink" title="7.16.3　3D条状图　　199"></a>7.16.3　3D条状图　　199</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> mpl_toolkits.mplot3d <span class="keyword">import</span> Axes3D</span><br><span class="line">x = np.arange(<span class="number">8</span>)</span><br><span class="line">y = np.random.randint(<span class="number">0</span>,<span class="number">10</span>,<span class="number">8</span>)</span><br><span class="line">y2 = y + np.random.randint(<span class="number">0</span>,<span class="number">3</span>,<span class="number">8</span>)</span><br><span class="line">y3 = y2 + np.random.randint(<span class="number">0</span>,<span class="number">3</span>,<span class="number">8</span>)</span><br><span class="line">y4 = y3 + np.random.randint(<span class="number">0</span>,<span class="number">3</span>,<span class="number">8</span>)</span><br><span class="line">y5 = y4 + np.random.randint(<span class="number">0</span>,<span class="number">3</span>,<span class="number">8</span>)</span><br><span class="line">clr = [<span class="string">'#4bb2c5'</span>, <span class="string">'#c5b47f'</span>, <span class="string">'#EAA228'</span>, <span class="string">'#579575'</span>, <span class="string">'#839557'</span>, <span class="string">'#958c12'</span>, <span class="string">'#953579'</span>,</span><br><span class="line"><span class="string">'#4b5de4'</span>]</span><br><span class="line">fig = plt.figure()</span><br><span class="line">ax = Axes3D(fig)</span><br><span class="line">ax.bar(x,y,<span class="number">0</span>,zdir=<span class="string">'y'</span>,color=clr)</span><br><span class="line">ax.bar(x,y2,<span class="number">10</span>,zdir=<span class="string">'y'</span>,color=clr)</span><br><span class="line">ax.bar(x,y3,<span class="number">20</span>,zdir=<span class="string">'y'</span>,color=clr)</span><br><span class="line">ax.bar(x,y4,<span class="number">30</span>,zdir=<span class="string">'y'</span>,color=clr)</span><br><span class="line">ax.bar(x,y5,<span class="number">40</span>,zdir=<span class="string">'y'</span>,color=clr)</span><br><span class="line">ax.set_xlabel(<span class="string">'X Axis'</span>)</span><br><span class="line">ax.set_ylabel(<span class="string">'Y Axis'</span>)</span><br><span class="line">ax.set_zlabel(<span class="string">'Z Axis'</span>)</span><br><span class="line">ax.view_init(elev=<span class="number">40</span>)</span><br></pre></td></tr></table></figure>
 <p><img src="/2018/04/12/python数据分析实战-第7章-用matplotlib实现数据可视化/output_78_0.png" alt="png"></p>
@@ -943,7 +943,7 @@ var jiathis_config={
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">103</span>
+                    <span class="site-state-item-count">104</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1113,7 +1113,11 @@ var jiathis_config={
                     
                       
                     
-                    <span class="site-state-item-count">41</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1249,7 +1253,7 @@ var jiathis_config={
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共207.6k字</span>
+  <span class="post-count">博客全站共211.7k字</span>
 </div>
 
         
@@ -1751,6 +1755,29 @@ var jiathis_config={
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+    
   
 
 

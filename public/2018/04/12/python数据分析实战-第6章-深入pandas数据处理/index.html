@@ -887,7 +887,7 @@ first     red      mug   4.20
 Length: 17
 Categories (4, interval[int64]): [(0, 25] &lt; (25, 50] &lt; (50, 75] &lt; (75, 100]]
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat.labels</span><br></pre></td></tr></table></figure>
-<pre><code>D:\ProgramData\Anaconda3_32\lib\site-packages\ipykernel_launcher.py:1: FutureWarning: &apos;labels&apos; is deprecated. Use &apos;codes&apos; instead
+<pre><code>D:\ProgramData\Anaconda3_32\lib\site-packages\ipykernel_launcher.py:1: FutureWarning: &#39;labels&#39; is deprecated. Use &#39;codes&#39; instead
   &quot;&quot;&quot;Entry point for launching an IPython kernel.
 
 
@@ -974,16 +974,16 @@ dtype: float64
 3  15  16  17  18  19
 3  15  16  17  18  19
 </code></pre><h1 id="6-6-字符串处理-137"><a href="#6-6-字符串处理-137" class="headerlink" title="6.6　字符串处理　　137"></a>6.6　字符串处理　　137</h1><h2 id="6-6-1-内置的字符串处理方法-137"><a href="#6-6-1-内置的字符串处理方法-137" class="headerlink" title="6.6.1　内置的字符串处理方法　　137"></a>6.6.1　内置的字符串处理方法　　137</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">text = <span class="string">'16 Bolton Avenue , Boston'</span></span><br><span class="line">text.split(<span class="string">','</span>)</span><br></pre></td></tr></table></figure>
-<pre><code>[&apos;16 Bolton Avenue &apos;, &apos; Boston&apos;]
+<pre><code>[&#39;16 Bolton Avenue &#39;, &#39; Boston&#39;]
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tokens = [s.strip() <span class="keyword">for</span> s <span class="keyword">in</span> text.split(<span class="string">','</span>)]</span><br><span class="line">tokens</span><br></pre></td></tr></table></figure>
-<pre><code>[&apos;16 Bolton Avenue&apos;, &apos;Boston&apos;]
+<pre><code>[&#39;16 Bolton Avenue&#39;, &#39;Boston&#39;]
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">address, city = [s.strip() <span class="keyword">for</span> s <span class="keyword">in</span> text.split(<span class="string">','</span>)]</span><br><span class="line">print(address)</span><br><span class="line">print(city)</span><br></pre></td></tr></table></figure>
 <pre><code>16 Bolton Avenue
 Boston
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">address + <span class="string">','</span> + city</span><br></pre></td></tr></table></figure>
-<pre><code>&apos;16 Bolton Avenue,Boston&apos;
+<pre><code>&#39;16 Bolton Avenue,Boston&#39;
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">strings = [<span class="string">'A+'</span>,<span class="string">'A'</span>,<span class="string">'A-'</span>,<span class="string">'B'</span>,<span class="string">'BB'</span>,<span class="string">'BBB'</span>,<span class="string">'C+'</span>]</span><br><span class="line"><span class="string">';'</span>.join(strings)</span><br></pre></td></tr></table></figure>
-<pre><code>&apos;A+;A;A-;B;BB;BBB;C+&apos;
+<pre><code>&#39;A+;A;A-;B;BB;BBB;C+&#39;
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">'Boston'</span> <span class="keyword">in</span> text</span><br></pre></td></tr></table></figure>
 <pre><code>True
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">text.index(<span class="string">'Boston'</span>)</span><br></pre></td></tr></table></figure>
@@ -996,7 +996,7 @@ Boston
 ValueError                                Traceback (most recent call last)
 
 &lt;ipython-input-113-e44f5210d36c&gt; in &lt;module&gt;()
-----&gt; 1 text.index(&apos;New York&apos;)
+----&gt; 1 text.index(&#39;New York&#39;)
 
 
 ValueError: substring not found
@@ -1005,30 +1005,30 @@ ValueError: substring not found
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">text.count(<span class="string">'Avenue'</span>)</span><br></pre></td></tr></table></figure>
 <pre><code>1
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">text.replace(<span class="string">'Avenue'</span>,<span class="string">'Street'</span>)</span><br></pre></td></tr></table></figure>
-<pre><code>&apos;16 Bolton Street , Boston&apos;
+<pre><code>&#39;16 Bolton Street , Boston&#39;
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">text.replace(<span class="string">'1'</span>,<span class="string">''</span>)</span><br></pre></td></tr></table></figure>
-<pre><code>&apos;6 Bolton Avenue , Boston&apos;
+<pre><code>&#39;6 Bolton Avenue , Boston&#39;
 </code></pre><h2 id="6-6-2-正则表达式-139"><a href="#6-6-2-正则表达式-139" class="headerlink" title="6.6.2　正则表达式　　139"></a>6.6.2　正则表达式　　139</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> re</span><br><span class="line">text = <span class="string">"This is an\t odd \n text!"</span></span><br><span class="line">re.split(<span class="string">'\s+'</span>, text)</span><br></pre></td></tr></table></figure>
-<pre><code>[&apos;This&apos;, &apos;is&apos;, &apos;an&apos;, &apos;odd&apos;, &apos;text!&apos;]
+<pre><code>[&#39;This&#39;, &#39;is&#39;, &#39;an&#39;, &#39;odd&#39;, &#39;text!&#39;]
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">regex = re.compile(<span class="string">'\s+'</span>)</span><br><span class="line">regex.split(text)</span><br></pre></td></tr></table></figure>
-<pre><code>[&apos;This&apos;, &apos;is&apos;, &apos;an&apos;, &apos;odd&apos;, &apos;text!&apos;]
+<pre><code>[&#39;This&#39;, &#39;is&#39;, &#39;an&#39;, &#39;odd&#39;, &#39;text!&#39;]
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">text = <span class="string">'This is my address: 16 Bolton Avenue, Boston'</span></span><br><span class="line">re.findall(<span class="string">'A\w+'</span>,text)</span><br></pre></td></tr></table></figure>
-<pre><code>[&apos;Avenue&apos;]
+<pre><code>[&#39;Avenue&#39;]
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">re.findall(<span class="string">'[A,a]\w+'</span>,text)</span><br></pre></td></tr></table></figure>
-<pre><code>[&apos;address&apos;, &apos;Avenue&apos;]
+<pre><code>[&#39;address&#39;, &#39;Avenue&#39;]
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">re.search(<span class="string">'[A,a]\w+'</span>,text)</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;_sre.SRE_Match object; span=(11, 18), match=&apos;address&apos;&gt;
+<pre><code>&lt;_sre.SRE_Match object; span=(11, 18), match=&#39;address&#39;&gt;
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">search = re.search(<span class="string">'[A,a]\w+'</span>,text)</span><br><span class="line">search.start()</span><br></pre></td></tr></table></figure>
 <pre><code>11
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">search.end()</span><br></pre></td></tr></table></figure>
 <pre><code>18
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">text[search.start():search.end()]</span><br></pre></td></tr></table></figure>
-<pre><code>&apos;address&apos;
+<pre><code>&#39;address&#39;
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">re.match(<span class="string">'[A,a]\w+'</span>,text)</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">re.match(<span class="string">'T\w+'</span>,text)</span><br></pre></td></tr></table></figure>
-<pre><code>&lt;_sre.SRE_Match object; span=(0, 4), match=&apos;This&apos;&gt;
+<pre><code>&lt;_sre.SRE_Match object; span=(0, 4), match=&#39;This&#39;&gt;
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">match = re.match(<span class="string">'T\w+'</span>,text)</span><br><span class="line">text[match.start():match.end()]</span><br></pre></td></tr></table></figure>
-<pre><code>&apos;This&apos;
+<pre><code>&#39;This&#39;
 </code></pre><h1 id="6-7-数据聚合-140"><a href="#6-7-数据聚合-140" class="headerlink" title="6.7　数据聚合　　140"></a>6.7　数据聚合　　140</h1><h2 id="6-7-1-GroupBy-141"><a href="#6-7-1-GroupBy-141" class="headerlink" title="6.7.1　GroupBy　　141"></a>6.7.1　GroupBy　　141</h2><p><img src="/2018/04/12/python数据分析实战-第6章-深入pandas数据处理/CAPTURE_2018412_152431.jpg" alt="图片"></p>
 <h2 id="6-7-2-实例-141"><a href="#6-7-2-实例-141" class="headerlink" title="6.7.2　实例　　141"></a>6.7.2　实例　　141</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">frame = pd.DataFrame(&#123; <span class="string">'color'</span>: [<span class="string">'white'</span>,<span class="string">'red'</span>,<span class="string">'green'</span>,<span class="string">'red'</span>,<span class="string">'green'</span>],</span><br><span class="line"> <span class="string">'object'</span>: [<span class="string">'pen'</span>,<span class="string">'pencil'</span>,<span class="string">'pencil'</span>,<span class="string">'ashtray'</span>,<span class="string">'pen'</span>],</span><br><span class="line"> <span class="string">'price1'</span> : [<span class="number">5.56</span>,<span class="number">4.20</span>,<span class="number">1.30</span>,<span class="number">0.56</span>,<span class="number">2.75</span>],</span><br><span class="line"> <span class="string">'price2'</span> : [<span class="number">4.75</span>,<span class="number">4.12</span>,<span class="number">1.60</span>,<span class="number">0.75</span>,<span class="number">3.15</span>]&#125;)</span><br><span class="line">print(frame)</span><br></pre></td></tr></table></figure>
 <pre><code>   color   object  price1  price2
@@ -1040,9 +1040,9 @@ ValueError: substring not found
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">group = frame[<span class="string">'price1'</span>].groupby(frame[<span class="string">'color'</span>])</span><br><span class="line">group</span><br></pre></td></tr></table></figure>
 <pre><code>&lt;pandas.core.groupby.SeriesGroupBy object at 0x06923E30&gt;
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">group.groups</span><br></pre></td></tr></table></figure>
-<pre><code>{&apos;green&apos;: Int64Index([2, 4], dtype=&apos;int64&apos;),
- &apos;red&apos;: Int64Index([1, 3], dtype=&apos;int64&apos;),
- &apos;white&apos;: Int64Index([0], dtype=&apos;int64&apos;)}
+<pre><code>{&#39;green&#39;: Int64Index([2, 4], dtype=&#39;int64&#39;),
+ &#39;red&#39;: Int64Index([1, 3], dtype=&#39;int64&#39;),
+ &#39;white&#39;: Int64Index([0], dtype=&#39;int64&#39;)}
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">group.mean()</span><br></pre></td></tr></table></figure>
 <pre><code>color
 green    2.025
@@ -1056,11 +1056,11 @@ red      4.76
 white    5.56
 Name: price1, dtype: float64
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ggroup = frame[<span class="string">'price1'</span>].groupby([frame[<span class="string">'color'</span>],frame[<span class="string">'object'</span>]])</span><br><span class="line">ggroup.groups</span><br></pre></td></tr></table></figure>
-<pre><code>{(&apos;green&apos;, &apos;pen&apos;): Int64Index([4], dtype=&apos;int64&apos;),
- (&apos;green&apos;, &apos;pencil&apos;): Int64Index([2], dtype=&apos;int64&apos;),
- (&apos;red&apos;, &apos;ashtray&apos;): Int64Index([3], dtype=&apos;int64&apos;),
- (&apos;red&apos;, &apos;pencil&apos;): Int64Index([1], dtype=&apos;int64&apos;),
- (&apos;white&apos;, &apos;pen&apos;): Int64Index([0], dtype=&apos;int64&apos;)}
+<pre><code>{(&#39;green&#39;, &#39;pen&#39;): Int64Index([4], dtype=&#39;int64&#39;),
+ (&#39;green&#39;, &#39;pencil&#39;): Int64Index([2], dtype=&#39;int64&#39;),
+ (&#39;red&#39;, &#39;ashtray&#39;): Int64Index([3], dtype=&#39;int64&#39;),
+ (&#39;red&#39;, &#39;pencil&#39;): Int64Index([1], dtype=&#39;int64&#39;),
+ (&#39;white&#39;, &#39;pen&#39;): Int64Index([0], dtype=&#39;int64&#39;)}
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ggroup.sum()</span><br></pre></td></tr></table></figure>
 <pre><code>color  object 
 green  pen        2.75
@@ -1197,12 +1197,12 @@ fourth  white   down   27.84   31.18
 fifth   black   down   23.40   18.25
 5       black     up   18.33   22.44
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">temp = pd.date_range(<span class="string">'1/1/2015'</span>, periods=<span class="number">10</span>, freq= <span class="string">'H'</span>)</span><br><span class="line">print(temp)</span><br></pre></td></tr></table></figure>
-<pre><code>DatetimeIndex([&apos;2015-01-01 00:00:00&apos;, &apos;2015-01-01 01:00:00&apos;,
-               &apos;2015-01-01 02:00:00&apos;, &apos;2015-01-01 03:00:00&apos;,
-               &apos;2015-01-01 04:00:00&apos;, &apos;2015-01-01 05:00:00&apos;,
-               &apos;2015-01-01 06:00:00&apos;, &apos;2015-01-01 07:00:00&apos;,
-               &apos;2015-01-01 08:00:00&apos;, &apos;2015-01-01 09:00:00&apos;],
-              dtype=&apos;datetime64[ns]&apos;, freq=&apos;H&apos;)
+<pre><code>DatetimeIndex([&#39;2015-01-01 00:00:00&#39;, &#39;2015-01-01 01:00:00&#39;,
+               &#39;2015-01-01 02:00:00&#39;, &#39;2015-01-01 03:00:00&#39;,
+               &#39;2015-01-01 04:00:00&#39;, &#39;2015-01-01 05:00:00&#39;,
+               &#39;2015-01-01 06:00:00&#39;, &#39;2015-01-01 07:00:00&#39;,
+               &#39;2015-01-01 08:00:00&#39;, &#39;2015-01-01 09:00:00&#39;],
+              dtype=&#39;datetime64[ns]&#39;, freq=&#39;H&#39;)
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">timeseries = pd.Series(np.random.rand(<span class="number">10</span>), index=temp)</span><br><span class="line">timeseries</span><br></pre></td></tr></table></figure>
 <pre><code>2015-01-01 00:00:00    0.463135
 2015-01-01 01:00:00    0.170738
@@ -1437,7 +1437,7 @@ var jiathis_config={
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">103</span>
+                    <span class="site-state-item-count">104</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1607,7 +1607,11 @@ var jiathis_config={
                     
                       
                     
-                    <span class="site-state-item-count">41</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1743,7 +1747,7 @@ var jiathis_config={
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共207.6k字</span>
+  <span class="post-count">博客全站共211.7k字</span>
 </div>
 
         
@@ -2245,6 +2249,29 @@ var jiathis_config={
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+    
   
 
 

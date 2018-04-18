@@ -519,6 +519,7 @@
 <p>在图2中，UE连接两个PDN。UE有两个IP地址：IP地址1由PGW1分配用于PDN1，IP地址2由PGW2分配用于PDN2。每一个PDN有一个默认承载和两个专用承载。在PGW使用SDF templates把用户IP数据流分成了不同的SDF。从PDN1和PDN2由两组SDF（1-5）。对于这些SDF，根据在PGW设置的QoS规则来分配网络资源和数据包转发策略。并基于他们特定的QCI和ARP映射到EPS承载上。图中，对于PDN1，SDF1/2映射到默认承载，SDF3/4映射到non-GBR专用承载，SDF5映射到GBR专用承载，所有的都传送到UE。这样的从SDF到EPS承载的映射是由TFT决定的。所有用户流量在通过EPS承载传输时都准守EPS承载QoS。</p>
 <p>所有和PDN关联的non-GBR承载都是由他们共享的最大APN-AMBR控制，而和UE关联的non-GBR承载都是由他们共享的最大UE-AMBR控制。</p>
 <p>表2 SDF和EPS承载的QoS参数</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -561,6 +562,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <h1 id="IV-QoS-Provisioning-and-Enforcement"><a href="#IV-QoS-Provisioning-and-Enforcement" class="headerlink" title="IV. QoS Provisioning and Enforcement"></a>IV. QoS Provisioning and Enforcement</h1><p>4.1节将讨论QoS分配：QoS参数是在哪个实体中设置的。4.2节讨论QoS实施：决定哪个实体设置和应用哪个用户流量参数。</p>
 <h2 id="4-1-QoS分配"><a href="#4-1-QoS分配" class="headerlink" title="4.1 QoS分配"></a>4.1 QoS分配</h2><p>图3展示了QoS参数是在哪个实体中设置的；<br><img src="http://img.blog.csdn.net/20150913113710510" alt="这里写图片描述"></p>
 <p><strong>SDF QoS分配</strong><br>SDF所有的QoS参数是由PCRF提供的（Policy and Charging Rules Function）。</p>
@@ -794,7 +796,7 @@ var jiathis_config={
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">103</span>
+                    <span class="site-state-item-count">104</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -964,7 +966,11 @@ var jiathis_config={
                     
                       
                     
-                    <span class="site-state-item-count">41</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1100,7 +1106,7 @@ var jiathis_config={
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共207.6k字</span>
+  <span class="post-count">博客全站共211.7k字</span>
 </div>
 
         
@@ -1602,6 +1608,29 @@ var jiathis_config={
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+    
   
 
 

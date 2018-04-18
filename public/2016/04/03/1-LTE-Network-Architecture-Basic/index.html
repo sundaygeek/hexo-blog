@@ -479,6 +479,7 @@
 <h1 id="II-LTE-Network-Reference-Model"><a href="#II-LTE-Network-Reference-Model" class="headerlink" title="II. LTE Network Reference Model"></a>II. LTE Network Reference Model</h1><p>图1是LT网络的参考模型，包含LTE实体（UE和eNB）和EPC实体（SGW/PGW/MME/HSS/PCRF/SPR/PCSOFCS）。PDN是和UE进行通信的运营商内部或者外面IP域，它提供给UE服务，比如，因特网，IMS。表1和表2是LTE和EPC实体的功能。表3列出了LTE网络参考模型的参考点，并对EPS实体之间的接口进行了描述。</p>
 <p><img src="http://img.blog.csdn.net/20150909120950694" alt="这里写图片描述"></p>
 <p>表格1：LTE实体</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -497,7 +498,9 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>表格2：EPC实体</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -540,8 +543,10 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>CDR：charging data record<br>OCS：online charging system<br>OFCS：offline charging system<br>OSS：operations support system<br>PCC：policy and charging control<br>PCEF：policy and charging enforcement function<br>PCRF：policy and charging rules function<br>SDF：service data flow<br>SPR：subscriber profile repository</p>
 <p>表3：LTE接口</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -613,6 +618,7 @@
 </tr>
 </tbody>
 </table>
+</div>
 <hr>
 <h1 id="III-LTE-Protocol-Stacks"><a href="#III-LTE-Protocol-Stacks" class="headerlink" title="III. LTE Protocol Stacks"></a>III. LTE Protocol Stacks</h1><p>这一章主要介绍LTE用户面和控制面的协议栈。</p>
 <h2 id="3-1-用户面协议栈"><a href="#3-1-用户面协议栈" class="headerlink" title="3.1 用户面协议栈"></a>3.1 用户面协议栈</h2><p>图2是LTE网络参考模型的用户面协议栈。接着介绍协议栈主要层的功能描述。<br><img src="http://img.blog.csdn.net/20150909135820709" alt="这里写图片描述"></p>
@@ -863,7 +869,7 @@ var jiathis_config={
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">103</span>
+                    <span class="site-state-item-count">104</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1033,7 +1039,11 @@ var jiathis_config={
                     
                       
                     
-                    <span class="site-state-item-count">41</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1169,7 +1179,7 @@ var jiathis_config={
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共207.6k字</span>
+  <span class="post-count">博客全站共211.7k字</span>
 </div>
 
         
@@ -1671,6 +1681,29 @@ var jiathis_config={
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+    
   
 
 

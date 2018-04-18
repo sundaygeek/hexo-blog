@@ -142,7 +142,10 @@
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://yoursite.com/2018/04/17/TensorFlow实战-第3章-TensorFlow第一步/output_5_1.png">
 <meta property="og:image" content="http://yoursite.com/2018/04/17/TensorFlow实战-第3章-TensorFlow第一步/Snipaste_2018-04-17_17-33-06.png">
-<meta property="og:updated_time" content="2018-04-17T10:38:26.323Z">
+<meta property="og:image" content="http://yoursite.com/2018/04/17/TensorFlow实战-第3章-TensorFlow第一步/Snipaste_2018-04-17_18-49-31.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/17/TensorFlow实战-第3章-TensorFlow第一步/Snipaste_2018-04-17_18-49-40.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/17/TensorFlow实战-第3章-TensorFlow第一步/Snipaste_2018-04-17_18-49-50.png">
+<meta property="og:updated_time" content="2018-04-18T07:04:19.796Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TensorFlow实战-第3章-TensorFlow第一步">
 <meta name="twitter:description" content="3 TensorFlow第一步 393.1 TensorFlow的编译及安装 39 install ancondalink  CPU versionconda install tensorflow  GPU versionconda install tensorflow-gpu   3.2 TensorFlow实现SoftmaxRegression识别手写数字 46导入数据MNIST是一个非常简单">
@@ -489,23 +492,28 @@ Extracting MNIST_data/t10k-labels-idx1-ubyte.gz
 </code></pre><p>可以看到数据集中，训练集有55000个样本，测试集有10000个样本，验证集有5000个样本。<br>这里的数据全部丢弃了图片的二维结构信息，只是把一张图片变成了一个很长的一维向量。<br>我们可以使用matplotlib把一维数据还原为原来的图像。如下所示。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</span><br><span class="line">% matplotlib inline</span><br><span class="line"></span><br><span class="line">data = mnist.train.images[<span class="number">0</span>].reshape((<span class="number">28</span>,<span class="number">28</span>))</span><br><span class="line">plt.imshow(data)</span><br><span class="line"></span><br><span class="line">print(mnist.train.labels[<span class="number">0</span>])</span><br></pre></td></tr></table></figure>
 <pre><code>[0. 0. 0. 0. 0. 0. 0. 1. 0. 0.]
-</code></pre><p><img src="/2018/04/17/TensorFlow实战-第3章-TensorFlow第一步/output_5_1.png" alt="png"></p>
+</code></pre><p><img src="/2018/04/17/TensorFlow实战-第3章-TensorFlow第一步/output_5_1.png" alt="png)">)</p>
 <p>训练数据(55000, 784)，第一维是图片的编号，第二维是图片中像素点的编号。<br>对10个种类的标签进行了onehot编码，如上所示，[0. 0. 0. 0. 0. 0. 0. 1. 0. 0.] 代表为7</p>
-<p><img src="/2018/04/17/TensorFlow实战-第3章-TensorFlow第一步/Snipaste_2018-04-17_17-33-06.png" alt="Snipaste_2018-04-17_17-33-06.png"></p>
+<p><img src="/2018/04/17/TensorFlow实战-第3章-TensorFlow第一步/Snipaste_2018-04-17_17-33-06.png" alt="pic"></p>
 <h3 id="准备好数据以后，接下来就要设计算法了"><a href="#准备好数据以后，接下来就要设计算法了" class="headerlink" title="准备好数据以后，接下来就要设计算法了"></a>准备好数据以后，接下来就要设计算法了</h3><p>这里使用了一个叫做softmax regression的算法来训练分类模型。</p>
 <p>当我们处理分类任务时，通常需要使用softmax regression模型。即使后面章节中的CNN或者RNN，如果是分类模型，最后一层同样也是softmax regression。<br>它的工作原理很简单，将可以判定为某类的特征想加，然后将这些特征转化为判定为这一类的概率。<br>这些特征可以通过一些简单的方法得到，比如对所有像素求一个加权和，而权重是根据数据自动学习、训练出来的。比如某一个像素的灰度值大代表可能是数字n的概率越大。</p>
 <p>如下公式：</p>
-<p><script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script><br>$$feature_i = \sum_j W_i,j x_j + b_i$$</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line">sess = tf.InteractiveSession()</span><br><span class="line">x = tf.placeholder(tf.float32, [<span class="keyword">None</span>, <span class="number">784</span>])</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">W = tf.Variable(tf.zeros([<span class="number">784</span>, <span class="number">10</span>]))</span><br><span class="line">b = tf.Variable(tf.zeros([<span class="number">10</span>]))</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y = tf.nn.softmax(tf.matmul(x, W) + b)</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">y_ = tf.placeholder(tf.float32, [<span class="keyword">None</span>, <span class="number">10</span>])</span><br><span class="line">cross_entropy = tf.reduce_mean(-tf.reduce_sum(y_ * tf.log(y), reduction_indices=[<span class="number">1</span>]))</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">train_step = tf.train.GradientDescentOptimizer(<span class="number">0.5</span>).minimize(cross_entropy)</span><br><span class="line">tf.global_variables_initializer().run()</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1000</span>):</span><br><span class="line">    batch_xs, batch_ys = mnist.train.next_batch(<span class="number">100</span>)</span><br><span class="line">    train_step.run(&#123;x: batch_xs, y_: batch_ys&#125;)</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">correct_prediction = tf.equal(tf.argmax(y, <span class="number">1</span>), tf.argmax(y_, <span class="number">1</span>))</span><br><span class="line">accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))</span><br></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(accuracy.eval(&#123;x: mnist.test.images, y_: mnist.test.labels&#125;))</span><br></pre></td></tr></table></figure>
+<script type="math/tex; mode=display">feature_i = \sum_j W_{ij} x_j + b_i</script><p>其中i为第i类，j代表一张图片的第j个像素。<script type="math/tex">b_i</script>是bias。</p>
+<p>接下来计算所有特征的softmax，简单的说就是计算一个exp函数，然后再进行标准化（让所有类别的输出的概率值和为1）。</p>
+<script type="math/tex; mode=display">softmax(x) = normalize(exp(x))</script><p>其中判定为第i类的概率是：</p>
+<script type="math/tex; mode=display">softmax(x)\_i = \frac {exp(x)}{\sum_j exp(x_j)}</script><p><img src="/2018/04/17/TensorFlow实战-第3章-TensorFlow第一步/Snipaste_2018-04-17_18-49-31.png" alt="pic"><br><img src="/2018/04/17/TensorFlow实战-第3章-TensorFlow第一步/Snipaste_2018-04-17_18-49-40.png" alt="pic"><br><img src="/2018/04/17/TensorFlow实战-第3章-TensorFlow第一步/Snipaste_2018-04-17_18-49-50.png" alt="pic"></p>
+<p>可以用下面一行简洁的表达：</p>
+<script type="math/tex; mode=display">y = softmax(Wx + b)</script><p>cross_entropy的定义如下：</p>
+<script type="math/tex; mode=display">H_{y'}(y) = - \sum_i {y_i'} log(y_i)</script><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建InteractiveSession，使用这个命令会将这个session注册为默认的session，</span></span><br><span class="line"><span class="comment"># 之后的计算也默认跑在这个session里面。</span></span><br><span class="line"><span class="comment"># 不同session之间的数据和运算都是相互独立的。</span></span><br><span class="line">sess = tf.InteractiveSession()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建用于输入数据的placeholder，第一个参数是数据类型，第二个参数代表tensor的shape。</span></span><br><span class="line"><span class="comment"># None表示不限制条数，784是表示一个784维的向量。</span></span><br><span class="line">x = tf.placeholder(tf.float32, [<span class="keyword">None</span>, <span class="number">784</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment">#接下来要为softmax regression模型中的weight和biases创建Variable对象。</span></span><br><span class="line"><span class="comment">#Variable中的数据是持久化的，长期存在并且在每轮迭代中被更新。</span></span><br><span class="line"><span class="comment">#这里把weight和bias全部初始化为0，因为模型训练时会自动学习合适的值，所以对这个简单模型来说初始值不太重要。</span></span><br><span class="line"><span class="comment">#但是对于复杂CNN RNN或者其他比较深的全连接网络来说，初始化的方法比较重要，甚至至关重要。</span></span><br><span class="line">W = tf.Variable(tf.zeros([<span class="number">784</span>, <span class="number">10</span>]))</span><br><span class="line">b = tf.Variable(tf.zeros([<span class="number">10</span>]))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 实现公式y = softmax(Wx + b)</span></span><br><span class="line"><span class="comment">#tf.nn包含了大量的神经网络组件，softmax是其中之一。</span></span><br><span class="line"><span class="comment">#tf.matmul是矩阵乘法函数</span></span><br><span class="line">y = tf.nn.softmax(tf.matmul(x, W) + b)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 为了训练模型，需要定义一个loss function来描述模型对问题的分类精度。</span></span><br><span class="line"><span class="comment">#loss越小，代表模型分类结果和真实值的偏差越小，也就是说模型越准确。</span></span><br><span class="line"><span class="comment">#对于多分类问题，通常使用cross-entrpopy作为loss function.</span></span><br><span class="line"><span class="comment">#其中y是预测的概率分布，y'是真是的概率分布。</span></span><br><span class="line"><span class="comment">#tf.reduce_mean用来对每个batch数据结果求平均值。</span></span><br><span class="line">y_ = tf.placeholder(tf.float32, [<span class="keyword">None</span>, <span class="number">10</span>])</span><br><span class="line">cross_entropy = tf.reduce_mean(-tf.reduce_sum(y_ * tf.log(y), reduction_indices=[<span class="number">1</span>]))</span><br><span class="line"></span><br><span class="line"><span class="comment">#有了softmax regression和损失函数cross-entropy的定义，只需要再定义一个优化算法就可以开始训练。</span></span><br><span class="line"><span class="comment">#我们常见的是随机梯度下降SGD，定义好优化算法后，TensorFlow就可以根据我们定义的整个计算图自动求导，并根据反向传播算法进行训练，在每一轮迭代时更新参数来减少loss。在后台TensorFlow会自动天津爱很多运算操作来实现刚才提到的返现爱你过传播和梯度下降，而给我们提供的是一个封装好的优化器。我们直接调用tf.train.GradientDescentOptimizer，并设置学习速率为0.5，优化目标设定为cross-entropy，得到进行训练的操作train_step。</span></span><br><span class="line"><span class="comment">#下一步使用TensorFlow的全局参数初始化器tf.global_variables_initializer，并直接实行run方法。</span></span><br><span class="line">train_step = tf.train.GradientDescentOptimizer(<span class="number">0.5</span>).minimize(cross_entropy)</span><br><span class="line">tf.global_variables_initializer().run()</span><br><span class="line"></span><br><span class="line"><span class="comment">#最后一步，开始迭代执行训练操作train_step，这里每次都随机从训练集中抽取100条样本过程一个mini-batch，并feed给placehodler，然后调用train_step对这些样本进行训练。</span></span><br><span class="line"><span class="comment">#使用一小部分数据进行随机梯度下降，这样绝大多数比全量样本训练的收敛速度更快，而且计算量不太大。</span></span><br><span class="line"><span class="comment">#只有把数据feed时，并运行run方法时，计算才开始执行。</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1000</span>):</span><br><span class="line">    batch_xs, batch_ys = mnist.train.next_batch(<span class="number">100</span>)</span><br><span class="line">    train_step.run(&#123;x: batch_xs, y_: batch_ys&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">#现在完成了训练，需要对模型的准确性进行验证。</span></span><br><span class="line"><span class="comment">#tf.argmax是从一个tensor中找最大值的序号</span></span><br><span class="line"><span class="comment">#tf.argmax(y, 1)是求各个预测的数字钟概率最大的那一个。</span></span><br><span class="line"><span class="comment">#tf.argmax(y_, 1)则是找样本的真是数字类别。</span></span><br><span class="line"><span class="comment">#tf.equal是判断预测的数字是否是真正的类别。</span></span><br><span class="line"><span class="comment">#tf.cast将correct_prediction输出的bool值转换为float32</span></span><br><span class="line">correct_prediction = tf.equal(tf.argmax(y, <span class="number">1</span>), tf.argmax(y_, <span class="number">1</span>))</span><br><span class="line">accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))</span><br><span class="line"></span><br><span class="line"><span class="comment">#最后计算模型的在测试集上的准确率，并打印出来结果。</span></span><br><span class="line">print(accuracy.eval(&#123;x: mnist.test.images, y_: mnist.test.labels&#125;))</span><br></pre></td></tr></table></figure>
 <pre><code>0.9194
-</code></pre>
+</code></pre><h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>从上面的例子，我们可以总结一下整个流程。</p>
+<ol>
+<li>定义算法公式，也就是神经网络forward时的计算</li>
+<li>定义loss，选定优化器，并指定优化器优化loss</li>
+<li>迭代地对数据进行训练</li>
+<li>在测试集或者验证集上对准确率进行评测。</li>
+</ol>
+
       
     </div>
 
@@ -589,6 +597,10 @@ Extracting MNIST_data/t10k-labels-idx1-ubyte.gz
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/18/TensorFlow实战-第4章-TensorFlow实现自编码器及多层感知机/" rel="prev" title="TensorFlow实战-第4章-TensorFlow实现自编码器及多层感知机">
+                TensorFlow实战-第4章-TensorFlow实现自编码器及多层感知机 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -697,7 +709,7 @@ var jiathis_config={
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">103</span>
+                    <span class="site-state-item-count">104</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -867,7 +879,11 @@ var jiathis_config={
                     
                       
                     
-                    <span class="site-state-item-count">41</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -945,7 +961,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#3-TensorFlow第一步-39"><span class="nav-number">1.</span> <span class="nav-text">3 TensorFlow第一步 39</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-TensorFlow的编译及安装-39"><span class="nav-number">1.1.</span> <span class="nav-text">3.1 TensorFlow的编译及安装 39</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-TensorFlow实现SoftmaxRegression识别手写数字-46"><span class="nav-number">1.2.</span> <span class="nav-text">3.2 TensorFlow实现SoftmaxRegression识别手写数字 46</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#导入数据"><span class="nav-number">1.2.1.</span> <span class="nav-text">导入数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#准备好数据以后，接下来就要设计算法了"><span class="nav-number">1.2.2.</span> <span class="nav-text">准备好数据以后，接下来就要设计算法了</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#3-TensorFlow第一步-39"><span class="nav-number">1.</span> <span class="nav-text">3 TensorFlow第一步 39</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-TensorFlow的编译及安装-39"><span class="nav-number">1.1.</span> <span class="nav-text">3.1 TensorFlow的编译及安装 39</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2-TensorFlow实现SoftmaxRegression识别手写数字-46"><span class="nav-number">1.2.</span> <span class="nav-text">3.2 TensorFlow实现SoftmaxRegression识别手写数字 46</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#导入数据"><span class="nav-number">1.2.1.</span> <span class="nav-text">导入数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#准备好数据以后，接下来就要设计算法了"><span class="nav-number">1.2.2.</span> <span class="nav-text">准备好数据以后，接下来就要设计算法了</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">1.2.3.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -1003,7 +1019,7 @@ var jiathis_config={
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共207.6k字</span>
+  <span class="post-count">博客全站共211.7k字</span>
 </div>
 
         
@@ -1505,6 +1521,29 @@ var jiathis_config={
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+    
   
 
 

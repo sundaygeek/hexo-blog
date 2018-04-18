@@ -527,9 +527,9 @@
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#http://it.thetimenow.com/distance-calculator.php</span></span><br><span class="line"><span class="comment">#(Comacchio)</span></span><br><span class="line">df_ravenna[<span class="string">'dist'</span>] = <span class="number">8</span></span><br><span class="line">df_cesena[<span class="string">'dist'</span>] = <span class="number">14</span></span><br><span class="line">df_faenza[<span class="string">'dist'</span>] = <span class="number">37</span></span><br><span class="line">df_ferrara[<span class="string">'dist'</span>] = <span class="number">47</span></span><br><span class="line">df_bologna[<span class="string">'dist'</span>] = <span class="number">71</span></span><br><span class="line">df_mantova[<span class="string">'dist'</span>] = <span class="number">121</span> </span><br><span class="line">df_piacenza[<span class="string">'dist'</span>] = <span class="number">200</span></span><br><span class="line">df_milano[<span class="string">'dist'</span>] = <span class="number">250</span></span><br><span class="line">df_asti[<span class="string">'dist'</span>] = <span class="number">315</span></span><br><span class="line">df_torino[<span class="string">'dist'</span>] = <span class="number">357</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="comment">#df_ferrara.to_csv('ferrara_270615.csv')</span></span><br><span class="line"><span class="comment">#df_milano.to_csv('milano_270615.csv')</span></span><br><span class="line"><span class="comment">#df_mantova.to_csv('mantova_270615.csv')</span></span><br><span class="line"><span class="comment">#df_ravenna.to_csv('ravenna_270615.csv')</span></span><br><span class="line"><span class="comment">#df_torino.to_csv('torino_270615.csv')</span></span><br><span class="line"><span class="comment">#df_asti.to_csv('asti_270615.csv')</span></span><br><span class="line"><span class="comment">#df_bologna.to_csv('bologna_270615.csv')</span></span><br><span class="line"><span class="comment">#df_piacenza.to_csv('piacenza_270615.csv')</span></span><br><span class="line"><span class="comment">#df_cesena.to_csv('cesena_270615.csv')</span></span><br><span class="line"><span class="comment">#df_faenza.to_csv('faenza_270615.csv')</span></span><br><span class="line">df_ferrara = pd.read_csv(<span class="string">'ferrara_270615.csv'</span>)</span><br><span class="line">df_milano = pd.read_csv(<span class="string">'milano_270615.csv'</span>)</span><br><span class="line">df_mantova = pd.read_csv(<span class="string">'mantova_270615.csv'</span>)</span><br><span class="line">df_ravenna = pd.read_csv(<span class="string">'ravenna_270615.csv'</span>)</span><br><span class="line">df_torino = pd.read_csv(<span class="string">'torino_270615.csv'</span>)</span><br><span class="line">df_asti = pd.read_csv(<span class="string">'asti_270615.csv'</span>)</span><br><span class="line">df_bologna = pd.read_csv(<span class="string">'bologna_270615.csv'</span>)</span><br><span class="line">df_piacenza = pd.read_csv(<span class="string">'piacenza_270615.csv'</span>)</span><br><span class="line">df_cesena = pd.read_csv(<span class="string">'cesena_270615.csv'</span>)</span><br><span class="line">df_faenza = pd.read_csv(<span class="string">'faenza_270615.csv'</span>)</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df_cesena.columns</span><br></pre></td></tr></table></figure>
-<pre><code>Index([&apos;Unnamed: 0&apos;, &apos;temp&apos;, &apos;humidity&apos;, &apos;pressure&apos;, &apos;description&apos;, &apos;dt&apos;,
-       &apos;wind_speed&apos;, &apos;wind_deg&apos;, &apos;city&apos;, &apos;day&apos;, &apos;dist&apos;],
-      dtype=&apos;object&apos;)
+<pre><code>Index([&#39;Unnamed: 0&#39;, &#39;temp&#39;, &#39;humidity&#39;, &#39;pressure&#39;, &#39;description&#39;, &#39;dt&#39;,
+       &#39;wind_speed&#39;, &#39;wind_deg&#39;, &#39;city&#39;, &#39;day&#39;, &#39;dist&#39;],
+      dtype=&#39;object&#39;)
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">dist = [df_ravenna[<span class="string">'dist'</span>][<span class="number">0</span>],</span><br><span class="line">     df_cesena[<span class="string">'dist'</span>][<span class="number">0</span>],</span><br><span class="line">     df_faenza[<span class="string">'dist'</span>][<span class="number">0</span>],</span><br><span class="line">     df_ferrara[<span class="string">'dist'</span>][<span class="number">0</span>],</span><br><span class="line">     df_bologna[<span class="string">'dist'</span>][<span class="number">0</span>],</span><br><span class="line">     df_mantova[<span class="string">'dist'</span>][<span class="number">0</span>],</span><br><span class="line">     df_piacenza[<span class="string">'dist'</span>][<span class="number">0</span>],</span><br><span class="line">     df_milano[<span class="string">'dist'</span>][<span class="number">0</span>],</span><br><span class="line">     df_asti[<span class="string">'dist'</span>][<span class="number">0</span>],</span><br><span class="line">     df_torino[<span class="string">'dist'</span>][<span class="number">0</span>]</span><br><span class="line">]</span><br><span class="line">temp_max = [df_ravenna[<span class="string">'temp'</span>].max(),</span><br><span class="line">     df_cesena[<span class="string">'temp'</span>].max(),</span><br><span class="line">     df_faenza[<span class="string">'temp'</span>].max(),</span><br><span class="line">     df_ferrara[<span class="string">'temp'</span>].max(),</span><br><span class="line">     df_bologna[<span class="string">'temp'</span>].max(),</span><br><span class="line">     df_mantova[<span class="string">'temp'</span>].max(),</span><br><span class="line">     df_piacenza[<span class="string">'temp'</span>].max(),</span><br><span class="line">     df_milano[<span class="string">'temp'</span>].max(),</span><br><span class="line">     df_asti[<span class="string">'temp'</span>].max(),</span><br><span class="line">     df_torino[<span class="string">'temp'</span>].max()</span><br><span class="line">]</span><br><span class="line">temp_min = [df_ravenna[<span class="string">'temp'</span>].min(),</span><br><span class="line">     df_cesena[<span class="string">'temp'</span>].min(),</span><br><span class="line">     df_faenza[<span class="string">'temp'</span>].min(),</span><br><span class="line">     df_ferrara[<span class="string">'temp'</span>].min(),</span><br><span class="line">     df_bologna[<span class="string">'temp'</span>].min(),</span><br><span class="line">     df_mantova[<span class="string">'temp'</span>].min(),</span><br><span class="line">     df_piacenza[<span class="string">'temp'</span>].min(),</span><br><span class="line">     df_milano[<span class="string">'temp'</span>].min(),</span><br><span class="line">     df_asti[<span class="string">'temp'</span>].min(),</span><br><span class="line">     df_torino[<span class="string">'temp'</span>].min()</span><br><span class="line">]</span><br><span class="line">hum_min = [df_ravenna[<span class="string">'humidity'</span>].min(),</span><br><span class="line">     df_cesena[<span class="string">'humidity'</span>].min(),</span><br><span class="line">     df_faenza[<span class="string">'humidity'</span>].min(),</span><br><span class="line">     df_ferrara[<span class="string">'humidity'</span>].min(),</span><br><span class="line">     df_bologna[<span class="string">'humidity'</span>].min(),</span><br><span class="line">     df_mantova[<span class="string">'humidity'</span>].min(),</span><br><span class="line">     df_piacenza[<span class="string">'humidity'</span>].min(),</span><br><span class="line">     df_milano[<span class="string">'humidity'</span>].min(),</span><br><span class="line">     df_asti[<span class="string">'humidity'</span>].min(),</span><br><span class="line">     df_torino[<span class="string">'humidity'</span>].min()</span><br><span class="line">]</span><br><span class="line">hum_max = [df_ravenna[<span class="string">'humidity'</span>].max(),</span><br><span class="line">     df_cesena[<span class="string">'humidity'</span>].max(),</span><br><span class="line">     df_faenza[<span class="string">'humidity'</span>].max(),</span><br><span class="line">     df_ferrara[<span class="string">'humidity'</span>].max(),</span><br><span class="line">     df_bologna[<span class="string">'humidity'</span>].max(),</span><br><span class="line">     df_mantova[<span class="string">'humidity'</span>].max(),</span><br><span class="line">     df_piacenza[<span class="string">'humidity'</span>].max(),</span><br><span class="line">     df_milano[<span class="string">'humidity'</span>].max(),</span><br><span class="line">     df_asti[<span class="string">'humidity'</span>].max(),</span><br><span class="line">     df_torino[<span class="string">'humidity'</span>].max()</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">%matplotlib inline</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> matplotlib.dates <span class="keyword">as</span> mdates</span><br></pre></td></tr></table></figure>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#temperatura massima</span></span><br><span class="line">plt.plot(dist,temp_max,<span class="string">'ro'</span>)</span><br></pre></td></tr></table></figure>
@@ -553,10 +553,10 @@ NameError                                 Traceback (most recent call last)
      14 result = findIntersection(line1,line2,0.0)
      15 print &quot;[x,y] = [ %d , %d ]&quot; % (result,line1(result))
 ---&gt; 16 x = numpy.linspace(0,300,31)
-     17 plt.plot(x,line1(x),x,line2(x),result,line1(result),&apos;ro&apos;)
+     17 plt.plot(x,line1(x),x,line2(x),result,line1(result),&#39;ro&#39;)
 
 
-NameError: name &apos;numpy&apos; is not defined
+NameError: name &#39;numpy&#39; is not defined
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#temperatures min</span></span><br><span class="line">plt.axis((<span class="number">0</span>,<span class="number">400</span>,<span class="number">15</span>,<span class="number">25</span>))</span><br><span class="line">plt.plot(dist,temp_min,<span class="string">'bo'</span>)</span><br></pre></td></tr></table></figure>
 <pre><code>[&lt;matplotlib.lines.Line2D at 0x18716320&gt;]
 </code></pre><p><img src="/2018/04/12/python数据分析实战-第9章-数据分析实例气象数据/output_24_1.png" alt="png"></p>
@@ -847,7 +847,7 @@ var jiathis_config={
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">103</span>
+                    <span class="site-state-item-count">104</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1017,7 +1017,11 @@ var jiathis_config={
                     
                       
                     
-                    <span class="site-state-item-count">41</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1137,7 +1141,7 @@ var jiathis_config={
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共207.6k字</span>
+  <span class="post-count">博客全站共211.7k字</span>
 </div>
 
         
@@ -1639,6 +1643,29 @@ var jiathis_config={
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+    
   
 
 

@@ -469,29 +469,29 @@
         <p>第10章　IPython Notebook内嵌JavaScript库D3　　252<br>10.1　开放的人口数据源　　252<br>10.2　JavaScript库D3　　255<br>10.3　绘制簇状条状图　　259<br>10.4　地区分布图　　262<br>10.5　2014年美国人口地区分布图　　266<br>10.6　小结　　270</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line"><span class="comment"># from urllib.request import urlopen</span></span><br><span class="line"><span class="comment"># pop2014 = pd.read_csv(</span></span><br><span class="line"><span class="comment"># urlopen('http://www.census.gov/popest/data/counties/totals/2014/files/CO-EST2014-alldata.csv'),</span></span><br><span class="line"><span class="comment"># encoding='latin-1',</span></span><br><span class="line"><span class="comment"># dtype=&#123;'STATE': 'str', 'COUNTY': 'str'&#125;</span></span><br><span class="line"><span class="comment"># )</span></span><br><span class="line"></span><br><span class="line">pop2014 = pd.read_csv(<span class="string">'CO-EST2014-alldata.csv'</span>,encoding=<span class="string">'latin-1'</span>,dtype=&#123;<span class="string">'STATE'</span>: <span class="string">'str'</span>, <span class="string">'COUNTY'</span>: <span class="string">'str'</span>&#125;)</span><br><span class="line">print(pop2014.shape)</span><br><span class="line">print(pop2014.columns)</span><br></pre></td></tr></table></figure>
 <pre><code>(3193, 84)
-Index([&apos;SUMLEV&apos;, &apos;REGION&apos;, &apos;DIVISION&apos;, &apos;STATE&apos;, &apos;COUNTY&apos;, &apos;STNAME&apos;, &apos;CTYNAME&apos;,
-       &apos;CENSUS2010POP&apos;, &apos;ESTIMATESBASE2010&apos;, &apos;POPESTIMATE2010&apos;,
-       &apos;POPESTIMATE2011&apos;, &apos;POPESTIMATE2012&apos;, &apos;POPESTIMATE2013&apos;,
-       &apos;POPESTIMATE2014&apos;, &apos;NPOPCHG_2010&apos;, &apos;NPOPCHG_2011&apos;, &apos;NPOPCHG_2012&apos;,
-       &apos;NPOPCHG_2013&apos;, &apos;NPOPCHG_2014&apos;, &apos;BIRTHS2010&apos;, &apos;BIRTHS2011&apos;,
-       &apos;BIRTHS2012&apos;, &apos;BIRTHS2013&apos;, &apos;BIRTHS2014&apos;, &apos;DEATHS2010&apos;, &apos;DEATHS2011&apos;,
-       &apos;DEATHS2012&apos;, &apos;DEATHS2013&apos;, &apos;DEATHS2014&apos;, &apos;NATURALINC2010&apos;,
-       &apos;NATURALINC2011&apos;, &apos;NATURALINC2012&apos;, &apos;NATURALINC2013&apos;, &apos;NATURALINC2014&apos;,
-       &apos;INTERNATIONALMIG2010&apos;, &apos;INTERNATIONALMIG2011&apos;, &apos;INTERNATIONALMIG2012&apos;,
-       &apos;INTERNATIONALMIG2013&apos;, &apos;INTERNATIONALMIG2014&apos;, &apos;DOMESTICMIG2010&apos;,
-       &apos;DOMESTICMIG2011&apos;, &apos;DOMESTICMIG2012&apos;, &apos;DOMESTICMIG2013&apos;,
-       &apos;DOMESTICMIG2014&apos;, &apos;NETMIG2010&apos;, &apos;NETMIG2011&apos;, &apos;NETMIG2012&apos;,
-       &apos;NETMIG2013&apos;, &apos;NETMIG2014&apos;, &apos;RESIDUAL2010&apos;, &apos;RESIDUAL2011&apos;,
-       &apos;RESIDUAL2012&apos;, &apos;RESIDUAL2013&apos;, &apos;RESIDUAL2014&apos;, &apos;GQESTIMATESBASE2010&apos;,
-       &apos;GQESTIMATES2010&apos;, &apos;GQESTIMATES2011&apos;, &apos;GQESTIMATES2012&apos;,
-       &apos;GQESTIMATES2013&apos;, &apos;GQESTIMATES2014&apos;, &apos;RBIRTH2011&apos;, &apos;RBIRTH2012&apos;,
-       &apos;RBIRTH2013&apos;, &apos;RBIRTH2014&apos;, &apos;RDEATH2011&apos;, &apos;RDEATH2012&apos;, &apos;RDEATH2013&apos;,
-       &apos;RDEATH2014&apos;, &apos;RNATURALINC2011&apos;, &apos;RNATURALINC2012&apos;, &apos;RNATURALINC2013&apos;,
-       &apos;RNATURALINC2014&apos;, &apos;RINTERNATIONALMIG2011&apos;, &apos;RINTERNATIONALMIG2012&apos;,
-       &apos;RINTERNATIONALMIG2013&apos;, &apos;RINTERNATIONALMIG2014&apos;, &apos;RDOMESTICMIG2011&apos;,
-       &apos;RDOMESTICMIG2012&apos;, &apos;RDOMESTICMIG2013&apos;, &apos;RDOMESTICMIG2014&apos;,
-       &apos;RNETMIG2011&apos;, &apos;RNETMIG2012&apos;, &apos;RNETMIG2013&apos;, &apos;RNETMIG2014&apos;],
-      dtype=&apos;object&apos;)
+Index([&#39;SUMLEV&#39;, &#39;REGION&#39;, &#39;DIVISION&#39;, &#39;STATE&#39;, &#39;COUNTY&#39;, &#39;STNAME&#39;, &#39;CTYNAME&#39;,
+       &#39;CENSUS2010POP&#39;, &#39;ESTIMATESBASE2010&#39;, &#39;POPESTIMATE2010&#39;,
+       &#39;POPESTIMATE2011&#39;, &#39;POPESTIMATE2012&#39;, &#39;POPESTIMATE2013&#39;,
+       &#39;POPESTIMATE2014&#39;, &#39;NPOPCHG_2010&#39;, &#39;NPOPCHG_2011&#39;, &#39;NPOPCHG_2012&#39;,
+       &#39;NPOPCHG_2013&#39;, &#39;NPOPCHG_2014&#39;, &#39;BIRTHS2010&#39;, &#39;BIRTHS2011&#39;,
+       &#39;BIRTHS2012&#39;, &#39;BIRTHS2013&#39;, &#39;BIRTHS2014&#39;, &#39;DEATHS2010&#39;, &#39;DEATHS2011&#39;,
+       &#39;DEATHS2012&#39;, &#39;DEATHS2013&#39;, &#39;DEATHS2014&#39;, &#39;NATURALINC2010&#39;,
+       &#39;NATURALINC2011&#39;, &#39;NATURALINC2012&#39;, &#39;NATURALINC2013&#39;, &#39;NATURALINC2014&#39;,
+       &#39;INTERNATIONALMIG2010&#39;, &#39;INTERNATIONALMIG2011&#39;, &#39;INTERNATIONALMIG2012&#39;,
+       &#39;INTERNATIONALMIG2013&#39;, &#39;INTERNATIONALMIG2014&#39;, &#39;DOMESTICMIG2010&#39;,
+       &#39;DOMESTICMIG2011&#39;, &#39;DOMESTICMIG2012&#39;, &#39;DOMESTICMIG2013&#39;,
+       &#39;DOMESTICMIG2014&#39;, &#39;NETMIG2010&#39;, &#39;NETMIG2011&#39;, &#39;NETMIG2012&#39;,
+       &#39;NETMIG2013&#39;, &#39;NETMIG2014&#39;, &#39;RESIDUAL2010&#39;, &#39;RESIDUAL2011&#39;,
+       &#39;RESIDUAL2012&#39;, &#39;RESIDUAL2013&#39;, &#39;RESIDUAL2014&#39;, &#39;GQESTIMATESBASE2010&#39;,
+       &#39;GQESTIMATES2010&#39;, &#39;GQESTIMATES2011&#39;, &#39;GQESTIMATES2012&#39;,
+       &#39;GQESTIMATES2013&#39;, &#39;GQESTIMATES2014&#39;, &#39;RBIRTH2011&#39;, &#39;RBIRTH2012&#39;,
+       &#39;RBIRTH2013&#39;, &#39;RBIRTH2014&#39;, &#39;RDEATH2011&#39;, &#39;RDEATH2012&#39;, &#39;RDEATH2013&#39;,
+       &#39;RDEATH2014&#39;, &#39;RNATURALINC2011&#39;, &#39;RNATURALINC2012&#39;, &#39;RNATURALINC2013&#39;,
+       &#39;RNATURALINC2014&#39;, &#39;RINTERNATIONALMIG2011&#39;, &#39;RINTERNATIONALMIG2012&#39;,
+       &#39;RINTERNATIONALMIG2013&#39;, &#39;RINTERNATIONALMIG2014&#39;, &#39;RDOMESTICMIG2011&#39;,
+       &#39;RDOMESTICMIG2012&#39;, &#39;RDOMESTICMIG2013&#39;, &#39;RDOMESTICMIG2014&#39;,
+       &#39;RNETMIG2011&#39;, &#39;RNETMIG2012&#39;, &#39;RNETMIG2013&#39;, &#39;RNETMIG2014&#39;],
+      dtype=&#39;object&#39;)
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pop2014_by_state = pop2014[pop2014.SUMLEV == <span class="number">40</span>]</span><br><span class="line">pop2014_by_state.shape</span><br></pre></td></tr></table></figure>
 <pre><code>(51, 84)
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">states = pop2014_by_state[[<span class="string">'STNAME'</span>,<span class="string">'POPESTIMATE2011'</span>, <span class="string">'POPESTIMATE2012'</span>, <span class="string">'POPESTIMATE2013'</span>,</span><br><span class="line"><span class="string">'POPESTIMATE2014'</span>]]</span><br></pre></td></tr></table></figure>
@@ -512,7 +512,8 @@ Index([&apos;SUMLEV&apos;, &apos;REGION&apos;, &apos;DIVISION&apos;, &apos;STATE
 </code></pre><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">%%javascript</span><br><span class="line"><span class="built_in">require</span>.config(&#123;</span><br><span class="line">paths: &#123;</span><br><span class="line">d3: <span class="string">'//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min'</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <pre><code>&lt;IPython.core.display.Javascript object&gt;
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> IPython.core.display <span class="keyword">import</span> display, Javascript, HTML</span><br><span class="line">display(HTML(<span class="string">"""</span></span><br><span class="line"><span class="string">&lt;style&gt;</span></span><br><span class="line"><span class="string">.bar &#123;</span></span><br><span class="line"><span class="string">fill: steelblue;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">.bar:hover&#123;</span></span><br><span class="line"><span class="string">fill: brown;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">.axis &#123;</span></span><br><span class="line"><span class="string">font: 10px sans-serif;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">.axis path,</span></span><br><span class="line"><span class="string">.axis line &#123;</span></span><br><span class="line"><span class="string">fill: none;</span></span><br><span class="line"><span class="string">stroke: #000;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">.x.axis path &#123;</span></span><br><span class="line"><span class="string">display: none;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">&lt;/style&gt;</span></span><br><span class="line"><span class="string">&lt;div id="chart_d3" /&gt;</span></span><br><span class="line"><span class="string">"""</span>))</span><br></pre></td></tr></table></figure>
-<p><style><br>.bar {<br>fill: steelblue;<br>}<br>.bar:hover{<br>fill: brown;<br>}<br>.axis {<br>font: 10px sans-serif;<br>}<br>.axis path,<br>.axis line {<br>fill: none;<br>stroke: #000;<br>}<br>.x.axis path {<br>display: none;<br>}<br></style></p>
+<p><style><br>.bar {<br>fill: steelblue;<br>}<br>.bar:hover{<br>fill: brown;<br>}<br>.axis {<br>font: 10px sans-serif;<br>}<br>.axis path,<br>.axis line {<br>fill: none;<br>stroke: #000;<br>}<br>.x.axis path {<br>display: none;<br>}
+</style></p>
 <div id="chart_d3">
 
 
@@ -522,7 +523,8 @@ Index([&apos;SUMLEV&apos;, &apos;REGION&apos;, &apos;DIVISION&apos;, &apos;STATE
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">display(Javascript(myTemplate.render(</span><br><span class="line">data=states.sort_values([<span class="string">'POPESTIMATE2012'</span>], ascending=<span class="keyword">False</span>)[:<span class="number">10</span>].itertuples()</span><br><span class="line">)))</span><br></pre></td></tr></table></figure>
 <pre><code>&lt;IPython.core.display.Javascript object&gt;
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">display(HTML(<span class="string">"""</span></span><br><span class="line"><span class="string">&lt;style&gt;</span></span><br><span class="line"><span class="string">.bar2011 &#123;</span></span><br><span class="line"><span class="string">fill: steelblue;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">.bar2012 &#123;</span></span><br><span class="line"><span class="string">fill: red;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">.bar2013 &#123;</span></span><br><span class="line"><span class="string">fill: yellow;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">.bar2014 &#123;</span></span><br><span class="line"><span class="string">fill: green;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">.axis &#123;</span></span><br><span class="line"><span class="string">font: 10px sans-serif;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">.axis path,</span></span><br><span class="line"><span class="string">.axis line &#123;</span></span><br><span class="line"><span class="string">fill: none;</span></span><br><span class="line"><span class="string">stroke: #000;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">.x.axis path &#123;</span></span><br><span class="line"><span class="string">display: none;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">&lt;/style&gt;</span></span><br><span class="line"><span class="string">&lt;div id="chart_d3" /&gt;</span></span><br><span class="line"><span class="string">"""</span>))</span><br></pre></td></tr></table></figure>
-<p><style><br>.bar2011 {<br>fill: steelblue;<br>}<br>.bar2012 {<br>fill: red;<br>}<br>.bar2013 {<br>fill: yellow;<br>}<br>.bar2014 {<br>fill: green;<br>}<br>.axis {<br>font: 10px sans-serif;<br>}<br>.axis path,<br>.axis line {<br>fill: none;<br>stroke: #000;<br>}<br>.x.axis path {<br>display: none;<br>}<br></style></p>
+<p><style><br>.bar2011 {<br>fill: steelblue;<br>}<br>.bar2012 {<br>fill: red;<br>}<br>.bar2013 {<br>fill: yellow;<br>}<br>.bar2014 {<br>fill: green;<br>}<br>.axis {<br>font: 10px sans-serif;<br>}<br>.axis path,<br>.axis line {<br>fill: none;<br>stroke: #000;<br>}<br>.x.axis path {<br>display: none;<br>}
+</style></p>
 <div id="chart_d3">
 
 
@@ -534,7 +536,8 @@ Index([&apos;SUMLEV&apos;, &apos;REGION&apos;, &apos;DIVISION&apos;, &apos;STATE
 </code></pre><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">%%javascript</span><br><span class="line"><span class="built_in">require</span>.config(&#123;</span><br><span class="line">paths: &#123;</span><br><span class="line">d3: <span class="string">'//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min'</span>,</span><br><span class="line">queue: <span class="string">'//cdnjs.cloudflare.com/ajax/libs/queue-async/1.0.7/queue.min'</span>,</span><br><span class="line">topojson: <span class="string">'//cdnjs.cloudflare.com/ajax/libs/topojson/1.6.19/topojson.min'</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <pre><code>&lt;IPython.core.display.Javascript object&gt;
 </code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> IPython.core.display <span class="keyword">import</span> display, Javascript, HTML</span><br><span class="line">display(HTML(<span class="string">"""</span></span><br><span class="line"><span class="string">&lt;style&gt;</span></span><br><span class="line"><span class="string">.counties &#123;</span></span><br><span class="line"><span class="string">fill: none;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">.states &#123;</span></span><br><span class="line"><span class="string">fill: none;</span></span><br><span class="line"><span class="string">stroke: #fff;</span></span><br><span class="line"><span class="string">stroke-linejoin: round;</span></span><br><span class="line"><span class="string">&#125;</span></span><br><span class="line"><span class="string">.q0-9 &#123; fill:rgb(247,251,255); &#125;</span></span><br><span class="line"><span class="string">.q1-9 &#123; fill:rgb(222,235,247); &#125;</span></span><br><span class="line"><span class="string">.q2-9 &#123; fill:rgb(198,219,239); &#125;</span></span><br><span class="line"><span class="string">.q3-9 &#123; fill:rgb(158,202,225); &#125;</span></span><br><span class="line"><span class="string">.q4-9 &#123; fill:rgb(107,174,214); &#125;</span></span><br><span class="line"><span class="string">.q5-9 &#123; fill:rgb(66,146,198); &#125;</span></span><br><span class="line"><span class="string">.q6-9 &#123; fill:rgb(33,113,181); &#125;</span></span><br><span class="line"><span class="string">.q7-9 &#123; fill:rgb(8,81,156); &#125;</span></span><br><span class="line"><span class="string">.q8-9 &#123; fill:rgb(8,48,107); &#125;</span></span><br><span class="line"><span class="string">&lt;/style&gt;</span></span><br><span class="line"><span class="string">&lt;div id="choropleth" /&gt;</span></span><br><span class="line"><span class="string">"""</span>))</span><br></pre></td></tr></table></figure>
-<p><style><br>.counties {<br>fill: none;<br>}<br>.states {<br>fill: none;<br>stroke: #fff;<br>stroke-linejoin: round;<br>}<br>.q0-9 { fill:rgb(247,251,255); }<br>.q1-9 { fill:rgb(222,235,247); }<br>.q2-9 { fill:rgb(198,219,239); }<br>.q3-9 { fill:rgb(158,202,225); }<br>.q4-9 { fill:rgb(107,174,214); }<br>.q5-9 { fill:rgb(66,146,198); }<br>.q6-9 { fill:rgb(33,113,181); }<br>.q7-9 { fill:rgb(8,81,156); }<br>.q8-9 { fill:rgb(8,48,107); }<br></style></p>
+<p><style><br>.counties {<br>fill: none;<br>}<br>.states {<br>fill: none;<br>stroke: #fff;<br>stroke-linejoin: round;<br>}<br>.q0-9 { fill:rgb(247,251,255); }<br>.q1-9 { fill:rgb(222,235,247); }<br>.q2-9 { fill:rgb(198,219,239); }<br>.q3-9 { fill:rgb(158,202,225); }<br>.q4-9 { fill:rgb(107,174,214); }<br>.q5-9 { fill:rgb(66,146,198); }<br>.q6-9 { fill:rgb(33,113,181); }<br>.q7-9 { fill:rgb(8,81,156); }<br>.q8-9 { fill:rgb(8,48,107); }
+</style></p>
 <div id="choropleth">
 
 
@@ -738,7 +741,7 @@ var jiathis_config={
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">103</span>
+                    <span class="site-state-item-count">104</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -908,7 +911,11 @@ var jiathis_config={
                     
                       
                     
-                    <span class="site-state-item-count">41</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">43</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -1028,7 +1035,7 @@ var jiathis_config={
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共207.6k字</span>
+  <span class="post-count">博客全站共211.7k字</span>
 </div>
 
         
@@ -1530,6 +1537,29 @@ var jiathis_config={
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+    
   
 
 

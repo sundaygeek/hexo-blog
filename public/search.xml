@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[scipy找不到lena]]></title>
+    <url>%2F2018%2F05%2F03%2Fscipy%E6%89%BE%E4%B8%8D%E5%88%B0lena%2F</url>
+    <content type="text"><![CDATA[scipy.misc.lena AttributeError: ‘module’ object has no attribute ‘lena’在数据可视化的那本书上看到的demo，不过运行不通过，然后出现上面的那个错误，lena函数看起来被移除了。 123456import scipy.misclena=scipy.misc.lena()plt.gray()plt.imshow(lena)plt.colorbar()plt.show() Error：lena=scipy.misc.lena()AttributeError: ‘module’ object has no attribute ‘lena’ 在scipy 1.0.0版本上已经移除了lena图的数据了。 不过替换了一张其他的图片。 在misc目录下看到一个叫ascent的data， 替换这个函数后：scipy.misc.ascent()后，显示一个楼梯的图片。只能凑合着用吧。 lena图自己上网找一张然后数字化就好了。]]></content>
+      <tags>
+        <tag>scipy</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[美国算什么-薛涌-云图]]></title>
+    <url>%2F2018%2F05%2F02%2F%E7%BE%8E%E5%9B%BD%E7%AE%97%E4%BB%80%E4%B9%88-%E8%96%9B%E6%B6%8C-%E4%BA%91%E5%9B%BE%2F</url>
+    <content type="text"><![CDATA[《美国算什么》作者薛涌，以自己对美国政治及整个国民生存状态的敏锐关注，捕捉到了美国作为世界大国面临的种种问题及对中国某些现状的启示。书中涉猎到美国大选，美国的基础设施，美国的精神分裂，“新美国”是个什么样子等等为人关注的问题。]]></content>
+      <tags>
+        <tag>文学</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[笑傲江湖-金庸-云图]]></title>
     <url>%2F2018%2F04%2F28%2F%E7%AC%91%E5%82%B2%E6%B1%9F%E6%B9%96-%E9%87%91%E5%BA%B8-%E4%BA%91%E5%9B%BE%2F</url>
     <content type="text"><![CDATA[《笑傲江湖》是金庸1967年写的一部武侠小说，属于金庸的后期作品。]]></content>

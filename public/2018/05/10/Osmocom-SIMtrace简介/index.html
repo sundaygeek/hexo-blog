@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.1.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.1.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="简介Osmocom SIMtrace是用于被动跟踪SIM卡和手机之间SIM-ME通信的软件和硬件系统。 它通过使用支持USB的AT91SAM7微控制器的T = 0兼容USART工作。 USART在SIM卡和手机之间的ISO 7816-3 / TS 11.11接口上交换时被动接收字节。 接收到的字节通过USB发送到PC，PC上的程序称为simtrace从USB设备收集数据，解析APDU并通过GSMT">
+<meta name="keywords" content="SIM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Osmocom SIMtrace简介">
+<meta property="og:url" content="http://yoursite.com/2018/05/10/Osmocom-SIMtrace简介/index.html">
+<meta property="og:site_name" content="sun-day-blog">
+<meta property="og:description" content="简介Osmocom SIMtrace是用于被动跟踪SIM卡和手机之间SIM-ME通信的软件和硬件系统。 它通过使用支持USB的AT91SAM7微控制器的T = 0兼容USART工作。 USART在SIM卡和手机之间的ISO 7816-3 / TS 11.11接口上交换时被动接收字节。 接收到的字节通过USB发送到PC，PC上的程序称为simtrace从USB设备收集数据，解析APDU并通过GSMT">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2018/05/10/Osmocom-SIMtrace简介/1.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/10/Osmocom-SIMtrace简介/simtrace_and_phone.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/05/10/Osmocom-SIMtrace简介/simtrace_functions.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/10/Osmocom-SIMtrace简介/wireshark-sim.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/10/Osmocom-SIMtrace简介/simtrace_11_front.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/05/10/Osmocom-SIMtrace简介/simtrace_connectors_scaled.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/10/Osmocom-SIMtrace简介/simtrace_v14_schematic.png">
+<meta property="og:updated_time" content="2018-05-10T12:05:41.796Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Osmocom SIMtrace简介">
+<meta name="twitter:description" content="简介Osmocom SIMtrace是用于被动跟踪SIM卡和手机之间SIM-ME通信的软件和硬件系统。 它通过使用支持USB的AT91SAM7微控制器的T = 0兼容USART工作。 USART在SIM卡和手机之间的ISO 7816-3 / TS 11.11接口上交换时被动接收字节。 接收到的字节通过USB发送到PC，PC上的程序称为simtrace从USB设备收集数据，解析APDU并通过GSMT">
+<meta name="twitter:image" content="http://yoursite.com/2018/05/10/Osmocom-SIMtrace简介/1.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/10/Osmocom-SIMtrace简介/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Osmocom SIMtrace简介 | sun-day-blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> 
+
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">sun-day-blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">牛逼的人生不需要解释</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+          
+  <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+</li>
+
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/10/Osmocom-SIMtrace简介/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="sun-day">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sun-day-blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Osmocom SIMtrace简介</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-10T19:40:40+08:00">2018-05-10</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Osmocom SIMtrace是用于被动跟踪SIM卡和手机之间SIM-ME通信的软件和硬件系统。<br><img src="/2018/05/10/Osmocom-SIMtrace简介/1.png" alt="pic"><br><img src="/2018/05/10/Osmocom-SIMtrace简介/simtrace_and_phone.jpg" alt="pic"><br><img src="/2018/05/10/Osmocom-SIMtrace简介/simtrace_functions.png" alt="pic"></p>
+<p>它通过使用支持USB的AT91SAM7微控制器的T = 0兼容USART工作。</p>
+<p>USART在SIM卡和手机之间的ISO 7816-3 / TS 11.11接口上交换时被动接收字节。 接收到的字节通过USB发送到PC，PC上的程序称为simtrace从USB设备收集数据，解析APDU并通过GSMTAP将它们转发到wireshark协议分析器。</p>
+<h1 id="特征"><a href="#特征" class="headerlink" title="特征"></a>特征</h1><ul>
+<li>完全无源扫描仪</li>
+<li>RST和ATR检测</li>
+<li>支持PPS / PTS自动波特率</li>
+<li>APDU的分割<br>SIMtrace可以用于监视ME-SIM通信，但也可以模拟手机或SIM卡，也可以是MitM。<br>虽然硬件支持所有这些模式，但只有监控方面已经在软件中实现。</li>
+</ul>
+<h1 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h1><p>SIMtrace是一个社区项目，帮助不仅仅是欢迎。</p>
+<p>有些任务需要不需要电子或SIM卡协议方面的知识，只需要非常基本的C编程技能：</p>
+<ul>
+<li>使用libusb热插拔API来保持程序跨SIMrtace断开连接<br>一些任务不需要微控制器编程技巧：</li>
+<li>扩展/完成SIM协议的wireshark解剖器。<br>以下是其他一些可以改进的方面：</li>
+<li>检查奇偶校验错误</li>
+<li>验证TCK / PCK校验字节</li>
+<li>实施MITM</li>
+</ul>
+<h1 id="硬件"><a href="#硬件" class="headerlink" title="硬件"></a>硬件</h1><p>第一种实现方式使用Olimex SAM7-P64开发板，其中一些I / O线连接到来自<a href="https://osmocom.org/projects/simtrace/wiki/RebelSIM_Scanner" target="_blank" rel="noopener">RebelSIM_Scanner</a>的机械SIM卡适配器。 如果使用<a href="https://osmocom.org/projects/simtrace/wiki/RebelSIM" target="_blank" rel="noopener">RebelSIM</a>扫描仪，即使只使用线路，也要连接USB。 它需要供电，否则真正的读者往往无法初始化卡。</p>
+<p>现在我们有专门的PCB设计。 原理图和Gerber文件是作为开源硬件发布的，并且可以由所有人制作。</p>
+<p>但是，那些对从零开始构建它不感兴趣的人可以从<a href="http://shop.sysmocom.de/products/simtrace" target="_blank" rel="noopener">http://shop.sysmocom.de/products/simtrace</a> 购买完整的工厂生产，测试和闪存PCB组件</p>
+<p>它也可以通过一个独立的适配器与全尺寸SIM卡连接. <a href="http://shop.sysmocom.de/products/fullsize-sim-fpc" target="_blank" rel="noopener">链接</a></p>
+<p><a href="https://osmocom.org/projects/simtrace/wiki/SIMtrace_Hardware" target="_blank" rel="noopener">SIMtrace_Hardware</a>提供更多详细信息</p>
+<h1 id="固件"><a href="#固件" class="headerlink" title="固件"></a>固件</h1><p>AT91SAM7S器件的固件是通过重复使用<a href="http://www.openpcd.org/" target="_blank" rel="noopener">OpenPCD</a>的许多代码编写的RFID阅读器。 详细信息可在<a href="https://osmocom.org/projects/simtrace/wiki/SIMtrace_Firmware" target="_blank" rel="noopener">SIMtrace固件</a>上找到。</p>
+<h1 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h1><p>请检查用户手册的附件。 在那里，你会发现一些提示安装现成的软件包<br>你最喜欢的Linux发行版。</p>
+<h1 id="主机PC软件"><a href="#主机PC软件" class="headerlink" title="主机PC软件"></a>主机PC软件</h1><p>simtrace程序是git：//git.osmocom.org/simtrace.git存储库的一部分。 它将绑定到USB设备并使用UDP / IPv4发送GSMTAP帧到localhost：4729。</p>
+<p>前提条件<br><a href="https://osmocom.org/projects/libosmocore/wiki" target="_blank" rel="noopener">libosmocore</a>和头文件（simtrace_usb.h）。</p>
+<p>其他软件包：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install libusb-1.0-0-dev</span><br></pre></td></tr></table></figure></p>
+<p>编译：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone git://git.osmocom.org/simtrace.git</span><br><span class="line">cd simtrace/host/</span><br><span class="line">make</span><br></pre></td></tr></table></figure></p>
+<p>访问它<br>添加udev规则，以便能够使用simtrace并以非root用户身份访问设备（只需要在osmocom组中）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo groupadd osmocom</span><br><span class="line">sudo adduser $USERNAME osmocom</span><br><span class="line">sudo tee /etc/udev/rules.d/10-osmocom.rules &lt;&lt; EOF</span><br><span class="line"># to use, install this file in /etc/udev/rules.d as 10-osmocom.rules</span><br><span class="line"># rule to grant read/write access on SIMtrace to group named osmocom.</span><br><span class="line">SUBSYSTEM==&quot;usb&quot;, ATTR&#123;idProduct&#125;==&quot;0762&quot;, ATTRS&#123;idVendor&#125;==&quot;16c0&quot;, MODE=&quot;0660&quot;, GROUP=&quot;osmocom&quot; </span><br><span class="line">EOF</span><br><span class="line">sudo service udev reload</span><br></pre></td></tr></table></figure></p>
+<p>您必须注销并重新登录才能生效。</p>
+<p>使用它<br>简单地开始simtrace。<br>它将发送GSMTAP帧到UDP / IPv4 localhost：4729。</p>
+<p>它还会将帧的hexdumps打印到控制台，如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">sudo ./simtrace</span><br><span class="line">APDU: (9):  a0 a4 00 00 02 6f 07 9f 0f</span><br><span class="line">APDU: (22):  a0 c0 00 00 0f 00 00 00 09 6f 07 04 00 15 00 15 01 02 00 00 91 78</span><br><span class="line">APDU: (9):  a0 a4 00 00 02 6f 38 9f 0f</span><br><span class="line">APDU: (22):  a0 c0 00 00 0f 00 00 00 09 6f 38 04 00 15 00 55 01 02 00 00 91 78</span><br><span class="line">APDU: (16):  a0 b0 00 00 09 ff 3f ff ff 00 00 3f 03 00 91 78</span><br><span class="line">APDU: (9):  a0 a4 00 00 02 6f ad 9f 0f</span><br><span class="line">APDU: (8):  a0 b0 00 00 01 00 91 78</span><br><span class="line">APDU: (9):  a0 a4 00 00 02 6f 07 9f 0f</span><br><span class="line">APDU: (16):  a0 b0 00 00 09 08 49 06 20 11 49 00 11 06 91 78</span><br><span class="line">APDU: (9):  a0 a4 00 00 02 6f 7e 9f 0f</span><br><span class="line">APDU: (18):  a0 b0 00 00 0b ff ff ff ff 64 f0 00 ff fe 00 03 91 78</span><br><span class="line">APDU: (9):  a0 a4 00 00 02 6f 78 9f 0f</span><br><span class="line">APDU: (9):  a0 b0 00 00 02 00 01 91 78</span><br><span class="line">APDU: (9):  a0 a4 00 00 02 6f 74 9f 0f</span><br><span class="line">APDU: (23):  a0 b0 00 00 10 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 91 78</span><br><span class="line">APDU: (9):  a0 a4 00 00 02 6f 20 9f 0f</span><br><span class="line">APDU: (16):  a0 b0 00 00 09 ff ff ff ff ff ff ff ff 07 91 78</span><br><span class="line">APDU: (9):  a0 a4 00 00 02 6f 30 9f 0f</span><br><span class="line">APDU: (22):  a0 c0 00 00 0f 00 00 00 f0 6f 30 04 00 11 00 55 01 02 00 00 91 78</span><br></pre></td></tr></table></figure></p>
+<h1 id="Wireshark集成"><a href="#Wireshark集成" class="headerlink" title="Wireshark集成"></a>Wireshark集成</h1><p>有一个实验补丁，也是simtrace.git软件包的一部分。 它也包含在wireshark开发者版本中（因为wireshark 1.7.1）。</p>
+<p>在wireshark中查看APDU：</p>
+<ul>
+<li>在本地主机上SIMtrace自动在本地打开一个UDP接收器，不需要做任何事情</li>
+<li><p>在另一台机器上获取数据</p>
+<ul>
+<li><p>在另一台机器上启动一个用于GSMTAP的UDP接收器（不要在netcat“连接”时使用）</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">socat -u udp-recv：4729 / dev / null</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>告诉SIMtrace要转发哪台机器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./simtrace -i 192.168.0.1</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="/2018/05/10/Osmocom-SIMtrace简介/wireshark-sim.png" alt="pic"></p>
+<p>协议解析远远没有完成，补丁总是受欢迎的！</p>
+<h1 id="其他软件"><a href="#其他软件" class="headerlink" title="其他软件"></a>其他软件</h1><p>simlabTrace似乎能够使用MITM，并且似乎也有一个使用SIMtrace作为读卡器的CCID驱动程序。</p>
+<h1 id="联系人-邮件列表"><a href="#联系人-邮件列表" class="headerlink" title="联系人/邮件列表"></a>联系人/邮件列表</h1><p>对于任何与开发或使用有关的问题，都有一个邮件列表[mailto：simtrace@lists.osmocom.org]，您可以在<a href="http://lists.osmocom.org/mailman/listinfo/simtrace" target="_blank" rel="noopener">http://lists.osmocom.org/mailman/listinfo/simtrace</a> 订阅/取消订阅它并阅读 档案在<a href="http://lists.osmocom.org/pipermail/simtrace/" target="_blank" rel="noopener">http://lists.osmocom.org/pipermail/simtrace/</a></p>
+<p>请确保您在开始发布之前阅读MailingListRules。</p>
+<h1 id="Osmocom-SIMtrace-Hardware"><a href="#Osmocom-SIMtrace-Hardware" class="headerlink" title="Osmocom SIMtrace Hardware"></a>Osmocom SIMtrace Hardware</h1><p>此页面专门用于Osmocom SIMtrace的硬件，如下所示：<br><img src="/2018/05/10/Osmocom-SIMtrace简介/simtrace_11_front.jpg" alt="pic"><br><img src="/2018/05/10/Osmocom-SIMtrace简介/simtrace_connectors_scaled.png" alt="pic"></p>
+<p>您可以在<a href="http://shop.sysmocom.de/products/simtrace" target="_blank" rel="noopener">sysmocom商店</a>购买该设备。</p>
+<h1 id="连接器"><a href="#连接器" class="headerlink" title="连接器"></a>连接器</h1><ul>
+<li>USB：USB mini-B连接器。主要连接器。主机软件通过USB与电路板进行通信（嗅探，…）。它也可以用来闪存微控制器（使用DFU）。</li>
+<li>串行：2.5毫米插孔串行电缆，由osmocomBB使用。用于调试设备的端口（printf去那里）。</li>
+<li>调试（P2）：与串行相同，但使用FTDI串行电缆。建议在将电缆插入simtrace之前，先切断6pin FTDI连接器的电压线。</li>
+<li>jtag（P1）：JTAG 20针连接器，用于进行硬件辅助调试。</li>
+<li>BT1：电池连接器（4.5-6V DC）。通常USB提供电源，但电池端口可用于自主使用SIMtrace。嗅探的数据可以保存在闪存（U1）中。</li>
+<li>FFC_SIM（P3）：将扁平柔性电缆与SIM端连接起来用于电话。</li>
+<li>SIM（P4）：将您的SIM卡放在那里（而不是在手机中）</li>
+<li>重置（SW1）：重置主板（不擦除固件）。如果你太懒惰拔掉并重新插上USB。</li>
+<li>引导加载程序（SW2）：用于启动引导加载程序以使用DFU闪存设备。插入USB时按下。</li>
+<li>测试（JP1）：使用SAM-BA使用跳线短路闪烁。</li>
+<li>擦除（JP2）：使用跳线短路以完全擦除固件。</li>
+</ul>
+<h1 id="电路图"><a href="#电路图" class="headerlink" title="电路图"></a>电路图</h1><p><img src="/2018/05/10/Osmocom-SIMtrace简介/simtrace_v14_schematic.png" alt="pic"><br>原理图，Gerber文件等可以在simtrace.git存储库的’hardware’子目录中找到：<br><a href="http://cgit.osmocom.org/cgit/simtrace/tree/hardware" target="_blank" rel="noopener">http://cgit.osmocom.org/cgit/simtrace/tree/hardware</a> （网页浏览）<br>git：//git.osmocom.org/simtrace（git clone URL）<br>我们使用Kicad作为EDA工具。大部分关于原理图和Gerber文件的工作都由Kevin Redon完成，基于Harald Welte的原始设计。</p>
+<p>最新原理图的PDF格式图也可作为此页的附件。</p>
+<h1 id="互连"><a href="#互连" class="headerlink" title="互连"></a>互连</h1><p>硬件原理图非常非常简单：</p>
+<ul>
+<li>将SIM-RST与PA7连接</li>
+<li>将SIM-I / O与PA6和PA1连接</li>
+<li>将SIM-CLK与PA2和PA4连接</li>
+<li>将SIM-GND与GND连接</li>
+</ul>
+<h1 id="操作模式"><a href="#操作模式" class="headerlink" title="操作模式"></a>操作模式</h1><p>AT91SAM7S的USART能够T = 0。文档只提及它在时钟主模式，就像你一样会在智能卡读卡器中运行，积极与智能卡通话。但是，通过使用USART输入时钟多路复用器，您可以使用外部生成的CLK，如手机SIM卡插槽中的那个。</p>
+<p>不幸的是，USART的Rx超时功能在T = 0模式下不工作，所以我不得不重新实现Rx超时（等待时间）<br>通过TC（定时器/计数器）模块0进行处理。由于技术限制，我们将等待最多一个字节（12 etu）比我们应该。</p>
+<h1 id="Modi"><a href="#Modi" class="headerlink" title="Modi"></a>Modi</h1><p>SIMtrace可以用作：</p>
+<ul>
+<li>嗅探器</li>
+<li>读卡器</li>
+<li>卡模拟器</li>
+<li>人在这方面的中间人<br>SAM7S提供2个T = 0的USART端口。<br>一个连接到手机（PA21-PA27），另一个连接到SIM（PA1-PA7）。<br>线路通过总线开关从手机传输到SIM卡（IC4 = CB3Q3244）。<br>总线交换机提供4条线路的2条总线：</li>
+<li>第一个用于转发RST，CLK和VPP（在SIM和电话之间）。它由SC_SW（PA20）控制，</li>
+<li>第二个用于转发I / O（在SIM和电话之间）。它由SC_I / O（PA19）控制，<br>各种修改需要中断不同的线路：</li>
+</ul>
+<hr>
+<h2 id="SW-SC（PA20）-SC-I-O（PA19）-描述-方式"><a href="#SW-SC（PA20）-SC-I-O（PA19）-描述-方式" class="headerlink" title="SW_SC（PA20）|SC_I / O（PA19）|描述|方式"></a>SW_SC（PA20）|SC_I / O（PA19）|描述|方式</h2><p>L| L|电话和SIM直接连接|嗅探器（使用任何USART端口）<br>L| H|只有I / O中断|MitM（使用两个USART端口）<br>H| H|手机和SIM卡未连接|读卡器，仿真器（使用每个USART端口）<br>截至目前，仍然只有嗅探器在固件中实现</p>
+<p>SIM卡支持各种类别（电压等级）：A类= 5.0V，B类= 3.0V，C类= 1.8V。<br>SIMtrace v1.x仅支持B类（3.0V），所有实际SIM卡和手机也支持。<br>为确保使用B类，SIMtrace通过将VCC线保持在该电压下强制3.3V（在3.0V±10％规格内）。<br>SIMtrace v2将支持所有3个类。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="sun-day 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="sun-day 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SIM/" rel="tag"><i class="fa fa-tag"></i> SIM</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/10/SIM-APDU学习/" rel="next" title="SIM APDU学习">
+                <i class="fa fa-chevron-left"></i> SIM APDU学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2160523" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTY1MC8xMjE4Ng=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="sun-day" />
+            
+              <p class="site-author-name" itemprop="name">sun-day</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">161</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">33</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">73</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/zhanghaogithub123" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:zhanghao163mail@163.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://blog.csdn.net/mouse1598189" target="_blank" title="CSDN"><i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/zhang-hao-3-80-49/activities" target="_blank" title="知乎"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.google.com/" title="Google" target="_blank">Google</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.baidu.com/" title="百度" target="_blank">百度</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#特征"><span class="nav-number">2.</span> <span class="nav-text">特征</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#TODO"><span class="nav-number">3.</span> <span class="nav-text">TODO</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#硬件"><span class="nav-number">4.</span> <span class="nav-text">硬件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#固件"><span class="nav-number">5.</span> <span class="nav-text">固件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文档"><span class="nav-number">6.</span> <span class="nav-text">文档</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#主机PC软件"><span class="nav-number">7.</span> <span class="nav-text">主机PC软件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Wireshark集成"><span class="nav-number">8.</span> <span class="nav-text">Wireshark集成</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他软件"><span class="nav-number">9.</span> <span class="nav-text">其他软件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#联系人-邮件列表"><span class="nav-number">10.</span> <span class="nav-text">联系人/邮件列表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Osmocom-SIMtrace-Hardware"><span class="nav-number">11.</span> <span class="nav-text">Osmocom SIMtrace Hardware</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#连接器"><span class="nav-number">12.</span> <span class="nav-text">连接器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#电路图"><span class="nav-number">13.</span> <span class="nav-text">电路图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#互连"><span class="nav-number">14.</span> <span class="nav-text">互连</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#操作模式"><span class="nav-number">15.</span> <span class="nav-text">操作模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Modi"><span class="nav-number">16.</span> <span class="nav-text">Modi</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SW-SC（PA20）-SC-I-O（PA19）-描述-方式"><span class="nav-number">16.1.</span> <span class="nav-text">SW_SC（PA20）|SC_I / O（PA19）|描述|方式</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate"> 
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">true</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+  <div class="powered-by">
+  <i class="fa fa-user-md"></i><span id="busuanzi_container_site_pv">
+    本站访客数:<span id="busuanzi_container_site_pv"></span>
+  </span>
+  </div>
+  
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.1.0</div>
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共235.4k字</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.1.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

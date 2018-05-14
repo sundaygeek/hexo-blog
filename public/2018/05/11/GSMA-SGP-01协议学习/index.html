@@ -1,0 +1,1619 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.1.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.1.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="第三章 架构3.1 架构图本节定义了支持远程配置eUICC所需的功能架构。 该体系结构的基本组成部分包括要执行的功能，角色（Role）和分配的参与者（Actors）。 下图显示了eUICC远程供应系统。 第3.3节和附录A中描述了角色的细节，相关的功能和接口。  3.2卡体系结构3.2.1安全域GlobalPlatform提供了安全域（SD）的概念。这些是离卡(off-card)实体的卡内(on-">
+<meta name="keywords" content="GSMA,eSIM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GSMA SGP.01协议学习">
+<meta property="og:url" content="http://yoursite.com/2018/05/11/GSMA-SGP-01协议学习/index.html">
+<meta property="og:site_name" content="sun-day-blog">
+<meta property="og:description" content="第三章 架构3.1 架构图本节定义了支持远程配置eUICC所需的功能架构。 该体系结构的基本组成部分包括要执行的功能，角色（Role）和分配的参与者（Actors）。 下图显示了eUICC远程供应系统。 第3.3节和附录A中描述了角色的细节，相关的功能和接口。  3.2卡体系结构3.2.1安全域GlobalPlatform提供了安全域（SD）的概念。这些是离卡(off-card)实体的卡内(on-">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2018/05/11/GSMA-SGP-01协议学习/Snipaste_2018-05-11_17-58-24.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/11/GSMA-SGP-01协议学习/Snipaste_2018-05-11_18-05-03.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/11/GSMA-SGP-01协议学习/Snipaste_2018-05-11_18-22-57.png">
+<meta property="og:updated_time" content="2018-05-11T11:09:59.139Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="GSMA SGP.01协议学习">
+<meta name="twitter:description" content="第三章 架构3.1 架构图本节定义了支持远程配置eUICC所需的功能架构。 该体系结构的基本组成部分包括要执行的功能，角色（Role）和分配的参与者（Actors）。 下图显示了eUICC远程供应系统。 第3.3节和附录A中描述了角色的细节，相关的功能和接口。  3.2卡体系结构3.2.1安全域GlobalPlatform提供了安全域（SD）的概念。这些是离卡(off-card)实体的卡内(on-">
+<meta name="twitter:image" content="http://yoursite.com/2018/05/11/GSMA-SGP-01协议学习/Snipaste_2018-05-11_17-58-24.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/11/GSMA-SGP-01协议学习/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>GSMA SGP.01协议学习 | sun-day-blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> 
+
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">sun-day-blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">牛逼的人生不需要解释</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+          
+  <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+</li>
+
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/11/GSMA-SGP-01协议学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="sun-day">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sun-day-blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">GSMA SGP.01协议学习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-11T17:55:03+08:00">2018-05-11</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="第三章-架构"><a href="#第三章-架构" class="headerlink" title="第三章 架构"></a>第三章 架构</h1><h2 id="3-1-架构图"><a href="#3-1-架构图" class="headerlink" title="3.1 架构图"></a>3.1 架构图</h2><p>本节定义了支持远程配置eUICC所需的功能架构。 该体系结构的基本组成部分包括要执行的功能，角色（Role）和分配的参与者（Actors）。 下图显示了eUICC远程供应系统。 第3.3节和附录A中描述了角色的细节，相关的功能和接口。</p>
+<p><img src="/2018/05/11/GSMA-SGP-01协议学习/Snipaste_2018-05-11_17-58-24.png" alt="pic"></p>
+<h2 id="3-2卡体系结构"><a href="#3-2卡体系结构" class="headerlink" title="3.2卡体系结构"></a>3.2卡体系结构</h2><h3 id="3-2-1安全域"><a href="#3-2-1安全域" class="headerlink" title="3.2.1安全域"></a>3.2.1安全域</h3><p>GlobalPlatform提供了安全域（SD）的概念。这些是离卡(off-card)实体的卡内(on-card)代表，提供：</p>
+<ul>
+<li>用于加密密钥的安全存储; </li>
+<li>使用（GP）安全通道协议访问离卡实体; </li>
+<li>加载应用程序的机制; </li>
+<li>应用程序的安全服务。<br>通过配置密钥（例如用于SCP02 / 03或SCP80 / 81）以及通过将SD与另一个SD关联来配置SD的属性（例如授权或授权管理，DAP验证，令牌管理，全局删除）与其他权利相关联，将SD与其自身相关联（从而移除高级SD的所有管理权），或者为SD及其所有内容分配内存配额。在早期版本中，ISD（发行者安全域）具有几个独特的特权。但是，在最新的GlobalPlatform Card Specification [GPCS]中，它也是通过权限进行配置的，除了在开始之前，没有一个主要的特定功能。这应该使移动网络运营商能够享受到与UICC当前的ISD一样的优势。</li>
+</ul>
+<p>前进的方向是：</p>
+<ul>
+<li>在SD结构上构建eUICC，以及</li>
+<li>定义其他属性（例如通过权限），以便不同的SD可以表示远程配置配置文件中各种角色的Actor。 </li>
+</ul>
+<h3 id="3-2-2卡体系结构"><a href="#3-2-2卡体系结构" class="headerlink" title="3.2.2卡体系结构"></a>3.2.2卡体系结构</h3><p>本节描述如何设计Profiles，例如，使用Global Platform Card Specification [GPCS]的概念和信息模型的扩展版本。配置文件包含在eUICC的安全域（SD）中，从而使SD的安全机制可用。更多信息可以在[GPCS]中找到。下图概述了eUICC的示意图。<br><img src="/2018/05/11/GSMA-SGP-01协议学习/Snipaste_2018-05-11_18-05-03.png" alt="pic"></p>
+<p>操作系统（OS）包含基本的平台特征，例如支持GlobalPlatform Card Specification [GPCS]中定义的功能。</p>
+<p>ECASD（eUICC认证机构安全域）：</p>
+<ul>
+<li>在制造时在eUICC内创建; </li>
+<li>交货后无法删除或禁用; </li>
+<li>基于全球平台CASD的概念（见[GPCS]，[AmdA]和[AmdE]）; </li>
+<li>由eUICC制造商在颁发前配置; </li>
+<li>包含不可修改的eUICC私钥，相关证书，CI的根公钥和用于密钥/证书续订的EUM密钥集; </li>
+<li>与提供底层安全OTA通道的ISD-R相关联; </li>
+<li>对ISD-P和ISD-R中的新密钥集的建立，但不限于此; </li>
+<li>不支持强制DAP验证功能。 </li>
+</ul>
+<p>ISD-R和ISD-P是具有特殊功能的安全域。<br>ISD-R（ISD-Root）是执行平台管理命令的SM-SR的卡上代表（请参阅第3.3.1.3节中的平台管理功能）。<br>ISD-R应：<br>a）在制造时在eUICC内创建;<br>b）与SM-SR相关联;<br>c）不被删除或禁用;<br>d）使用平台管理证书（[管理]中定义的SCP80或SCP81）向SM-SR提供安全的OTA通道; e）实施支持SM-SR变更的密钥建立协议; f）在配置文件下载期间提供运输部分的包装和解包服务; g）能够创建具有所需内存配额的新的ISD-Ps（注：内存配额管理有待进一步研究）; h）除ISD-P外无法创建任何SD;<br>i）按照政策规定执行平台管理职能;<br>j）不能在ISD-P内执行任何操作。 </p>
+<p>ISD-P（ISD-Profile）是移动网络运营商的现场代表，或者是MNO授权的SM-DP。<br>ISD-P应：<br>a）在eUICC上成为一个独立的独立实体<br>b）包含文件系统，NAA和政策规则等配置文件; c）包含与创建，启用和禁用配置文件相关的状态机; d）包含用于加载和安装阶段的配置文件管理的密钥; e）实施密钥建立协议，为ISD-P的个性化生成密钥集; f）能够接收和解密，加载并安装由SMDP创建的Profile; g）安装配置文件后，能够将自己的状态设置为禁用状态; h）提供SCP03能力以确保与SM-DP的通信;<br>i）能够包含CASD。此CASD在配置文件中是可选的，并且只在配置文件处于启用状态时才提供服务。 </p>
+<p>MNO-SD是MNO的卡上代表。<br>MNO-SD应：<br>j）与自身相关联;<br>k）包含MNO OTA密钥; l）提供安全的OTA通道（[102225]和[102226]中定义的SCP80或SCP81）;<br>m）有能力托管补充安全域。</p>
+<p>一旦配置文件安装在eUICC的ISD-P上，配置文件和ISD-P应被认为是联合的，此后它就是被管理的ISD-P的状态。在装载和安装阶段，SM-DP执行ISD-P上的配置文件管理功能（请参阅第3.3.1.2节）。一旦配置文件启用，MNO-SD由MNO OTA平台管理。 MNO-SD以与当前UICC的ISD等效的方式进行管理。</p>
+<p>平台服务管理器是提供平台管理功能和策略规则强制机制（策略规则强制实施器）的操作系统服务。它由ISD-R或ISD-P调用，它根据策略规则执行功能（参见第3.6节）。另外，它可以检索可以根据请求与授权实体共享的ISD-P通用信息（即profileID，profile状态）。</p>
+<p>电信框架是一项OS服务，为ISD-Ps中托管的NAA提供标准化的网络认证算法。此外，它还提供了使用所需参数配置算法的功能。包含在ISD-P中的是公知的具有应用的卡结构，用于其他实体的SD，文件系统（MF树，ADF等）（根据ETSI TS 102 221 [102221]和3GPP TS 31 102 [31102 ]）和政策规则。 </p>
+<h3 id="3-2-3-ISD-P的状态图"><a href="#3-2-3-ISD-P的状态图" class="headerlink" title="3.2.3 ISD-P的状态图"></a>3.2.3 ISD-P的状态图</h3><p>ISD-P的状态和状态转换如下：<br>在创建ISD-P并建立密钥后，SM-DP代表MNO创建SD ，应用程序，NAA和文件系统。安装配置文件时，SM-DP将ISD-P的状态设置为禁用状态，从而有效地将其交给SM-SR进行平台管理。</p>
+<p><img src="/2018/05/11/GSMA-SGP-01协议学习/Snipaste_2018-05-11_18-22-57.png" alt="pic"></p>
+<p>在上图所示的创建状态下，配置文件被下载并安装在ISD-P中。在创建，禁用或删除状态下，配置文件对机器不可见以便机器设备</p>
+<h2 id="3-3相关角色和功能"><a href="#3-3相关角色和功能" class="headerlink" title="3.3相关角色和功能"></a>3.3相关角色和功能</h2><p>本节介绍并定义支持远程配置嵌入式UICC所需的相关角色和功能。这些函数描述了角色内部执行哪些操作，或者与架构的另一个角色或实体进行通信时执行了哪些操作。该角色与该角色分配给的业务角色不可知。 </p>
+<h3 id="3-3-1功能定义"><a href="#3-3-1功能定义" class="headerlink" title="3.3.1功能定义"></a>3.3.1功能定义</h3><h4 id="3-3-1-1数据准备功能"><a href="#3-3-1-1数据准备功能" class="headerlink" title="3.3.1.1数据准备功能"></a>3.3.1.1数据准备功能</h4><h5 id="3-3-1-1-1非个性化profile创建"><a href="#3-3-1-1-1非个性化profile创建" class="headerlink" title="3.3.1.1.1非个性化profile创建"></a>3.3.1.1.1非个性化profile创建</h5><p>非个性化profile创建包括基于MNO profile描述和eUICC目标类型构建非个性化profile。 SM-DP使用目标eUICC的EUM提供的服务，脚本，工具或文档生成非个性化配置文件。 SM-DP和EUM之间交换的信息不是标准化的，可能因不同实体而有所不同。假定SM-DP用目标eUICC的样本测试非个性化配置文件。 MNO通过测试使用由SM-DP开发的非个性化配置文件创建的测试个性化配置文件个性化的目标eUICC的样本来验证非个性化配置文件。</p>
+<h5 id="3-3-1-1-2配置文件订购"><a href="#3-3-1-1-2配置文件订购" class="headerlink" title="3.3.1.1.2配置文件订购"></a>3.3.1.1.2配置文件订购</h5><p>配置文件订购包括由SM-DP根据MNO向SM-DP提供的输入数据准备和生成个性化配置文件的过程。输入数据包括（但不限于）：</p>
+<ul>
+<li>要生成的配置文件的数量; </li>
+<li>IMSI值或范围; </li>
+<li>ICCID值或范围; </li>
+<li>非个性化的配置文件类型; </li>
+<li>有关目标eUICC的信息，例如EID。<br>MNO向SM-DP提供输入数据的方式和时间超出范围。 </li>
+</ul>
+<h5 id="3-3-1-1-3个性化数据的生成"><a href="#3-3-1-1-3个性化数据的生成" class="headerlink" title="3.3.1.1.3个性化数据的生成"></a>3.3.1.1.3个性化数据的生成</h5><p>该功能基于由MNO提供的输入数据（例如，IMSI，ICCID）在安全环境中创建证书和密钥值（例如，NAC，PIN，OTA密钥）。 </p>
+<h5 id="3-3-1-1-4配置文件个性化"><a href="#3-3-1-1-4配置文件个性化" class="headerlink" title="3.3.1.1.4配置文件个性化"></a>3.3.1.1.4配置文件个性化</h5><p>SM-DP根据MNO下达的命令将个性化数据插入到非个性化配置文件中。此功能解决了确保创建的个性化配置文件只能安装在特定eUICC上的过程。 </p>
+<h5 id="3-3-1-1-5-EUM服务，脚本，工具或文档"><a href="#3-3-1-1-5-EUM服务，脚本，工具或文档" class="headerlink" title="3.3.1.1.5 EUM服务，脚本，工具或文档"></a>3.3.1.1.5 EUM服务，脚本，工具或文档</h5><p>为允许任何SM-DP在任何eUICC上承担上述功能，EUM提供的服务，脚本，工具或文档必须至少支持以下eUICC属性由MNO交付。某些属性与非个性化配置文件创建的功能有关，有些属性与配置文件个性化有关，在某些情况下，它们适用的功能可能取决于特定的eUICC。这些属性包括：</p>
+<ul>
+<li>要加载的应用程序（和应用程序的分配） - 包括USIM，ISIM，CAT和第三方应用程序SSD; </li>
+<li>eUICC平台内的算法选择，算法参数分配和算法参数加载; </li>
+<li>应用密钥和PIN分配和加载; </li>
+<li>USIM应用程序文件结构中的可选和可变数据字段; </li>
+<li>支持其他应用程序的附加数据字段和文件结构 - 基于SIM和基于设备的应用程序。 </li>
+</ul>
+<p>SM-DP和EUM之间交换的信息不是标准化的，可能因不同实体而有所不同。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="sun-day 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="sun-day 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/GSMA/" rel="tag"><i class="fa fa-tag"></i> GSMA</a>
+          
+            <a href="/tags/eSIM/" rel="tag"><i class="fa fa-tag"></i> eSIM</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/10/Osmocom-SIMtrace简介/" rel="next" title="Osmocom SIMtrace简介">
+                <i class="fa fa-chevron-left"></i> Osmocom SIMtrace简介
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/12/GSMA-SGP-21-第五章学习/" rel="prev" title="GSMA SGP.21 第五章学习">
+                GSMA SGP.21 第五章学习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2160523" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTY1MC8xMjE4Ng=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="sun-day" />
+            
+              <p class="site-author-name" itemprop="name">sun-day</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">164</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">33</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">75</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/zhanghaogithub123" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:zhanghao163mail@163.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://blog.csdn.net/mouse1598189" target="_blank" title="CSDN"><i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/zhang-hao-3-80-49/activities" target="_blank" title="知乎"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.google.com/" title="Google" target="_blank">Google</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.baidu.com/" title="百度" target="_blank">百度</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第三章-架构"><span class="nav-number">1.</span> <span class="nav-text">第三章 架构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1-架构图"><span class="nav-number">1.1.</span> <span class="nav-text">3.1 架构图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2卡体系结构"><span class="nav-number">1.2.</span> <span class="nav-text">3.2卡体系结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-1安全域"><span class="nav-number">1.2.1.</span> <span class="nav-text">3.2.1安全域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-2卡体系结构"><span class="nav-number">1.2.2.</span> <span class="nav-text">3.2.2卡体系结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-3-ISD-P的状态图"><span class="nav-number">1.2.3.</span> <span class="nav-text">3.2.3 ISD-P的状态图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3相关角色和功能"><span class="nav-number">1.3.</span> <span class="nav-text">3.3相关角色和功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-1功能定义"><span class="nav-number">1.3.1.</span> <span class="nav-text">3.3.1功能定义</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-1-1数据准备功能"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">3.3.1.1数据准备功能</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-3-1-1-1非个性化profile创建"><span class="nav-number">1.3.1.1.1.</span> <span class="nav-text">3.3.1.1.1非个性化profile创建</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-3-1-1-2配置文件订购"><span class="nav-number">1.3.1.1.2.</span> <span class="nav-text">3.3.1.1.2配置文件订购</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-3-1-1-3个性化数据的生成"><span class="nav-number">1.3.1.1.3.</span> <span class="nav-text">3.3.1.1.3个性化数据的生成</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-3-1-1-4配置文件个性化"><span class="nav-number">1.3.1.1.4.</span> <span class="nav-text">3.3.1.1.4配置文件个性化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-3-1-1-5-EUM服务，脚本，工具或文档"><span class="nav-number">1.3.1.1.5.</span> <span class="nav-text">3.3.1.1.5 EUM服务，脚本，工具或文档</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate"> 
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">true</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+  <div class="powered-by">
+  <i class="fa fa-user-md"></i><span id="busuanzi_container_site_pv">
+    本站访客数:<span id="busuanzi_container_site_pv"></span>
+  </span>
+  </div>
+  
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.1.0</div>
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共255.2k字</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.1.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

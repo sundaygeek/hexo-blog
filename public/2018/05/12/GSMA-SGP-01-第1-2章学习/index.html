@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.1.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.1.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="1简介1.1概述许多机器对机器设备将不易于达到供应订购的目的。这将需要一个新的解决方案来适应这种特殊情况。要求是在假定采用与今天相同或相似的认证协议的情况下，为具有获得移动网络访问所必需的凭证的“无线”远程配置机器对机器设备定义机制。 MNO必须能够响应请求，将订阅（合同）从一个MNO A更改为不同的MNO B，而无需物理访问相关设备中的嵌入式UICC。本文档描述了一种体系结构，该体系结构在实施时">
+<meta name="keywords" content="GSMA,SGP01,eSIM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GSMA SGP.01 第1&#x2F;2章学习">
+<meta property="og:url" content="http://yoursite.com/2018/05/12/GSMA-SGP-01-第1-2章学习/index.html">
+<meta property="og:site_name" content="sun-day-blog">
+<meta property="og:description" content="1简介1.1概述许多机器对机器设备将不易于达到供应订购的目的。这将需要一个新的解决方案来适应这种特殊情况。要求是在假定采用与今天相同或相似的认证协议的情况下，为具有获得移动网络访问所必需的凭证的“无线”远程配置机器对机器设备定义机制。 MNO必须能够响应请求，将订阅（合同）从一个MNO A更改为不同的MNO B，而无需物理访问相关设备中的嵌入式UICC。本文档描述了一种体系结构，该体系结构在实施时">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-05-12T09:04:46.525Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="GSMA SGP.01 第1&#x2F;2章学习">
+<meta name="twitter:description" content="1简介1.1概述许多机器对机器设备将不易于达到供应订购的目的。这将需要一个新的解决方案来适应这种特殊情况。要求是在假定采用与今天相同或相似的认证协议的情况下，为具有获得移动网络访问所必需的凭证的“无线”远程配置机器对机器设备定义机制。 MNO必须能够响应请求，将订阅（合同）从一个MNO A更改为不同的MNO B，而无需物理访问相关设备中的嵌入式UICC。本文档描述了一种体系结构，该体系结构在实施时">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/12/GSMA-SGP-01-第1-2章学习/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>GSMA SGP.01 第1/2章学习 | sun-day-blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> 
+
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">sun-day-blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">牛逼的人生不需要解释</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+          
+  <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+</li>
+
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/12/GSMA-SGP-01-第1-2章学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="sun-day">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sun-day-blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">GSMA SGP.01 第1/2章学习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-12T16:41:36+08:00">2018-05-12</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1简介"><a href="#1简介" class="headerlink" title="1简介"></a>1简介</h1><h2 id="1-1概述"><a href="#1-1概述" class="headerlink" title="1.1概述"></a>1.1概述</h2><p>许多机器对机器设备将不易于达到供应订购的目的。这将需要一个新的解决方案来适应这种特殊情况。要求是在假定采用与今天相同或相似的认证协议的情况下，为具有获得移动网络访问所必需的凭证的“无线”远程配置机器对机器设备定义机制。 MNO必须能够响应请求，将订阅（合同）从一个MNO A更改为不同的MNO B，而无需物理访问相关设备中的嵌入式UICC。本文档描述了一种体系结构，该体系结构在实施时将启用远程供应和订阅管理，同时至少为网络运营商和客户保持与现有解决方案相同的安全级别。这包括MNO网络访问凭证的安全保存，例如加密功能的密钥，以及IMSI和其他客户身份标识符等标识符的使用。 </p>
+<h2 id="1-2问题范围"><a href="#1-2问题范围" class="headerlink" title="1.2问题范围"></a>1.2问题范围</h2><p>本文件涉及：<br>•GSMA“嵌入式SIM任务组要求和用例”版本1.0 [1]中描述的机器对机器用例。该解决方案不适用于传统的消费电信设备，因为它们不关心上述问题陈述。<br>•嵌入式UICC远程供应系统的体系结构，即其组件和相关接口。 GSMA的嵌入式UICC生态系统文件[2]以及第2节中所述的原则和假设将支持其定义。<br>•嵌入式UICC的远程供应系统的安全性。<br>•网络基础设施中的SM-SR和SM-DP集成选项。<br>•嵌入式UICC架构及其外部接口的必要方面，以确保在交付ETSI标准之前与GSMA架构兼容。<br>•在适当的地方标准化嵌入式UICC远程供应架构。</p>
+<h2 id="1-3文档目的"><a href="#1-3文档目的" class="headerlink" title="1.3文档目的"></a>1.3文档目的</h2><p>本文档的目的是定义一个通用的全局体系结构框架，以实现机器设备中嵌入式UICC（eUICC）的远程供应和管理，这些设备不易到达。采用通用架构框架将为确保潜在的不同MNO部署方案之间的全球互用性提供基础，同时利用标准化的eUICC平台。本文档确定了各个角色和潜在的角色以及架构中每个角色之间的界面。 </p>
+<h2 id="1-4目标读者"><a href="#1-4目标读者" class="headerlink" title="1.4目标读者"></a>1.4目标读者</h2><p>在MNO，SIM解决方案提供商，机器对机器设备供应商，标准组织，网络基础设施供应商，服务提供商和其他行业机构内部工作的技术专家。 </p>
+<h2 id="1-5术语定义"><a href="#1-5术语定义" class="headerlink" title="1.5术语定义"></a>1.5术语定义</h2><h2 id="1-6缩略语"><a href="#1-6缩略语" class="headerlink" title="1.6缩略语"></a>1.6缩略语</h2><h2 id="1-7参考资料"><a href="#1-7参考资料" class="headerlink" title="1.7参考资料"></a>1.7参考资料</h2><h1 id="2基本原理和假设"><a href="#2基本原理和假设" class="headerlink" title="2基本原理和假设"></a>2基本原理和假设</h1><p>本节包含与嵌入式UICC GSMA远程供应系统相关的原理和假设。 </p>
+<h2 id="2-1基本原则"><a href="#2-1基本原则" class="headerlink" title="2.1基本原则"></a>2.1基本原则</h2><p>BPR1解决方案应反映UICC相关最重要的使用案例，并在eUICC硬件不容易从机器到机器设备进行访问或移除的情况下给予充分支持。由于eUICC的性质不同，可能会涵盖并非所有的当前使用案例。<br>BPR2解决方案的设计应能够提供新的商业机会，例如在M2M领域，同时保持现有UICC的成熟效益。<br>BPR3 eUICC及其整体管理流程的安全必须在任何时候，在任何情况下都至少与目前可拆卸的UICC及其供应流程一样好。<br>BPR4 eUICC上可以使用当前UICC上的任何功能，特性或服务。<br>BPR5 eUICC对功能，特性或业务的访问应与当前UICC相同，即对终端和用户透明。<br>BPR6对eUICC的功能，特性或服务的远程管理应对运营商现有的系统和基础设施产生最小的影响。这应通过尽可能使用现有的标准和规范来实现。<br>BPR7保持简单。复杂性被理解为一个风险因素。合理有限的功能方法将支持产品上市时间的预期，并可能随着未来的需求和改进而发展。<br>BPR8第三方应用程序在操作profile之外不属于本文档的范围。<br>BPR9各实体应对其运营负责。<br>BPR10禁用的操作profile中的应用程序和文件系统既不是本地的，也不是远程可选的。 </p>
+<h2 id="2-2一般假设"><a href="#2-2一般假设" class="headerlink" title="2.2一般假设"></a>2.2一般假设</h2><h3 id="2-2-1现有标准的使用"><a href="#2-2-1现有标准的使用" class="headerlink" title="2.2.1现有标准的使用"></a>2.2.1现有标准的使用</h3><p>STD1 eUICC和相关供应系统的定义应当尽可能有效地体现所有相关方的努力和成本。这应通过尽可能使用现有的标准和规范来实现。<br>STD2全球平台规范将被视为实施eUICC的首选框架。 </p>
+<h3 id="2-2-2机器对机器设备的影响"><a href="#2-2-2机器对机器设备的影响" class="headerlink" title="2.2.2机器对机器设备的影响"></a>2.2.2机器对机器设备的影响</h3><p>DEV1 eUICC生态系统的实施对设备的影响很小。<br>DEV2没有安全认证要求将被放置在设备上。<br>DEV3没有新的认证要求放置在设备上。<br>DEV4任何设备批准的影响应包括在现有的设备型号认证或认证方案下，并且独立于eUICC的认证。<br>DEV5设备内的通信模块应符合ETSI TS 102 221 [102221]内针对所有标准ETSI格式要素的终端要求。<br>DEV6设备制造商应确保设备或服务提供商的所有者有权访问eUICC标识（EID）。<br>DEV7设备制造商应该在设备上打印eUICC标识（EID），以便人类可读。 </p>
+<h3 id="2-2-3安全性"><a href="#2-2-3安全性" class="headerlink" title="2.2.3安全性"></a>2.2.3安全性</h3><p>SEC1 eUICC的总体安全性与相关管理过程必须始终在任何情况下至少与当前的可拆卸UICC及其供应过程相当。<br>SEC2 eUICC及其远程供应系统的体系结构符合3GPP TS 21.133 [21133]“3G安全，安全威胁和要求”的要求。<br>SEC3体系结构必须支持与保护操作员证书有关的安全级别，该级别至少等于当前的安全级别。这尤其适用于：<br>•密钥和认证参数的机密性。<br>•订户身份的完整性（例如IMSI）。<br>SEC4 对于eUICC，认证将成为强制性的，因为包含运营商证书的实体可能不再处于MNO的设计控制之下。<br>SEC5远程供应架构必须避免损害客户数据的安全性。<br>SEC6可信系统是一个依赖于特定范围的系统来执行指定的安全策略。信任模型被定义为安全相关项目可交付成果的一部分。<br>SEC7对于平台和profile管理，涉及管理的所有实体都必须经过相互认证。 </p>
+<h3 id="2-2-4-Regulatory"><a href="#2-2-4-Regulatory" class="headerlink" title="2.2.4 Regulatory"></a>2.2.4 Regulatory</h3><p>REG1监管问题被认为不在嵌入式SIM快速通道工作组的范围之内。监管问题将提交给GSMA监管团队。 </p>
+<h2 id="2-3-eUICC生态系统"><a href="#2-3-eUICC生态系统" class="headerlink" title="2.3 eUICC生态系统"></a>2.3 eUICC生态系统</h2><p>ECO1订阅管理功能由两个角色 - SM-DP和SM-SR提供。<br>ECO2<br>1.profile管理由MNOprofile和SM-SR中包含的策略规则管理。<br>2.政策规则由eUICC和SM-SR代表MNO执行。<br>3.政策规则的控制在于MNO。 </p>
+<h3 id="2-3-1角色和实体"><a href="#2-3-1角色和实体" class="headerlink" title="2.3.1角色和实体"></a>2.3.1角色和实体</h3><h4 id="2-3-1-1-eUICC制造商"><a href="#2-3-1-1-eUICC制造商" class="headerlink" title="2.3.1.1 eUICC制造商"></a>2.3.1.1 eUICC制造商</h4><p>MAN1<br>1.eUICC的制造商提供包含profile和/或一个或多个操作profile的eUICC。<br>2.eUICC交付给机器以加工设备制造商。<br>3.相关平台管理证书被转发到SM-SR以与每个eUICC相关联。<br>4.eUICC制造商负责eUICC的初始密码配置和安全架构。<br>5.eUICC制造商的产品和流程的相关部分通过了GSMA认可的认证流程。<br>MAN2 EUM应颁发eUICC证书以允许：<br>•eUICC对其他实体的认证和认证;<br>•在SM-DP和eUICC之间建立认证的密钥集;<br>•在SM-SR和eUICC之间建立认证的密钥集。<br>MAN3 EUM证书和根证书应使用可靠的存储和通信渠道交付给其他实体。<br>MAN4 EUM应向SM-DP提供服务，工具，脚本或文档，以便为EUM生成的eUICC创建非个性化的profile。代表SM-DP创建非个性化profile不是EUM的作用。 </p>
+<h4 id="2-3-1-2机器到机器设备制造商"><a href="#2-3-1-2机器到机器设备制造商" class="headerlink" title="2.3.1.2机器到机器设备制造商"></a>2.3.1.2机器到机器设备制造商</h4><p>DMA1<br>1.设备制造商构建机器到机器包含通信模块和eUICC的设备。<br>2.预配置profile和/或操作profile可以默认启用。<br>注意：任何启用的profile都需要各自的MNO的同意。 </p>
+<h4 id="2-3-1-3移动网络运营商（MNO）"><a href="#2-3-1-3移动网络运营商（MNO）" class="headerlink" title="2.3.1.3移动网络运营商（MNO）"></a>2.3.1.3移动网络运营商（MNO）</h4><p>MNO1<br>1.MNO提供移动网络连接。<br>2.MNO选择至少一个SM-DP。<br>3.MNO应具有到SM-SR的直接接口。<br>4.如果客户选择了移动网络运营商，则该移动网络运营商将根据当前的“策略规则”向特定的目标eUICC发起特定profile的下载。 5.移动运营商指定profile特征以及任何特征和应用，类似于当前的UICC。 MNO拥有该profile。<br>6.profile可以在订购下载时生成。<br>7.为了实现与现有UICC流程和接口的透明配合，profile也可以批量订购，然后安全存储在SM-DP中，直到订购下载为止。 SAS要求适用。<br>8.当启用此profile时，MNO定义了控制profile管理的策略规则。<br>9.命令下载后，MNO应能够在下载profile之前检查并验证目标eUICC的认证和功能（制造商，内存大小，算法等）。<br>10.移动网络运营商将收到成功完成的下载和安装profile的确认。<br>11.启用的MNO应能够使用OTA平台来管理eUICC中启用的profile的内容。<br>MNO2应客户的请求，移动网络运营商应能向相关实体申报将设备加密机器被盗的机器，以便采取适当措施。<br>MNO3移动网络运营商应该只使用profile向设备提供有限的服务; MNO用来执行这项有限服务的机制超出了这种架构的范围。 </p>
+<h4 id="2-3-1-4-MNO客户"><a href="#2-3-1-4-MNO客户" class="headerlink" title="2.3.1.4 MNO客户"></a>2.3.1.4 MNO客户</h4><p>CUS1<br>1.MNO客户是MNO订阅的实际合约伙伴。他可能与最终用户不一样。<br>2.MNO客户使用一台机器加工来自设备制造商的装备有eUICC的设备和来自所选MNO的profile（订购）。<br>3.在下载profile之前，MNO客户必须提供其隐含或明确的接受。<br>4.MNO客户直接或间接识别机器以加工设备。机器识别机器设备应隐式或明确识别eUICC。 </p>
+<h4 id="2-3-1-5最终用户"><a href="#2-3-1-5最终用户" class="headerlink" title="2.3.1.5最终用户"></a>2.3.1.5最终用户</h4><p>END1<br>1.最终用户使用本机器加工设备以及与启用profile相关的服务。 2.最终用户可以与MNO客户相同。<br>3.eUICC对最终用户是透明的。 4.最终用户与MNO客户或MNO直接相关。 </p>
+<h4 id="2-3-1-6订购管理器-数据准备（SM-DP）"><a href="#2-3-1-6订购管理器-数据准备（SM-DP）" class="headerlink" title="2.3.1.6订购管理器 - 数据准备（SM-DP）"></a>2.3.1.6订购管理器 - 数据准备（SM-DP）</h4><p>SMDP1<br>1.SM-DP代表MNO行事。<br>2.SM-DP从MNO接收profile描述并相应地创建非个人化profile。 SM-DP可能不得不利用EUM提供的工具来创建非个性化profile。 SM-DP和EUM之间交换的信息不是标准化的，可能因不同实体而有所不同。<br>3.SM-DP基于来自MNO的输入数据为目标eUICC生成个性化数据（例如，网络访问证书和其他数据）。<br>4.SM-DP为目标eUICC构建个性化profile。<br>5.SM-DP应使用目标eUICC的Profile Installer证书保护Profile软件包。<br>6.SM-DP通过SM-SR在eUICC上安装Personalized Profile。 </p>
+<p>SMDP2在MNO的请求下，SM-DP还启动profile启用，以及通过SM-SR向eUICC发送profile删除请求。<br>SMDP3 SM-DP为eUICC建立一个安全和认证的通道，以下载和安装profile到eUICC。<br>SMDP4 SM-DP和SM-SR之间的接口应具有适当的安全级别，以便支持向SM-SR安全传送profile。<br>SMDP5 SM-DP必须始终接收来自MNO的通过SMSR发送profile到eUICC的请求。<br>SMDP6 SM-DP至少应通过GSMA SAS认证。<br>SMDP7鉴于任何eUICC，SM-DP应能够为此eUICC生成个性化profile。<br>SMDP8 SM-DP和MNO是唯一允许为eUICC建立安全和认证通道来管理profile的实体。<br>SMDP9 MNO应能够与MNO选择服务任何MNO批准的eUICC的SM-DP接口。<br>SMDP10 SM-DP应能够生成可下载并安装在MNO所针对的eUICC上的个性化profile。<br>SMDP11 SM-DP应支持本文档第3.5.3节中描述的profile订购程序。 </p>
+<h4 id="2-3-1-7订购管理器-安全路由（SM-SR）"><a href="#2-3-1-7订购管理器-安全路由（SM-SR）" class="headerlink" title="2.3.1.7订购管理器 - 安全路由（SM-SR）"></a>2.3.1.7订购管理器 - 安全路由（SM-SR）</h4><p>SMSR1 SM-SR是唯一允许为eUICC建立安全和认证传输信道以管理eUICC平台的实体。<br>SMSR2 SM-SR根据MNO的策略规则加载，启用，禁用和删除eUICC上的profile。<br>SMSR3 SM-SR从eUICC制造商或以前的SM-SR获取eUICC的平台管理凭证。<br>SMSR4在任何时间点，只有一个SM-SR可以与eUICC相关联，但可以在eUICC的生命周期中更改。<br>SMSR5 SM-SR和eUICC之间的接口应具有适当的安全级别，以支持eUICC中的profile的安全传送和管理。<br>SMSR6<br>1.SM-SR不得以明文形式处理操作员证书。<br>2.SM-SR具有到SM-DP，eUICC和MNO的安全通信通道。<br>3.SM-SR至少应通过GSMA SAS认证。 </p>
+<p>SMSR7 SM-SR应能够确定eUICC是否可用于远程管理。<br>SMSR8 SM-SR对于生态系统内的其他实体不应具有歧视性。 </p>
+<h4 id="2-3-1-8证书颁发者"><a href="#2-3-1-8证书颁发者" class="headerlink" title="2.3.1.8证书颁发者"></a>2.3.1.8证书颁发者</h4><p>CIS1证书颁发者角色为嵌入式UICC远程供应系统实体颁发证书，并充当可信第三方，用于对系统实体进行身份验证。<br>CIS2证书颁发者为EUM，SM-SR，SM-DP和MNO提供证书。<br>CIS3证书颁发者通过超出本规范范围的接口与MNO，SM-SR，SM-DP和EUM进行通信。 </p>
+<h4 id="2-3-1-9发起者"><a href="#2-3-1-9发起者" class="headerlink" title="2.3.1.9发起者"></a>2.3.1.9发起者</h4><p>INT1发起者是一个可以由各种实体承担的虚拟角色。发起人负责启动特定程序。<br>INT2为了本文件中定义的程序的目的，发起者可以假定为MNO。<br>INT3在任何时候，只有一个实体可以承担发起者角色。<br>INT4发起方和SM-SR之间的接口基于本文档中定义的接口。<br>INT5发起者应由SM-SR授权和认证。 </p>
+<h2 id="2-4-eUICC"><a href="#2-4-eUICC" class="headerlink" title="2.4 eUICC"></a>2.4 eUICC</h2><p>EUICC1 eUICC是标准化ETSI规格中的分立硬件组件。<br>EUICC2通常，eUICC是不可移动的。<br>EUICC3从机器到机器设备的角度来看，eUICC的行为通常与UICC相同。<br>EUICC4 1. eUICC可以包含一个或多个profile。 2.在任何时间点只能启用一个profile。 3. eUICC应包含一个具有回退属性集的profile。只有一个profile可以设置“回退属性”。 4.具有回退属性集的profile不能删除。 5.回退属性的设置由SM-SR管理。 6.适用所有相关的UICC规范。<br>EUICC5 eUICC中的（U）SIM或ISIM在profile中的行为预计与当前（U）SIM或ISIM相同。预期不会更改现有的3GPP（U）SIM和ISIM规范。<br>EUICC6 eUICC将实施Milenage网络认证算法。<br>EUICC7当TUAK包含在3GPP规范中时，eUICC应该在Milenage之外实施TUAK算法。<br>EUICC8物理eUICC的所有权可能会在其整个生命周期内发生变化。<br>EUICC9 eUICC应包含其相关SM-SR的身份并具有对其进行鉴定的手段。 eUICC制造商交付的<br>EUICC10 eUICC应始终注册到SMSR。<br>EUICC11如果profile启用，profile禁用和profile下载和安装等任何命令未成功完成，则eUICC应在收到请求之前保持其所处的状态。 </p>
+<h3 id="2-4-1简介"><a href="#2-4-1简介" class="headerlink" title="2.4.1简介"></a>2.4.1简介</h3><p>PRO 1简介是发行MNO的财产。<br>PRO 2profile应有唯一标识。<br>PRO 3 1.在任何时间点只能启用一个profile。 2.嵌入式UICC上可能存在其他profile，但启用/禁用profile始终只是由代表运营商的SM-SR执行的操作。 3.应根据政策规定采取行动。<br>PRO 4 1.简介由发行MNO控制。 2.profile与eUICC一起承载UICC的所有逻辑特性。所有相关的UICC规范应适用于eUICC规范定义的例外。<br>PRO 5每个profile应在其专用安全容器内隔离。应考虑GlobalPlatform的安全域框架。<br>PRO 6profile可用于配置（profile）或操作（操作profile）。他们显然是有区别的。 1.操作profile可以用作配置profile。 2.profile不能用作操作profile。<br>PRO 7总是会有一个profile。<br>PRO 8可能有几个操作profile。<br>PRO 9已安装的profile可以具有以下状态之一：•已启用•已禁用<br>PRO 10在所有操作使用中，eUICC应强制在任何时间点启用该profile并且只有一个profile已启用。<br>PRO 11将有一个由eUICC启动的使用回退属性集启用profile的功能。具有回退属性集的profile将因此提供网络连接，以允许SM-SR远程管理eUICC。<br>PRO 12机器不会对机器进行本地profile管理。<br>PRO 13 Aprofile包含认证算法的参数（例如Milenage算法的OPc，ri，ci），但不包括算法本身。 PRO 14 eUICC可支持其他网络认证算法;如果支持这样的算法，eUICC应实现一种机制来配置其参数。注意：这些其他网络身份验证算法对profile的可访问性超出了本文的范围。 PRO 15 Aprofile包含策略规则的子集以控制外部profile管理操作。 PRO 16 Aprofile可能包含生态系统中实体的标识符，密钥，PIN，证书，算法参数以及第一和第二级应用程序。 （参考：ETSI TS 102 221 [102221]）PRO 17在当前UICC上可能的任何功能，特性或服务应该可以在eUICC上的操作profile中实现。<br>PRO 18在eUICC上对profile中功能，特性或服务的访问应与当前的UICC相同，即对终端和用户透明。<br>PRO 19在eUICC上对profile中的功能，特性或服务进行远程管理应该对运营商现有的系统和基础设施产生最小的影响。<br>PRO 20profile仅存储在SM-DP中并安装在eUICC上;它们不存储在其他地方并且在传输中加密。 </p>
+<h3 id="2-4-2策略和策略控制"><a href="#2-4-2策略和策略控制" class="headerlink" title="2.4.2策略和策略控制"></a>2.4.2策略和策略控制</h3><p>PPC1每个profile都有相关的策略。政策包含管理profile操作状态更改的规则。这些状态转换是：•禁用•启用•删除<br>PPC2更新 - 对profile策略的访问仅限于发放MNO。<br>PPC3禁用profile的策略规则只能应用于自身。禁用的profile的策略规则不能影响任何其他profile。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="sun-day 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="sun-day 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/GSMA/" rel="tag"><i class="fa fa-tag"></i> GSMA</a>
+          
+            <a href="/tags/SGP01/" rel="tag"><i class="fa fa-tag"></i> SGP01</a>
+          
+            <a href="/tags/eSIM/" rel="tag"><i class="fa fa-tag"></i> eSIM</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/12/GSMA-SGP-21-第1-2-3章学习/" rel="next" title="GSMA SGP.21 第1/2/3章学习">
+                <i class="fa fa-chevron-left"></i> GSMA SGP.21 第1/2/3章学习
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/12/GSMA-SGP-01-第3章学习/" rel="prev" title="GSMA SGP.01 第3章学习">
+                GSMA SGP.01 第3章学习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2160523" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTY1MC8xMjE4Ng=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="sun-day" />
+            
+              <p class="site-author-name" itemprop="name">sun-day</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">171</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">33</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">77</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/zhanghaogithub123" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:zhanghao163mail@163.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://blog.csdn.net/mouse1598189" target="_blank" title="CSDN"><i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/zhang-hao-3-80-49/activities" target="_blank" title="知乎"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.google.com/" title="Google" target="_blank">Google</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.baidu.com/" title="百度" target="_blank">百度</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1简介"><span class="nav-number">1.</span> <span class="nav-text">1简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1概述"><span class="nav-number">1.1.</span> <span class="nav-text">1.1概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2问题范围"><span class="nav-number">1.2.</span> <span class="nav-text">1.2问题范围</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3文档目的"><span class="nav-number">1.3.</span> <span class="nav-text">1.3文档目的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4目标读者"><span class="nav-number">1.4.</span> <span class="nav-text">1.4目标读者</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5术语定义"><span class="nav-number">1.5.</span> <span class="nav-text">1.5术语定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6缩略语"><span class="nav-number">1.6.</span> <span class="nav-text">1.6缩略语</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-7参考资料"><span class="nav-number">1.7.</span> <span class="nav-text">1.7参考资料</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2基本原理和假设"><span class="nav-number">2.</span> <span class="nav-text">2基本原理和假设</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1基本原则"><span class="nav-number">2.1.</span> <span class="nav-text">2.1基本原则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2一般假设"><span class="nav-number">2.2.</span> <span class="nav-text">2.2一般假设</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-1现有标准的使用"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.2.1现有标准的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-2机器对机器设备的影响"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2.2机器对机器设备的影响</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-3安全性"><span class="nav-number">2.2.3.</span> <span class="nav-text">2.2.3安全性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-4-Regulatory"><span class="nav-number">2.2.4.</span> <span class="nav-text">2.2.4 Regulatory</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-eUICC生态系统"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 eUICC生态系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-1角色和实体"><span class="nav-number">2.3.1.</span> <span class="nav-text">2.3.1角色和实体</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-1-1-eUICC制造商"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">2.3.1.1 eUICC制造商</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-1-2机器到机器设备制造商"><span class="nav-number">2.3.1.2.</span> <span class="nav-text">2.3.1.2机器到机器设备制造商</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-1-3移动网络运营商（MNO）"><span class="nav-number">2.3.1.3.</span> <span class="nav-text">2.3.1.3移动网络运营商（MNO）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-1-4-MNO客户"><span class="nav-number">2.3.1.4.</span> <span class="nav-text">2.3.1.4 MNO客户</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-1-5最终用户"><span class="nav-number">2.3.1.5.</span> <span class="nav-text">2.3.1.5最终用户</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-1-6订购管理器-数据准备（SM-DP）"><span class="nav-number">2.3.1.6.</span> <span class="nav-text">2.3.1.6订购管理器 - 数据准备（SM-DP）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-1-7订购管理器-安全路由（SM-SR）"><span class="nav-number">2.3.1.7.</span> <span class="nav-text">2.3.1.7订购管理器 - 安全路由（SM-SR）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-1-8证书颁发者"><span class="nav-number">2.3.1.8.</span> <span class="nav-text">2.3.1.8证书颁发者</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-3-1-9发起者"><span class="nav-number">2.3.1.9.</span> <span class="nav-text">2.3.1.9发起者</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-eUICC"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 eUICC</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-1简介"><span class="nav-number">2.4.1.</span> <span class="nav-text">2.4.1简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-2策略和策略控制"><span class="nav-number">2.4.2.</span> <span class="nav-text">2.4.2策略和策略控制</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate"> 
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">true</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+  <div class="powered-by">
+  <i class="fa fa-user-md"></i><span id="busuanzi_container_site_pv">
+    本站访客数:<span id="busuanzi_container_site_pv"></span>
+  </span>
+  </div>
+  
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.1.0</div>
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共282.5k字</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.1.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

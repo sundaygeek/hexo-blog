@@ -1,0 +1,1640 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.1.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.1.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="5操作程序5.1 LPA启动的下载5.1.1 LPA启动的下载要求LID1如果激活码尚未提供，则LPA应使用eUICC上填充的任何Root SM-DS或默认SM-DP +地址.LID2在LID1的上下文中，如果同时填充了根SM-DS和默认SM-DP +地址，则LPA应先联系SM-DP +，然后再联系SM-DS以启动远程SIM配置事务. 5.1.2 LPA启动的下载过程以下过程描述了属于由LPA启动">
+<meta name="keywords" content="GSMA,eSIM,SGP21">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GSMA SGP.21 第五章学习">
+<meta property="og:url" content="http://yoursite.com/2018/05/12/GSMA-SGP-21-第五章学习/index.html">
+<meta property="og:site_name" content="sun-day-blog">
+<meta property="og:description" content="5操作程序5.1 LPA启动的下载5.1.1 LPA启动的下载要求LID1如果激活码尚未提供，则LPA应使用eUICC上填充的任何Root SM-DS或默认SM-DP +地址.LID2在LID1的上下文中，如果同时填充了根SM-DS和默认SM-DP +地址，则LPA应先联系SM-DP +，然后再联系SM-DS以启动远程SIM配置事务. 5.1.2 LPA启动的下载过程以下过程描述了属于由LPA启动">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2018/05/12/GSMA-SGP-21-第五章学习/Snipaste_2018-05-12_15-05-57.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/12/GSMA-SGP-21-第五章学习/Snipaste_2018-05-12_15-20-22.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/12/GSMA-SGP-21-第五章学习/Snipaste_2018-05-12_15-26-29.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/12/GSMA-SGP-21-第五章学习/Snipaste_2018-05-12_15-26-43.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/12/GSMA-SGP-21-第五章学习/Snipaste_2018-05-12_15-28-20.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/12/GSMA-SGP-21-第五章学习/Snipaste_2018-05-12_15-28-55.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/12/GSMA-SGP-21-第五章学习/Snipaste_2018-05-12_15-29-54.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/12/GSMA-SGP-21-第五章学习/Snipaste_2018-05-12_15-30-10.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/12/GSMA-SGP-21-第五章学习/Snipaste_2018-05-12_15-31-02.png">
+<meta property="og:image" content="http://yoursite.com/2018/05/12/GSMA-SGP-21-第五章学习/Snipaste_2018-05-12_15-31-31.png">
+<meta property="og:updated_time" content="2018-05-12T07:51:08.469Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="GSMA SGP.21 第五章学习">
+<meta name="twitter:description" content="5操作程序5.1 LPA启动的下载5.1.1 LPA启动的下载要求LID1如果激活码尚未提供，则LPA应使用eUICC上填充的任何Root SM-DS或默认SM-DP +地址.LID2在LID1的上下文中，如果同时填充了根SM-DS和默认SM-DP +地址，则LPA应先联系SM-DP +，然后再联系SM-DS以启动远程SIM配置事务. 5.1.2 LPA启动的下载过程以下过程描述了属于由LPA启动">
+<meta name="twitter:image" content="http://yoursite.com/2018/05/12/GSMA-SGP-21-第五章学习/Snipaste_2018-05-12_15-05-57.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/12/GSMA-SGP-21-第五章学习/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>GSMA SGP.21 第五章学习 | sun-day-blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> 
+
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">sun-day-blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">牛逼的人生不需要解释</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+          
+  <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+</li>
+
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/12/GSMA-SGP-21-第五章学习/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="sun-day">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sun-day-blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">GSMA SGP.21 第五章学习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-12T15:04:53+08:00">2018-05-12</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="5操作程序"><a href="#5操作程序" class="headerlink" title="5操作程序"></a>5操作程序</h1><h2 id="5-1-LPA启动的下载"><a href="#5-1-LPA启动的下载" class="headerlink" title="5.1 LPA启动的下载"></a>5.1 LPA启动的下载</h2><h3 id="5-1-1-LPA启动的下载要求"><a href="#5-1-1-LPA启动的下载要求" class="headerlink" title="5.1.1 LPA启动的下载要求"></a>5.1.1 LPA启动的下载要求</h3><p>LID1如果激活码尚未提供，则LPA应使用eUICC上填充的任何Root SM-DS或默认SM-DP +地址.<br>LID2在LID1的上下文中，如果同时填充了根SM-DS和默认SM-DP +地址，则LPA应先联系SM-DP +，然后再联系SM-DS以启动远程SIM配置事务.</p>
+<p>5.1.2 LPA启动的下载过程<br>以下过程描述了属于由LPA启动的profile包下载和安装过程的一部分的事件.</p>
+<p>GSMA-SGP-21-第五章学习<br><img src="/2018/05/12/GSMA-SGP-21-第五章学习/Snipaste_2018-05-12_15-05-57.png" alt="pic"></p>
+<p>开始条件：<br>a.订户已完成所选运营商/服务提供商优惠的订购流程.<br>b.与此订阅相关的profile订购过程已完成（即，分配的受保护profile包存储在SM-DP +上）.</p>
+<p>程序：<br>1.LPA启动profile包下载并识别profile存储并可供下载（通过例如URL，QR码，手动输入等）以及提供的其他信息（例如，令牌，SMDPId，确认码）.<br>2.LPA通过与SM-DP +建立TLS连接来认证SM-DP +，并验证SMDID是否已提供此类信息.3.至4.<br>LPA得到eUICC挑战<br>5.至6. LPA将eUICC质询和任何其他相关信息发送至SM-DP +.<br>7.至9. SM-DP +签署eUICC挑战，并生成一个DP_Challenge发送回eUICC.<br>10.LPA将SM-DP +和AC令牌收到的资料发送给eUICC; eUICC检查SMDPid并验证SM-DP +.<br>11.eUICC将包括DP_Challenge，AC令牌，EID及其证书在内的一组签名信息发送回LPA.<br>12.最终用户确认profile的下载，可选择显示运营商的profile名称.<br>13.LPA将步骤11中收到的一组信息从eUICC发送到SM-DP +.<br>14.SM-DP +验证签名; eUICC已通过认证.<br>15.至16.可选：eUICC资格检查和profile绑定功能由SM-DP +执行.<br>17.至22.可选<br>17.将向运营商通知即将下载的profile包.<br>18.如果操作员已收到通知，可以通过向SM-DP +指示错误代码来请求停止下载过程.<br>19.如果操作员向SM-DP +发送错误代码，则SM-DP +将停止下载过程并向LPA指示错误代码.</p>
+<ol>
+<li>LPA通知最终用户一个适当的消息.<br>21.至22.SM-DP +可以接收来自运营商的信息以准备适当的profile包.<br>23.至25.绑定的profile包被发送到eUICC并安装在eUICC上.<br>26.profile包下载报告从SM-DP +发送给运营商.</li>
+</ol>
+<p>结束条件：<br>a.profile在禁用状态下安装在eUICC中</p>
+<h2 id="5-2使用激活码下载profile"><a href="#5-2使用激活码下载profile" class="headerlink" title="5.2使用激活码下载profile"></a>5.2使用激活码下载profile</h2><h3 id="5-2-1激活码要求"><a href="#5-2-1激活码要求" class="headerlink" title="5.2.1激活码要求"></a>5.2.1激活码要求</h3><p>AC1如果使用，激活码应触发从特定SM-DP +下载绑定profile包.<br>AC2激活码应包含以下参数：SM-DP +地址激活码令牌（包括可选确认码必需标志）SMDPid（可选）<br>AC3激活码令牌应能够包含一个参数，该参数指示确认码是否需要.如果需要此确认码，则LPA应要求最终用户输入确认码.SM-DP +在交付绑定profile包之前应验证确认码.注意：如何创建确认码并将其提供给最终用户超出了本规范的范围.<br>AC4在交付绑定profile包之前，激活代码应由SM-DP +进行验证.<br>AC5最终用户在LPA中的激活码输入应至少支持手动输入和QR码扫描.<br>AC6所有激活码程序应作为LPA的一部分原生实施.<br>AC7激活码程序应有条件地在初始设备设置期间自动提供给最终用户.如果已经设置了profile，则此自动设置不适用.不需要验证确认.注意：例如，这可能不适用于开放市场cellularenabled笔记本电脑.<br>AC8按照激活码过程，应使用profile包下载程序.<br>AC9激活码程序应保护用户意图的生态系统安全性，隐私和验证.<br>AC10激活码程序应仅用于将profile包下载到目标eUICC的唯一目的.激活码程序应防止将IMEI和EID信息发送给未经认证的SM-DP +.<br>AC11激活码应唯一标识运营商/服务提供商.<br>AC12对特定SM-DP +进行认证后，对SM-DP +的激活码请求应由LPA用EID进行扩展.</p>
+<p>5.2.2使用激活码下载profile过程<br>激活码过程定义了一项通用功能，允许用户或最终用户代表用户通过请求从设备本身下载操作profile来“激活”设备.</p>
+<p><img src="/2018/05/12/GSMA-SGP-21-第五章学习/Snipaste_2018-05-12_15-20-22.png" alt="pic"></p>
+<p>开始条件：<br>a.认购人已订立认购协议.<br>b.激活码已经提供给最终用户和可选的确认码（旁道）.</p>
+<p>过程：<br>1.最终用户通过LUI将激活码输入到LPA.<br>2.LPA解析激活码参数以识别SM-DP +地址，激活码令牌，LPA模式和可选的SMDPid.另外，LPA可以在激活令牌中解析需要确认码的信息.<br>3.如果激活码令牌中的确认码参数设置为“需要确认码”，则会提示最终用户输入由发卡运营商/服务提供商提供给他们的确认码.<br>4.激活码下载程序由LPA启动.LPA向eUICC请求nonceeUICC.<br>5.eUICC创建与支持的eUICC规范版本号（eSVN）关联的nonceeUICC.</p>
+<ol>
+<li>eUICC将与支持的eSVN相关联的nonceeUICC传输给LPA.</li>
+<li>LPA将与支持的eSVN关联的nonceeUICC发送到SMDP +.注意：在此步骤之前，应根据存储在设备中的根证书的公钥，在LPA和SM-DP +之间建立一个HTTP会话，其中包括使用TLS证书进行身份验证，并检查是否存在SMDPid用于TLS会话的TLS证书.<br>8.在接收到nonceeUICC和相关的eSVN后，SM-DP +创建nonceSMDP并签署nonceSMDP和nonceeUICC.</li>
+<li>SM-DP +将签名的nonceeUICC和nonceSMDP发送给LPA.</li>
+<li>LPA收集激活码参数以及资格程序和可选的确认码所需的设备信息，并将它们与签名的nonceeUICC和nonceSMDP一起发送给eUICC.<br>11.eUICC检查附属于nonceeUICC的签名.如果在AC中配置SMDPid，则eUICC检查LPA提供的SMDPid和SM-DP +证书中的SMDPid是否一致.SM-DP +在此阶段由eUICC认证.eUICC生成将用于会话密钥建立的密钥材料.eUICC使用eUICC私钥签署一系列信息，其中包括：<br>a.nonceSMDP<br>b.eUICC为计算绑定profile包的准备计算会话密钥创建的关键材料<br>c.激活代码参数<br>d.设备和eUICC信息e.可选地，确认码<br>12.除了以下之外，eUICC还将签名的一组信息发送给LPA：<br>a.nonceSMDP<br>b.eUICC为计算绑定profile包的准备计算会话密钥创建的关键材料<br>c.激活代码参数<br>d.设备和eUICC信息<br>e.包含EID的eUICC证书<br>f.EUM证书<br>g.可选的确认码<br>13.LPA将从eUICC收到的全部信息发送给SMDP +.<br>14.SM-DP +使用CI公钥检查EUM证书.SM-DP +检查nonceSMDP的签名; eUICC目前正处于SM-DP +认证阶段.<br>15.SM-DP +根据传输的信息（EID，设备信息，eUICC信息，eSVN）进行资格审查.</li>
+<li>SM-DP +检查激活码参数和可选的确认码以检索引用的profile包.<br>17.profile包下载到eUICC：<br>a.SM-DP +与eUICC建立会话密钥.<br>b.绑定的profile包基于eUICC会话密钥材料准备并下载并安装在eUICC上.<br>C.确认成功在eUICC上安装profile，并由SM-DP +通知操作员.<br>d.eUICC向LPA确认profile在eUICC上的成功安装，通知最终用户状态.</li>
+</ol>
+<p>结束条件：<br>a.绑定的profile包已经下载并安装在处于禁用状态的eUICC上.<br>b.LPA可能会提供最终用户启用的profile.</p>
+<h2 id="5-3本地profile管理"><a href="#5-3本地profile管理" class="headerlink" title="5.3本地profile管理"></a>5.3本地profile管理</h2><h3 id="5-3-1本地profile管理程序"><a href="#5-3-1本地profile管理程序" class="headerlink" title="5.3.1本地profile管理程序"></a>5.3.1本地profile管理程序</h3><h4 id="5-3-1-1启用profile"><a href="#5-3-1-1启用profile" class="headerlink" title="5.3.1.1启用profile"></a>5.3.1.1启用profile</h4><p>此过程执行目标profile的启用.该请求由最终用户给予LPA.<br><img src="/2018/05/12/GSMA-SGP-21-第五章学习/Snipaste_2018-05-12_15-26-29.png" alt="pic"></p>
+<p>开始条件：<br>a.目标profile在eUICC上被禁用.<br>b.目标profile已由最终用户选择.<br>C. LPA向eUICC认证为合法执行本地profile管理.</p>
+<p>过程：<br>1.最终用户在LPA上发出profile启用请求.<br>2.用户意图已验证.<br>3.LPA将目标profile的profile启用操作发送给eUICC上的ISD-R.<br>4.ISD-R检查在目标profile上应用的profile策略规则是否允许启用profile<br>5.如果与profile策略规则存在冲突，则ISD-R中止该过程并通过LPA通知最终用户.<br>6.目标profile已启用. </p>
+<ol>
+<li>ISD-R通知LPA启用profile.<br>8.最终用户通过LPA通知.</li>
+</ol>
+<p>结束条件：<br>a.目标profile已启用. </p>
+<h4 id="5-3-1-2禁用profile"><a href="#5-3-1-2禁用profile" class="headerlink" title="5.3.1.2禁用profile"></a>5.3.1.2禁用profile</h4><p>禁用profile可以通过以下步骤来实现.该请求由LPA上的最终用户提供.<br><img src="/2018/05/12/GSMA-SGP-21-第五章学习/Snipaste_2018-05-12_15-26-43.png" alt="pic"></p>
+<p>开始条件：<br>a.目标profile在eUICC上启用.<br>b.目标profile已由最终用户选择.<br>C. LPA向eUICC认证为合法执行本地profile管理.</p>
+<p>过程：<br>1.最终用户在LPA上发出profile禁用请求.<br>2.用户意图已验证.<br>3.LPA向eUICC上的ISD-R发送profile禁用操作.<br>4.ISD-R检查在目标profile上应用的profile策略规则是否允许profile被禁用.<br>5.如果与profile策略规则有冲突，ISD-R将中止该过程并通过LPA通知最终用户. </p>
+<ol>
+<li>ISD-R禁用目标profile. </li>
+<li>ISD-R通知LPA禁用profile.<br>8.最终用户通过LPA通知.<br>结束条件：<br>a.目标profile被禁用. </li>
+</ol>
+<h4 id="5-3-1-3删除profile"><a href="#5-3-1-3删除profile" class="headerlink" title="5.3.1.3删除profile"></a>5.3.1.3删除profile</h4><p>通过以下步骤可以实现profile删除.该请求由LPA上的最终用户提供.<br><img src="/2018/05/12/GSMA-SGP-21-第五章学习/Snipaste_2018-05-12_15-28-20.png" alt="pic"></p>
+<p>开始条件：<br>a.目标profile被禁用.<br>b.目标profile已由最终用户选择<br>c. LPA向eUICC认证为合法执行本地profile管理.</p>
+<p>过程：<br>1.最终用户在LPA上发出profile删除请求.<br>2.用户意图已验证.<br>3.LPA将目标profile的profile删除操作发送给eUICC上的ISD-R.该请求包括目标profile的ISD-P AID.<br>4.ISD-R检查是否应用profile策略规则允许删除profile.<br>5.如果与profile策略规则有冲突，ISD-R将中止该过程并通过LPA通知最终用户.<br>6.ISD-R擦除目标profile和相关的ISD-P.<br>7.ISD-R通知LPA删除profile.<br>8.目标profile的profile元数据被删除.<br>9.最终用户通过LPA通知. </p>
+<ol>
+<li>LPA向profile中删除profile的通知接收器发送删除通知.</li>
+</ol>
+<p>结束条件：<br>a.目标profile被删除.</p>
+<h4 id="5-3-1-4添加-更新profile昵称"><a href="#5-3-1-4添加-更新profile昵称" class="headerlink" title="5.3.1.4添加/更新profile昵称"></a>5.3.1.4添加/更新profile昵称</h4><p>添加/更新昵称将允许订户或最终用户将昵称归属到profile以便于使用.请注意，添加或更改昵称不会影响该profile的任何其他数据或其他profile元数据.<br><img src="/2018/05/12/GSMA-SGP-21-第五章学习/Snipaste_2018-05-12_15-28-55.png" alt="pic"></p>
+<p>开始条件：<br>a.用户意图已被验证.<br>b.目标profile已由最终用户选择.<br>C. LPA向eUICC认证为合法执行本地profile管理.</p>
+<p>过程：<br>1.最终用户请求更新LPA上的昵称.<br>2.LPA使用eUICC中最终用户选择的昵称更新目标profile的profile元数据.</p>
+<p>结束条件：<br>a.profile目标profile的元数据已更新为最终用户选择的昵称. </p>
+<h4 id="5-3-1-5查询profile元数据"><a href="#5-3-1-5查询profile元数据" class="headerlink" title="5.3.1.5查询profile元数据"></a>5.3.1.5查询profile元数据</h4><p>此过程将允许最终用户查询最终用户可访问的profile的profile元数据.结果应在查询时在eUICC上显示所选profile的全部（或部分）profile元数据.作为此过程的结果，不会对eUICC上的任何数据进行更改.<br><img src="/2018/05/12/GSMA-SGP-21-第五章学习/Snipaste_2018-05-12_15-29-54.png" alt="pic"></p>
+<p>开始条件：<br>a. LPA被认证为eUICC合法执行本地profile管理.<br>b.最终用户可访问的profile列表由LPA（LUI）显示.</p>
+<p>过程：<br>1.最终用户选择要查询的profile.<br>2.LPA收到来自最终用户的查询请求.<br>3.LPA向eUICC请求profile元数据.<br>4.LPA在LUI上向最终用户显示profile元数据.</p>
+<p>结束条件：<br>a.没有更改profile元数据. </p>
+<h4 id="5-3-1-6-eUICC存储器复位"><a href="#5-3-1-6-eUICC存储器复位" class="headerlink" title="5.3.1.6 eUICC存储器复位"></a>5.3.1.6 eUICC存储器复位</h4><p>此过程执行eUICC的eUICC存储器复位，包括其关联的profile元数据.该请求由最终用户给予LPA.注意：执行eUICC的eUICC测试存储器复位也将采用类似的步骤.<br><img src="/2018/05/12/GSMA-SGP-21-第五章学习/Snipaste_2018-05-12_15-30-10.png" alt="pic"></p>
+<p>开始条件：<br>a. LPA向eUICC认证为合法执行本地profile管理.<br>b.eUICC Memory Reset选项由LPA（LUI）显示.</p>
+<p>过程：<br>1.最终用户在LPA（LUI）上发出eUICC存储器重置请求.<br>2.用户意图已验证.<br>3.LPA（LUI）向最终用户显示’eUICC Memory Reset’的结果消息.<br>4.最终用户确认符合对LPA的后果.<br>5.LPA向eUICC发送eUICC存储器复位操作. </p>
+<ol>
+<li>eUICC即使是包含与其关联的profile元数据的已启用profile，也会删除eUICC上的profile. </li>
+<li>eUICC通知LPA eUICC的eUICC存储器复位.<br>8.通过LPA（LUI）通知最终用户. </li>
+<li>LPA向profile中删除profile的所有通知接收器发送删除通知.</li>
+</ol>
+<p>结束条件：a.profile已从eUICC中删除. </p>
+<p>5.3.1.7添加具有激活码的profile<br>此步骤将允许订户添加单个profile.此过程不会启用下载的profile，也不会禁用已启用的profile.假定网络连接.下载可以通过输入激活码来启动.<br><img src="/2018/05/12/GSMA-SGP-21-第五章学习/Snipaste_2018-05-12_15-31-02.png" alt="pic"></p>
+<p>开始条件：<br>a.用户意图已被验证.<br>b.eUICC允许下载新的profile.<br>C. LPA向eUICC认证为合法执行profile下载.<br>过程：<br>1.最终用户获得激活码以将profile添加到其设备.<br>2.LPA请求最终用户输入激活码.<br>3.按照第5.2.2节开始所述的激活码程序下载profile.</p>
+<p>结束条件：<br>a.该profile已安装在最终用户的设备上.<br>b.profile元数据已从profile更新. </p>
+<p>5.3.1.8编辑SM-DP +地址<br>此过程将允许最终用户编辑到eUICC的默认SM-DP +地址.<br><img src="/2018/05/12/GSMA-SGP-21-第五章学习/Snipaste_2018-05-12_15-31-31.png" alt="pic"></p>
+<p>开始条件：<br>a.LPA中有一个默认的SM-DP +地址.<br>b.最终用户愿意编辑默认的SM-DP +地址<br>程序：<br>1.最终用户通过LPA编辑SM-DP +地址.<br>2.需要最终用户的简单确认.<br>3.LPA发送默认的SM-DP +地址以存储在LPA服务中.<br>4.LPA服务通知LPA存储默认SM-DP +地址.<br>5.最终用户通过LPA通知.<br>结束条件：<br>a.目标默认SM-DP +地址在LPA服务中编辑.</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="sun-day 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="sun-day 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/GSMA/" rel="tag"><i class="fa fa-tag"></i> GSMA</a>
+          
+            <a href="/tags/eSIM/" rel="tag"><i class="fa fa-tag"></i> eSIM</a>
+          
+            <a href="/tags/SGP21/" rel="tag"><i class="fa fa-tag"></i> SGP21</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/10/Osmocom-SIMtrace简介/" rel="next" title="Osmocom SIMtrace简介">
+                <i class="fa fa-chevron-left"></i> Osmocom SIMtrace简介
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/12/GSMA-SGP-21-第四章学习/" rel="prev" title="GSMA SGP.21 第四章学习">
+                GSMA SGP.21 第四章学习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2160523" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTY1MC8xMjE4Ng=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="sun-day" />
+            
+              <p class="site-author-name" itemprop="name">sun-day</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">171</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">33</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">77</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/zhanghaogithub123" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:zhanghao163mail@163.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://blog.csdn.net/mouse1598189" target="_blank" title="CSDN"><i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/zhang-hao-3-80-49/activities" target="_blank" title="知乎"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.google.com/" title="Google" target="_blank">Google</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.baidu.com/" title="百度" target="_blank">百度</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#5操作程序"><span class="nav-number">1.</span> <span class="nav-text">5操作程序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-LPA启动的下载"><span class="nav-number">1.1.</span> <span class="nav-text">5.1 LPA启动的下载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-1-LPA启动的下载要求"><span class="nav-number">1.1.1.</span> <span class="nav-text">5.1.1 LPA启动的下载要求</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2使用激活码下载profile"><span class="nav-number">1.2.</span> <span class="nav-text">5.2使用激活码下载profile</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-1激活码要求"><span class="nav-number">1.2.1.</span> <span class="nav-text">5.2.1激活码要求</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3本地profile管理"><span class="nav-number">1.3.</span> <span class="nav-text">5.3本地profile管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-1本地profile管理程序"><span class="nav-number">1.3.1.</span> <span class="nav-text">5.3.1本地profile管理程序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-1-1启用profile"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">5.3.1.1启用profile</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-1-2禁用profile"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">5.3.1.2禁用profile</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-1-3删除profile"><span class="nav-number">1.3.1.3.</span> <span class="nav-text">5.3.1.3删除profile</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-1-4添加-更新profile昵称"><span class="nav-number">1.3.1.4.</span> <span class="nav-text">5.3.1.4添加/更新profile昵称</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-1-5查询profile元数据"><span class="nav-number">1.3.1.5.</span> <span class="nav-text">5.3.1.5查询profile元数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-1-6-eUICC存储器复位"><span class="nav-number">1.3.1.6.</span> <span class="nav-text">5.3.1.6 eUICC存储器复位</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate"> 
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">true</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+  <div class="powered-by">
+  <i class="fa fa-user-md"></i><span id="busuanzi_container_site_pv">
+    本站访客数:<span id="busuanzi_container_site_pv"></span>
+  </span>
+  </div>
+  
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.1.0</div>
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共282.5k字</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.1.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

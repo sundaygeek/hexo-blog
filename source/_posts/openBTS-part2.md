@@ -340,5 +340,238 @@ $ sudo start openbts
 在实际连接到测试网络之前的唯一一步就是查找并隐藏手机的身份参数，以便将其接收到网络上。
 
 ### 查找IMSI
-您将要搜索的主要身份参数是国际移动用户身份（IMSI）。这是存储在SIM卡中的14-15位数字，与网络上的手机用户名类似。手机通常不会泄露其SIM卡的IMSI。它有时可能位于菜单中或通过现场测试模式，但是这种确定SIM的IMSI的方法很麻烦。幸运的是，还有其他方法。 OpenBTS也知道它与之交互过的IMSI，因为你掌控着网络端，所以你也可以访问这些信息。为了强制手机和测试网络之间的交互，你需要执行更新请求（LUR）操作网络，类似于注册。这不比从运营商选择列表中选择网络更复杂。在尝试任何LUR之前，您需要启动负责处理这些请求的SIPAuthServe守护进程：$ sudo start sipauthservesipauthserve start / running，process 7017Now，再次按照第23页上的“搜索网络”中的步骤，调出载波选择列表并选择您的测试网络。在很短的时间之后，手机应报告注册失败。它也可能会从您的测试网络收到一条短信，指示注册失败。此消息自动包含IM-SI，因此您可以跳到第29页上的“添加订户”。但是，此功能在所有硬件上都不起作用，因此如果您未收到SMS，则继续操作.OpenBTS会按顺序记住这些LUR交互执行一些称为SIM /临时移动订户身份（TMSI）交换的功能。 IMSI / TMSI交换用于TMSI的用户可识别的IMSI，并用于增加网络上的用户隐私。交易所默认是禁用的（修改Control.LUR.SendTMSIs toenable）;但是，信息仍然存在，可以使用tmsis命令进行检查。现在，请使用它查看与手持设备最近的LUR交互：条目按时间排序，最上面的条目对应于最近的交互操作。您的手机应该是此列表中的首要条目 - 最近与AUTH设置为0的交互，因为LUR由于手机不是知识订阅者而失败。本例中的其他条目是成功执行LUR的附加测试手机，如AUTH列设置为1所示。
+您将要搜索的主要身份参数是国际移动用户身份（IMSI）。这是存储在SIM卡中的14-15位数字，与网络上的手机用户名类似。手机通常不会泄露其SIM卡的IMSI。它有时可能位于菜单中或通过现场测试模式，但是这种确定SIM的IMSI的方法很麻烦。幸运的是，还有其他方法。 OpenBTS也知道它与之交互过的IMSI，因为你掌控着网络端，所以你也可以访问这些信息。为了强制手机和测试网络之间的交互，你需要执行更新请求（LUR）操作网络，类似于注册。这不比从运营商选择列表中选择网络更复杂。在尝试任何LUR之前，您需要启动负责处理这些请求的SIPAuthServe守护进程：
+```
+$ sudo start sipauthserve
+sipauthserve start / running，process 7017
+```
+现在，再次按照第23页上的“搜索网络”中的步骤，调出载波选择列表并选择您的测试网络。在很短的时间之后，手机应报告注册失败。它也可能会从您的测试网络收到一条短信，指示注册失败。此消息自动包含IM-SI，因此您可以跳到第29页上的“添加订户”。但是，此功能在所有硬件上都不起作用，因此如果您未收到SMS，则继续操作. OpenBTS会按顺序记住这些LUR交互执行一些称为SIM /临时移动订户身份（TMSI）交换的功能。 IMSI / TMSI交换用于TMSI的用户可识别的IMSI，并用于增加网络上的用户隐私。交易所默认是禁用的（修改Control.LUR.SendTMSIs toenable）;但是，信息仍然存在，可以使用tmsis命令进行检查。现在，请使用它查看与手持设备最近的LUR交互：
+```
+OpenBTS> tmsis
+IMSI TMSI IMEI AUTH CREATED ACCESSED TMSI_ASSIGNED
+214057715229963 - 012546629231850 0 78s 78s 0
+001010000000002 - 351771054186520 1 80h 95s 0
+001010000000003 - 351771053005400 1 80h 108s 0
+```
+条目按时间排序，最上面的条目对应于最近的交互操作。您的手机应该是此列表中的首要条目 - 最近与AUTH设置为0的交互，因为LUR由于手机不是知识订阅者而失败。本例中的其他条目是成功执行LUR的附加测试手机，如AUTH列设置为1所示。
+
+### 查找IMEI
+在繁忙的环境中，可能很难确定哪个手机硬件与此列表上的哪个条目相对应。要将IMSI与特定硬件匹配，可以使用国际移动设备标识符（IMEI）。这是手机物理无线电硬件的唯一标识符，类似于以太网接口上的MAC地址。手机的IMSI通常印在其电池盖下或非常靠近SIM本身的地方。在许多手机上，IMEI也可以通过在键盘上拨打以下内容来访问：\*＃06＃.IMEI值通常仅用于在生产环境中报告和检测被盗硬件。这里可以作为确定哪个SIM卡在哪个手机中的便捷方式。 IMEI的最后一位可能与OpenBTS显示的不匹配。它是一个校验位，在OpenBTS中显示为零。
+
+### 添加订户
+您现在应该拥有所有必要的信息以在您的测试网络上创建新的订户帐户。一些字段仍然需要，但可以自由选择：名称和移动台国际用户目录号码（MSISDN）。名称字段仅仅是该用户的友好名称，因此您可以记住与哪个手机或与哪个人相关联。 MSISDN字段并不比订户的电话号码复杂。由于您没有连接到公共电话网络，因此您可以选择任何号码。您需要添加订户的程序是nmcli.py。它是No-deManager API的简单客户端（更多内容参见第7章），并允许您通过JSON格式的命令更改配置参数，添加订阅者，监控活动等。 nmcli.py已经存在于你的开发目录中 - 现在移动它来访问它：
+```
+$ cd dev /NodeManager
+```
+有两种方法可以使用nmcli.py添加订阅者。第一个创建将使用缓存身份验证的订户：
+```
+$ ./nmcli.py sipauthserve subscribers create name imsi msisdn
+```
+第二个创建将使用完全身份验证的订户：
+```
+$ ./nmcli.py sipauthserve subscribers create name imsi msisdn ki
+```
+如果IMSI是“用户名”，手机的“密码”是第5页的“使用备用SIM卡”中讨论的Ki字段。如果您使用来自其他提供商的备用SIM卡，则无法使用Ki，并应使用第一个调用样式。如果你正在使用自己烧过的SIM，Ki会被你知道。使用nmcli.py的第二个调用样式将它包含在新订户中。在这个例子中，在iPhone 4中使用备用SIM卡，并在南达科他州（区号605）为其指定一个假号码：IMSI字段由数字IMSI组成，前缀为字符串“IMSI”。
+```
+$ ./nmcli.py sipauthserve subscribers create "iPhone 4" IMSI214057715229963 6055551234
+raw request: {"command":"subscribers","action":"create","fields":
+{"name":"iPhone 4","imsi":"IMSI214057715229963","msisdn":"6055551234","ki":""}}
+raw response: {
+"code" : 200,
+"data" : "both ok"
+}
+```
+使用您自己的信息执行相同的命令，将第一个用户添加到您的测试网络。
+
+### 连接
+现在，当您在连接菜单中选择测试网络时，LUR应该成功。 这可以通过OpenBTS中的tmsis命令来确认。 “AUTH”列现在在对应于您的IMSI的条目中具有“1”：
+```
+OpenBTS> tmsis
+IMSI TMSI IMEI AUTH CREATED ACCESSED TMSI_ASSIGNED
+214057715229963 - 012546629231850 1 11m 56s 0
+001010000000002 - 351771054186520 1 80h 8m 0
+001010000000003 - 351771053005400 1 80h 9m 0
+```
+恭喜，您已成功注册到您自己的私人移动网络！ 在继续之前，请随时注册您想要使用的任何其他手机。
+
+## 测试短信
+现在手机可以访问您的网络，您可以执行一些更有趣的测试。 首先是对网络SMS功能的快速测试。 负责接收，路由和安排SMS消息传送的组件是SMQueue。 必须在测试这些功能之前启动它; 执行以下命令来执行此操作：
+```
+$ sudo start smqueue
+smqueue start/running, process 21101
+```
+
+### 回声短信（411）
+在手机上，编号为411的短信。这是SMQueue中的一个“短代码”处理程序，它只会回显接收到的任何内容以及有关使用的网络和用户帐户的其他信息。给411的消息的主体可以是任何你想要的，尽管对每个消息或连续的数字或字母使用独特的内容可能是有用的。这可以帮助您确定发生错误时正在响应的消息。一旦你的信息组成411，点击发送。几秒钟后，应该会出现一个回复（示例如下）：
+```
+“1 queued, cell 0.1, IMSI214057715229963, phonenum 6055551234, at Sep 8 02:30:59, Ping pong"
+```
+这表示以下内容：
+•有一条消息排队
+•基站的负载因子为0.1
+•从IMSI 214057715229963，MSISDN 6055551234接收到消息
+•消息在9月8日02:30:59发送
+•消息正文为“Ping pong”。 “
+
+### 直接SMS
+SMS消息也可以通过使用sendms命令直接从OpenBTS进行测试。在OpenBTS CLI中，让我们看看如何使用help命令调用它：
+```
+OpenBTS> help sendsms
+sendsms IMSI src# message... -- send direct SMS to IMSI on this BTS, addressed
+from source number src#.
+```
+通过指定目标IMSI，消息应该看起来源于的源号码和消息主体本身来发送消息。 用您的订户帐户替代信息编写消息并按Enter键：
+```
+OpenBTS> sendsms 214057715229963 8675309 direct SMS test
+message submitted for delivery
+```
+几秒钟后，您的手机应该显示来自假想号码8675309的新的传入消息，其中包含“直接短信测试”。
+以这种方式创建的SMS消息根本不会路由SMQueue; 它们通过GSM空中接口直接发送到手机，因此不能重新安排时间。 如果手机离线或无法到达，这些信息就会丢失。 这就是SMQueue需要的原因 - 尝试和重新安排在固有不可预测的无线环境中的交付。
+
+### 双方短信
+如果您配置了多个手机用于您的网络，请随时在它们之间来回发送一些消息。 验证接收消息时源号码是否正确，并将这些消息的回复路由回原始发件人。
+
+## 测试呼叫
+另一项要测试的服务是语音。与SMS一样，OpenBTS不直接处理语音，并需要额外的服务才能运行，在这种情况下，Asterisk。立即启动Asterisk：
+```
+$ sudo start asterisk
+asterisk start/running, process 1809
+```
+使用您在SMS测试中使用的手机，您现在将验证语音服务的几个方面。这是通过使用rangeasterisk-configs软件包定义的一些测试扩展来完成的。分机是内部电话号码，从外面无法接通。
+
+### 测试音调（2602）
+您将使用的第一个测试扩展会播放一个不变的音调。这听起来可能不太令人兴奋，但确实证实了有关网络的许多事情：
+- Asterisk正在运行并且可以访问。
+- 呼叫路由按预期工作。
+- 下行音频功能正常。
+现在用手机拨打2602。
+当你听到音调时，听音调的变化。音调的这些变化是由于丢失了下行链路语音流路径中的信息，类似于分组丢失。在现场，这是测试音调扩展的主要用途：测试下行链路质量。在生产网络中，下行链路损失3％是正常的，损失5％-7％仍然可以提供可理解的对话。
+
+### 回声呼叫（2600）
+下一个测试扩展会创建一个“回声呼叫”。基本上，Asterisk收到的所有音频将立即回送给发件人。除了确认列出的用于测试音调的项目之外，回声呼叫还会显示网络中存在的任何延迟或上行链路质量问题。
+现在用手机拨打2600。
+当你对着麦克风讲话时，你很快会听到自己在听筒里的声音。有点延迟是正常的，但更长的延迟会导致更像是使用对讲机的体验。人脑可以处理大约200毫秒的延迟而没有麻烦。除此之外，谈话开始瓦解，双方都停止说话，因为它变得不舒服。
+
+### 双方通话
+如果您配置了多个手机用于您的网络，请随时在它们之间拨打一些电话。接收呼叫时验证来源号码是否正确。
+
+### 测量链路质量
+此时，您应该了解OpenBTS CLI中可用的便捷工具chans命令。 该工具可用于客观量化链接质量，而不是基于用户感知。 要查看此命令有用的任何内容，必须有一个活动的呼叫。 在这个例子中，呼叫被放置到2602测试音调扩展，并且在10秒钟后执行chans命令（注意“时间”列）。 手机被移动了一米远离正在使用的无线电，另一个带有chans命令的样本被采集：
+```
+OpenBTS> chans
+CN TN chan transaction Signal SNR FER TA TXPWR RXLEV_DL BER_DL Time IMSI type id dB pct sym dBm dBm pct
+0 1 TCH/F T101 28 28.7 0.15 1.2 7 -61 0.00 0:10 2140...
+OpenBTS> chans
+CN TN chan transaction Signal SNR FER TA TXPWR RXLEV_DL BER_DL Time IMSI type id dB pct sym dBm dBm pct
+0 1 TCH/F T101 14 31.4 0.50 1.2 19 -73 0.00 0:26 2140...
+```
+这里有很多领域，他们都非常有用，但现在我们来关注信噪比（SNR），TXPWR和RXLEV_DL。在两次读数中，都有一个活动频道。 SNR列表示由基站测量的上行链路的SNR：越高越好。随着手机移开，这个数字实际上有所改善！怎么可能？答案在于TXPWR专栏。该列表示手机报告的上行链路发射功率。在二读中，这个数字已经从7跳到19 dBm，这意味着手机使用更多的功率将其信号传输到基站。这可以解释为什么在基站测得的信噪比更好。取决于基站接收其上行链路信号的程度，网络独立地指示手机以不同的功率电平进行发送。这是因为所有的信号都是在基地台以大约相同的强度接收到的，这使得它更容易解调。然而，基站在下行链路上对所有的手机使用相同的发射功率。这可以在RXLEV_DL列中观察到。该列表示手机报告的下行信号电平。在二读时，随着手机远离基站移动，这个数字从-61 dBm下降到-73 dBm。它正在接收较低强度的下行链路信号，因为它现在距离较远。这些字段的完整列表可以通过运行来检索：
+```
+OpenBTS> help chans
+```
+
+## 配置系统（续）
+在本章中，您已经熟悉了几个OpenBTS命令，其中最重要的一个可能是配置。 在继续之前，我们将提供一些关于配置的最终细节，并且会向您介绍几位亲戚。
+### 配置
+到目前为止，您使用config来搜索配置键并更改其值。 如果提供了完整的名称，它还可用于提供有关特定配置密钥的其他信息：
+```
+OpenBTS> config SIP.Proxy.SMS
+SIP.Proxy.SMS 127.0.0.1:5063 (default)
+- description: The hostname or IP address and port of the proxy to be used for text messaging. This is smqueue, for example.
+- type: hostname or IP address and port
+- default value: 127.0.0.1:5063
+- visibility level: customer warn - a warning will be presented and confirmation required before changing this sensitive setting
+- static: 0
+- scope: value must be the same across all nodes
+```
+
+### DEVCONFIG
+devconfig命令的功能与config命令相同。 但是，它允许您操作更多类型的键。 每个键都有一个可视级别，用于标识键用于用户，开发人员或工厂的人员。 使用devconfig可以访问这些更敏感的键，例如协议定时器：
+```
+OpenBTS> config GSM.Timer
+GSM.Timer.Handover.Holdoff 10 [default]
+GSM.Timer.T3109 30000 [default]
+GSM.Timer.T3212 0 [default]
+OpenBTS> devconfig GSM.Timer
+GSM.Timer.Handover.Holdoff 10 [default]
+GSM.Timer.T3103 12000 [default]
+GSM.Timer.T3105 50 [default]
+GSM.Timer.T3109 30000 [default]
+GSM.Timer.T3113 10000 [default]
+GSM.Timer.T3212 0 [default]
+```
+
+### rawconfig
+rawconfig命令会比devconfig做更多的事情并删除所有输入验证。 如果你有一个你想更改为有效范围之外的实验值的键，则需要使用rawconfig。
+rawconfig的另一个用途是在数据库中定义全新的自定义键/值对。 编写新功能时这很方便：
+```
+OpenBTS> rawconfig My.New.Setting zebra
+defined new config My.New.Setting as "zebra"
+```
+
+### unconfig
+一些控制可选功能的按键可以被禁用。 可以禁用的键将在其类型字段中设置“字符串（可选）”：
+```
+OpenBTS> config Control.LUR.FailedRegistration.Message
+Control.LUR.FailedRegistration.Message Your handset is not provisioned for this network. [default]
+- description: Send this text message, followed by the IMSI, to unprovisioned handsets that are denied registration.
+- type: string (optional)
+```
+
+unconfig命令将尝试禁用某个密钥并在其成功时报告回来.
+```
+OpenBTS> unconfig Control.LUR.FailedRegistration.Message
+Control.LUR.FailedRegistration.Message disabled
+```
+
+### rmconfig
+要将密钥恢复为其默认值，请使用rmconfig：
+```
+OpenBTS> rmconfig SIP.Proxy.SMS
+SIP.Proxy.SMS set back to its default value
+```
+
+该命令也可用于删除使用rawconfig定义的自定义键/值对：
+```
+OpenBTS> rmconfig My.New.Setting
+My.New.Setting removed from the configuration table
+```
+
+## 个性化您的网络
+你的网络已经启动并且正在运行，你知道如何控制它，而不是一个糟糕的开始。 然而，这是你的网络，所以它应该根据你的口味进行定制。 本节将介绍个性化一些事情的过程，以便它绝对是您的网络。
+### 简称
+浏览时，短名称会显示在某些手机上。 这是搜索网络时有人注意到的第一件事，所以请继续并从OpenBTS的默认设置中进行更改：
+```
+OpenBTS> config GSM.Identity.ShortName GroundControl
+GSM.Identity.ShortName changed from "OpenBTS" to "GroundControl"
+```
+只有名称的字母数字字符不允许使用空格和特殊字符。
+
+### 注册消息
+如果您还记得，在第27页的“第一次连接”中，有一条“注册失败”的短信发送给手机。 实际上，对于不同的事件，有几条SMS消息。 要查看它们的列表，请使用名称中的Registration.Message搜索配置密钥：
+```
+OpenBTS> config Registration.Message
+Control.LUR.FailedRegistration.Message Your handset is not provisioned for this network. [default]
+Control.LUR.NormalRegistration.Message (disabled) [default]
+Control.LUR.OpenRegistration.Message Welcome to the test network. Your IMSI is [default]
+```
+注册失败的消息很好，但有点无聊。 您可以使用config命令更改它：
+```
+OpenBTS> config Control.LUR.FailedRegistration.Message Nuh-uh-uh, you didn't say
+the magic word.
+Control.LUR.FailedRegistration.Message changed from "Your handset is not provisioned for this network." to "Nuh-uh-uh, you didn't say the magic word."
+```
+
+或者，要完全禁用失败的注册消息，您可以使用unconfig：
+```
+OpenBTS> unconfig Control.LUR.FailedRegistration.Message
+Control.LUR.FailedRegistration.Message disabled
+```
+
+还有另一个消息，Control.LUR.NormalRegistration.Message，默认情况下是禁用的。 每次成功注册时，该消息都会发送到手机。 虽然在生产环境中很烦人，但它对于实验室来说可能是一个有用的工具，特别是如果他们正在操作多个基站的话。 如果注册更新或切换，该消息用作提示：
+```
+OpenBTS> config Control.LUR.NormalRegistration.Message Welcome to BTS 1
+Control.LUR.NormalRegistration.Message changed from "" to "Welcome to BTS 1"
+```
+要测试它，请尝试关闭手机的电源或切换打开和关闭飞行模式。 当手机重新获得您的基站信号并注册时，您应该收到一条消息。 第6章将介绍Control.LUR.OpenRegistration.Message参数。
 

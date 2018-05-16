@@ -1,0 +1,1640 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.1.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.1.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="第4章从单个到多个节点具有单塔的移动网络比具有零塔的移动网络更有用。然而，无论单塔如何调整，都无法有效覆盖特定区域。由于OpenBTS使用相同的软件堆栈来实现大范围和小范围的覆盖区域，甚至可以在Raspberry Pi上运行，因此试图释放您对经典“细胞塔”图像的想法。塔可以很容易地放入鞋盒或与您的WiFi接入点融合。本章介绍如何将网络扩展到多个物理站点，但仍然保持单个逻辑网络。这个逻辑网络将支持任">
+<meta name="keywords" content="OpenBTS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="openBTS part4">
+<meta property="og:url" content="http://yoursite.com/2018/05/16/openBTS-part4/index.html">
+<meta property="og:site_name" content="sun-day-blog">
+<meta property="og:description" content="第4章从单个到多个节点具有单塔的移动网络比具有零塔的移动网络更有用。然而，无论单塔如何调整，都无法有效覆盖特定区域。由于OpenBTS使用相同的软件堆栈来实现大范围和小范围的覆盖区域，甚至可以在Raspberry Pi上运行，因此试图释放您对经典“细胞塔”图像的想法。塔可以很容易地放入鞋盒或与您的WiFi接入点融合。本章介绍如何将网络扩展到多个物理站点，但仍然保持单个逻辑网络。这个逻辑网络将支持任">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-05-16T03:29:19.124Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="openBTS part4">
+<meta name="twitter:description" content="第4章从单个到多个节点具有单塔的移动网络比具有零塔的移动网络更有用。然而，无论单塔如何调整，都无法有效覆盖特定区域。由于OpenBTS使用相同的软件堆栈来实现大范围和小范围的覆盖区域，甚至可以在Raspberry Pi上运行，因此试图释放您对经典“细胞塔”图像的想法。塔可以很容易地放入鞋盒或与您的WiFi接入点融合。本章介绍如何将网络扩展到多个物理站点，但仍然保持单个逻辑网络。这个逻辑网络将支持任">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/16/openBTS-part4/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>openBTS part4 | sun-day-blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> 
+
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">sun-day-blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">牛逼的人生不需要解释</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+          
+  <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+</li>
+
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/16/openBTS-part4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="sun-day">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sun-day-blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">openBTS part4</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-16T09:30:26+08:00">2018-05-16</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="第4章从单个到多个节点"><a href="#第4章从单个到多个节点" class="headerlink" title="第4章从单个到多个节点"></a>第4章从单个到多个节点</h1><p>具有单塔的移动网络比具有零塔的移动网络更有用。然而，无论单塔如何调整，都无法有效覆盖特定区域。<br>由于OpenBTS使用相同的软件堆栈来实现大范围和小范围的覆盖区域，甚至可以在Raspberry Pi上运行，因此试图释放您对经典“细胞塔”图像的想法。塔可以很容易地放入鞋盒或与您的WiFi接入点融合。<br>本章介绍如何将网络扩展到多个物理站点，但仍然保持单个逻辑网络。这个逻辑网络将支持任何商业网络的移动性和切换。</p>
+<h2 id="移动性，切换和漫游"><a href="#移动性，切换和漫游" class="headerlink" title="移动性，切换和漫游"></a>移动性，切换和漫游</h2><p>这些术语之间存在一些混淆。虽然它们确实意味着非常具体的事情，但即使是该领域的专家也会将它们放在讨论中，并希望对方从背景中理解正确的含义。为了澄清这个歧义，我们将简要概述每个术语。</p>
+<h3 id="移动性"><a href="#移动性" class="headerlink" title="移动性"></a>移动性</h3><p>移动性是手机在运营商网络中的不同物理基站上接收服务的能力。当手机在三维空间中移动时，它从相邻基站接收到的信号质量将会波动。当手机检测到来自邻近基站的显着更好的信号时，它发送LUR以注册或“驻扎”到新的基站。为了区分，在同一基站的定期LUR刷新现有注册，但新基站的LUR重新刷新，将注册切换到新塔。除非两个基站具有不同的位置区域码（LAC），否则不会执行LUR。在传统的GSM网络中，给定地理区域内的所有基站都具有相同的LAC。然而，OpenBTS目前要求所有基站都有独特的LAC，因此在基站之间移动时将执行LUR。这触发更新的SIP REGISTER消息，并因此触发包含新基站的IP的更新的订户注册表项。<br>移动性是网络的一个功能，但手机决定重新播放。而且，只有当手机没有处于诸如语音呼叫或交换SMS之类的活动交易时也是如此。移动性也可以被称为“空闲模式重新征卡”。</p>
+<h3 id="切换"><a href="#切换" class="headerlink" title="切换"></a>切换</h3><p>切换是在两个基站之间的过渡期间存活的语音呼叫的能力。移动性是切换的先决条件，但与移动性不同，网络决定并执行切换。手机别无选择，只能服从网络发送它的切换命令。<br>基站控制器（BSC）控制传统GSM网络中的切换。 OpenBTS通过使用新的对等协议消除了对BSC的需求。通过此协议交换关于相邻频率，身份和活动事务的信息，从而简化部署体系结构。<br>几个因素决定执行切换的决定。首先，来自当前服务该手机的基站的下行链路信号必须足够弱。而且，来自最强的相邻基站的信号也必须超过服务基站电平一个设定的阈值。最后，最强的相邻基站最近不会因拥塞而拒绝任何切换。如果满足这些条件，则服务基站将发起切换到最强的相邻基站。</p>
+<h3 id="漫游"><a href="#漫游" class="headerlink" title="漫游"></a>漫游</h3><p>漫游是跨运营商的移动性。它需要这些运营商和通用接口技术之间的管理协议，通常是7号信令系统（SS7）网络上的GSM-Mobile应用部分（MAP）信令。在你自己的网络中漫游是不可能的。</p>
+<h2 id="拓扑"><a href="#拓扑" class="headerlink" title="拓扑"></a>拓扑</h2><p>到目前为止，您一直在构建一个“网箱在线”拓扑结构，每个单个组件都位于单个服务器上，即单个逻辑实体。在多节点网络中，现在有两个逻辑实体：中央服务和“塔”。到目前为止，您熟悉的组件必须进行重新安排以支持这一点。中央服务将需要安装SIPAuthServe，SMQueue和Asterisk。为了简单起见，SIPAuthServe，SMQueue和Asterisk在本章剩余部分将被称为中央服务。塔将只运行OpenBTS。将有一个单一的中央服务安装和多塔安装，如图4-1所示。<br>Snipaste_2018-05-16_10-01-09.png</p>
+<p>Towers通过IP回传到中心服务，允许多个覆盖区域共享相同的用户数据库和配置。在以下说明中，中央服务将位于192.168.158.100，而塔将从192.168.158.201开始。</p>
+<h2 id="中央服务设置"><a href="#中央服务设置" class="headerlink" title="中央服务设置"></a>中央服务设置</h2><p>而不是从现有的盒内网络配置中提取中央服务，只需将OpenBTS实例和无线电硬件移动到新家即可。这避免了必须移植SMQueue，SIPAuthServe和Asterisk的订户数据和配置。</p>
+<h3 id="删除OpenBTS"><a href="#删除OpenBTS" class="headerlink" title="删除OpenBTS"></a>删除OpenBTS</h3><p>为了确保OpenBTS不会在启动时启动，并且因为缺少收音机而不断失败，请立即将其卸载：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get remove openbts</span><br></pre></td></tr></table></figure></p>
+<h3 id="配置日志记录"><a href="#配置日志记录" class="headerlink" title="配置日志记录"></a>配置日志记录</h3><p>独立的每座塔楼以及中央服务部门都将生成记录信息。您需要将中央服务设置为接受来自所有塔的记录信息，以便通过网络捕获所有活动。<br>这一步不是建立功能多节点网络所必需的，但在调试时非常有用。使用单独的日志追踪多个塔中的错误并不是很有趣。<br>用你最喜欢的编辑器编辑/etc/rsyslog.conf并在“提供UDP系统日志接收”之后直接取消注释这两行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># provides UDP syslog reception</span><br><span class="line">$ModLoad imudp</span><br><span class="line">$UDPServerRun 514</span><br></pre></td></tr></table></figure></p>
+<p>这两行意味着rsyslog将接受端口514上的UDP日志通信。要应用这些设置，需要重新启动该服务：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo service rsyslog restart</span><br></pre></td></tr></table></figure></p>
+<h3 id="Asterisk，SMQueue和SIPAuthServe"><a href="#Asterisk，SMQueue和SIPAuthServe" class="headerlink" title="Asterisk，SMQueue和SIPAuthServe"></a>Asterisk，SMQueue和SIPAuthServe</h3><p>这些组件中无需重新配置。他们不关心OpenBTS实例是本地通信还是通过IP网络进行通信。</p>
+<h2 id="塔设置"><a href="#塔设置" class="headerlink" title="塔设置"></a>塔设置</h2><p>跳回到第7页的“操作系统和开发环境设置”，并按照新的虚拟机或新服务器来启动并运行新塔的操作系统和组件。确保选择塔的唯一主机名，以便在集中日志中区分它。此外，只需安装OpenBTS，在这些说明的末尾节省一些时间。<br>这些说明假定您的塔式计算机和中央服务计算机位于同一个网络子网上。一旦登录到新的塔式安装，确保您可以通过中央服务（按Ctrl-C停止ping命令）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ ping 192.168.158.100</span><br><span class="line">PING 192.168.158.100 (192.168.158.100) 56(84) bytes of data.</span><br><span class="line">64 bytes from 192.168.158.100: icmp_req=1 ttl=128 time=4.28 ms</span><br><span class="line">64 bytes from 192.168.158.100: icmp_req=2 ttl=128 time=4.34 ms</span><br><span class="line">64 bytes from 192.168.158.100: icmp_req=3 ttl=128 time=4.48 ms</span><br><span class="line">64 bytes from 192.168.158.100: icmp_req=4 ttl=128 time=4.48 ms</span><br><span class="line">^C</span><br><span class="line">--- 192.168.158.100 ping statistics ---</span><br><span class="line">4 packets transmitted, 4 received, 0% packet loss, time 3006ms</span><br><span class="line">rtt min/avg/max/mdev = 4.285/4.399/4.484/0.086 ms</span><br></pre></td></tr></table></figure></p>
+<h3 id="配置SIP代理"><a href="#配置SIP代理" class="headerlink" title="配置SIP代理"></a>配置SIP代理</h3><p>OpenBTS使用SIP连接到所有其他组件。由于这些组件位于另一台主机上，因此需要对SIP.Proxy键进行相应的调整。此外，现在OpenBTS正在与除localhost之外的IP地址上的服务通话，它需要知道将自己的请求发送到哪个地址。 SIP.Local.IP键允许您设置其他服务在联系OpenBTS或回复其请求时应使用的IP地址。现在使用塔的IP地址进行设置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">OpenBTS&gt; config SIP.Local.IP 192.168.158.201</span><br><span class="line">SIP.Local.IP changed from &quot;127.0.0.1&quot; to &quot;192.168.158.201&quot;</span><br><span class="line">SIP.Local.IP is static; change takes effect on restart</span><br></pre></td></tr></table></figure></p>
+<p>重新启动OpenBTS以应用此静态键：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo stop openbts</span><br><span class="line">$ sudo start openbts</span><br></pre></td></tr></table></figure></p>
+<p>现在，每个SIP.Proxy键都可以更新为指向中央服务，因此注册，语音和短信流量将发送到那里，而不是本地主机：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">OpenBTS&gt; config SIP.Proxy.Registration 192.168.158.100:5064</span><br><span class="line">SIP.Proxy.Registration changed from &quot;127.0.0.1:5064&quot; to &quot;192.168.158.100:5064&quot;</span><br><span class="line">OpenBTS&gt; config SIP.Proxy.SMS 192.168.158.100:5063</span><br><span class="line">SIP.Proxy.SMS changed from &quot;127.0.0.1:5063&quot; to &quot;192.168.158.100:5063&quot;</span><br><span class="line">OpenBTS&gt; config SIP.Proxy.Speech 192.168.158.100:5060</span><br><span class="line">SIP.Proxy.Speech changed from &quot;127.0.0.1:5060&quot; to &quot;192.168.158.100:5060&quot;</span><br></pre></td></tr></table></figure></p>
+<p>确保包含端口信息。每个组件都运行在不同的端口上，并将请求路由到不正确的端口会破坏功能。</p>
+<p>强制手机通过这种新拓扑进行注册以测试事情。语音和短信也应该起作用。在继续之前验证这一点。</p>
+<h3 id="配置日志记录-1"><a href="#配置日志记录-1" class="headerlink" title="配置日志记录"></a>配置日志记录</h3><p>记录每个塔产生的信息可以发送到中央服务。中央服务上的日志记录守护程序已更改为接受此通信;现在是时候告诉塔节点发送它。使用您最喜欢的编辑器编辑/etc/rsyslog.d/OpenBTS.conf，以便它在现有local7条目正下方包含一个新行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">local7.* /var/log/OpenBTS.log</span><br><span class="line">local7.* @the-central-services-ip</span><br></pre></td></tr></table></figure></p>
+<p>此行意味着除了将信息记录到磁盘上的OpenBTS.log文件之外，还会将相同的消息发送到中央服务以便在那里记录。要应用这些设置，需要重新启动服务：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo service rsyslog restart</span><br></pre></td></tr></table></figure></p>
+<h3 id="拓扑重做"><a href="#拓扑重做" class="headerlink" title="拓扑重做"></a>拓扑重做</h3><p>到目前为止，您的网络在功能上是相同的。仍然有一个覆盖区域由一个逻辑塔和中央服务创建 - 它们只是分成两个独立的物理机器。下一步需要向网络添加更多的邻近塔，并将其配置为单个RAN。</p>
+<h2 id="添加相邻的塔"><a href="#添加相邻的塔" class="headerlink" title="添加相邻的塔"></a>添加相邻的塔</h2><p>塔架设置部分现在可以重复用于您想要添加的任意多个物理塔架。一旦它们被配置为至少起到独立塔的作用，它们必须被配置为在网络内作为适当的邻近塔。此外，所有现有的塔必须被告知这个新的塔。<br>到目前为止，假设您的网络中只有一个塔 - 您刚刚从网络集中式布局移植的塔。现在看看它的身份参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">OpenBTS&gt; config Identity</span><br><span class="line">GSM.Identity.BSIC.BCC 2 [default]</span><br><span class="line">GSM.Identity.BSIC.NCC 0 [default]</span><br><span class="line">GSM.Identity.CI 10 [default]</span><br><span class="line">GSM.Identity.LAC 1000 [default]</span><br><span class="line">GSM.Identity.MCC 001 [default]</span><br><span class="line">GSM.Identity.MNC 01 [default]</span><br><span class="line">GSM.Identity.ShortName GroundControl</span><br></pre></td></tr></table></figure></p>
+<p>其中一些参数必须是唯一的，而其他参数必须在所有邻居中相同。表4-1是一个方便的总结。配置模式也将这些信息嵌入到作用域中。范围字段会告诉您键必须是唯一的还是相邻的塔之间或网络中的所有塔之间。<br>Table 4-1. Configuration scope</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Identical</th>
+<th>Unique</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GSM.Identity.MCC</td>
+<td>GSM.Identity.LAC</td>
+</tr>
+<tr>
+<td>GSM.Identity.MNC</td>
+<td>GSM.Identity.CI</td>
+</tr>
+<tr>
+<td>GSM.Identity.BSIC.NCC</td>
+<td>GSM.Identity.BSIC.BCC</td>
+</tr>
+<tr>
+<td>GSM.CellSelection.NCCsPermitted</td>
+<td>GSM.Radio.C0</td>
+</tr>
+<tr>
+<td>GSM.Identity.ShortName</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>一些背景信息将被呈现，因此每个参数都可以被理解，以及设置你的下一个塔的分步指南。</p>
+<h3 id="必须完全一致"><a href="#必须完全一致" class="headerlink" title="必须完全一致"></a>必须完全一致</h3><p>GSM.Identity.MCC和GSM.Identity.MNC键是任何网络的最高级别标识，指示该网络在哪个国家以及哪个运营商正在运行它。监管机构分配这两个ID。测试网络总是分别使用001和01。如果这不是一个测试网络，那么您可能已经为许可证付了钱，并且非常了解适当的价值。<br>GSM.Identity.BSIC.NCC键是您的网络颜色代码（NCC），这是手机用来快速确定他们是否可以访问网络的信息。特定区域内的所有运营商必须具有唯一的颜色代码。<br>与最后一个键相关的是GSM.CellSelection.NCCsPermitted。在与合作伙伴网络合作时使用此键来表达以下内容：“不仅我的NCC正常，而且允许其他NCC。”NCC许可键是一个按位标志，而不是一个整数值。无论如何，所有的塔都应该具有相同的NCCsPermitted设置。<br>GSM.Identity.ShortName键在所有塔中应该是相同的，但它不是必需的。部署多节点网络时，一种方便的调试技术是为每个塔设置唯一的短名称。如果您的手机可靠地显示短名称，您现在可以立即知道手机在移动时驻留的塔楼。<br>一步步<br>本节的逐步说明非常基本：确保所有这些键与网络中现有的塔相同。</p>
+<h3 id="必须是唯一的"><a href="#必须是唯一的" class="headerlink" title="必须是唯一的"></a>必须是唯一的</h3><p>第一个键GSM.Radio.C0必须是唯一的，因为它是ARFCN，因此在该塔上使用RF。如果物理上相邻的塔使用相同的频率，则会对重叠信号区域中的任何参与者造成干扰并拒绝服务。<br>C0 ARFCN不仅必须是唯一的，而且它们也不能在数字上相邻。由于信号间隔仅为200 KHz，信号带宽为270 KHz，相邻的ARFCN重叠。部署物理上相邻的塔时，至少使用其他每个ARFCN（例如，塔1使用ARFCN 151，塔2使用ARFCN 153）。<br>GSM.Identity.BSIC.BCC对于物理上相邻的塔也必须是唯一的。它发信号给基站色码（BCC），一个3位字段允许7个唯一值。<br>您获得许可的C0 ARFCN和BCC数量非常有限，如果您打算购买大量的色彩地图，可能会有助于将值分配给塔。彩色地图显示所有塔的地理位置并为每个塔分配一种颜色。每种颜色对应于ARFCN编号和BCC对，如图4-2所示。如果您的计划显示没有两个相邻的塔楼具有相同的“颜色”，则移动性和交接不会因与ARFCN或BCC冲突而受到阻碍。<br>Snipaste_2018-05-16_10-04-42.png</p>
+<p>GSM.Identity.LAC在您的网络中的所有信号塔中必须是唯一的。当手机穿过塔台边界时，它意识到位置区域代码正在改变，并且应该执行另一个LUR。该LUR被转换为SIP REGISTER，并且SIPAuthServe可以更新该手机可达的塔的IP地址。 LAC独特的要求特定于OpenBTS。传统网络的LAC对应于包含多个塔的更大的地理区域.GSM.Identity.CI是单元ID（CI），并且在网络中的所有塔中必须是唯一的。</p>
+<h4 id="一步步"><a href="#一步步" class="headerlink" title="一步步"></a>一步步</h4><p>为新塔分配颜色并使用相应的C0值和BCC：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">OpenBTS&gt; config GSM.Radio.C0 168</span><br><span class="line">GSM.Radio.C0 changed from &quot;151&quot; to &quot;168&quot;</span><br><span class="line">GSM.Radio.C0 is static; change takes effect on restart</span><br><span class="line">OpenBTS&gt; config GSM.Identity.BSIC.BCC 3</span><br><span class="line">GSM.Identity.BSIC.BCC changed from &quot;2&quot; to &quot;3&quot;</span><br></pre></td></tr></table></figure></p>
+<p>由于有很多LAC和CI值，只需使用每个塔的下一个：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">OpenBTS&gt; config GSM.Identity.LAC 1001</span><br><span class="line">GSM.Identity.LAC changed from &quot;1000&quot; to &quot;1001&quot;</span><br><span class="line">OpenBTS&gt; config GSM.Identity.CI 11</span><br><span class="line">GSM.Identity.CI changed from &quot;10&quot; to &quot;11&quot;</span><br></pre></td></tr></table></figure></p>
+<p>重新启动OpenBTS以应用更改：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo stop openbts</span><br><span class="line">$ sudo start openbts</span><br></pre></td></tr></table></figure></p>
+<h3 id="邻居列表和命令"><a href="#邻居列表和命令" class="headerlink" title="邻居列表和命令"></a>邻居列表和命令</h3><p>你的塔现在被配置为不会在物理上通过其传输频率或逻辑上在他们的ID编号方案中彼此踩踏。他们仍然必须在配置中被告知彼此。这是使用GSM.Neighbors键完成的。每个塔必须将其GSM.Neighbors键设置为与所有物理相邻塔对应的空间分离IP地址列表，但不包括其本身。<br>在您的新塔楼（192.168.158.202）上，输入以下内容以告知您的原塔楼（192.168.158.201）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">OpenBTS&gt; config GSM.Neighbors 192.168.158.201</span><br><span class="line">GSM.Neighbors changed from &quot;&quot; to &quot;192.168.158.201&quot;</span><br></pre></td></tr></table></figure></p>
+<p>对原来的塔做同样的事情，以便了解新塔的情况：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">OpenBTS&gt; config GSM.Neighbors 192.168.158.202</span><br><span class="line">GSM.Neighbors changed from &quot;&quot; to &quot;192.168.158.202&quot;</span><br></pre></td></tr></table></figure></p>
+<p>仍然在你的原始塔，192.168.158.201，检查邻居命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">OpenBTS&gt; neighbors</span><br><span class="line">host C0 BSIC FreqIndex Noise ARFCNs TCH-Avail Updated Holdoff</span><br><span class="line">------------------ --- ---- --------- ----- ------ --------- ------- -------</span><br><span class="line">192.168.158.202:16001 168 2 0 68 1 7 16 0</span><br></pre></td></tr></table></figure></p>
+<p>OpenBTS对等协议自动查询有关GSM.Neighbors中定义的相邻基站的信息。 neighbors命令提供对这些信息的访问。在这里您可以看到C0 ARFCN，当前噪声级别，总ARFCN数量和可用业务信道（TCH）。</p>
+<h3 id="启用了邻居的命令"><a href="#启用了邻居的命令" class="headerlink" title="启用了邻居的命令"></a>启用了邻居的命令</h3><p>既然您有一对功能相近的人，chans命令也会在通话期间提供更多信息。该信息与手机报告的最强邻居塔的当前接收等级有关。要查看它，请使用带有-l标志的chans命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">OpenBTS&gt; chans -l</span><br><span class="line">CN TN chan transaction LAPDm recyc Signal RSSI RSSP SNR FER BER TA type id state dB dB dB pct pct sym</span><br><span class="line">0 1 TCH/F T100 LinkEstablished false 26 -50 -24 38.7 0.00 0 0.9</span><br><span class="line">TXPWR TA_DL RXLEV_DL BER_DL Time IMSI Neighbor Handover</span><br><span class="line">dBm sym dBm pct M:S ARFCN(dBm) C0:BSIC</span><br><span class="line">7 0 -93 2.26 0:25 2140... 168 (-76)</span><br></pre></td></tr></table></figure></p>
+<h2 id="覆盖重叠调整"><a href="#覆盖重叠调整" class="headerlink" title="覆盖重叠调整"></a>覆盖重叠调整</h2><p>每个塔单独调谐，最棘手的部分是相互调整它们。再看一下图4-1。塔1和塔2之间的重叠区域是至关重要的。该区域必须足够宽，以便穿过它的手机可以可靠地与两个塔接触，只要它执行切换。必须考虑该区域的地形以及潜在的手机速度。重叠不能太过于浪费资源。在可靠的重叠和优化的整体覆盖范围之间找到平衡是关键。再次，整个企业都可以建立在这种专业知识基础之上，深入的研究不在“入门”的范围之内。<br>手机移动只有一个键来配置：GSM.CellSelection.CELLRESELECT-HYSTERESIS。这个关键指示手机在重新播放之前应该有多好的潜在邻近塔的信号。</p>
+<p>OpenBTS可以更直接地控制切换。有几个键可用于调整切换行为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">OpenBTS&gt; config Handover</span><br><span class="line">GSM.Handover.FailureHoldoff 20 [default]</span><br><span class="line">GSM.Handover.Margin 15 [default]</span><br><span class="line">GSM.Handover.Ny1 50 [default]</span><br><span class="line">GSM.Timer.Handover.Holdoff 10 [default]</span><br></pre></td></tr></table></figure></p>
+<p>GSM.Handover.Margin键与GSM.CellSelection.CELL-RESELECTHYSTERESIS类似，只是它用于切换操作。在这两种设置下，重要的是要记住，如果它们设置得太高（例如，在切换之前塔必须强得多），则存在手机不能及时跳过的风险。如果它们设置得太低（例如，在切换之前塔必须稍微强一些），当手机快速地来回跳动时，网络可能被位于两个信号大致相等的区域中的手机流量峰值所击中。<br>如果您想尝试OpenBTS切换算法中的权重，那么使用devconfig还可以使用更多参数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">OpenBTS&gt; devconfig Handover</span><br><span class="line">GSM.Handover.FailureHoldoff 20 [default]</span><br><span class="line">GSM.Handover.History.Max 32 [default]</span><br><span class="line">GSM.Handover.Margin 15 [default]</span><br><span class="line">GSM.Handover.Ny1 50 [default]</span><br><span class="line">GSM.Handover.RXLEV_DL.History 6 [default]</span><br><span class="line">GSM.Handover.RXLEV_DL.Margin 10 [default]</span><br><span class="line">GSM.Handover.RXLEV_DL.PenaltyTime 20 [default]</span><br><span class="line">GSM.Handover.RXLEV_DL.Target 60 [default]</span><br><span class="line">GSM.Timer.Handover.Holdoff 10 [default]</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="sun-day 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="sun-day 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/OpenBTS/" rel="tag"><i class="fa fa-tag"></i> OpenBTS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/16/openBTS-part3/" rel="next" title="openBTS part3">
+                <i class="fa fa-chevron-left"></i> openBTS part3
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/16/openBTS-part5/" rel="prev" title="openBTS part5">
+                openBTS part5 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2160523" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTY1MC8xMjE4Ng=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="sun-day" />
+            
+              <p class="site-author-name" itemprop="name">sun-day</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">186</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">33</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">82</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/zhanghaogithub123" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:zhanghao163mail@163.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://blog.csdn.net/mouse1598189" target="_blank" title="CSDN"><i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/zhang-hao-3-80-49/activities" target="_blank" title="知乎"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.google.com/" title="Google" target="_blank">Google</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.baidu.com/" title="百度" target="_blank">百度</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第4章从单个到多个节点"><span class="nav-number">1.</span> <span class="nav-text">第4章从单个到多个节点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#移动性，切换和漫游"><span class="nav-number">1.1.</span> <span class="nav-text">移动性，切换和漫游</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#移动性"><span class="nav-number">1.1.1.</span> <span class="nav-text">移动性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#切换"><span class="nav-number">1.1.2.</span> <span class="nav-text">切换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#漫游"><span class="nav-number">1.1.3.</span> <span class="nav-text">漫游</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#拓扑"><span class="nav-number">1.2.</span> <span class="nav-text">拓扑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中央服务设置"><span class="nav-number">1.3.</span> <span class="nav-text">中央服务设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#删除OpenBTS"><span class="nav-number">1.3.1.</span> <span class="nav-text">删除OpenBTS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置日志记录"><span class="nav-number">1.3.2.</span> <span class="nav-text">配置日志记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Asterisk，SMQueue和SIPAuthServe"><span class="nav-number">1.3.3.</span> <span class="nav-text">Asterisk，SMQueue和SIPAuthServe</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#塔设置"><span class="nav-number">1.4.</span> <span class="nav-text">塔设置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#配置SIP代理"><span class="nav-number">1.4.1.</span> <span class="nav-text">配置SIP代理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置日志记录-1"><span class="nav-number">1.4.2.</span> <span class="nav-text">配置日志记录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拓扑重做"><span class="nav-number">1.4.3.</span> <span class="nav-text">拓扑重做</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#添加相邻的塔"><span class="nav-number">1.5.</span> <span class="nav-text">添加相邻的塔</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#必须完全一致"><span class="nav-number">1.5.1.</span> <span class="nav-text">必须完全一致</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#必须是唯一的"><span class="nav-number">1.5.2.</span> <span class="nav-text">必须是唯一的</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#一步步"><span class="nav-number">1.5.2.1.</span> <span class="nav-text">一步步</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#邻居列表和命令"><span class="nav-number">1.5.3.</span> <span class="nav-text">邻居列表和命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#启用了邻居的命令"><span class="nav-number">1.5.4.</span> <span class="nav-text">启用了邻居的命令</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#覆盖重叠调整"><span class="nav-number">1.6.</span> <span class="nav-text">覆盖重叠调整</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate"> 
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">true</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+  <div class="powered-by">
+  <i class="fa fa-user-md"></i><span id="busuanzi_container_site_pv">
+    本站访客数:<span id="busuanzi_container_site_pv"></span>
+  </span>
+  </div>
+  
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.1.0</div>
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共333.5k字</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.1.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1621 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.1.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.1.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="第5章GPRS移动网络已经在世界的许多地区沦为数据网络。像WhatsApp和Skype这样的OTT服务只需要一个数据管道，参与者可以连接到任何运营商。参与者之间的费用也不取决于地理位置，不同于本地和长途费用。 GPRS的速度太慢，无法支持双向流视频，但可以满足低质量的语音通话。它的速度非常适合电子邮件和OTT短信。传感器和基础设施（如热量和流量传感器或电子和停车计时器）的世界也需要数据连接。这些低">
+<meta name="keywords" content="OpenBTS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="openBTS part5">
+<meta property="og:url" content="http://yoursite.com/2018/05/16/openBTS-part5/index.html">
+<meta property="og:site_name" content="sun-day-blog">
+<meta property="og:description" content="第5章GPRS移动网络已经在世界的许多地区沦为数据网络。像WhatsApp和Skype这样的OTT服务只需要一个数据管道，参与者可以连接到任何运营商。参与者之间的费用也不取决于地理位置，不同于本地和长途费用。 GPRS的速度太慢，无法支持双向流视频，但可以满足低质量的语音通话。它的速度非常适合电子邮件和OTT短信。传感器和基础设施（如热量和流量传感器或电子和停车计时器）的世界也需要数据连接。这些低">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-05-16T03:29:54.898Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="openBTS part5">
+<meta name="twitter:description" content="第5章GPRS移动网络已经在世界的许多地区沦为数据网络。像WhatsApp和Skype这样的OTT服务只需要一个数据管道，参与者可以连接到任何运营商。参与者之间的费用也不取决于地理位置，不同于本地和长途费用。 GPRS的速度太慢，无法支持双向流视频，但可以满足低质量的语音通话。它的速度非常适合电子邮件和OTT短信。传感器和基础设施（如热量和流量传感器或电子和停车计时器）的世界也需要数据连接。这些低">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/16/openBTS-part5/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>openBTS part5 | sun-day-blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> 
+
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">sun-day-blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">牛逼的人生不需要解释</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+          
+  <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+</li>
+
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/16/openBTS-part5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="sun-day">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sun-day-blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">openBTS part5</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-16T10:14:47+08:00">2018-05-16</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="第5章GPRS"><a href="#第5章GPRS" class="headerlink" title="第5章GPRS"></a>第5章GPRS</h1><p>移动网络已经在世界的许多地区沦为数据网络。像WhatsApp和Skype这样的OTT服务只需要一个数据管道，参与者可以连接到任何运营商。参与者之间的费用也不取决于地理位置，不同于本地和长途费用。 GPRS的速度太慢，无法支持双向流视频，但可以满足低质量的语音通话。它的速度非常适合电子邮件和OTT短信。传感器和基础设施（如热量和流量传感器或电子和停车计时器）的世界也需要数据连接。这些低带宽机器到机器（M2M）设备，现在被称为物联网（IoT）设备，是GPRS的一种非常常见的用途。 GPRS实际上不是GSM的一部分。它是在GSM已经标准化之后开发的，通常被称为2.5G，而普通的GSM是2G。 OpenBTS可以抽象出这些差异，并在可能的情况下提供统一的配置。</p>
+<h2 id="启用-禁用"><a href="#启用-禁用" class="headerlink" title="启用/禁用"></a>启用/禁用</h2><p>默认情况下，OpenBTS中的GPRS服务被禁用。通过切换GPRS.Enable键现在打开它：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">OpenBTS&gt; config GPRS.Enable 1</span><br><span class="line">GPRS.Enable changed from &quot;0&quot; to &quot;1&quot;</span><br><span class="line">GPRS.Enable is static; change takes effect on restart</span><br></pre></td></tr></table></figure></p>
+<p>重新启动OpenBTS以应用此静态键：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ sudo stop openbts</span><br><span class="line">$ sudo start openbts</span><br></pre></td></tr></table></figure></p>
+<p>一旦OpenBTS重新启动，请重新登录其命令行并使用gprs list命令确认OpenBTS已为GPRS设置了几个通道：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">OpenBTS&gt; gprs list</span><br><span class="line">PDCH ARFCN=166 TN=1 FER=0%</span><br><span class="line">PDCH ARFCN=166 TN=2 FER=0%</span><br></pre></td></tr></table></figure></p>
+<h2 id="中央服务"><a href="#中央服务" class="headerlink" title="中央服务"></a>中央服务</h2><p>GPRS不依赖任何附加组件，但是必须在Linux主机上安装一些配置才能正常工作。在安装过程中，这应该已经从range-configs包中处理好了，但这是如何仔细检查事情是否正常。手机的IP流量通过OpenBTS传输到名为sgsntun的虚拟网络接口中。您现在可以确认OpenBTS已经使用ifconfig创建了它：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ ifconfig sgsntun</span><br><span class="line">sgsntun Link encap:UNSPEC HWaddr 00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00</span><br><span class="line">UP POINTOPOINT RUNNING NOARP MULTICAST MTU:1500 Metric:1</span><br><span class="line">RX packets:0 errors:0 dropped:0 overruns:0 frame:0</span><br><span class="line">TX packets:0 errors:0 dropped:0 overruns:0 carrier:0</span><br><span class="line">collisions:0 txqueuelen:500</span><br><span class="line">RX bytes:0 (0.0 B) TX bytes:0 (0.0 B)</span><br></pre></td></tr></table></figure></p>
+<p>虚拟网络接口还需要应用于iptables Linux防火墙的路由和规则。示例规则位于/etc/OpenBTS/iptables.rules中，如果需要更改网关接口名称，则可以对其进行修改。默认情况下，它们是为eth0编写的。现在手动应用规则：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo iptables-restore &lt; /etc/OpenBTS/iptables.rules</span><br></pre></td></tr></table></figure></p>
+<p>为了让系统在每次启动eth0界面时应用这些规则，修改/ etc / network / interfaces以添加下面包含“pre-up”的最后一行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># This file describes the network interfaces available on your system</span><br><span class="line"># and how to activate them. For more information, see interfaces(5).</span><br><span class="line"># The loopback network interface</span><br><span class="line">auto lo</span><br><span class="line">iface lo inet loopback</span><br><span class="line"># The primary network interface</span><br><span class="line">auto eth0</span><br><span class="line">iface eth0 inet dhcp</span><br><span class="line">pre-up iptables-restore &lt; /etc/OpenBTS/iptables.rules</span><br></pre></td></tr></table></figure></p>
+<p>在隧道设备存在且应用规则，你的Linux主机应该是有序的。</p>
+<h2 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h2><p>尽管您的手机应该执行LUR并在网络恢复后加入网络，但可能还需要其他步骤来确保GPRS服务已被识别并可用。在GPRS中，这不是一个LUR;它被称为GPRS连接。由于几个原因，手机可能无法执行此附件。如果您正在使用其他运营商的SIM卡，则手机GPRS子系统在加入OpenBTS网络时可能会认为自己正在漫游。除非手机中的“使用数据漫游”已打开，否则GPRS子系统不会尝试进行附加。再次检查您的手机的接入点名称（APN）设置。 OpenBTS不关心在名称，用户名和密码字段中放入了什么信息，但手机可能不会发出附加请求，直到输入内容。当涉及APN条目时，Android有一个非常奇怪的错误。在某些版本中，您可以添加新的APN，但除非您输入的移动国家代码（MCC）和移动网络代码（MNC）与SIM卡上定义的那些匹配，否则它不会保存。这个失败是无声的，没有迹象表明新的APN设置不会被使用。它们也不会显示在设备上的APN列表中。但是，如果您将SIM卡替换为与您输入的MCC和MNC相匹配的SIM卡，则会再次出现您的APN信息。尽管如此，有些手机可能仍需要几分钟时间才能连接。他们可能会在放弃并开始新的评估之前向OpenBTS提供旧的网络访问信息。成功连接后，手机的IP地址通过sgsn list命令可见：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">OpenBTS&gt; sgsn list</span><br><span class="line">GMM Context: imsi=001010000000009 ptmsi=0x47001 tlli=0xc0047001</span><br><span class="line">state=GmmRegisteredNormal age=32 idle=0 MS#1,TLLI=c0047001,7d4373ae</span><br><span class="line">IPs=192.168.99.1</span><br></pre></td></tr></table></figure></p>
+<h2 id="故障排除"><a href="#故障排除" class="headerlink" title="故障排除"></a>故障排除</h2><p>如果您能够连接但尚未收到IP地址，则防火墙设置可能会妨碍您的工作。通常这不是问题，但根据Linux安装和IP网络配置，这是可能的。现在禁用防火墙并重新启动OpenBTS以应用更改：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">OpenBTS&gt; config GGSN.Firewall.Enable 0</span><br><span class="line">GGSN.Firewall.Enable changed from &quot;1&quot; to &quot;0&quot;</span><br><span class="line">GGSN.Firewall.Enable is static; change takes effect on restart</span><br></pre></td></tr></table></figure></p>
+<p>OpenBTS还会尝试检测您的DNS服务器设置并将它们传递到手机。如果您发现手机无法解析域名，请尝试手动设置DNS服务器并重新启动OpenBTS以应用更改：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">OpenBTS&gt; config GGSN.DNS 8.8.8.8</span><br><span class="line">GGSN.DNS changed from &quot;&quot; to &quot;8.8.8.8&quot;</span><br><span class="line">GGSN.DNS is static; change takes effect on restart</span><br></pre></td></tr></table></figure></p>
+<p>网关GPRS支持节点（GGSN）和服务GPRS支持节点（SGSN）通常是GSM中的独立实体网络，但直接嵌入在OpenBTS中。为了更深入地了解这些组件发生了什么，您可以设置一个单独的日志文件，并观察手机与网络上的GPRS服务交互时的内容。将GGSN.Logfile.Name键设置为您希望发送日志的文件路径，然后重新启动OpenBTS以应用更改：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">OpenBTS&gt; devconfig GGSN.Logfile.Name /tmp/GGSN.log</span><br><span class="line">GGSN.Logfile.Name changed from &quot;&quot; to &quot;/tmp/GGSN.log&quot;</span><br><span class="line">GGSN.Logfile.Name is static; change takes effect on restart</span><br></pre></td></tr></table></figure></p>
+<p>现在，当GPRS网络上的活动通过GGSN时，新条目将添加到此日志文件中。使用tail命令和-f标志来监视内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ tail -f /tmp/GGSN.log</span><br><span class="line">19:44:04.5: GGSN.MS.IP.Base=192.168.99.1</span><br><span class="line">19:44:04.5: GGSN.MS.IP.MaxCount=254</span><br><span class="line">19:44:04.5: GGSN.MS.IP.Route=192.168.99.0/24</span><br><span class="line">19:44:04.5: GGSN.IP.MaxPacketSize=1520</span><br><span class="line">19:44:04.5: GGSN.IP.ReuseTimeout=180</span><br><span class="line">19:44:04.5: GGSN.Firewall.Enable=0</span><br><span class="line">19:44:04.5: GGSN.IP.TossDuplicatePackets=0</span><br><span class="line">19:44:04.5:GGSN: DNS servers: 8.8.8.8 0.0.0.0</span><br><span class="line">19:44:04.5:ip link set sgsntun up</span><br><span class="line">19:44:04.7:ip route add to 192.168.99.0/24 dev sgsntun</span><br></pre></td></tr></table></figure></p>
+<h2 id="性能调整"><a href="#性能调整" class="headerlink" title="性能调整"></a>性能调整</h2><p>OpenBTS尝试在信令的独立专用控制信道（SDCCH）和媒体的TCH之间智能划分资源。但是，它还没有一种机制来平衡不同类型的TCH使用。</p>
+<h3 id="语音与GPRS"><a href="#语音与GPRS" class="headerlink" title="语音与GPRS"></a>语音与GPRS</h3><p>话音和GPRS业务都使用携带TCH逻辑信道的时隙。如果您的网络将部署为主要服务于GPRS而不是语音，则应调整GPRS.Channels.Min.C0键，该键指定应该用于GPRS的可用TCH时隙的最小数量。默认值是两个。要查看当前可用信道数量，请使用load命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">OpenBTS&gt; load</span><br><span class="line">== GSM ==</span><br><span class="line">SDCCH load/available: 0/4</span><br><span class="line">TCH/F load/available: 0/5</span><br><span class="line">PCH load: active, total: 0, 0</span><br><span class="line">AGCH load: active, pending: 0, 0</span><br><span class="line">== GPRS ==</span><br><span class="line">current PDCHs: 2</span><br><span class="line">utilization: 0%</span><br></pre></td></tr></table></figure></p>
+<p>在这里，我们看到有7个可用的TCH信道：GSM语音（GSM：TCH / F）有5个，GPRS数据（GPRS：PDCH）有2个可用。要使GPRS网络最大化，请将GPRS.Channels.Min.C0设置为7，即可用的TCH通道总数，然后重新启动OpenBTS以应用更改：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">OpenBTS&gt; config GPRS.Channels.Min.C0 7</span><br><span class="line">GPRS.Channels.Min.C0 changed from &quot;2&quot; to &quot;7&quot;</span><br><span class="line">GPRS.Channels.Min.C0 is static; change takes effect on restart</span><br></pre></td></tr></table></figure></p>
+<p>重新运行负载将显示所有TCH通道都已分配给GPRS：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">OpenBTS&gt; load</span><br><span class="line">== GSM ==</span><br><span class="line">SDCCH load/available: 0/4</span><br><span class="line">TCH/F load/available: 0/0</span><br><span class="line">PCH load: active: 0 total: 0</span><br><span class="line">AGCH load: active: 0 () pending: 0</span><br><span class="line">== GPRS ==</span><br><span class="line">current PDCHs: 7</span><br><span class="line">utilization: 0%</span><br></pre></td></tr></table></figure></p>
+<p>如果您想手动控制它们，OpenBTS允许您更改所有时间片分配。您可以调整组合1（TCH）与组合7（SDCCH）时隙分配的数量。您还可以调整这些时间段的顺序，以及GPRS时隙应该出现在多ARFCN系统中的位置。通过搜索“Channels”来查看所有键：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">OpenBTS&gt; config Channels</span><br><span class="line">GPRS.Channels.Min.C0 2 [default]</span><br><span class="line">GPRS.Channels.Min.CN 0 [default]</span><br><span class="line">GSM.Channels.C1sFirst 0 [default]</span><br><span class="line">GSM.Channels.NumC1s auto [default]</span><br><span class="line">GSM.Channels.NumC7s auto [default]</span><br><span class="line">GSM.Channels.SDCCHReserve 0 [default]</span><br></pre></td></tr></table></figure></p>
+<h3 id="个人手机吞吐量"><a href="#个人手机吞吐量" class="headerlink" title="个人手机吞吐量"></a>个人手机吞吐量</h3><p>手机可以同时使用多个时隙来访问GPRS。上行链路和下行链路支持的并行时隙数称为多时隙类。默认情况下，OpenBTS被设置为支持3 + 2多时隙等级：三个下行链路的连续时隙和两个上行链路。这并不意味着一部手机将同时支配所有五个时隙，但您现在可以明白为什么将尽可能多的时隙添加到以GPRS为中心的网络中非常重要。一个更高的多时隙类将向单个手机提供更高速的数据，但随着多个手机试图使用它，网络将变得更加迅速拥塞。您可以使用以下两个键来调整支持的多时隙类：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">OpenBTS&gt; config Multislot</span><br><span class="line">GPRS.Multislot.Max.Downlink 3 [default]</span><br><span class="line">GPRS.Multislot.Max.Uplink 2 [default]</span><br></pre></td></tr></table></figure></p>
+<h3 id="覆盖面积与吞吐量"><a href="#覆盖面积与吞吐量" class="headerlink" title="覆盖面积与吞吐量"></a>覆盖面积与吞吐量</h3><p>GPRS为传送的数据定义了四种不同的编码方案（CS）。它们被适当命名为CS1，CS2，CS3和CS4。编码方案1的吞吐量最低，但可靠性最高。它分配更多的比特用于消除无线传输过程中引入的错误。另一方面，编码方案4具有最高的吞吐量，但在传输过程中容易出错。这些传输错误限制了每种编码方案的可用覆盖范围。 OpenBTS支持CS1和CS4。您可以选择低吞吐量，但是可以选择可靠的覆盖区域，或者更高的吞吐量，而且鲁棒性较差的纠错会导致覆盖区域更小。默认情况下，OpenBTS已启用，但可以在上行链路和下行链路上单独调整它们：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">OpenBTS&gt; devconfig Codecs</span><br><span class="line">GPRS.Codecs.Downlink 1,4 [default]</span><br><span class="line">GPRS.Codecs.Uplink 1,4 [default]</span><br></pre></td></tr></table></figure></p>
+<h2 id="期望"><a href="#期望" class="headerlink" title="期望"></a>期望</h2><p>GPRS不是很快，但数据是数据。在无法使用WiFi的地方，相对较大的区域可以使用调制解调器速度的互联网接入，无论是M2M /物联网设备还是联系亲朋好友的人。表5-1列出了每部手机的预期吞吐量。<br>Table 5-1. Multislot class and coding scheme throughputs</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Slots down+up</th>
+<th>1+1</th>
+<th>2+1</th>
+<th>2+2</th>
+<th>3+2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CS1</td>
+<td>9.05/9.05 kbps</td>
+<td>18.1/9.05 kbps</td>
+<td>18.1/18.1 kbps</td>
+<td>27.15/18.1 kbps</td>
+</tr>
+<tr>
+<td>CS4</td>
+<td>21.4/21.4 kbps</td>
+<td>42.8/21.4 kbps</td>
+<td>42.8/42.8 kbps</td>
+<td>64.2/42.8 kbps</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>这些都是最佳吞吐量，并且非常依赖于网络拥塞，无论是本地无线电还是互联网上行链路。无可否认，OpenBTS GPRS支持并不完美。 GSM语音和短信几乎都是OpenBTS内部完成的工作，但是GPRS仍然可以进行改进和优化。这些改进大部分与分配接入无线电媒体以及数据包重新安排的算法有关。优化这些将大大提高OpenBTS中的GPRS体验。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="sun-day 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="sun-day 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/OpenBTS/" rel="tag"><i class="fa fa-tag"></i> OpenBTS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/16/openBTS-part4/" rel="next" title="openBTS part4">
+                <i class="fa fa-chevron-left"></i> openBTS part4
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/16/openBTS-part6/" rel="prev" title="openBTS part6">
+                openBTS part6 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2160523" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTY1MC8xMjE4Ng=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="sun-day" />
+            
+              <p class="site-author-name" itemprop="name">sun-day</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">186</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">33</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">82</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/zhanghaogithub123" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:zhanghao163mail@163.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://blog.csdn.net/mouse1598189" target="_blank" title="CSDN"><i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/zhang-hao-3-80-49/activities" target="_blank" title="知乎"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.google.com/" title="Google" target="_blank">Google</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.baidu.com/" title="百度" target="_blank">百度</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第5章GPRS"><span class="nav-number">1.</span> <span class="nav-text">第5章GPRS</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#启用-禁用"><span class="nav-number">1.1.</span> <span class="nav-text">启用/禁用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#中央服务"><span class="nav-number">1.2.</span> <span class="nav-text">中央服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#连接"><span class="nav-number">1.3.</span> <span class="nav-text">连接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#故障排除"><span class="nav-number">1.4.</span> <span class="nav-text">故障排除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#性能调整"><span class="nav-number">1.5.</span> <span class="nav-text">性能调整</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#语音与GPRS"><span class="nav-number">1.5.1.</span> <span class="nav-text">语音与GPRS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#个人手机吞吐量"><span class="nav-number">1.5.2.</span> <span class="nav-text">个人手机吞吐量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#覆盖面积与吞吐量"><span class="nav-number">1.5.3.</span> <span class="nav-text">覆盖面积与吞吐量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#期望"><span class="nav-number">1.6.</span> <span class="nav-text">期望</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate"> 
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">true</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+  <div class="powered-by">
+  <i class="fa fa-user-md"></i><span id="busuanzi_container_site_pv">
+    本站访客数:<span id="busuanzi_container_site_pv"></span>
+  </span>
+  </div>
+  
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.1.0</div>
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共333.5k字</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.1.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

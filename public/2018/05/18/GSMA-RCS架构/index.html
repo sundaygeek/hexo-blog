@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.1.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.1.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="目录I. 导言II. SIMPLE IM架构III. CPM架构IV. RCS架构V. 总结 由开放移动联盟（OMA）和GSM协会（GSMA）等主要标准组织制定的消息传送技术在架构和技术细节方面有许多相似之处。 OMA融合IP消息系统（CPM）从一开始就基于OMA SIMPLE IM进行设计. 因此重用了其大部分有关即时消息功能的详细技术。 GSMA丰富通信套件（RCS）在其早期版本中采用了OMA">
+<meta name="keywords" content="RCS,GSMA">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GSMA RCS架构">
+<meta property="og:url" content="http://yoursite.com/2018/05/18/GSMA-RCS架构/index.html">
+<meta property="og:site_name" content="sun-day-blog">
+<meta property="og:description" content="目录I. 导言II. SIMPLE IM架构III. CPM架构IV. RCS架构V. 总结 由开放移动联盟（OMA）和GSM协会（GSMA）等主要标准组织制定的消息传送技术在架构和技术细节方面有许多相似之处。 OMA融合IP消息系统（CPM）从一开始就基于OMA SIMPLE IM进行设计. 因此重用了其大部分有关即时消息功能的详细技术。 GSMA丰富通信套件（RCS）在其早期版本中采用了OMA">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-05-18T06:53:20.996Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="GSMA RCS架构">
+<meta name="twitter:description" content="目录I. 导言II. SIMPLE IM架构III. CPM架构IV. RCS架构V. 总结 由开放移动联盟（OMA）和GSM协会（GSMA）等主要标准组织制定的消息传送技术在架构和技术细节方面有许多相似之处。 OMA融合IP消息系统（CPM）从一开始就基于OMA SIMPLE IM进行设计. 因此重用了其大部分有关即时消息功能的详细技术。 GSMA丰富通信套件（RCS）在其早期版本中采用了OMA">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/18/GSMA-RCS架构/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>GSMA RCS架构 | sun-day-blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> 
+
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">sun-day-blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">牛逼的人生不需要解释</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+          
+  <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+</li>
+
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/18/GSMA-RCS架构/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="sun-day">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sun-day-blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">GSMA RCS架构</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-18T14:27:57+08:00">2018-05-18</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h1><p>I. 导言<br>II. SIMPLE IM架构<br>III. CPM架构<br>IV. RCS架构<br>V. 总结</p>
+<p>由开放移动联盟（OMA）和GSM协会（GSMA）等主要标准组织制定的消息传送技术在架构和技术细节方面有许多相似之处。 OMA融合IP消息系统（CPM）从一开始就基于OMA SIMPLE IM进行设计. 因此重用了其大部分有关即时消息功能的详细技术。 GSMA丰富通信套件（RCS）在其早期版本中采用了OMA SIMPLE IM架构. 并且最近采用了OMA CPM架构来提供融合通信服务功能。 因此. RCS由许多具有最先进的服务特性. 协议和接口的功能组件组成. 本文将对此进行简要回顾。</p>
+<h1 id="I-导言"><a href="#I-导言" class="headerlink" title="I. 导言"></a>I. 导言</h1><p>GSMA富通信套件（RCS）最初基于OMA SIMPLE IM架构. 但采用了RCS r4.0的OMA融合IP消息系统（CPM）架构。 虽然RCS r4.0更新至RCS 5.0及以上版本. 但整合了更多的服务特性和更详细的技术要点. 但其架构本身保持不变。 SIMPLE IM和CPM之间的概念区别在于SIMPLE IM专注于在SIP / IP核心上实现IP消息传递功能. 而CPM侧重于如何实现不同通信技术中的融合用户体验. 例如IP消息传递 . 语音. 视频等。在CPM架构之上. RCS已经指定了内容共享. 位置信息共享和社交呈现信息共享等附加增值服务功能. 反映了近期许多社交网络服务已经证明的市场需求。</p>
+<h1 id="II-SIMPLE-IM架构"><a href="#II-SIMPLE-IM架构" class="headerlink" title="II. SIMPLE IM架构"></a>II. SIMPLE IM架构</h1><p>Snipaste_2018-05-18_14-31-50.png<br>SIMPLE IM启动器由IM客户端，IM服务器和IM XML文档管理服务器（XDMS）组成。 IM服务器分解为三个功能组件，即控制功能，参与功能和对话历史功能。参与功能为UE提供用户网络接口（UNI），控制功能担当会议聚焦的角色，这是一个控制群组通信业务信令过程的集中功能。对话历史记录功能与IM XDMS交互以存储和检索SIMPLE IM用户之间交换的对话历史记录。 IM服务器还与共享XDMS互通以检索IM相关的规则和策略。 IM客户端可以在内部与位于UE内的XDM客户端互通以访问IM XDMS。注意：为简单起见，本图中省略了一些界面和表示。详细架构请参考OMA SIMPLE IM [1]。</p>
+<h1 id="III-CPM架构"><a href="#III-CPM架构" class="headerlink" title="III. CPM架构"></a>III. CPM架构</h1><p>Snipaste_2018-05-18_14-34-07.png<br>CPM的开发旨在提供支持所有多媒体类型（例如语音，视频，文本等）和所有不同通信服务（如IP聊天，语音通话，视频通话，传统消息传递等）的一体化通信服务服务等）。因此，CPM旨在销毁不同传统通信服务之间的孤岛，并将它们合并到SIP / IP网络中。因此，CPM用户可以简单地与联系人中的任何人进行通信，而无需选择要使用的特定类型的消息服务。在SIMPLE IM架构的基础上，CPM增加了一些功能组件：会话服务器和基于网络的消息存储服务器。与SIMPLE IM的IM服务器相比，会话服务器提供相同但扩展的功能，并且具有用于互通选择功能（ISF），互通功能（IWF）和消息存储服务器的附加接口。 ISF确定在SMS，MMS和电子邮件中使用何种类型的传统消息服务以联系目标非CPM用户。一旦确定，所选择的各个互通功能（例如，SMS-IWF，MMS-IWF，EMAIL-IWF）相应地将CPM消息转换为传统消息。然后，转换后的消息，即SMS，MMS，电子邮件被转发到对应的传统网络。基于网络的消息存储服务器通过与对话服务器交互来存储和检索对话历史记录。对话历史还可以跨CPM用户的多个设备同步，从而确保用户可以在他/她的任何设备上获得一致的用户体验。注意：为了简单起见，许多接口和表示已被省略和调整。有关详细体系结构，请参阅OMA CPM [2]。</p>
+<h1 id="IV-RCS架构"><a href="#IV-RCS架构" class="headerlink" title="IV. RCS架构"></a>IV. RCS架构</h1><p>Snipaste_2018-05-18_14-36-26.png</p>
+<p>RCSe已经采用了SIMPLE IM的即时消息服务器，并正在重用其他服务引擎如Presence和XDMS。 RCS r5.x增强了每个组件的功能，并且还集成了来自OMA CPM的一些功能组件，如消息存储服务器和互通功能。视频共享服务器提供基于GSMA IR.94的视频共享服务，并且OPTIONS AS已被推荐为支持基于SIP OPTIONS的服务功能发现功能的多个设备。原则上，支持RCS的设备的认证受制于底层网络的安全机制。在该图中，所有SIP业务都穿过IMS网络，而其余协议业务即XCAP，HTTP，MSRP和IMAPv4将经过RCS客户端和相应应用服务器之间的相应直接接口。除非底层网络提供适当的功能，否则每个应用程序服务器可能需要支持其自己的授权机制。 Provisioning Server向用户设备提供与服务相关的配置参数。配置参数由与IMS网络和RCS AS接入点的IP配置，认证/授权和RCS服务功能（例如，IP聊天，文件传输，内容共享，状态，XDMS等）相关的各种管理对象（MO）组成。 ）。 GSMA RCS允许运营商使用OMA数据管理（DM）或OMA内容提供（CP）启用码作为默认配置供应技术。作为在其网络中可能没有这些功能组件的运营商的另一种方式，GSMA还指定基于HTTP（S）的配置供应。供应服务器可能需要与运营商的NE（一个或多个）（例如，HSS，BSS等）的后端集成来为用户执行授权并提供简档管理功能。这种后端集成不是RCS规范的范围，而是一个实现问题。 Presence服务器基于OMA SIMPLE存在v1.1体系结构。它在RCS上下文中用于支持社交呈现信息共享和基于状态的服务功能发现功能。社交呈现信息是RCS用户间的共享对象，其中包括肖像图标，收藏夹链接，自由文本，可用性，意愿和地理位置信息。运营商可以进一步定义自己的项目，以提供差异化​​的RCS服务。 Presence服务器与XDMS互操作以存储和检索社交呈现信息，用户简档和RCS联系人列表。 XDMS管理RCS用户的配置文件和各种组信息，如RCS联系人组，被阻止的联系组，被撤销的联系组等.XDMS基于OMA XDM v1.0和v2.0架构。一旦RCS客户端在被调用后完成服务能力发现过程，它将连接到XDMS并执行目录服务，以检索存储在XDMS中的所有RCS用户的XML文档。如果没有存储XML文档，这是第一次访问RCS服务时的典型情况，则RCS客户端应创建新的XML文档（即RCS联系人组，用户配置文件，用户首选项，组列表）并将其上传到XDMS。 Presence服务器必须支持XCAP接口来存储/检索这些呈现XML文档。 XDMS可以包括但不限于共享XDMS，存在XDMS，聚合代理以及用于网络 - 网络接口（NNI）的交叉网络代理子系统。会话服务器基于OMA SIMPLE IM v1.0的IM服务器或OMA CPM v1.0的会话服务器。它由参与功能（PF）和控制功能（CF）组成。 PF提供UNI功能并处理所有RCS信令和媒体控制，以实现IP聊天，文件传输，独立消息传递等一对一通信。所有针对多个接收者的RCS消息（即组通信）都被转发给CF. CF通过处理RCS组相关程序担任会议焦点。如果目标用户被解析为非RCS用户，则会话服务器应通过SIP / IP核心将RCS消息与互通功能（IWF）互通。对话服务器充当IMAPv4客户端以将对话历史存储在集中式消息存储器中。消息存储服务器存储和检索RCS客户端之间交换的所有RCS消息和内容。如果RCS用户有多个设备，则可以使用IMAPv4在所有用户的多个设备上同步对话历史记录。 RCS用户可以在存储库中创建一个新目录来管理他/她自己的对话历史记录。任何与消息存储服务器交互的节点都应该作为IMAPv4客户端。视频共享服务器基于RCSe中的GSMA IR.74和RCS r1.0至r3.0提供视频共享服务功能。<br>GSMA IR.74规定视频共享会话取决于现有的语音会话。视频共享会话仅在存在语音会话时才可用。如果语音会话关闭，则视频共享会话也应与语音会话一起关闭。如果通过例如呼叫保持，呼叫转移等以某种方式影响语音会话，则视频共享会话也将被关闭。同时，从RCS 4.0及以上开始，RCS采用GSMA IR.84进行视频共享服务。在基于GSMA IR.84的视频共享服务中，视频共享会话不具有对现有语音会话的任何依赖性。也就是说，无论是否有正在进行的语音会话，RCS用户都可以建立视频共享会话。视频共享服务器具有与IMS核心的ISC接口。 IWF执行RCS消息和SMS和MMS等传统消息之间的协议转换，并将转换后的消息转发给非RCS用户，反之亦然。 IWF由SMS-IWF和MMS-IWF功能组件组成，可能包括互通选择功能（ISF）。 ISF确定使用哪个传统消息服务以将RCS消息中继给非RCS用户。 ISF可以基于内容类型和内容长度来确定特定的IWF功能组件，并且/或者运营商可以定义它们自己的标准来选择互通功能。 SMS-IWF可以与短消息服务中心（SM-SC）或IP-SM-GW互通以进行SMS互通。在SM-SC互通的情况下，使用SMPP接口，SMS-IWF作为SIP领域的终点。在IPSM-GW互通的情况下，IP-SM-GW扮演SIP端点的角色。因此，SMS-IWF提供了朝向IMS核心的SIP接口以接入IP-SM-GW。 SMS-IWF还应具有与IP-SM-GW的MSRP接口来传递RCS消息。当谈到MMS互通时，MMS-IWF与多媒体服务中心（MMSC）有一个MM4接口。 OPTIONS AS（OAS）在RCS用户之间提供基于SIP OPTIONS的服务能力发现功能。服务能力发现可以基于轮询时间（由供应服务器供应）周期性地发生，或者也可以根据用户请求发生。基于SIP选项的服务能力发现应该应用于RCS用户地址簿的非RCS联系人。在接收者（即联系人）具有多个设备的情况下，OAS必须执行服务级分叉并聚集来自个体接收者的设备的结果。 OPTIONS AS可以与会话服务器建立SIP接口，SIP OPTIONS可以从该会话服务器转发，或者可以通过IMS核心与RCS客户端建立直接接口。</p>
+<h1 id="五-总结"><a href="#五-总结" class="headerlink" title="五. 总结"></a>五. 总结</h1><p>RCS r5.x架构是RCSe架构的扩展。如果运营商已经提供RCSe服务，运营商可以通过增加几个功能组件并相应地升级现有的RCSe功能组件来将其RCSe服务发展到RCS r5.x服务。由于GSMA RCS正在采用各种接口和复杂性较高的OMA技术，因此运营商可能需要考虑如何简化系统架构。运营商应确定要采用哪些标准以及哪些标准可以省略或替换。他们还需要找到一种方法来提高RCS系统的性能，因为基于OMA的存在技术和基于SIP选项的功能发现过程极有可能导致网络中的大量流量。一些流量优化方法已经在GSMA RCS规范中提出。但是，运营商可能还需要找到更多的方法来减少可能的流量过载。实现简单的架构和流量优化将是成功提供稳健和稳定的RCS服务的关键。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="sun-day 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="sun-day 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/RCS/" rel="tag"><i class="fa fa-tag"></i> RCS</a>
+          
+            <a href="/tags/GSMA/" rel="tag"><i class="fa fa-tag"></i> GSMA</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/16/GSMA-RCS标准的演变/" rel="next" title="GSMA RCS标准的演变">
+                <i class="fa fa-chevron-left"></i> GSMA RCS标准的演变
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/18/GSMA-RCS-百度百科/" rel="prev" title="GSMA RCS - 百度百科">
+                GSMA RCS - 百度百科 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2160523" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTY1MC8xMjE4Ng=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="sun-day" />
+            
+              <p class="site-author-name" itemprop="name">sun-day</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">200</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">33</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">88</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/zhanghaogithub123" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:zhanghao163mail@163.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://blog.csdn.net/mouse1598189" target="_blank" title="CSDN"><i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/zhang-hao-3-80-49/activities" target="_blank" title="知乎"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.google.com/" title="Google" target="_blank">Google</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.baidu.com/" title="百度" target="_blank">百度</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#目录"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#I-导言"><span class="nav-number">2.</span> <span class="nav-text">I. 导言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#II-SIMPLE-IM架构"><span class="nav-number">3.</span> <span class="nav-text">II. SIMPLE IM架构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#III-CPM架构"><span class="nav-number">4.</span> <span class="nav-text">III. CPM架构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#IV-RCS架构"><span class="nav-number">5.</span> <span class="nav-text">IV. RCS架构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#五-总结"><span class="nav-number">6.</span> <span class="nav-text">五. 总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate"> 
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">true</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+  <div class="powered-by">
+  <i class="fa fa-user-md"></i><span id="busuanzi_container_site_pv">
+    本站访客数:<span id="busuanzi_container_site_pv"></span>
+  </span>
+  </div>
+  
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.1.0</div>
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共345.3k字</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.1.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

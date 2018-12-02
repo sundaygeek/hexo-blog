@@ -1,0 +1,1550 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.1.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.1.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="第一章1.1数据分析什么是数据，数据不同于信息。信息实际上是对数据集进行处理，从中提炼出可用于其他场合的结论，也就是说，它是对数据进行处理后得到的结果。从原始数据中抽取信息的这个过程就叫做数据分析。 数据分析的目的正是抽取不易推断的信息，而一旦理解了这些信息，就能够对产生数据的系统的运行机制进行研究，从而对系统可能的响应和演变做出预测。 数据分析最初用于数据保护，现在已经发展成为数据建模的方法论，">
+<meta name="keywords" content="python,数据分析">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python数据分析实战">
+<meta property="og:url" content="http://yoursite.com/2018/04/11/python数据分析实战/index.html">
+<meta property="og:site_name" content="sun-day-blog">
+<meta property="og:description" content="第一章1.1数据分析什么是数据，数据不同于信息。信息实际上是对数据集进行处理，从中提炼出可用于其他场合的结论，也就是说，它是对数据进行处理后得到的结果。从原始数据中抽取信息的这个过程就叫做数据分析。 数据分析的目的正是抽取不易推断的信息，而一旦理解了这些信息，就能够对产生数据的系统的运行机制进行研究，从而对系统可能的响应和演变做出预测。 数据分析最初用于数据保护，现在已经发展成为数据建模的方法论，">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2018/04/11/python数据分析实战/CAPTURE_2018411_155639.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/04/11/python数据分析实战/CAPTURE_2018411_160506.jpg">
+<meta property="og:updated_time" content="2018-12-02T13:01:28.219Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python数据分析实战">
+<meta name="twitter:description" content="第一章1.1数据分析什么是数据，数据不同于信息。信息实际上是对数据集进行处理，从中提炼出可用于其他场合的结论，也就是说，它是对数据进行处理后得到的结果。从原始数据中抽取信息的这个过程就叫做数据分析。 数据分析的目的正是抽取不易推断的信息，而一旦理解了这些信息，就能够对产生数据的系统的运行机制进行研究，从而对系统可能的响应和演变做出预测。 数据分析最初用于数据保护，现在已经发展成为数据建模的方法论，">
+<meta name="twitter:image" content="http://yoursite.com/2018/04/11/python数据分析实战/CAPTURE_2018411_155639.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/11/python数据分析实战/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>python数据分析实战 | sun-day-blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> 
+
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">sun-day-blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">牛逼的人生不需要解释</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+          
+  <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+</li>
+
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/11/python数据分析实战/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="sun-day">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sun-day-blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">python数据分析实战</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-11T15:33:17+08:00">2018-04-11</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据分析/" itemprop="url" rel="index"><span itemprop="name">数据分析</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据分析/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h1><h2 id="1-1数据分析"><a href="#1-1数据分析" class="headerlink" title="1.1数据分析"></a>1.1数据分析</h2><p>什么是数据，数据不同于信息。信息实际上是对数据集进行处理，从中提炼出可用于其他场合的结论，也就是说，它是对数据进行处理后得到的结果。从原始数据中抽取信息的这个过程就叫做<strong>数据分析</strong>。</p>
+<p>数据分析的目的正是抽取不易推断的信息，而一旦理解了这些信息，就能够对产生数据的系统的运行机制进行研究，从而对系统可能的响应和演变做出预测。</p>
+<p>数据分析最初用于数据保护，现在已经发展成为数据建模的方法论，从而完成了到一门真正科学的转变。模型实际上是指将所研究的系统转化为数学形式。一旦建立数学或逻辑模型，对系统的响应能做出不同精度的预测，我们就可以预测在给定输入的情况下，系统会给出怎样的输出。这样看来，数据分析的目的不止是建模，更重要的是其预测能力。</p>
+<p>模型的预测能力不仅取决于建模技术的质量，还取决于选择分析使用的优质数据集的能力。因此数据搜索、数据提取、数据准备也是属于数据分析的范畴，他们对最终结果有重要影响。</p>
+<p>在数据分析的各个阶段还是有各种各样的数据可视化方法。无论是孤立的看数据，还是将其放到整个数据集来看，理解数据的最好的方法莫过于将其做成可视化的图形，从而传达出数字中蕴含的信息。</p>
+<p>数据分析的产出为模型和图形化展示，据此可预测所研究系统的响应。随后进入测试阶段，用已知输出结果的一个数据集对模型进行测试。这些数据不是用来生成模型的，而是用来检验系统给的能否重现实际观察到的输出，从而掌握模型的误差，了解其有效性和局限。</p>
+<p>拿新模型的测试结果与既有模型进行对比便可知道优劣。如果新模型胜出，既可尽心该数据分析的最后一步，部署。部署阶段需要根据摩西个给出的预测结果，实现相应的决策，同时还要防范模型预测到的潜在风险。</p>
+<h2 id="1-2数据分析师的知识范畴"><a href="#1-2数据分析师的知识范畴" class="headerlink" title="1.2数据分析师的知识范畴"></a>1.2数据分析师的知识范畴</h2><ol>
+<li>计算机科学</li>
+<li>数据和统计学</li>
+<li>机器学习和人工智能</li>
+<li>数据来源领域</li>
+</ol>
+<h2 id="1-3理解数据的性质"><a href="#1-3理解数据的性质" class="headerlink" title="1.3理解数据的性质"></a>1.3理解数据的性质</h2><p>数据 -&gt; 信息 -&gt; 知识</p>
+<h2 id="1-4数据分析过程"><a href="#1-4数据分析过程" class="headerlink" title="1.4数据分析过程"></a>1.4数据分析过程</h2><p>数据分析过程可以用下图表示</p>
+<p><img src="/2018/04/11/python数据分析实战/CAPTURE_2018411_155639.jpg" alt="你想输入的替代文字"></p>
+<ul>
+<li>问题定义</li>
+<li>数据抽取</li>
+<li>数据清洗</li>
+<li>数据转换</li>
+<li>数据探索</li>
+<li>预测模型</li>
+<li>模型评估/测试</li>
+<li>结果可视化和阐释</li>
+<li>解决方案部署</li>
+</ul>
+<h2 id="1-5-定量和定性数据分析"><a href="#1-5-定量和定性数据分析" class="headerlink" title="1.5 定量和定性数据分析"></a>1.5 定量和定性数据分析</h2><p><img src="/2018/04/11/python数据分析实战/CAPTURE_2018411_160506.jpg" alt="你想输入的替代文字"></p>
+<h2 id="1-6-开放数据源"><a href="#1-6-开放数据源" class="headerlink" title="1.6 开放数据源"></a>1.6 开放数据源</h2><p><a href="https://sundaygeek.github.io/2018/04/11/%E5%BC%80%E6%94%BE%E6%95%B0%E6%8D%AE%E6%BA%90/" target="_blank" rel="noopener">开放数据源</a></p>
+<h2 id="1-7-python和数据分析"><a href="#1-7-python和数据分析" class="headerlink" title="1.7 python和数据分析"></a>1.7 python和数据分析</h2><p>python大量的库为数据分析和处理提供了完整的工具集，也广泛应用于科学计算领域。</p>
+<h1 id="第2章-ptyhon世界简介"><a href="#第2章-ptyhon世界简介" class="headerlink" title="第2章-ptyhon世界简介"></a>第2章-ptyhon世界简介</h1><p>这一章主要是回顾一些python的知识点。</p>
+<p>第2章　Python世界简介　　12<br>2.1　Python——编程语言　　12<br>2.2　Python——解释器　　13<br>2.2.1　Cython　　14<br>2.2.2　Jython　　14<br>2.2.3　PyPy　　14<br>2.3　Python 2和Python 3　　14<br>2.4　安装Python　　15<br>2.5　Python发行版　　15<br>2.5.1　Anaconda　　15<br>2.5.2　Enthought Canopy　　16<br>2.5.3　Python(x,y)　　17<br>2.6　使用Python　　17<br>2.6.1　Python shell　　17<br>2.6.2　运行完整的Python程序　　17<br>2.6.3　使用IDE编写代码　　18<br>2.6.4　跟Python交互　　18<br>2.7　编写Python代码　　18<br>2.7.1　数学运算　　18<br>2.7.2　导入新的库和函数　　19<br>2.7.3　函数式编程　　21<br>2.7.4　缩进　　22<br>2.8　IPython　　23<br>2.8.1　IPython shell　　23<br>2.8.2　IPython Qt-Console　　24<br>2.9　PyPI仓库——Python包索引　　25<br>2.10　多种Python IDE　　26<br>2.10.1　IDLE　　26<br>2.10.2　Spyder　　27<br>2.10.3　Eclipse（pyDev）　　27<br>2.10.4　Sublime　　28<br>2.10.5　Liclipse　　29<br>2.10.6　NinjaIDE　　29<br>2.10.7　Komodo IDE　　29<br>2.11　SciPy　　30<br>2.11.1　NumPy　　30<br>2.11.2　pandas　　30<br>2.11.3　matplotlib　　31<br>2.12　小结　　31</p>
+<h1 id="第3章-NumPy库-32"><a href="#第3章-NumPy库-32" class="headerlink" title="第3章　NumPy库　　32"></a>第3章　NumPy库　　32</h1><p>3.1　NumPy简史　　32<br>3.2　NumPy安装　　32<br>3.3　ndarray：NumPy库的心脏　　33<br>3.3.1　创建数组　　34<br>3.3.2　数据类型　　34<br>3.3.3　dtype选项　　35<br>3.3.4　自带的数组创建方法　　36<br>3.4　基本操作　　37<br>3.4.1　算术运算符　　37<br>3.4.2　矩阵积　　38<br>3.4.3　自增和自减运算符　　39<br>3.4.4　通用函数　　40<br>3.4.5　聚合函数　　40<br>3.5　索引机制、切片和迭代方法　　41<br>3.5.1　索引机制　　41<br>3.5.2　切片操作　　42<br>3.5.3　数组迭代　　43<br>3.6　条件和布尔数组　　45<br>3.7　形状变换　　45<br>3.8　数组操作　　46<br>3.8.1　连接数组　　46<br>3.8.2　数组切分　　47<br>3.9　常用概念　　49<br>3.9.1　对象的副本或视图　　49<br>3.9.2　向量化　　50<br>3.9.3　广播机制　　50<br>3.10　结构化数组　　52<br>3.11　数组数据文件的读写　　53<br>3.11.1　二进制文件的读写　　54<br>3.11.2　读取文件中的列表形式数据　　54<br>3.12　小结　　55</p>
+<h1 id="第4章-pandas库简介-56"><a href="#第4章-pandas库简介-56" class="headerlink" title="第4章　pandas库简介　　56"></a>第4章　pandas库简介　　56</h1><p>4.1　pandas：Python数据分析库　　56<br>4.2　安装　　57<br>4.2.1　用Anaconda安装　　57<br>4.2.2　用PyPI安装　　58<br>4.2.3　在Linux系统的安装方法　　58<br>4.2.4　用源代码安装　　58<br>4.2.5　Windows模块仓库　　59<br>4.3　测试pandas是否安装成功　　59<br>4.4　开始pandas之旅　　59<br>4.5　pandas数据结构简介　　60<br>4.5.1　Series对象　　60<br>4.5.2　DataFrame对象　　66<br>4.5.3　Index对象　　72<br>4.6　索引对象的其他功能　　74<br>4.6.1　更换索引　　74<br>4.6.2　删除　　75<br>4.6.3　算术和数据对齐　　77<br>4.7　数据结构之间的运算　　78<br>4.7.1　灵活的算术运算方法　　78<br>4.7.2　DataFrame和Series对象之间的运算　　78<br>4.8　函数应用和映射　　79<br>4.8.1　操作元素的函数　　79<br>4.8.2　按行或列执行操作的函数　　80<br>4.8.3　统计函数　　81<br>4.9　排序和排位次　　81<br>4.10　相关性和协方差　　84<br>4.11　NaN数据　　85<br>4.11.1　为元素赋NaN值　　85<br>4.11.2　过滤NaN　　86<br>4.11.3　为NaN元素填充其他值　　86<br>4.12　等级索引和分级　　87<br>4.12.1　重新调整顺序和为层级排序　　89<br>4.12.2　按层级统计数据　　89<br>4.13　小结　　90</p>
+<h1 id="第5章-pandas：数据读写-91"><a href="#第5章-pandas：数据读写-91" class="headerlink" title="第5章　pandas：数据读写　　91"></a>第5章　pandas：数据读写　　91</h1><p>5.1　I/O API 工具　　91<br>5.2　CSV和文本文件　　92<br>5.3　读取CSV或文本文件中的数据　　92<br>5.3.1　用RegExp解析TXT文件　　94<br>5.3.2　从TXT文件读取部分数据　　96<br>5.3.3　往CSV文件写入数据　　97<br>5.4　读写HTML文件　　98<br>5.4.1　写入数据到HTML文件　　99<br>5.4.2　从HTML文件读取数据　　100<br>5.5　从XML读取数据　　101<br>5.6　读写Microsoft Excel文件　　103<br>5.7　JSON数据　　105<br>5.8　HDF5格式　　107<br>5.9　pickle——Python对象序列化　　108<br>5.9.1　用cPickle实现Python对象序列化　　109<br>5.9.2　用pandas实现对象序列化　　109<br>5.10　对接数据库　　110<br>5.10.1　SQLite3数据读写　　111<br>5.10.2　PostgreSQL数据读写　　112<br>5.11　NoSQL数据库MongoDB数据读写　　114<br>5.12　小结　　116</p>
+<h1 id="第6章-深入pandas：数据处理-117"><a href="#第6章-深入pandas：数据处理-117" class="headerlink" title="第6章　深入pandas：数据处理　　117"></a>第6章　深入pandas：数据处理　　117</h1><p>6.1　数据准备　　117<br>6.2　拼接　　122<br>6.2.1　组合　　124<br>6.2.2　轴向旋转　　125<br>6.2.3　删除　　127<br>6.3　数据转换　　128<br>6.3.1　删除重复元素　　128<br>6.3.2　映射　　129<br>6.4　离散化和面元划分　　132<br>6.5　排序　　136<br>6.6　字符串处理　　137<br>6.6.1　内置的字符串处理方法　　137<br>6.6.2　正则表达式　　139<br>6.7　数据聚合　　140<br>6.7.1　GroupBy　　141<br>6.7.2　实例　　141<br>6.7.3　等级分组　　142<br>6.8　组迭代　　143<br>6.8.1　链式转换　　144<br>6.8.2　分组函数　　145<br>6.9　高级数据聚合　　145<br>6.10　小结　　148</p>
+<h1 id="第7章-用matplotlib实现数据可视化-149"><a href="#第7章-用matplotlib实现数据可视化-149" class="headerlink" title="第7章　用matplotlib实现数据可视化　　149"></a>第7章　用matplotlib实现数据可视化　　149</h1><p>7.1　matplotlib库　　149<br>7.2　安装　　150<br>7.3　IPython和IPython QtConsole　　150<br>7.4　matplotlib架构　　151<br>7.4.1　Backend层　　152<br>7.4.2　Artist层　　152<br>7.4.3　Scripting层（pyplot）　　153<br>7.4.4　pylab和pyplot　　153<br>7.5　pyplot　　154<br>7.5.1　生成一幅简单的交互式图表　　154<br>7.5.2　设置图形的属性　　156<br>7.5.3　matplotlib和NumPy　　158<br>7.6　使用kwargs　　160<br>7.7　为图表添加更多元素　　162<br>7.7.1　添加文本　　162<br>7.7.2　添加网格　　165<br>7.7.3　添加图例　　166<br>7.8　保存图表　　168<br>7.8.1　保存代码　　169<br>7.8.2　将会话转换为HTML文件　　170<br>7.8.3　将图表直接保存为图片　　171<br>7.9　处理日期值　　171<br>7.10　图表类型　　173<br>7.11　线性图　　173<br>7.12　直方图　　180<br>7.13　条状图　　181<br>7.13.1　水平条状图　　183<br>7.13.2　多序列条状图　　184<br>7.13.3　为pandas DataFrame生成多序列条状图　　185<br>7.13.4　多序列堆积条状图　　186<br>7.13.5　为pandas DataFrame绘制堆积条状图　　189<br>7.13.6　其他条状图　　190<br>7.14　饼图　　190<br>7.15　高级图表　　193<br>7.15.1　等值线图　　193<br>7.15.2　极区图　　195<br>7.16　mplot3d　　197<br>7.16.1　3D曲面　　197<br>7.16.2　3D散点图　　198<br>7.16.3　3D条状图　　199<br>7.17　多面板图形　　200<br>7.17.1　在其他子图中显示子图　　200<br>7.17.2　子图网格　　202<br>7.18　小结　　204</p>
+<h1 id="第8章-用scikit-learn库实现机器学习-205"><a href="#第8章-用scikit-learn库实现机器学习-205" class="headerlink" title="第8章　用scikit-learn库实现机器学习　　205"></a>第8章　用scikit-learn库实现机器学习　　205</h1><p>8.1　scikit-learn库　　205<br>8.2　机器学习　　205<br>8.2.1　有监督和无监督学习　　205<br>8.2.2　训练集和测试集　　206<br>8.3　用scikit-learn实现有监督学习　　206<br>8.4　Iris数据集　　206<br>8.5　K-近邻分类器　　211<br>8.6　Diabetes数据集　　214<br>8.7　线性回归：最小平方回归　　215<br>8.8　支持向量机　　219<br>8.8.1　支持向量分类　　219<br>8.8.2　非线性SVC　　223<br>8.8.3　绘制SVM分类器对Iris数据集的分类效果图　　225<br>8.8.4　支持向量回归　　227<br>8.9　小结　　229</p>
+<h1 id="第9章-数据分析实例——气象数据-230"><a href="#第9章-数据分析实例——气象数据-230" class="headerlink" title="第9章　数据分析实例——气象数据　　230"></a>第9章　数据分析实例——气象数据　　230</h1><p>9.1　待检验的假设：靠海对气候的影响　　230<br>9.2　数据源　　233<br>9.3　用IPython Notebook做数据分析　　234<br>9.4　风向频率玫瑰图　　246<br>9.5　小结　　251</p>
+<h1 id="第10章-IPython-Notebook内嵌JavaScript库D3-252"><a href="#第10章-IPython-Notebook内嵌JavaScript库D3-252" class="headerlink" title="第10章　IPython Notebook内嵌JavaScript库D3　　252"></a>第10章　IPython Notebook内嵌JavaScript库D3　　252</h1><p>10.1　开放的人口数据源　　252<br>10.2　JavaScript库D3　　255<br>10.3　绘制簇状条状图　　259<br>10.4　地区分布图　　262<br>10.5　2014年美国人口地区分布图　　266<br>10.6　小结　　270</p>
+<h1 id="第11章-识别手写体数字-271"><a href="#第11章-识别手写体数字-271" class="headerlink" title="第11章　识别手写体数字　　271"></a>第11章　识别手写体数字　　271</h1><p>11.1　手写体识别　　271<br>11.2　用scikit-learn识别手写体数字　　271<br>11.3　Digits数据集　　272<br>11.4　学习和预测　　274<br>11.5　小结　　276</p>
+<p>附录A　用LaTeX编写数学表达式　　277<br>附录B　开放数据源　　287</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="sun-day 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="sun-day 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+          
+            <a href="/tags/数据分析/" rel="tag"><i class="fa fa-tag"></i> 数据分析</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/11/linux-Samba服务器配置/" rel="next" title="linux-Samba服务器配置">
+                <i class="fa fa-chevron-left"></i> linux-Samba服务器配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/11/开放数据源/" rel="prev" title="开放数据源">
+                开放数据源 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2160523" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTY1MC8xMjE4Ng=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="sun-day" />
+            
+              <p class="site-author-name" itemprop="name">sun-day</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">81</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">18</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">51</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/zhanghaogithub123" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:zhanghao163mail@163.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://blog.csdn.net/mouse1598189" target="_blank" title="CSDN"><i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/zhang-hao-3-80-49/activities" target="_blank" title="知乎"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.google.com/" title="Google" target="_blank">Google</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.baidu.com/" title="百度" target="_blank">百度</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#第一章"><span class="nav-number">1.</span> <span class="nav-text">第一章</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1数据分析"><span class="nav-number">1.1.</span> <span class="nav-text">1.1数据分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2数据分析师的知识范畴"><span class="nav-number">1.2.</span> <span class="nav-text">1.2数据分析师的知识范畴</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3理解数据的性质"><span class="nav-number">1.3.</span> <span class="nav-text">1.3理解数据的性质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4数据分析过程"><span class="nav-number">1.4.</span> <span class="nav-text">1.4数据分析过程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-定量和定性数据分析"><span class="nav-number">1.5.</span> <span class="nav-text">1.5 定量和定性数据分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-开放数据源"><span class="nav-number">1.6.</span> <span class="nav-text">1.6 开放数据源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-7-python和数据分析"><span class="nav-number">1.7.</span> <span class="nav-text">1.7 python和数据分析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第2章-ptyhon世界简介"><span class="nav-number">2.</span> <span class="nav-text">第2章-ptyhon世界简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第3章-NumPy库-32"><span class="nav-number">3.</span> <span class="nav-text">第3章　NumPy库　　32</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第4章-pandas库简介-56"><span class="nav-number">4.</span> <span class="nav-text">第4章　pandas库简介　　56</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第5章-pandas：数据读写-91"><span class="nav-number">5.</span> <span class="nav-text">第5章　pandas：数据读写　　91</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第6章-深入pandas：数据处理-117"><span class="nav-number">6.</span> <span class="nav-text">第6章　深入pandas：数据处理　　117</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第7章-用matplotlib实现数据可视化-149"><span class="nav-number">7.</span> <span class="nav-text">第7章　用matplotlib实现数据可视化　　149</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第8章-用scikit-learn库实现机器学习-205"><span class="nav-number">8.</span> <span class="nav-text">第8章　用scikit-learn库实现机器学习　　205</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第9章-数据分析实例——气象数据-230"><span class="nav-number">9.</span> <span class="nav-text">第9章　数据分析实例——气象数据　　230</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第10章-IPython-Notebook内嵌JavaScript库D3-252"><span class="nav-number">10.</span> <span class="nav-text">第10章　IPython Notebook内嵌JavaScript库D3　　252</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#第11章-识别手写体数字-271"><span class="nav-number">11.</span> <span class="nav-text">第11章　识别手写体数字　　271</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate"> 
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">true</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+  <div class="powered-by">
+  <i class="fa fa-user-md"></i><span id="busuanzi_container_site_pv">
+    本站访客数:<span id="busuanzi_container_site_pv"></span>
+  </span>
+  </div>
+  
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.1.0</div>
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共242.3k字</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.1.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

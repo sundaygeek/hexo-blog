@@ -1,0 +1,1575 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.1.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.1.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.1.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.1.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.1.0',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="OpenCV-1-图片处理下载图片12345678910111213141516import cv2import numpy as npimg = cv2.imread(&apos;Lenna.png&apos;) #load RGB imageimgGS = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) #convert RGB to grayscalecv2.imwrite(&quot;Len">
+<meta name="keywords" content="python,OpenCV,图像处理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenCV识别一个人">
+<meta property="og:url" content="http://yoursite.com/2018/04/23/OpenCV识别一个人/index.html">
+<meta property="og:site_name" content="sun-day-blog">
+<meta property="og:description" content="OpenCV-1-图片处理下载图片12345678910111213141516import cv2import numpy as npimg = cv2.imread(&apos;Lenna.png&apos;) #load RGB imageimgGS = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) #convert RGB to grayscalecv2.imwrite(&quot;Len">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2018/04/23/OpenCV识别一个人/Lenna.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/23/OpenCV识别一个人/Lenna.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/23/OpenCV识别一个人/LennaGS.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/23/OpenCV识别一个人/LennaBW.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/23/OpenCV识别一个人/putText-1-300x238.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/23/OpenCV识别一个人/lines-768x313.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/23/OpenCV识别一个人/bsubs-1024x408.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/23/OpenCV识别一个人/noise-300x225.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/23/OpenCV识别一个人/letters-235x300.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/04/23/OpenCV识别一个人/peoplecount-filter2-300x226.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/23/OpenCV识别一个人/peoplecount-filter3-300x226.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/23/OpenCV识别一个人/contours-300x226.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/23/OpenCV识别一个人/badTH.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/23/OpenCV识别一个人/badTH2.png">
+<meta property="og:image" content="http://yoursite.com/2018/04/23/OpenCV识别一个人/trayectories.png">
+<meta property="og:updated_time" content="2018-12-02T12:56:05.804Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OpenCV识别一个人">
+<meta name="twitter:description" content="OpenCV-1-图片处理下载图片12345678910111213141516import cv2import numpy as npimg = cv2.imread(&apos;Lenna.png&apos;) #load RGB imageimgGS = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) #convert RGB to grayscalecv2.imwrite(&quot;Len">
+<meta name="twitter:image" content="http://yoursite.com/2018/04/23/OpenCV识别一个人/Lenna.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/23/OpenCV识别一个人/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>OpenCV识别一个人 | sun-day-blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> 
+
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">sun-day-blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">牛逼的人生不需要解释</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+          
+  <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+</li>
+
+      
+        
+        
+          
+  <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+</li>
+
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/23/OpenCV识别一个人/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="sun-day">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sun-day-blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">OpenCV识别一个人</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-23T15:58:56+08:00">2018-04-23</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OpenCV/" itemprop="url" rel="index"><span itemprop="name">OpenCV</span></a></span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OpenCV/python/" itemprop="url" rel="index"><span itemprop="name">python</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="OpenCV-1-图片处理"><a href="#OpenCV-1-图片处理" class="headerlink" title="OpenCV-1-图片处理"></a>OpenCV-1-图片处理</h1><p>下载图片<img src="/2018/04/23/OpenCV识别一个人/Lenna.png" alt="pic"><br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">'Lenna.png'</span>) <span class="comment">#load RGB image</span></span><br><span class="line"></span><br><span class="line">imgGS = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) <span class="comment">#convert RGB to grayscale</span></span><br><span class="line">cv2.imwrite(<span class="string">"LennaGS.png"</span>,imgGS) <span class="comment">#save grayscale image</span></span><br><span class="line"></span><br><span class="line">ret,imgBW = cv2.threshold(imgGS,<span class="number">127</span>,<span class="number">255</span>,cv2.THRESH_BINARY) <span class="comment">#binarization</span></span><br><span class="line">cv2.imwrite(<span class="string">"LennaBW.png"</span>,imgBW) <span class="comment">#save binary image</span></span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">'Original image'</span>, img) <span class="comment">#Display original image</span></span><br><span class="line">cv2.imshow(<span class="string">'Grayscale image'</span>, imgGS) <span class="comment">#Display grayscale image</span></span><br><span class="line">cv2.imshow(<span class="string">'Binary image'</span>, imgBW) <span class="comment">#Display binarized image</span></span><br><span class="line">cv2.waitKey(<span class="number">0</span>) <span class="comment">#exit with 'Q' or ESC</span></span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure></p>
+<p><img src="/2018/04/23/OpenCV识别一个人/Lenna.png" alt="pic"><br><img src="/2018/04/23/OpenCV识别一个人/LennaGS.png" alt="pic"><br><img src="/2018/04/23/OpenCV识别一个人/LennaBW.png" alt="pic"></p>
+<h1 id="OpenCV-2-读取视频流"><a href="#OpenCV-2-读取视频流" class="headerlink" title="OpenCV-2-读取视频流"></a>OpenCV-2-读取视频流</h1><p>视频<a href="https://www.dropbox.com/s/7mbo35zrxd1aefz/peopleCounter.avi?dl=0" target="_blank" rel="noopener">链接</a></p>
+<h2 id="读取视频文件"><a href="#读取视频文件" class="headerlink" title="读取视频文件"></a>读取视频文件</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">cap = cv2.VideoCapture(<span class="string">'peopleCounter.avi'</span>) <span class="comment">#Open video file</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(cap.isOpened()):</span><br><span class="line">    ret, frame = cap.read() <span class="comment">#read a frame</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        cv2.imshow(<span class="string">'Frame'</span>,frame)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="comment">#if there are no more frames to show...</span></span><br><span class="line">        print(<span class="string">'EOF'</span>)</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#Abort and exit with 'Q' or ESC</span></span><br><span class="line">    k = cv2.waitKey(<span class="number">30</span>) &amp; <span class="number">0xff</span></span><br><span class="line">    <span class="keyword">if</span> k == <span class="number">27</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">cap.release() <span class="comment">#release video file</span></span><br><span class="line">cv2.destroyAllWindows() <span class="comment">#close all openCV windows</span></span><br></pre></td></tr></table></figure>
+<p>然后我们用VideoCapture对象打开视频文件，将视频文件的位置作为参数。</p>
+<p>我们从视频中读取相框并逐一展示，直到我们到达结尾。 此时，我们退出while循环并关闭视频文件和视频窗口。<br>使用网络摄像头非常相似.<br>唯一的区别是我们如何创建VideoCapture对象。 这次我们将它作为参数传递给它。 这表示我们要使用ID为0的网络摄像头。您的计算机上是否有多个网络摄像头，例如USB网络摄像头，另一个嵌入了您的屏幕上，您需要传递0或1，具体取决于您想要哪一个使用。</p>
+<p>VideoCapture对象有几个<a href="http://docs.OpenCV识别一个人/classcv_1_1VideoCapture.html#aeb1644641842e6b104f244f049648f94" target="_blank" rel="noopener">属性</a>，您可以访问并且有时会更改.</p>
+<h2 id="从摄像头读取视频"><a href="#从摄像头读取视频" class="headerlink" title="从摄像头读取视频"></a>从摄像头读取视频</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">cap = cv2.VideoCapture(<span class="number">0</span>)</span><br><span class="line">    </span><br><span class="line"><span class="keyword">while</span>(cap.isOpened()):</span><br><span class="line">    ret, frame = cap.read()</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        cv2.imshow(<span class="string">'Frame'</span>,frame)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        print(<span class="string">'EOF'</span>)</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    k = cv2.waitKey(<span class="number">30</span>) &amp; <span class="number">0xff</span></span><br><span class="line">    <span class="keyword">if</span> k == <span class="number">27</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">cap.release()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<p>下面是一个示例，显示所有属性的值并更改网络摄像头中视频流的宽度和高度.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">cap = cv2.VideoCapture(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#show all video properties</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">19</span>):</span><br><span class="line">    print(i, cap.get(i))</span><br><span class="line"></span><br><span class="line">cap.set(<span class="number">3</span>,<span class="number">160</span>) <span class="comment">#set width</span></span><br><span class="line">cap.set(<span class="number">4</span>,<span class="number">120</span>) <span class="comment">#set height</span></span><br><span class="line">    </span><br><span class="line"><span class="keyword">while</span>(cap.isOpened()):</span><br><span class="line">    ret, frame = cap.read()</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        cv2.imshow(<span class="string">'Frame'</span>,frame)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        print(<span class="string">'EOF'</span>)</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    k = cv2.waitKey(<span class="number">30</span>) &amp; <span class="number">0xff</span></span><br><span class="line">    <span class="keyword">if</span> k == <span class="number">27</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">cap.release()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<h1 id="OpenCV-3-在视频中绘制图像"><a href="#OpenCV-3-在视频中绘制图像" class="headerlink" title="OpenCV-3-在视频中绘制图像"></a>OpenCV-3-在视频中绘制图像</h1><h2 id="在视频中插入helloworld"><a href="#在视频中插入helloworld" class="headerlink" title="在视频中插入helloworld"></a>在视频中插入helloworld</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">cap = cv2.VideoCapture(<span class="string">'peopleCounter.avi'</span>) <span class="comment">#Open video file</span></span><br><span class="line"></span><br><span class="line">w = cap.get(<span class="number">3</span>) <span class="comment">#get width</span></span><br><span class="line">h = cap.get(<span class="number">4</span>) <span class="comment">#get height</span></span><br><span class="line"></span><br><span class="line">mx = int(w/<span class="number">2</span>)</span><br><span class="line">my = int(h/<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">count = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(cap.isOpened()):</span><br><span class="line">    ret, frame = cap.read() <span class="comment">#read a frame</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        count = count + <span class="number">1</span></span><br><span class="line">        text = <span class="string">"Hello World "</span> + str(count)</span><br><span class="line">        cv2.putText(frame, text ,(mx,my),cv2.FONT_HERSHEY_SIMPLEX</span><br><span class="line">                    ,<span class="number">1</span>,(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>),<span class="number">1</span>,cv2.LINE_AA)</span><br><span class="line">        cv2.imshow(<span class="string">'Frame'</span>,frame)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="comment">#if there are no more frames to show...</span></span><br><span class="line">        print(<span class="string">'EOF'</span>)</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#Abort and exit with 'Q' or ESC</span></span><br><span class="line">    k = cv2.waitKey(<span class="number">30</span>) &amp; <span class="number">0xff</span></span><br><span class="line">    <span class="keyword">if</span> k == <span class="number">27</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">cap.release() <span class="comment">#release video file</span></span><br><span class="line">cv2.destroyAllWindows() <span class="comment">#close all openCV windows</span></span><br></pre></td></tr></table></figure>
+<p>首先，我们使用cap.get（）方法计算视频中的中间坐标（宽度/ 2，高度/ 2）。</p>
+<p>然后，在我们调用imshow（）之前，我们使用cv2.putText（）这种方法在视频帧上写入文本。 用法是：cv.PutText（img，text，org，font，color），其中org是要编写的文本的原点（左下角）。</p>
+<p>如果你运行代码，你会看到这个：<br><img src="/2018/04/23/OpenCV识别一个人/putText-1-300x238.png" alt="pic"></p>
+<p>我们也可以在视频框架中绘制直线，圆圈等，OpenCV有很多绘制几何形状的方法。</p>
+<p>让我们画一些线：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">cap = cv2.VideoCapture(<span class="string">'peopleCounter.avi'</span>) <span class="comment">#Open video file</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(cap.isOpened()):</span><br><span class="line">    ret, frame = cap.read() <span class="comment">#read a frame</span></span><br><span class="line">    <span class="keyword">try</span>:        </span><br><span class="line">        cv2.imshow(<span class="string">'Frame'</span>,frame)</span><br><span class="line">        frame2 = frame</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="comment">#if there are no more frames to show...</span></span><br><span class="line">        print(<span class="string">'EOF'</span>)</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    line1 = np.array([[<span class="number">100</span>,<span class="number">100</span>],[<span class="number">300</span>,<span class="number">100</span>],[<span class="number">350</span>,<span class="number">200</span>]], np.int32).reshape((<span class="number">-1</span>,<span class="number">1</span>,<span class="number">2</span>))</span><br><span class="line">    line2 = np.array([[<span class="number">400</span>,<span class="number">50</span>],[<span class="number">450</span>,<span class="number">300</span>]], np.int32).reshape((<span class="number">-1</span>,<span class="number">1</span>,<span class="number">2</span>))</span><br><span class="line"></span><br><span class="line">    frame2 = cv2.polylines(frame2,[line1],<span class="keyword">False</span>,(<span class="number">255</span>,<span class="number">0</span>,<span class="number">0</span>),thickness=<span class="number">2</span>)</span><br><span class="line">    frame2 = cv2.polylines(frame2,[line2],<span class="keyword">False</span>,(<span class="number">0</span>,<span class="number">0</span>,<span class="number">255</span>),thickness=<span class="number">1</span>)</span><br><span class="line">    </span><br><span class="line">    cv2.imshow(<span class="string">'Frame 2'</span>,frame2)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">#Abort and exit with 'Q' or ESC</span></span><br><span class="line">    k = cv2.waitKey(<span class="number">30</span>) &amp; <span class="number">0xff</span></span><br><span class="line">    <span class="keyword">if</span> k == <span class="number">27</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">cap.release() <span class="comment">#release video file</span></span><br><span class="line">cv2.destroyAllWindows() <span class="comment">#close all openCV windows</span></span><br></pre></td></tr></table></figure></p>
+<p>这一次，我们在try块外工作，并使用两个视频窗口，一个用于显示原始视频，另一个用线条显示修改的视频。</p>
+<p>为了使多段线正常工作，它需要为线段中的每个点（在我们的例子中为起点和终点）接收一个包含坐标对（x和y）的numpy数组。 如果你想像我一样指定点，你还需要调用reshape（-1,1,2）来使用多段线（）。</p>
+<p>如果你运行这个代码，你会看到：<br><img src="/2018/04/23/OpenCV识别一个人/lines-768x313.png" alt="pic"></p>
+<p><a href="http://docs.OpenCV识别一个人/drawing_functions.html" target="_blank" rel="noopener">这里</a>是OpenCV的绘图功能文档。</p>
+<h1 id="OpenCV-4-视频背景消除"><a href="#OpenCV-4-视频背景消除" class="headerlink" title="OpenCV-4-视频背景消除"></a>OpenCV-4-视频背景消除</h1><p>背景减法可以识别图像的前景和背景。 背景被认为是一系列图像中的任何东西，任何东西都是静态的。 前景是变化（移动）的一切。</p>
+<p>在OpenCV中做背景减法只需要2行：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">cap = cv2.VideoCapture(<span class="string">'peopleCounter.avi'</span>) <span class="comment">#Open video file</span></span><br><span class="line"></span><br><span class="line">fgbg = cv2.createBackgroundSubtractorMOG2(detectShadows = <span class="keyword">True</span>) <span class="comment">#Create the background substractor</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(cap.isOpened()):</span><br><span class="line">    ret, frame = cap.read() <span class="comment">#read a frame</span></span><br><span class="line">    </span><br><span class="line">    fgmask = fgbg.apply(frame) <span class="comment">#Use the substractor</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">try</span>:        </span><br><span class="line">        cv2.imshow(<span class="string">'Frame'</span>,frame)</span><br><span class="line">        cv2.imshow(<span class="string">'Background Substraction'</span>,fgmask)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="comment">#if there are no more frames to show...</span></span><br><span class="line">        print(<span class="string">'EOF'</span>)</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">#Abort and exit with 'Q' or ESC</span></span><br><span class="line">    k = cv2.waitKey(<span class="number">30</span>) &amp; <span class="number">0xff</span></span><br><span class="line">    <span class="keyword">if</span> k == <span class="number">27</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">cap.release() <span class="comment">#release video file</span></span><br><span class="line">cv2.destroyAllWindows() <span class="comment">#close all openCV windows</span></span><br></pre></td></tr></table></figure>
+<p>运行结果如下图<br><img src="/2018/04/23/OpenCV识别一个人/bsubs-1024x408.png" alt="pic"></p>
+<p>在新图像中，黑色代表背景，白色是前景中的物体，灰色是这些物体投射的阴影。</p>
+<p><a href="http://docs.OpenCV识别一个人/tutorial_py_bg_subtraction.html#gsc.tab=0" target="_blank" rel="noopener">MOG2减法器</a><br>在OpenCV中使用MOG2减法器的好处是背景不断被计算，这意味着照明的细微变化（例如由太阳引起的变化）不会影响您的计算结果。</p>
+<h1 id="OpenCV-5-形态改变"><a href="#OpenCV-5-形态改变" class="headerlink" title="OpenCV-5-形态改变"></a>OpenCV-5-形态改变</h1><p>首先了解一下转换的内容及其用途（您只需要阅读关于侵蚀和扩张(Erosion and Dilation)，打开和关闭）。</p>
+<p>本质上，我们将在二值化图像上使用侵蚀和扩张(Erosion and Dilation)（黑白）。 以非常普遍的方式，侵蚀(Erosion)将图像的黑色部分扩展成白色部分。 另一方面，扩张(Dilation)将图像的白色部分扩大成黑色部分。</p>
+<p>要做这个操作，你还需要指定一个内核或结构元素（strel）。 这是一个在n * n大小的图像上进行卷积的矩阵，用于定义在计算每个像素的值时要使用的区域。</p>
+<p>让我们试试这张图片：<br><img src="/2018/04/23/OpenCV识别一个人/noise-300x225.png" alt="pic"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">"noise.png"</span>)</span><br><span class="line">ret,thresh1 = cv2.threshold(img,<span class="number">127</span>,<span class="number">255</span>,cv2.THRESH_BINARY)</span><br><span class="line"></span><br><span class="line">kernel = np.ones((<span class="number">3</span>,<span class="number">3</span>),np.uint8)</span><br><span class="line"></span><br><span class="line">erosion = cv2.erode(img,kernel,iterations = <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">dilation = cv2.dilate(img,kernel,iterations = <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">cv2.imwrite(<span class="string">"erode.png"</span>,erosion)</span><br><span class="line">cv2.imwrite(<span class="string">"dilate.png"</span>,dilation)</span><br></pre></td></tr></table></figure>
+<p>我们使用阈值方法来二值化图像。 将其从颜色转换为黑白两种值（不同于灰度）。 </p>
+<p>运行它并查看输出图像。 另外，尝试更改内核的大小（例如5,5或9,9），看看会发生什么。<br>您也可以将两个操作相结合，一个接一个地运行。</p>
+<p>先做侵蚀，然后扩张被称为Openning。<br>先做扩张，然后侵蚀被称为Closing。</p>
+<p>让我们试试这张图片：<br><img src="/2018/04/23/OpenCV识别一个人/letters-235x300.jpg" alt="pic"></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">"noise.png"</span>)</span><br><span class="line">ret,thresh1 = cv2.threshold(img,<span class="number">127</span>,<span class="number">255</span>,cv2.THRESH_BINARY)</span><br><span class="line"></span><br><span class="line">kernel = np.ones((<span class="number">3</span>,<span class="number">3</span>),np.uint8)</span><br><span class="line"></span><br><span class="line">erosion = cv2.erode(img,kernel,iterations = <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">dilation = cv2.dilate(img,kernel,iterations = <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">cv2.imwrite(<span class="string">"erode.png"</span>,erosion)</span><br><span class="line">cv2.imwrite(<span class="string">"dilate.png"</span>,dilation)</span><br></pre></td></tr></table></figure>
+<p>看看输出结果，并试图了解关闭和打开过程中发生的事情。</p>
+<p>现在，尝试将此代码合并到我们的代码中，在背景减除后，将阴影（灰色）取出并使视频流清晰（取出任何噪音），从中取出：<br><img src="/2018/04/23/OpenCV识别一个人/peoplecount-filter2-300x226.png" alt="pic"><br><img src="/2018/04/23/OpenCV识别一个人/peoplecount-filter3-300x226.png" alt="pic"></p>
+<h1 id="OpenCV-6-计数"><a href="#OpenCV-6-计数" class="headerlink" title="OpenCV-6-计数"></a>OpenCV-6-计数</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line"><span class="comment"># http://docs.OpenCV识别一个人/group__imgproc__shape.html#ga17ed9f5d79ae97bd4c7cf18403e1689a&amp;gsc.tab=0</span></span><br><span class="line"><span class="comment">##http://docs.OpenCV识别一个人/tutorial_py_contours_begin.html#gsc.tab=0</span></span><br><span class="line"></span><br><span class="line">cap = cv2.VideoCapture(<span class="string">'peopleCounter.avi'</span>) <span class="comment">#Open video file</span></span><br><span class="line">fgbg = cv2.createBackgroundSubtractorMOG2(detectShadows = <span class="keyword">True</span>) <span class="comment">#Create the background substractor</span></span><br><span class="line">kernelOp = np.ones((<span class="number">3</span>,<span class="number">3</span>),np.uint8)</span><br><span class="line">kernelCl = np.ones((<span class="number">11</span>,<span class="number">11</span>),np.uint8)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(cap.isOpened()):</span><br><span class="line">    ret, frame = cap.read() <span class="comment">#read a frame</span></span><br><span class="line"></span><br><span class="line">    fgmask = fgbg.apply(frame) <span class="comment">#Use the substractor</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        ret,imBin= cv2.threshold(fgmask,<span class="number">200</span>,<span class="number">255</span>,cv2.THRESH_BINARY)</span><br><span class="line">        <span class="comment">#Opening (erode-&gt;dilate) para quitar ruido.</span></span><br><span class="line">        mask = cv2.morphologyEx(imBin, cv2.MORPH_OPEN, kernelOp)</span><br><span class="line">        <span class="comment">#Closing (dilate -&gt; erode) para juntar regiones blancas.</span></span><br><span class="line">        mask = cv2.morphologyEx(mask , cv2.MORPH_CLOSE, kernelCl)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="comment">#if there are no more frames to show...</span></span><br><span class="line">        print(<span class="string">'EOF'</span>)</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    _, contours0, hierarchy = cv2.findContours(mask,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE)</span><br><span class="line">    <span class="keyword">for</span> cnt <span class="keyword">in</span> contours0:</span><br><span class="line">        cv2.drawContours(frame, cnt, <span class="number">-1</span>, (<span class="number">0</span>,<span class="number">255</span>,<span class="number">0</span>), <span class="number">3</span>, <span class="number">8</span>)</span><br><span class="line"></span><br><span class="line">    cv2.imshow(<span class="string">'Frame'</span>,frame)</span><br><span class="line"></span><br><span class="line">    <span class="comment">#Abort and exit with 'Q' or ESC</span></span><br><span class="line">    k = cv2.waitKey(<span class="number">30</span>) &amp; <span class="number">0xff</span></span><br><span class="line">    <span class="keyword">if</span> k == <span class="number">27</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">cap.release() <span class="comment">#release video file</span></span><br><span class="line">cv2.destroyAllWindows() <span class="comment">#close all openCV windows</span></span><br></pre></td></tr></table></figure>
+<p>我们赋予函数我们的掩码，cv2.RETR_EXTERNAL表示我们只关心外部轮廓（轮廓内的轮廓不会被检测到），而cv2.CHAIN_APPROX_NONE是用于“制作”轮廓的算法（您可以将其更改为另一个）。</p>
+<p>绘制轮廓仅用于直观地欣赏所显示图像上的轮廓。<br><img src="/2018/04/23/OpenCV识别一个人/contours-300x226.png" alt="pic"></p>
+<h1 id="OpenCV-7-确定一个人"><a href="#OpenCV-7-确定一个人" class="headerlink" title="OpenCV-7-确定一个人"></a>OpenCV-7-确定一个人</h1><p>我们如何将轮廓归类为一个人？<br>一个简单但有效的步骤可能是定义轮廓必须具有的最小区域：</p>
+<p>为每个轮廓定义一个最小区域，查找轮廓，获取该区域，如果超过阈值，则执行一些操作。<br>阈值不是通用的，这意味着取决于您的视频流，您需要测试不同的值，直到它与视频一起工作。<br>例如，设置一个较低的阈值会让你感觉像这样：<br><img src="/2018/04/23/OpenCV识别一个人/badTH.png" alt="pic"><br>虽然设置得太高会让你：<br><img src="/2018/04/23/OpenCV识别一个人/badTH2.png" alt="pic"></p>
+<p>代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">cap = cv2.VideoCapture(<span class="string">'peopleCounter.avi'</span>) <span class="comment">#Open video file</span></span><br><span class="line">fgbg = cv2.createBackgroundSubtractorMOG2(detectShadows = <span class="keyword">True</span>) <span class="comment">#Create the background substractor</span></span><br><span class="line">kernelOp = np.ones((<span class="number">3</span>,<span class="number">3</span>),np.uint8)</span><br><span class="line">kernelCl = np.ones((<span class="number">11</span>,<span class="number">11</span>),np.uint8)</span><br><span class="line">areaTH = <span class="number">500</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(cap.isOpened()):</span><br><span class="line">    ret, frame = cap.read() <span class="comment">#read a frame</span></span><br><span class="line">    </span><br><span class="line">    fgmask = fgbg.apply(frame) <span class="comment">#Use the substractor</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        ret,imBin= cv2.threshold(fgmask,<span class="number">200</span>,<span class="number">255</span>,cv2.THRESH_BINARY)</span><br><span class="line">        <span class="comment">#Opening (erode-&gt;dilate) para quitar ruido.</span></span><br><span class="line">        mask = cv2.morphologyEx(imBin, cv2.MORPH_OPEN, kernelOp)</span><br><span class="line">        <span class="comment">#Closing (dilate -&gt; erode) para juntar regiones blancas.</span></span><br><span class="line">        mask =  cv2.morphologyEx(mask , cv2.MORPH_CLOSE, kernelCl)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="comment">#if there are no more frames to show...</span></span><br><span class="line">        print(<span class="string">'EOF'</span>)</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    _, contours0, hierarchy = cv2.findContours(mask,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE)</span><br><span class="line">    <span class="keyword">for</span> cnt <span class="keyword">in</span> contours0:</span><br><span class="line">        cv2.drawContours(frame, cnt, <span class="number">-1</span>, (<span class="number">0</span>,<span class="number">255</span>,<span class="number">0</span>), <span class="number">3</span>, <span class="number">8</span>)</span><br><span class="line">        area = cv2.contourArea(cnt)</span><br><span class="line">        print(area)</span><br><span class="line">        <span class="keyword">if</span> area &gt; areaTH:</span><br><span class="line">            <span class="comment">#################</span></span><br><span class="line">            <span class="comment">#   TRACKING    #</span></span><br><span class="line">            <span class="comment">#################            </span></span><br><span class="line">            M = cv2.moments(cnt)</span><br><span class="line">            cx = int(M[<span class="string">'m10'</span>]/M[<span class="string">'m00'</span>])</span><br><span class="line">            cy = int(M[<span class="string">'m01'</span>]/M[<span class="string">'m00'</span>])</span><br><span class="line">            x,y,w,h = cv2.boundingRect(cnt)</span><br><span class="line">            cv2.circle(frame,(cx,cy), <span class="number">5</span>, (<span class="number">0</span>,<span class="number">0</span>,<span class="number">255</span>), <span class="number">-1</span>)            </span><br><span class="line">            img = cv2.rectangle(frame,(x,y),(x+w,y+h),(<span class="number">0</span>,<span class="number">255</span>,<span class="number">0</span>),<span class="number">2</span>)</span><br><span class="line">        </span><br><span class="line">    cv2.imshow(<span class="string">'Frame'</span>,frame)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">#Abort and exit with 'Q' or ESC</span></span><br><span class="line">    k = cv2.waitKey(<span class="number">30</span>) &amp; <span class="number">0xff</span></span><br><span class="line">    <span class="keyword">if</span> k == <span class="number">27</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">cap.release() <span class="comment">#release video file</span></span><br><span class="line">cv2.destroyAllWindows() <span class="comment">#close all openCV windows</span></span><br></pre></td></tr></table></figure></p>
+<h1 id="OpenCV-8-跟踪移动"><a href="#OpenCV-8-跟踪移动" class="headerlink" title="OpenCV-8-跟踪移动"></a>OpenCV-8-跟踪移动</h1><p>您现在已经知道图像中有人的时候，您想知道他们正朝哪个方向移动（上/下）。<br>在第一帧中，您检测到某人需要为该人提供一个ID并将其存储在图像中的初始位置。<br>然后，在以下帧中，要跟踪该人，需要将后面帧中的人物轮廓与首次出现时设置的ID相匹配，并保存该人的坐标。<br>然后，在该人穿过图像中的限制（或一定数量的限制）之后，您需要使用所有存储的位置评估他/她是否向上或向下移动。<br>为了处理所有这些ID和存储坐标，我创建了一个名为Person的类。 它可能没有被优化，但你可以在这里看看它。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Person.py</span></span><br><span class="line"><span class="keyword">from</span> random <span class="keyword">import</span> randint</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyPerson</span>:</span></span><br><span class="line">    tracks = []</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, i, xi, yi, max_age)</span>:</span></span><br><span class="line">        self.i = i</span><br><span class="line">        self.x = xi</span><br><span class="line">        self.y = yi</span><br><span class="line">        self.tracks = []</span><br><span class="line">        self.R = randint(<span class="number">0</span>,<span class="number">255</span>)</span><br><span class="line">        self.G = randint(<span class="number">0</span>,<span class="number">255</span>)</span><br><span class="line">        self.B = randint(<span class="number">0</span>,<span class="number">255</span>)</span><br><span class="line">        self.done = <span class="keyword">False</span></span><br><span class="line">        self.state = <span class="string">'0'</span></span><br><span class="line">        self.age = <span class="number">0</span></span><br><span class="line">        self.max_age = max_age</span><br><span class="line">        self.dir = <span class="keyword">None</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getRGB</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> (self.R,self.G,self.B)</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getTracks</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.tracks</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getId</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.i</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getState</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.state</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getDir</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.dir</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getX</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.x</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getY</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.y</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">updateCoords</span><span class="params">(self, xn, yn)</span>:</span></span><br><span class="line">        self.age = <span class="number">0</span></span><br><span class="line">        self.tracks.append([self.x,self.y])</span><br><span class="line">        self.x = xn</span><br><span class="line">        self.y = yn</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">setDone</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.done = <span class="keyword">True</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">timedOut</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">return</span> self.done</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">going_UP</span><span class="params">(self,mid_start,mid_end)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> len(self.tracks) &gt;= <span class="number">2</span>:</span><br><span class="line">            <span class="keyword">if</span> self.state == <span class="string">'0'</span>:</span><br><span class="line">                <span class="keyword">if</span> self.tracks[<span class="number">-1</span>][<span class="number">1</span>] &lt; mid_end <span class="keyword">and</span> self.tracks[<span class="number">-2</span>][<span class="number">1</span>] &gt;= mid_end: <span class="comment">#cruzo la linea</span></span><br><span class="line">                    state = <span class="string">'1'</span></span><br><span class="line">                    self.dir = <span class="string">'up'</span></span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">going_DOWN</span><span class="params">(self,mid_start,mid_end)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> len(self.tracks) &gt;= <span class="number">2</span>:</span><br><span class="line">            <span class="keyword">if</span> self.state == <span class="string">'0'</span>:</span><br><span class="line">                <span class="keyword">if</span> self.tracks[<span class="number">-1</span>][<span class="number">1</span>] &gt; mid_start <span class="keyword">and</span> self.tracks[<span class="number">-2</span>][<span class="number">1</span>] &lt;= mid_start: <span class="comment">#cruzo la linea</span></span><br><span class="line">                    state = <span class="string">'1'</span></span><br><span class="line">                    self.dir = <span class="string">'down'</span></span><br><span class="line">                    <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">age_one</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.age += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> self.age &gt; self.max_age:</span><br><span class="line">            self.done = <span class="keyword">True</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MultiPerson</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, persons, xi, yi)</span>:</span></span><br><span class="line">        self.persons = persons</span><br><span class="line">        self.x = xi</span><br><span class="line">        self.y = yi</span><br><span class="line">        self.tracks = []</span><br><span class="line">        self.R = randint(<span class="number">0</span>,<span class="number">255</span>)</span><br><span class="line">        self.G = randint(<span class="number">0</span>,<span class="number">255</span>)</span><br><span class="line">        self.B = randint(<span class="number">0</span>,<span class="number">255</span>)</span><br><span class="line">        self.done = <span class="keyword">False</span></span><br></pre></td></tr></table></figure>
+<p>这里有一个你应该尝试的代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> Person</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="comment"># http://docs.OpenCV识别一个人/group__imgproc__shape.html#ga17ed9f5d79ae97bd4c7cf18403e1689a&amp;gsc.tab=0</span></span><br><span class="line"><span class="comment">##http://docs.OpenCV识别一个人/tutorial_py_contours_begin.html#gsc.tab=0</span></span><br><span class="line"></span><br><span class="line">cap = cv2.VideoCapture(<span class="string">'peopleCounter.avi'</span>) <span class="comment">#Open video file</span></span><br><span class="line">fgbg = cv2.createBackgroundSubtractorMOG2(detectShadows = <span class="keyword">True</span>) <span class="comment">#Create the background substractor</span></span><br><span class="line">kernelOp = np.ones((<span class="number">3</span>,<span class="number">3</span>),np.uint8)</span><br><span class="line">kernelCl = np.ones((<span class="number">11</span>,<span class="number">11</span>),np.uint8)</span><br><span class="line"></span><br><span class="line"><span class="comment">#Variables</span></span><br><span class="line">font = cv2.FONT_HERSHEY_SIMPLEX</span><br><span class="line">persons = []</span><br><span class="line">max_p_age = <span class="number">5</span></span><br><span class="line">pid = <span class="number">1</span></span><br><span class="line">areaTH = <span class="number">500</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(cap.isOpened()):</span><br><span class="line">    ret, frame = cap.read() <span class="comment">#read a frame</span></span><br><span class="line">    </span><br><span class="line">    fgmask = fgbg.apply(frame) <span class="comment">#Use the substractor</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        ret,imBin= cv2.threshold(fgmask,<span class="number">200</span>,<span class="number">255</span>,cv2.THRESH_BINARY)</span><br><span class="line">        <span class="comment">#Opening (erode-&gt;dilate) para quitar ruido.</span></span><br><span class="line">        mask = cv2.morphologyEx(imBin, cv2.MORPH_OPEN, kernelOp)</span><br><span class="line">        <span class="comment">#Closing (dilate -&gt; erode) para juntar regiones blancas.</span></span><br><span class="line">        mask =  cv2.morphologyEx(mask , cv2.MORPH_CLOSE, kernelCl)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="comment">#if there are no more frames to show...</span></span><br><span class="line">        print(<span class="string">'EOF'</span>)</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">    _, contours0, hierarchy = cv2.findContours(mask,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_NONE)</span><br><span class="line">    <span class="keyword">for</span> cnt <span class="keyword">in</span> contours0:</span><br><span class="line">        cv2.drawContours(frame, cnt, <span class="number">-1</span>, (<span class="number">0</span>,<span class="number">255</span>,<span class="number">0</span>), <span class="number">3</span>, <span class="number">8</span>)</span><br><span class="line">        area = cv2.contourArea(cnt)</span><br><span class="line">        <span class="keyword">if</span> area &gt; areaTH:</span><br><span class="line">            <span class="comment">#################</span></span><br><span class="line">            <span class="comment">#   TRACKING    #</span></span><br><span class="line">            <span class="comment">#################            </span></span><br><span class="line">            M = cv2.moments(cnt)</span><br><span class="line">            cx = int(M[<span class="string">'m10'</span>]/M[<span class="string">'m00'</span>])</span><br><span class="line">            cy = int(M[<span class="string">'m01'</span>]/M[<span class="string">'m00'</span>])</span><br><span class="line">            x,y,w,h = cv2.boundingRect(cnt)</span><br><span class="line">            </span><br><span class="line">            new = <span class="keyword">True</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> persons:</span><br><span class="line">                <span class="keyword">if</span> abs(x-i.getX()) &lt;= w <span class="keyword">and</span> abs(y-i.getY()) &lt;= h:</span><br><span class="line">                    <span class="comment"># el objeto esta cerca de uno que ya se detecto antes</span></span><br><span class="line">                    new = <span class="keyword">False</span></span><br><span class="line">                    i.updateCoords(cx,cy)   <span class="comment">#actualiza coordenadas en el objeto and resets age</span></span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">            <span class="keyword">if</span> new == <span class="keyword">True</span>:</span><br><span class="line">                p = Person.MyPerson(pid,cx,cy, max_p_age)</span><br><span class="line">                persons.append(p)</span><br><span class="line">                pid += <span class="number">1</span>     </span><br><span class="line">            <span class="comment">#################</span></span><br><span class="line">            <span class="comment">#   DIBUJOS     #</span></span><br><span class="line">            <span class="comment">#################</span></span><br><span class="line">            cv2.circle(frame,(cx,cy), <span class="number">5</span>, (<span class="number">0</span>,<span class="number">0</span>,<span class="number">255</span>), <span class="number">-1</span>)</span><br><span class="line">            img = cv2.rectangle(frame,(x,y),(x+w,y+h),(<span class="number">0</span>,<span class="number">255</span>,<span class="number">0</span>),<span class="number">2</span>)            </span><br><span class="line">            cv2.drawContours(frame, cnt, <span class="number">-1</span>, (<span class="number">0</span>,<span class="number">255</span>,<span class="number">0</span>), <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">#########################</span></span><br><span class="line">    <span class="comment"># DIBUJAR TRAYECTORIAS  #</span></span><br><span class="line">    <span class="comment">#########################</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> persons:</span><br><span class="line">        <span class="keyword">if</span> len(i.getTracks()) &gt;= <span class="number">2</span>:</span><br><span class="line">            pts = np.array(i.getTracks(), np.int32)</span><br><span class="line">            pts = pts.reshape((<span class="number">-1</span>,<span class="number">1</span>,<span class="number">2</span>))</span><br><span class="line">            frame = cv2.polylines(frame,[pts],<span class="keyword">False</span>,i.getRGB())</span><br><span class="line">        <span class="keyword">if</span> i.getId() == <span class="number">9</span>:</span><br><span class="line">            print(str(i.getX()), <span class="string">','</span>, str(i.getY()))</span><br><span class="line">        cv2.putText(frame, str(i.getId()),(i.getX(),i.getY()),font,<span class="number">0.3</span>,i.getRGB(),<span class="number">1</span>,cv2.LINE_AA)</span><br><span class="line">     </span><br><span class="line">    </span><br><span class="line">    cv2.imshow(<span class="string">'Frame'</span>,frame)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">#Abort and exit with 'Q' or ESC</span></span><br><span class="line">    k = cv2.waitKey(<span class="number">30</span>) &amp; <span class="number">0xff</span></span><br><span class="line">    <span class="keyword">if</span> k == <span class="number">27</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">cap.release() <span class="comment">#release video file</span></span><br><span class="line">cv2.destroyAllWindows() <span class="comment">#close all openCV windows</span></span><br></pre></td></tr></table></figure></p>
+<p>寻找一个检测到的轮廓的坐标，并尝试将它们与以前检测到的人物进行匹配。 如果没有人匹配，那么我们创建一个新的。<br><img src="/2018/04/23/OpenCV识别一个人/trayectories.png" alt="pic"></p>
+<h1 id="OpenCV-9-人数"><a href="#OpenCV-9-人数" class="headerlink" title="OpenCV-9-人数"></a>OpenCV-9-人数</h1><p>上次我向你展示了如何跟踪一个对象的移动，虽然实际上它只是保存了该对象之前坐标的列表。 现在，我们必须查看该列表并确定对象在图像中上下移动。<br>为此，我将首先创建两条假想线，指示何时评估对象的方向（line_up，line_down）。<br>我还设置了两条限制线来告诉我的代码何时停止跟踪一个对象（up_limit，down_limit）。</p>
+<p>我还在Person类中使用了两个方法：going_UP（a，b）和going_DOWN（a，b）。 都会收到line_down和line_up，并返回true，它们会评估对象是否已沿正确方向越过line_up或line_down。 如果是这样，那么计数器会递增……而我们正在计数人数。</p>
+<p>此外，Person类还具有一个State属性，用于了解对象何时位于映像的计数限制之外并释放分配的内存。</p>
+<p>这是代码：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">##Contador de personas</span></span><br><span class="line"><span class="comment">##Federico Mejia</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> Person</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="comment">#Contadores de entrada y salida</span></span><br><span class="line">cnt_up   = <span class="number">0</span></span><br><span class="line">cnt_down = <span class="number">0</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#Fuente de video</span></span><br><span class="line"><span class="comment">#cap = cv2.VideoCapture(0)</span></span><br><span class="line">cap = cv2.VideoCapture(<span class="string">'peopleCounter.avi'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#Propiedades del video</span></span><br><span class="line"><span class="comment">##cap.set(3,160) #Width</span></span><br><span class="line"><span class="comment">##cap.set(4,120) #Height</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#Imprime las propiedades de captura a consola</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">19</span>):</span><br><span class="line">    print(i, cap.get(i))</span><br><span class="line"></span><br><span class="line">w = cap.get(<span class="number">3</span>)</span><br><span class="line">h = cap.get(<span class="number">4</span>)</span><br><span class="line">frameArea = h*w</span><br><span class="line">areaTH = frameArea/<span class="number">250</span></span><br><span class="line">print(<span class="string">'Area Threshold'</span>, areaTH)</span><br><span class="line"></span><br><span class="line"><span class="comment">#Lineas de entrada/salida</span></span><br><span class="line">line_up = int(<span class="number">2</span>*(h/<span class="number">5</span>))</span><br><span class="line">line_down   = int(<span class="number">3</span>*(h/<span class="number">5</span>))</span><br><span class="line"></span><br><span class="line">up_limit =   int(<span class="number">1</span>*(h/<span class="number">5</span>))</span><br><span class="line">down_limit = int(<span class="number">4</span>*(h/<span class="number">5</span>))</span><br><span class="line"></span><br><span class="line">print(<span class="string">"Red line y:"</span>,str(line_down))</span><br><span class="line">print(<span class="string">"Blue line y:"</span>, str(line_up))</span><br><span class="line">line_down_color = (<span class="number">255</span>,<span class="number">0</span>,<span class="number">0</span>)</span><br><span class="line">line_up_color = (<span class="number">0</span>,<span class="number">0</span>,<span class="number">255</span>)</span><br><span class="line">pt1 =  [<span class="number">0</span>, line_down];</span><br><span class="line">pt2 =  [w, line_down];</span><br><span class="line">pts_L1 = np.array([pt1,pt2], np.int32)</span><br><span class="line">pts_L1 = pts_L1.reshape((<span class="number">-1</span>,<span class="number">1</span>,<span class="number">2</span>))</span><br><span class="line">pt3 =  [<span class="number">0</span>, line_up];</span><br><span class="line">pt4 =  [w, line_up];</span><br><span class="line">pts_L2 = np.array([pt3,pt4], np.int32)</span><br><span class="line">pts_L2 = pts_L2.reshape((<span class="number">-1</span>,<span class="number">1</span>,<span class="number">2</span>))</span><br><span class="line"></span><br><span class="line">pt5 =  [<span class="number">0</span>, up_limit];</span><br><span class="line">pt6 =  [w, up_limit];</span><br><span class="line">pts_L3 = np.array([pt5,pt6], np.int32)</span><br><span class="line">pts_L3 = pts_L3.reshape((<span class="number">-1</span>,<span class="number">1</span>,<span class="number">2</span>))</span><br><span class="line">pt7 =  [<span class="number">0</span>, down_limit];</span><br><span class="line">pt8 =  [w, down_limit];</span><br><span class="line">pts_L4 = np.array([pt7,pt8], np.int32)</span><br><span class="line">pts_L4 = pts_L4.reshape((<span class="number">-1</span>,<span class="number">1</span>,<span class="number">2</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">#Substractor de fondo</span></span><br><span class="line">fgbg = cv2.createBackgroundSubtractorMOG2(detectShadows = <span class="keyword">True</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#Elementos estructurantes para filtros morfoogicos</span></span><br><span class="line">kernelOp = np.ones((<span class="number">3</span>,<span class="number">3</span>),np.uint8)</span><br><span class="line">kernelOp2 = np.ones((<span class="number">5</span>,<span class="number">5</span>),np.uint8)</span><br><span class="line">kernelCl = np.ones((<span class="number">11</span>,<span class="number">11</span>),np.uint8)</span><br><span class="line"></span><br><span class="line"><span class="comment">#Variables</span></span><br><span class="line">font = cv2.FONT_HERSHEY_SIMPLEX</span><br><span class="line">persons = []</span><br><span class="line">max_p_age = <span class="number">5</span></span><br><span class="line">pid = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span>(cap.isOpened()):</span><br><span class="line"><span class="comment">##for image in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):</span></span><br><span class="line">    <span class="comment">#Lee una imagen de la fuente de video</span></span><br><span class="line">    ret, frame = cap.read()</span><br><span class="line"><span class="comment">##    frame = image.array</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> persons:</span><br><span class="line">        i.age_one() <span class="comment">#age every person one frame</span></span><br><span class="line">    <span class="comment">#########################</span></span><br><span class="line">    <span class="comment">#   PRE-PROCESAMIENTO   #</span></span><br><span class="line">    <span class="comment">#########################</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">#Aplica substraccion de fondo</span></span><br><span class="line">    fgmask = fgbg.apply(frame)</span><br><span class="line">    fgmask2 = fgbg.apply(frame)</span><br><span class="line"></span><br><span class="line">    <span class="comment">#Binariazcion para eliminar sombras (color gris)</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        ret,imBin= cv2.threshold(fgmask,<span class="number">200</span>,<span class="number">255</span>,cv2.THRESH_BINARY)</span><br><span class="line">        ret,imBin2 = cv2.threshold(fgmask2,<span class="number">200</span>,<span class="number">255</span>,cv2.THRESH_BINARY)</span><br><span class="line">        <span class="comment">#Opening (erode-&gt;dilate) para quitar ruido.</span></span><br><span class="line">        mask = cv2.morphologyEx(imBin, cv2.MORPH_OPEN, kernelOp)</span><br><span class="line">        mask2 = cv2.morphologyEx(imBin2, cv2.MORPH_OPEN, kernelOp)</span><br><span class="line">        <span class="comment">#Closing (dilate -&gt; erode) para juntar regiones blancas.</span></span><br><span class="line">        mask =  cv2.morphologyEx(mask , cv2.MORPH_CLOSE, kernelCl)</span><br><span class="line">        mask2 = cv2.morphologyEx(mask2, cv2.MORPH_CLOSE, kernelCl)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        print(<span class="string">'EOF'</span>)</span><br><span class="line">        print(<span class="string">'UP:'</span>,cnt_up)</span><br><span class="line">        print(<span class="string">'DOWN:'</span>,cnt_down)</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    <span class="comment">#################</span></span><br><span class="line">    <span class="comment">#   CONTORNOS   #</span></span><br><span class="line">    <span class="comment">#################</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># RETR_EXTERNAL returns only extreme outer flags. All child contours are left behind.</span></span><br><span class="line">    _, contours0, hierarchy = cv2.findContours(mask2,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)</span><br><span class="line">    <span class="keyword">for</span> cnt <span class="keyword">in</span> contours0:</span><br><span class="line">        area = cv2.contourArea(cnt)</span><br><span class="line">        <span class="keyword">if</span> area &gt; areaTH:</span><br><span class="line">            <span class="comment">#################</span></span><br><span class="line">            <span class="comment">#   TRACKING    #</span></span><br><span class="line">            <span class="comment">#################</span></span><br><span class="line">            </span><br><span class="line">            <span class="comment">#Falta agregar condiciones para multipersonas, salidas y entradas de pantalla.</span></span><br><span class="line">            </span><br><span class="line">            M = cv2.moments(cnt)</span><br><span class="line">            cx = int(M[<span class="string">'m10'</span>]/M[<span class="string">'m00'</span>])</span><br><span class="line">            cy = int(M[<span class="string">'m01'</span>]/M[<span class="string">'m00'</span>])</span><br><span class="line">            x,y,w,h = cv2.boundingRect(cnt)</span><br><span class="line"></span><br><span class="line">            new = <span class="keyword">True</span></span><br><span class="line">            <span class="keyword">if</span> cy <span class="keyword">in</span> range(up_limit,down_limit):</span><br><span class="line">                <span class="keyword">for</span> i <span class="keyword">in</span> persons:</span><br><span class="line">                    <span class="keyword">if</span> abs(cx-i.getX()) &lt;= w <span class="keyword">and</span> abs(cy-i.getY()) &lt;= h:</span><br><span class="line">                        <span class="comment"># el objeto esta cerca de uno que ya se detecto antes</span></span><br><span class="line">                        new = <span class="keyword">False</span></span><br><span class="line">                        i.updateCoords(cx,cy)   <span class="comment">#actualiza coordenadas en el objeto and resets age</span></span><br><span class="line">                        <span class="keyword">if</span> i.going_UP(line_down,line_up) == <span class="keyword">True</span>:</span><br><span class="line">                            cnt_up += <span class="number">1</span>;</span><br><span class="line">                            print(<span class="string">"ID:"</span>,i.getId(),<span class="string">'crossed going up at'</span>,time.strftime(<span class="string">"%c"</span>))</span><br><span class="line">                        <span class="keyword">elif</span> i.going_DOWN(line_down,line_up) == <span class="keyword">True</span>:</span><br><span class="line">                            cnt_down += <span class="number">1</span>;</span><br><span class="line">                            print(<span class="string">"ID:"</span>,i.getId(),<span class="string">'crossed going down at'</span>,time.strftime(<span class="string">"%c"</span>))</span><br><span class="line">                        <span class="keyword">break</span></span><br><span class="line">                    <span class="keyword">if</span> i.getState() == <span class="string">'1'</span>:</span><br><span class="line">                        <span class="keyword">if</span> i.getDir() == <span class="string">'down'</span> <span class="keyword">and</span> i.getY() &gt; down_limit:</span><br><span class="line">                            i.setDone()</span><br><span class="line">                        <span class="keyword">elif</span> i.getDir() == <span class="string">'up'</span> <span class="keyword">and</span> i.getY() &lt; up_limit:</span><br><span class="line">                            i.setDone()</span><br><span class="line">                    <span class="keyword">if</span> i.timedOut():</span><br><span class="line">                        <span class="comment">#sacar i de la lista persons</span></span><br><span class="line">                        index = persons.index(i)</span><br><span class="line">                        persons.pop(index)</span><br><span class="line">                        <span class="keyword">del</span> i     <span class="comment">#liberar la memoria de i</span></span><br><span class="line">                <span class="keyword">if</span> new == <span class="keyword">True</span>:</span><br><span class="line">                    p = Person.MyPerson(pid,cx,cy, max_p_age)</span><br><span class="line">                    persons.append(p)</span><br><span class="line">                    pid += <span class="number">1</span>     </span><br><span class="line">            <span class="comment">#################</span></span><br><span class="line">            <span class="comment">#   DIBUJOS     #</span></span><br><span class="line">            <span class="comment">#################</span></span><br><span class="line">            cv2.circle(frame,(cx,cy), <span class="number">5</span>, (<span class="number">0</span>,<span class="number">0</span>,<span class="number">255</span>), <span class="number">-1</span>)</span><br><span class="line">            img = cv2.rectangle(frame,(x,y),(x+w,y+h),(<span class="number">0</span>,<span class="number">255</span>,<span class="number">0</span>),<span class="number">2</span>)            </span><br><span class="line">            <span class="comment">#cv2.drawContours(frame, cnt, -1, (0,255,0), 3)</span></span><br><span class="line">            </span><br><span class="line">    <span class="comment">#END for cnt in contours0</span></span><br><span class="line">            </span><br><span class="line">    <span class="comment">#########################</span></span><br><span class="line">    <span class="comment"># DIBUJAR TRAYECTORIAS  #</span></span><br><span class="line">    <span class="comment">#########################</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> persons:</span><br><span class="line"><span class="comment">##        if len(i.getTracks()) &gt;= 2:</span></span><br><span class="line"><span class="comment">##            pts = np.array(i.getTracks(), np.int32)</span></span><br><span class="line"><span class="comment">##            pts = pts.reshape((-1,1,2))</span></span><br><span class="line"><span class="comment">##            frame = cv2.polylines(frame,[pts],False,i.getRGB())</span></span><br><span class="line"><span class="comment">##        if i.getId() == 9:</span></span><br><span class="line"><span class="comment">##            print str(i.getX()), ',', str(i.getY())</span></span><br><span class="line">        cv2.putText(frame, str(i.getId()),(i.getX(),i.getY()),font,<span class="number">0.3</span>,i.getRGB(),<span class="number">1</span>,cv2.LINE_AA)</span><br><span class="line">        </span><br><span class="line">    <span class="comment">#################</span></span><br><span class="line">    <span class="comment">#   IMAGANES    #</span></span><br><span class="line">    <span class="comment">#################</span></span><br><span class="line">    str_up = <span class="string">'UP: '</span>+ str(cnt_up)</span><br><span class="line">    str_down = <span class="string">'DOWN: '</span>+ str(cnt_down)</span><br><span class="line">    frame = cv2.polylines(frame,[pts_L1],<span class="keyword">False</span>,line_down_color,thickness=<span class="number">2</span>)</span><br><span class="line">    frame = cv2.polylines(frame,[pts_L2],<span class="keyword">False</span>,line_up_color,thickness=<span class="number">2</span>)</span><br><span class="line">    frame = cv2.polylines(frame,[pts_L3],<span class="keyword">False</span>,(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>),thickness=<span class="number">1</span>)</span><br><span class="line">    frame = cv2.polylines(frame,[pts_L4],<span class="keyword">False</span>,(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>),thickness=<span class="number">1</span>)</span><br><span class="line">    cv2.putText(frame, str_up ,(<span class="number">10</span>,<span class="number">40</span>),font,<span class="number">0.5</span>,(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>),<span class="number">2</span>,cv2.LINE_AA)</span><br><span class="line">    cv2.putText(frame, str_up ,(<span class="number">10</span>,<span class="number">40</span>),font,<span class="number">0.5</span>,(<span class="number">0</span>,<span class="number">0</span>,<span class="number">255</span>),<span class="number">1</span>,cv2.LINE_AA)</span><br><span class="line">    cv2.putText(frame, str_down ,(<span class="number">10</span>,<span class="number">90</span>),font,<span class="number">0.5</span>,(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>),<span class="number">2</span>,cv2.LINE_AA)</span><br><span class="line">    cv2.putText(frame, str_down ,(<span class="number">10</span>,<span class="number">90</span>),font,<span class="number">0.5</span>,(<span class="number">255</span>,<span class="number">0</span>,<span class="number">0</span>),<span class="number">1</span>,cv2.LINE_AA)</span><br><span class="line"></span><br><span class="line">    cv2.imshow(<span class="string">'Frame'</span>,frame)</span><br><span class="line">    <span class="comment">#cv2.imshow('Mask',mask)    </span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">#preisonar ESC para salir</span></span><br><span class="line">    k = cv2.waitKey(<span class="number">30</span>) &amp; <span class="number">0xff</span></span><br><span class="line">    <span class="keyword">if</span> k == <span class="number">27</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"><span class="comment">#END while(cap.isOpened())</span></span><br><span class="line">    </span><br><span class="line"><span class="comment">#################</span></span><br><span class="line"><span class="comment">#   LIMPIEZA    #</span></span><br><span class="line"><span class="comment">#################</span></span><br><span class="line">cap.release()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+      
+    </div>
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="sun-day 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="sun-day 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"><i class="fa fa-tag"></i> python</a>
+          
+            <a href="/tags/OpenCV/" rel="tag"><i class="fa fa-tag"></i> OpenCV</a>
+          
+            <a href="/tags/图像处理/" rel="tag"><i class="fa fa-tag"></i> 图像处理</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/17/TensorFlow实战/" rel="next" title="TensorFlow实战-第1章-TensorFlow基础">
+                <i class="fa fa-chevron-left"></i> TensorFlow实战-第1章-TensorFlow基础
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/28/Python编程快速上手-让繁琐工作自动化-云图/" rel="prev" title="Python编程快速上手 让繁琐工作自动化 云图">
+                Python编程快速上手 让繁琐工作自动化 云图 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+<span class="jiathis_txt">分享到：</span>
+<a class="jiathis_button_fav">收藏夹</a>
+<a class="jiathis_button_copy">复制网址</a>
+<a class="jiathis_button_email">邮件</a>
+<a class="jiathis_button_weixin">微信</a>
+<a class="jiathis_button_qzone">QQ空间</a>
+<a class="jiathis_button_tqq">腾讯微博</a>
+<a class="jiathis_button_douban">豆瓣</a>
+<a class="jiathis_button_share">一键分享</a>
+
+<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+var jiathis_config={
+  data_track_clickback:true,
+  summary:"",
+  shortUrl:false,
+  hideMore:false
+}
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2160523" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNTY1MC8xMjE4Ng=="></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="sun-day" />
+            
+              <p class="site-author-name" itemprop="name">sun-day</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">81</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">18</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">51</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/zhanghaogithub123" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:zhanghao163mail@163.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://blog.csdn.net/mouse1598189" target="_blank" title="CSDN"><i class="fa fa-fw fa-globe"></i>CSDN</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/zhang-hao-3-80-49/activities" target="_blank" title="知乎"><i class="fa fa-fw fa-globe"></i>知乎</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.google.com/" title="Google" target="_blank">Google</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.baidu.com/" title="百度" target="_blank">百度</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#OpenCV-1-图片处理"><span class="nav-number">1.</span> <span class="nav-text">OpenCV-1-图片处理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OpenCV-2-读取视频流"><span class="nav-number">2.</span> <span class="nav-text">OpenCV-2-读取视频流</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#读取视频文件"><span class="nav-number">2.1.</span> <span class="nav-text">读取视频文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从摄像头读取视频"><span class="nav-number">2.2.</span> <span class="nav-text">从摄像头读取视频</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OpenCV-3-在视频中绘制图像"><span class="nav-number">3.</span> <span class="nav-text">OpenCV-3-在视频中绘制图像</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#在视频中插入helloworld"><span class="nav-number">3.1.</span> <span class="nav-text">在视频中插入helloworld</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OpenCV-4-视频背景消除"><span class="nav-number">4.</span> <span class="nav-text">OpenCV-4-视频背景消除</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OpenCV-5-形态改变"><span class="nav-number">5.</span> <span class="nav-text">OpenCV-5-形态改变</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OpenCV-6-计数"><span class="nav-number">6.</span> <span class="nav-text">OpenCV-6-计数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OpenCV-7-确定一个人"><span class="nav-number">7.</span> <span class="nav-text">OpenCV-7-确定一个人</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OpenCV-8-跟踪移动"><span class="nav-number">8.</span> <span class="nav-text">OpenCV-8-跟踪移动</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OpenCV-9-人数"><span class="nav-number">9.</span> <span class="nav-text">OpenCV-9-人数</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate"> 
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">true</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+  <div class="powered-by">
+  <i class="fa fa-user-md"></i><span id="busuanzi_container_site_pv">
+    本站访客数:<span id="busuanzi_container_site_pv"></span>
+  </span>
+  </div>
+  
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Gemini</a> v6.1.0</div>
+
+
+
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共242.3k字</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.1.0"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
